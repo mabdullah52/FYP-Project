@@ -21,14 +21,14 @@ Radiologists review hundreds of CT slices per scan, and most existing AI tools g
 - forecasts the **next likely region of tumour growth**, and
 - explains its predictions with **confidence-coloured overlays** and **Grad-CAM++ heatmaps**,
 
-all presented to radiologists through a Flutter desktop dashboard backed by a Python AI engine.
+served by a Python AI engine to two apps: a **doctor web app** for radiologists and a **patient app** with an agentic AI assistant.
 
 ## Planned System Architecture
 
 ```
 ┌──────────────────────────────┐   HTTP / REST (JSON)   ┌───────────────────────────────────┐
-│  Radiologist Dashboard        │ ─────────────────────▶ │  Python AI Engine (FastAPI/Flask)  │
-│  Flutter desktop app          │ ◀───────────────────── │                                   │
+│  Doctor web app               │ ─────────────────────▶ │  Python AI Engine (FastAPI/Flask)  │
+│  (radiologist dashboard)      │ ◀───────────────────── │                                   │
 │  • Slice viewer               │   risk scores, boxes,  │  1. Preprocessing & slice extract  │
 │  • Confidence overlays        │   heatmap images       │  2. Nodule segmentation (U-Net)    │
 │  • Grad-CAM toggle            │                        │  3. Slice-level risk (CNN + RNN)   │
@@ -57,7 +57,32 @@ Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 | 🟡 Yellow | 30–70% | Uncertain, needs manual review |
 | 🔴 Red | > 70% | High risk (likely malignant) |
 
+## Pipeline
+
+**Train on LUNA16 + LIDC-IDRI → freeze the models → test on LUNA25 (external, unseen) → serve to the doctor web app and patient app.**
+
+```
+LUNA16 + LIDC-IDRI ─▶ de-duplicate + patient-level split ─▶ preprocess ─▶ U-Net segmentation
+        ─▶ slice-level risk model ─▶ growth forecast ─▶ Grad-CAM++ / confidence colours
+        ─▶ internal validation ─▶ freeze weights + thresholds
+                                         │
+LUNA25 ─▶ same preprocessing ────────────┴─▶ external test (AUC-ROC, sensitivity, specificity)
+                                         │
+                                  Backend REST API
+                              ┌──────────┴──────────┐
+                       Doctor web app          Patient app
+                  (radiologist support)    (agentic AI assistant)
+```
+
+Full stage-by-stage plan: [docs/PIPELINE.md](docs/PIPELINE.md)
+
 ## Datasets
+
+| Dataset | Role |
+|---|---|
+| LUNA16 | Training and validation |
+| LIDC-IDRI | Training and validation (overlaps LUNA16, de-duplicated) |
+| LUNA25 | External test only (never used for training or tuning) |
 
 The CT data is **not stored in this repository** (too large, and redistribution is governed by each dataset's terms). See [docs/DATASET.md](docs/DATASET.md) for download and placement instructions.
 
@@ -69,6 +94,7 @@ The CT data is **not stored in this repository** (too large, and redistribution 
 | Classification | Accuracy, Sensitivity, Specificity, AUC-ROC |
 | Risk trend | MSE against slice-level expert annotations (where available) |
 | Interpretability | Qualitative comparison of Grad-CAM maps with radiologist annotations; ablation of the sequential module |
+| External generalisation | Nodule-level malignancy AUC-ROC, sensitivity, specificity on LUNA25 with the frozen model |
 
 ## Results
 
@@ -84,6 +110,7 @@ The CT data is **not stored in this repository** (too large, and redistribution 
 ├── configs/                  # Example configuration files
 ├── docs/
 │   ├── ARCHITECTURE.md
+│   ├── PIPELINE.md           # Train on LUNA16 + LIDC-IDRI, external test on LUNA25, apps
 │   ├── DATASET.md
 │   ├── API.md                # Planned REST API contract
 │   ├── proposal/             # Proposal document and presentation
@@ -96,8 +123,8 @@ The CT data is **not stored in this repository** (too large, and redistribution 
 ├── src/                      # AI engine source (preprocessing, models, explainability)
 ├── backend/                  # REST API server
 ├── apps/
-│   ├── doctor-dashboard/     # Flutter radiologist dashboard
-│   └── patient-app/          # Patient app (scope to be confirmed)
+│   ├── doctor-web-app/       # Radiologist decision-support web app
+│   └── patient-app/          # Patient app with agentic AI assistant
 ├── notebooks/                # Experiments
 ├── data/                     # Local datasets (git-ignored)
 ├── models/                   # Trained weights (git-ignored)
@@ -131,7 +158,8 @@ Then download the dataset as described in [docs/DATASET.md](docs/DATASET.md).
 - **Deep learning:** PyTorch or TensorFlow/Keras (final choice to be confirmed)
 - **Medical imaging:** SimpleITK, OpenCV, NumPy
 - **API:** FastAPI or Flask
-- **Frontend:** Flutter (Dart), Provider or Riverpod for state
+- **Doctor web app:** Flutter (Dart) per the methodology, Provider or Riverpod for state (to be confirmed)
+- **Patient app:** framework and AI-agent stack to be decided
 - **Hardware:** NVIDIA GPU workstation
 
 ## Disclaimer

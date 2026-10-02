@@ -14,7 +14,7 @@ _Last updated: 2026-10-02_
 | Methodology | ✅ | `docs/thesis/Methodology.docx` |
 | Research gap analysis | ✅ | `docs/thesis/` |
 | Literature papers & summaries | ✅ | `literature/` |
-| README, architecture, dataset, API docs | ✅ | root, `docs/` |
+| README, pipeline, architecture, dataset, API docs | ✅ | root, `docs/` |
 | Remaining report chapters (implementation, results, conclusion) | ⬜ | `docs/thesis/` |
 
 ## Repository setup
@@ -31,7 +31,10 @@ _Last updated: 2026-10-02_
 
 | Module | Status | Notes |
 |---|---|---|
-| Dataset downloaded (LUNA16) | 🏫 | On university PC |
+| LUNA16 downloaded | 🏫 | On university PC |
+| LIDC-IDRI downloaded | ⬜ | Training data |
+| LUNA25 downloaded | ⬜ | External test only (~221 GB) |
+| De-duplication LUNA16 ⊂ LIDC-IDRI + patient-level split | ⬜ | `src/preprocessing/` |
 | Preprocessing code | 🏫 | `src/preprocessing/` |
 | Nodule segmentation (U-Net) | 🏫 | `src/segmentation/` |
 | Slice-level risk model | 🏫 | `src/risk_model/` |
@@ -39,16 +42,18 @@ _Last updated: 2026-10-02_
 | Grad-CAM++ explainability | 🏫 / ⬜ | `src/explainability/` |
 | Training notebooks | 🏫 | `notebooks/` |
 | Trained weights | 🏫 | external link in `models/README.md` |
-| Results (Dice, IoU, AUC, …) | 🏫 | `results/`, only real numbers |
+| Internal validation results | 🏫 | `results/`, only real numbers |
+| External test on LUNA25 | ⬜ | After models are frozen |
 | REST API | ⬜ | `backend/`, contract in `docs/API.md` |
-| Flutter radiologist dashboard | ⬜ / 🏫 | `apps/doctor-dashboard/` |
-| Patient app | ❓ | Scope to confirm |
+| Doctor web app | ⬜ / 🏫 | `apps/doctor-web-app/` |
+| Patient app (agentic AI) | ⬜ | `apps/patient-app/`, features TBC |
 | Tests | ⬜ | `tests/` |
 
 ## Open decisions ❓
 
 - Framework: PyTorch or TensorFlow
-- Datasets: LUNA16 only, or also IQ-OTH/NCCD as in the methodology?
+- Keep IQ-OTH/NCCD from the methodology, or drop it?
+- Rule for turning LIDC-IDRI malignancy ratings (1–5) into benign/malignant labels
 - Growth-forecast dataset
-- Patient app in scope?
+- Patient app: framework, agent features, which results patients see
 - Project title: the proposal title ("…Handling Incomplete and Noisy Clinical Data…") vs. the methodology's focus (interpretable slice-level risk + growth forecasting)

@@ -1,12 +1,13 @@
 # System Architecture (planned)
 
-Source: `docs/thesis/Methodology.docx`, Sections 3.1–3.7. This describes the **design**; implementation status is tracked in [PROGRESS.md](../PROGRESS.md).
+Source: `docs/thesis/Methodology.docx`, Sections 3.1–3.7. For the full data → training → testing → apps workflow see [PIPELINE.md](PIPELINE.md). This describes the **design**; implementation status is tracked in [PROGRESS.md](../PROGRESS.md).
 
 ## Client–server layout
 
 | Layer | Technology | Responsibility |
 |---|---|---|
-| Client | Flutter desktop app (Provider or Riverpod) | Load scans, slice viewer, colour overlays, Grad-CAM toggle |
+| Doctor web app | Flutter per methodology (TBC) | Load scans, slice viewer, colour overlays, Grad-CAM toggle, growth forecast |
+| Patient app | TBC | Patient-facing app with an agentic AI assistant |
 | Server | Python, FastAPI or Flask | Run models, return JSON (risk scores, boxes, heatmap images) |
 | Models | PyTorch or TensorFlow/Keras | Segmentation, risk, growth forecasting, explanations |
 
@@ -34,7 +35,7 @@ CT volume (.mhd/.raw or DICOM)
     confidence colours (green < 0.30 ≤ yellow ≤ 0.70 < red) · Grad-CAM++ pixel heatmaps
    │
    ▼
-Flutter dashboard
+Backend API ─▶ Doctor web app · Patient app
 ```
 
 ## Source-code mapping (planned)
@@ -47,7 +48,8 @@ Flutter dashboard
 | 4 | `src/growth_forecast/` |
 | 5 | `src/explainability/` |
 | API | `backend/` |
-| UI | `apps/doctor-dashboard/` |
+| Doctor web app | `apps/doctor-web-app/` |
+| Patient app | `apps/patient-app/` |
 
 ## Open design decisions
 
@@ -57,4 +59,5 @@ Flutter dashboard
 - [ ] Sequence model: Bi-LSTM vs Transformer encoder
 - [ ] API framework: FastAPI vs Flask
 - [ ] Dataset for the growth forecasting module
-- [ ] Patient app: in scope or not (the proposal describes a desktop-only deliverable)
+- [ ] Patient app: framework, agent features, and which results patients may see
+- [ ] Label rule mapping LIDC-IDRI malignancy ratings (1–5) to benign/malignant

@@ -1,3 +1,5 @@
 # Patient App
 
-**Scope to be confirmed.** The proposal describes a desktop-only radiologist deliverable. Add this app only if it is formally part of the FYP.
+Patient-facing app with an agentic AI assistant. See [docs/PIPELINE.md](../../docs/PIPELINE.md#11-patient-app).
+
+**Not started.** To decide: framework, what the agent can do, and which results patients see (and whether a doctor reviews them first).

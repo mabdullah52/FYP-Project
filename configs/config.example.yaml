@@ -7,6 +7,13 @@ paths:
   model_dir: ./models
   results_dir: ./results
 
+datasets:
+  train: [luna16, lidc_idri]     # de-duplicated by SeriesInstanceUID
+  external_test: [luna25]        # never used for training or tuning
+  split_by: patient
+  val_fraction: null             # set when the split is made
+  lidc_malignancy_rule: null     # TBC: how ratings 1-5 map to benign/malignant
+
 preprocessing:
   target_spacing_mm: [1.0, 1.0, 1.0]
   hu_window: [-1000, 400]
