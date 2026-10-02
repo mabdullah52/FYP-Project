@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you refer to this work, please cite it as below."
+type: software
+title: "Interpretable Lung Nodule Malignancy Prediction with External Validation on LUNA25"
+authors:
+  - given-names: Abdullah
+    family-names: Asim
+    affiliation: "Bahria University Lahore Campus"
+  - given-names: Hussnain
+    family-names: Khalid
+    affiliation: "Bahria University Lahore Campus"
+repository-code: "https://github.com/mabdullah52/FYP-Project"
+license: MIT
+date-released: "2026-10-02"
+keywords:
+  - lung cancer
+  - lung nodule
+  - deep learning
+  - explainable AI
+  - LUNA16
+  - LIDC-IDRI
+  - LUNA25

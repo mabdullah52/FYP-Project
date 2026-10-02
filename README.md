@@ -1,14 +1,21 @@
-# Robust Lung Cancer Prediction: Handling Incomplete and Noisy Clinical Data Using Deep Learning
+# Interpretable Lung Nodule Malignancy Prediction with External Validation on LUNA25
 
-Final Year Project, BS Computer Science, Department of Computer Sciences, Bahria University Lahore Campus.
+**Abdullah Asim, Hussnain Khalid** · Supervisor: **Rabia Masood**
+Department of Computer Sciences, Bahria University Lahore Campus
 
-| | |
+Final Year Project, BS Computer Science (2025–26). Official FYP title: *Robust Lung Cancer Prediction: Handling Incomplete and Noisy Clinical Data Using Deep Learning.*
+
+![Status](https://img.shields.io/badge/status-in%20progress-yellow) ![License](https://img.shields.io/badge/license-MIT-blue)
+
+| Document | What it covers |
 |---|---|
-| **Team** | Abdullah Asim, Hussnain Khalid |
-| **Supervisor** | Rabia Masood |
-| **Status** | Research and design phase complete; implementation in progress (see [PROGRESS.md](PROGRESS.md)) |
+| [Research design](docs/RESEARCH.md) | Research questions, hypotheses, experiments, paper outline |
+| [Pipeline](docs/PIPELINE.md) | Data → training → external test → apps, with core vs stretch scope |
+| [Architecture](docs/ARCHITECTURE.md) · [Datasets](docs/DATASET.md) · [API](docs/API.md) | Technical design |
+| [References](docs/REFERENCES.md) | Literature reviewed |
+| [Progress](PROGRESS.md) | What is done and what remains |
 
-> **Honesty note.** This repository currently contains the project proposal, methodology, literature review material and a planned code structure. Model code, trained weights and experimental results are **not yet in this repository**. No performance numbers are reported here until they come from real experiments.
+> **Project status.** The research design, literature review and methodology are complete. Implementation is in progress. Code and results will be added as they are produced; **no results are reported until the experiments have been run.**
 
 ---
 
@@ -90,6 +97,17 @@ Full stage-by-stage plan: [docs/PIPELINE.md](docs/PIPELINE.md)
 
 Details: [docs/PIPELINE.md](docs/PIPELINE.md#scope-what-is-realistic)
 
+## Research Questions
+
+| ID | Question |
+|---|---|
+| RQ1 | How well does a malignancy model trained on LUNA16 / LIDC-IDRI generalise to an independent screening cohort (LUNA25)? |
+| RQ2 | Do Grad-CAM++ explanations focus on the nodule, as defined by radiologist outlines? |
+| RQ3 | Does a green / yellow / red confidence scheme concentrate model errors in the "review" band? |
+| RQ4 (extension) | Does modelling the slice sequence through a nodule improve on a single-patch model? |
+
+Hypotheses, experiment tables and threats to validity: [docs/RESEARCH.md](docs/RESEARCH.md)
+
 ## Datasets
 
 | Dataset | Role |
@@ -119,6 +137,8 @@ The CT data is **not stored in this repository** (too large, and redistribution 
 ```
 .
 ├── README.md
+├── LICENSE                   # MIT
+├── CITATION.cff
 ├── PROGRESS.md               # What is done / what remains
 ├── requirements.txt          # Python dependencies (versions to be pinned)
 ├── configs/                  # Example configuration files
@@ -127,13 +147,13 @@ The CT data is **not stored in this repository** (too large, and redistribution 
 │   ├── PIPELINE.md           # Train on LUNA16 + LIDC-IDRI, external test on LUNA25, apps
 │   ├── DATASET.md
 │   ├── API.md                # Planned REST API contract
+│   ├── RESEARCH.md           # Research questions, hypotheses, experiments
+│   ├── REFERENCES.md         # Literature reviewed (DOI links)
 │   ├── proposal/             # Proposal document and presentation
 │   ├── thesis/               # Report chapters, methodology, research gap analysis
-│   ├── drafts/               # Working drafts
 │   └── literature-matrices/  # Paper comparison spreadsheets
 ├── literature/
-│   ├── journals/             # Reference papers grouped by research theme
-│   └── summaries/            # Paper summaries
+│   └── summaries/            # Our summaries of key papers
 ├── src/                      # AI engine source (preprocessing, models, explainability)
 ├── backend/                  # REST API server
 ├── apps/
@@ -143,7 +163,6 @@ The CT data is **not stored in this repository** (too large, and redistribution 
 ├── data/                     # Local datasets (git-ignored)
 ├── models/                   # Trained weights (git-ignored)
 ├── results/                  # Verified metrics and figures
-├── scripts/                  # Helper scripts
 └── tests/
 ```
 
@@ -179,6 +198,14 @@ Then download the dataset as described in [docs/DATASET.md](docs/DATASET.md).
 ## Disclaimer
 
 This is an academic research project. It is **not a medical device** and must not be used for clinical diagnosis.
+
+## Citation
+
+If you refer to this work, please cite it using [CITATION.cff](CITATION.cff) (GitHub's "Cite this repository" button).
+
+## License
+
+Code and documentation in this repository are released under the [MIT License](LICENSE). Datasets and third-party papers keep their own licenses and are not redistributed here.
 
 ## Acknowledgements
 

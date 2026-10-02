@@ -15,9 +15,11 @@ _Last updated: 2026-10-02_
 | Chapter 1, Chapter 2 | ✅ (drafts) | `docs/thesis/` |
 | Methodology | ✅ | `docs/thesis/Methodology.docx` |
 | Research gap analysis | ✅ | `docs/thesis/` |
-| Literature papers & summaries | ✅ | `literature/` |
+| Literature review (32 papers) & summaries | ✅ | `docs/REFERENCES.md`, `literature/summaries/` |
+| Research questions, hypotheses, experiment plan | ✅ | `docs/RESEARCH.md` |
 | README, pipeline, architecture, dataset, API docs | ✅ | root, `docs/` |
 | Remaining report chapters (implementation, results, conclusion) | ⬜ | `docs/thesis/` |
+| Research paper draft | ⬜ | Outline in `docs/RESEARCH.md` §7 |
 
 ## Repository setup
 
@@ -27,7 +29,8 @@ _Last updated: 2026-10-02_
 | `.gitignore` (data, weights, secrets) | ✅ |
 | `requirements.txt` (unpinned) | 🟡 exact versions 🏫 |
 | `configs/config.example.yaml`, `.env.example` | ✅ (training hyperparameters 🏫) |
-| Literature PDFs: check redistribution rights | ⬜ |
+| Paper PDFs replaced with DOI reference list | ✅ |
+| LICENSE (MIT) and CITATION.cff | ✅ |
 
 ## Implementation
 
@@ -59,4 +62,3 @@ _Last updated: 2026-10-02_
 - Rule for turning LIDC-IDRI malignancy ratings (1–5) into benign/malignant labels
 - Growth-forecast dataset
 - Patient app: framework, agent features, which results patients see
-- Project title: the proposal title ("…Handling Incomplete and Noisy Clinical Data…") vs. the methodology's focus (interpretable slice-level risk + growth forecasting)
