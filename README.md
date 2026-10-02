@@ -6,7 +6,7 @@ Final Year Project, BS Computer Science, Department of Computer Sciences, Bahria
 |---|---|
 | **Team** | Abdullah Asim, Hussnain Khalid |
 | **Supervisor** | Rabia Masood |
-| **Status** | 🟡 Research and design phase complete; implementation in progress (see [PROGRESS.md](PROGRESS.md)) |
+| **Status** | Research and design phase complete; implementation in progress (see [PROGRESS.md](PROGRESS.md)) |
 
 > **Honesty note.** This repository currently contains the project proposal, methodology, literature review material and a planned code structure. Model code, trained weights and experimental results are **not yet in this repository**. No performance numbers are reported here until they come from real experiments.
 
