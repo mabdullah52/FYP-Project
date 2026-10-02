@@ -1,0 +1,27 @@
+# Planned dependencies, taken from the methodology (Section 3.6).
+# NEEDS UNIVERSITY PC: replace with exact versions from the training environment:
+#   pip freeze > requirements-lock.txt
+
+# --- Core / imaging ---
+numpy
+SimpleITK
+opencv-python
+pandas
+scikit-learn
+matplotlib
+pyyaml
+python-dotenv
+
+# --- Deep learning framework: uncomment the one actually used ---
+# torch
+# torchvision
+# tensorflow
+
+# --- Explainability ---
+# grad-cam            # pytorch-grad-cam (PyTorch only)
+
+# --- API server: uncomment the one actually used ---
+# fastapi
+# uvicorn[standard]
+# python-multipart
+# flask

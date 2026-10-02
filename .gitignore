@@ -1,0 +1,64 @@
+# ===== Datasets (never commit raw medical data) =====
+data/*
+!data/README.md
+*.mhd
+*.raw
+*.dcm
+*.nii
+*.nii.gz
+*.nrrd
+*.npy
+*.npz
+*.h5
+*.hdf5
+
+# ===== Model weights & checkpoints =====
+models/*
+!models/README.md
+*.pt
+*.pth
+*.ckpt
+*.keras
+*.onnx
+*.pb
+*.tflite
+checkpoints/
+runs/
+lightning_logs/
+wandb/
+mlruns/
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+
+# ===== Secrets & local config =====
+.env
+configs/config.yaml
+
+# ===== Flutter / Dart =====
+apps/**/.dart_tool/
+apps/**/build/
+apps/**/.flutter-plugins
+apps/**/.flutter-plugins-dependencies
+apps/**/.packages
+apps/**/.pub-cache/
+
+# ===== IDE / OS =====
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Office temp/lock files =====
+~$*
+*.tmp

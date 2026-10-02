@@ -1,0 +1,36 @@
+# Example configuration. Copy to configs/config.yaml and adjust.
+# Values below come from the methodology document; training hyperparameters
+# are intentionally left blank until they match the real experiments.
+
+paths:
+  data_dir: ./data
+  model_dir: ./models
+  results_dir: ./results
+
+preprocessing:
+  target_spacing_mm: [1.0, 1.0, 1.0]
+  hu_window: [-1000, 400]
+  normalize_range: [0.0, 1.0]
+  slice_axis: axial
+  augmentation:
+    rotation: true
+    flip: true
+    random_pixel_swap: true
+
+segmentation:
+  architecture: unet          # variant: attention | residual (TBC)
+  variant: null
+
+risk_model:
+  backbone: null              # densenet121 | resnet50 (TBC)
+  sequence_model: null        # bilstm | transformer (TBC)
+
+confidence_thresholds:
+  green_below: 0.30
+  red_above: 0.70
+
+training:                     # NEEDS UNIVERSITY PC: fill from actual runs
+  batch_size: null
+  epochs: null
+  learning_rate: null
+  seed: 42
