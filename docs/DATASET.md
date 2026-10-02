@@ -54,7 +54,7 @@ data/
 | Dataset | Status |
 |---|---|
 | IQ-OTH/NCCD | Not part of the current pipeline. Confirm whether to keep it |
-| Longitudinal dataset for growth forecasting | Not yet selected |
+| Longitudinal dataset for growth forecasting (stretch) | Not selected. LUNA16/LIDC-IDRI are single-timepoint; longitudinal NLST data needs a separate access application |
 
 ## Preprocessing
 

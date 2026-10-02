@@ -1,5 +1,7 @@
 # Project Progress
 
+Scope tiers (see [docs/PIPELINE.md](docs/PIPELINE.md#scope-what-is-realistic)): **core** = committed · **ext** = extension if time allows · **stretch** = future work unless completed
+
 Legend: ✅ done · 🟡 partly done · ⬜ not started · 🏫 **NEEDS UNIVERSITY PC** · ❓ decision needed
 
 _Last updated: 2026-10-02_
@@ -37,16 +39,17 @@ _Last updated: 2026-10-02_
 | De-duplication LUNA16 ⊂ LIDC-IDRI + patient-level split | ⬜ | `src/preprocessing/` |
 | Preprocessing code | 🏫 | `src/preprocessing/` |
 | Nodule segmentation (U-Net) | 🏫 | `src/segmentation/` |
-| Slice-level risk model | 🏫 | `src/risk_model/` |
-| Growth forecasting | 🏫 / ⬜ | `src/growth_forecast/` |
+| Nodule malignancy classifier (core) | 🏫 | `src/risk_model/` |
+| Slice-sequence model (ext) | ⬜ | `src/risk_model/`, ablation vs. classifier |
+| Growth forecasting (stretch) | ⬜ | `src/growth_forecast/`; needs longitudinal data |
 | Grad-CAM++ explainability | 🏫 / ⬜ | `src/explainability/` |
 | Training notebooks | 🏫 | `notebooks/` |
 | Trained weights | 🏫 | external link in `models/README.md` |
 | Internal validation results | 🏫 | `results/`, only real numbers |
 | External test on LUNA25 | ⬜ | After models are frozen |
 | REST API | ⬜ | `backend/`, contract in `docs/API.md` |
-| Doctor web app | ⬜ / 🏫 | `apps/doctor-web-app/` |
-| Patient app (agentic AI) | ⬜ | `apps/patient-app/`, features TBC |
+| Doctor web app (core) | ⬜ / 🏫 | `apps/doctor-web-app/` |
+| Patient app with AI assistant (stretch) | ⬜ | `apps/patient-app/`, features TBC |
 | Tests | ⬜ | `tests/` |
 
 ## Open decisions ❓
