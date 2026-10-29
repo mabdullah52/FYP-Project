@@ -10,7 +10,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 // Built-in server address: set at build time with --dart-define=LUNGCARE_SERVER=https://...
-const _defaultServer = String.fromEnvironment('LUNGCARE_SERVER', defaultValue: 'http://192.168.1.10:8100');
+const _defaultServer = String.fromEnvironment('LUNGCARE_SERVER', defaultValue: 'https://lungscan-ai.thankfulocean-bfa8eccd.koreacentral.azurecontainerapps.io/patient');
 
 class _LoginScreenState extends State<LoginScreen> {
   final _url = TextEditingController(text: Api.instance.baseUrl.isEmpty ? _defaultServer : Api.instance.baseUrl);
@@ -133,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   keyboardType: TextInputType.url,
                   decoration: const InputDecoration(
                     labelText: 'Hospital server address',
-                    helperText: 'Shown in the patient-app window on the hospital PC',
+                    helperText: 'Already filled in - only change it if the hospital gives you another address',
                     border: OutlineInputBorder(),
                   ),
                 ),

@@ -85,6 +85,8 @@ Flutter apps: `doctor_flutter/BUILD_DOCTOR_FLUTTER.bat` (web + Android) and `lun
 
 ## Online demo
 
+**Live:** doctor app https://lungscan-ai.thankfulocean-bfa8eccd.koreacentral.azurecontainerapps.io/doctor/ · patient app https://lungscan-ai.thankfulocean-bfa8eccd.koreacentral.azurecontainerapps.io/patient/ · Android app: see Releases (LungCare.apk).
+
 Every push to `main` runs `.github/workflows/deploy.yml`, which
 1. builds the Flutter doctor web app and packs the whole system into one Docker image, `ghcr.io/mabdullah52/lungscan-ai:latest` (port 7860: `/` and `/doctor/` for doctors, `/patient/` for patients), and
 2. builds the LungCare Android APK and publishes it under **Releases**.

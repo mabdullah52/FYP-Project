@@ -30,7 +30,7 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started
 | Flutter doctor app (web + Android + Windows) | ✅ | `doctor_flutter/` |
 | Patient web app with assistant, reminders, symptom diary, doctor requests, code recovery | ✅ | `patient_app/` |
 | Flutter patient app (Android APK) | ✅ | `lungcare_mobile/` |
-| Online deployment (Hugging Face Space, built automatically by GitHub Actions) | 🟡 | `deploy/huggingface/`, `.github/workflows/` |
+| Online deployment on Azure Container Apps (image built by GitHub Actions) | ✅ | https://lungscan-ai.thankfulocean-bfa8eccd.koreacentral.azurecontainerapps.io/doctor/ · https://lungscan-ai.thankfulocean-bfa8eccd.koreacentral.azurecontainerapps.io/patient/ |
 
 ## Writing
 
