@@ -1,0 +1,6 @@
+
+===== show_patches.py =====
+scans finished: 888 / 888  (missing: 0)
+empty (never written) patches: 0   <- must be 0
+mean HU at the exact centre of nodules >= 10 mm: 46   <- should be about -100 or higher
+-> ./work\patch_check.png

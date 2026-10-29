@@ -1,0 +1,11 @@
+comparison,CPM_A,CPM_B,delta_B_minus_A,delta_95CI,p_value,significant_at_0.05
+Ablation: no context stream,0.9075,0.9088,0.0014,-0.026 to +0.027,0.953,False
+Ablation: concat instead of gated fusion,0.9075,0.898,-0.0095,-0.057 to +0.027,0.62,False
+Ablation: single HU window,0.9075,0.9034,-0.0041,-0.034 to +0.022,0.742,False
+Ablation: no diameter task,0.9075,0.9238,0.0163,-0.019 to +0.037,0.444,False
+Ablation: BCE instead of focal,0.9075,0.9252,0.0177,-0.012 to +0.043,0.248,False
+TTA + MC dropout (test),0.8816,0.9034,0.0218,-0.006 to +0.039,0.177,False
+TTA + MC dropout (validation),0.8608,0.8801,0.0194,+0.001 to +0.040,0.04,True
+Round-2 hard negatives (validation),0.8608,0.8329,-0.0278,-0.067 to -0.001,0.037,True
+Round-2 hard negatives (test),0.8816,0.8884,0.0068,-0.024 to +0.024,0.987,False
+Training length 10 vs 30 epochs (test),0.8816,0.9075,0.0259,-0.015 to +0.057,0.249,False

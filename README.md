@@ -1,212 +1,99 @@
-# Interpretable Lung Nodule Malignancy Prediction with External Validation on LUNA25
+# LungScan AI: Robust Lung Cancer Prediction
 
-**Abdullah Asim, Hussnain Khalid** · Supervisor: **Rabia Masood**
-Department of Computer Sciences, Bahria University Lahore Campus
+Official FYP title: *Robust Lung Cancer Prediction: Handling Incomplete and Noisy Clinical Data Using Deep Learning.*
 
-Final Year Project, BS Computer Science (2025–26). Official FYP title: *Robust Lung Cancer Prediction: Handling Incomplete and Noisy Clinical Data Using Deep Learning.*
+Final Year Project, BS Computer Science, Bahria University Lahore Campus
+**Abdullah Asim** (03-134231-005) · **Hussnain Khalid** (03-134222-035) · Supervisor: **Rabia Masood**
 
-![Status](https://img.shields.io/badge/status-in%20progress-yellow) ![License](https://img.shields.io/badge/license-MIT-blue)
+LungScan AI finds pulmonary nodules on chest CT, estimates their size, calibrated probability and
+uncertainty, estimates cancer risk, and uses last year's scan when one exists. It ships with a
+Flutter doctor app, a Flutter (Android) and web patient app, and an online demo.
+
+> Research prototype. Decision support for radiologists only. It is not a medical device and does not diagnose.
+
+## Results at a glance
+
+| Task | Data | Result |
+|---|---|---|
+| Nodule detection (FP reduction), MSGF-Net, 3.35 M parameters | LUNA16, held-out subset 9 (88 scans, 105 nodules) | **CPM 0.903** (95% CI 0.843–0.956) |
+| Same protocol, standard networks | same | plain 3D CNN 0.908 (tie, p = 0.68) · 2.5D ResNet-18 0.861 · 3D ResNet-18 0.856 (MSGF-Net better, p = 0.034) |
+| Nodule size | same | MAE 0.45 mm (r = 0.996) |
+| Calibration / uncertainty | same | ECE 0.0123 → 0.0007 · uncertainty flags own errors with AUROC 0.971 |
+| Complete system from raw CT (own candidate finder) | same | CPM 0.864, 72 s per scan on GPU |
+| External test without retraining | LUNA25 (6,163 nodules, NLST low-dose) | mean sensitivity 0.754 (0.907 at 8 FP/scan) |
+| Cancer risk from one scan | LUNA25, 424 unseen patients | AUC 0.900 vs 0.856 for size alone (p = 0.001); 5-fold CV 0.875 vs 0.830 |
+| Cancer risk with last year's scan | LUNA25, 5-fold CV, 2,401 nodules | AUC 0.932 vs 0.904 single scan (p < 0.001) |
+| Federated training (4 simulated hospitals) | LUNA16 | CPM 0.808 vs 0.665 one hospital alone, 0.880 pooled |
+
+All confidence intervals come from patient- or scan-level bootstrap; all comparisons are paired.
+Full numbers are in `work/*.csv`, `work/*/…metrics.json` and the run logs in `logs/`.
+
+## Papers
+
+* `paper/MSGF-Net_paper.pdf`: *MSGF-Net: calibrated, uncertainty-aware 3D false-positive reduction for lung nodule detection* (LaTeX source in `paper/`)
+* Paper 2 (draft): cancer-risk prediction on LUNA25 using a single scan and the prior-year scan (growth)
+
+## Documentation
 
 | Document | What it covers |
 |---|---|
-| [Research design](docs/RESEARCH.md) | Research questions, hypotheses, experiments, paper outline |
-| [Pipeline](docs/PIPELINE.md) | Data → training → external test → apps, with core vs stretch scope |
-| [Architecture](docs/ARCHITECTURE.md) · [Datasets](docs/DATASET.md) · [API](docs/API.md) | Technical design |
-| [References](docs/REFERENCES.md) | Literature reviewed |
-| [Progress](PROGRESS.md) | What is done and what remains |
+| [Progress](PROGRESS.md) | What is done |
+| [Methodology](METHODOLOGY.md) · [Pipeline guide](docs/PIPELINE_GUIDE.md) | How the system and experiments work |
+| [Research design](docs/RESEARCH.md) · [Datasets](docs/DATASET.md) · [References](docs/REFERENCES.md) | Original research plan, data, literature (32 papers) |
+| `docs/thesis/`, `docs/proposal/`, `docs/literature-matrices/`, `literature/summaries/` | Thesis chapters, proposal, literature matrices and summaries |
 
-> **Project status.** The research design, literature review and methodology are complete. Implementation is in progress. Code and results will be added as they are produced; **no results are reported until the experiments have been run.**
+## Repository layout
 
----
-
-## Overview
-
-Radiologists review hundreds of CT slices per scan, and most existing AI tools give a single "cancer / no cancer" answer with no explanation. This project proposes an **interpretable Computer-Aided Diagnosis (CAD) system** that:
-
-- segments lung nodules in CT scans,
-- estimates **nodule malignancy risk**, with a slice-by-slice risk view as an extension,
-- explains its predictions with **confidence-coloured overlays** and **Grad-CAM++ heatmaps**, and
-- is tested on an **external dataset (LUNA25)** that it never saw during training,
-
-served by a Python AI engine to a **doctor web app** for radiologists.
-
-**Stretch goals** (only if time and data allow; see [Scope](#scope-core-vs-stretch)): forecasting the next likely region of tumour growth, and a patient app with an AI assistant.
-
-## Planned System Architecture
-
-```
-┌──────────────────────────────┐   HTTP / REST (JSON)   ┌───────────────────────────────────┐
-│  Doctor web app               │ ─────────────────────▶ │  Python AI Engine (FastAPI/Flask)  │
-│  (radiologist dashboard)      │ ◀───────────────────── │                                   │
-│  • Slice viewer               │   risk scores, boxes,  │  1. Preprocessing & slice extract  │
-│  • Confidence overlays        │   heatmap images       │  2. Nodule segmentation (U-Net)    │
-│  • Grad-CAM toggle            │                        │  3. Slice-level risk (CNN + RNN)   │
-└──────────────────────────────┘                        │  4. Growth forecast (stretch)      │
-                                                        │  5. Grad-CAM++ explanations        │
-                                                        └───────────────────────────────────┘
-```
-
-Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-
-### Modules (from the methodology)
-
-The main model is a **nodule malignancy classifier** on nodule-centred CT patches (backbone such as DenseNet121 / ResNet50, 2D/2.5D/3D to be chosen).
-
-| Module | Approach (planned) | Output |
-|---|---|---|
-| Preprocessing | Resample to ~1×1×1 mm, clip HU to [-1000, 400], normalise to [0, 1], axial slicing, augmentation incl. Random Pixel Swap | Normalised 2D/3D inputs |
-| Nodule segmentation | Modified U-Net with residual or attention gates | Binary nodule mask per slice |
-| Slice-level risk trend (extension) | CNN backbone (DenseNet121 / ResNet50) → Bi-LSTM or Transformer encoder | Risk score 0–1 per slice + contributing features |
-| Growth forecasting (stretch) | Centroid + boundary-gradient analysis of segmented nodule | Probabilistic growth heatmap |
-| Interpretability | Confidence colours + Grad-CAM++ | Green < 30%, Yellow 30–70%, Red > 70%; pixel heatmaps |
-
-### Confidence colour scheme
-
-| Colour | Malignancy probability | Meaning |
-|---|---|---|
-| 🟢 Green | < 30% | Low risk (likely benign) |
-| 🟡 Yellow | 30–70% | Uncertain, needs manual review |
-| 🔴 Red | > 70% | High risk (likely malignant) |
-
-## Pipeline
-
-**Train on LUNA16 + LIDC-IDRI → freeze the models → test on LUNA25 (external, unseen) → serve to the doctor web app.**
-
-```
-LUNA16 + LIDC-IDRI ─▶ de-duplicate + patient-level split ─▶ preprocess
-        ─▶ U-Net segmentation + nodule malignancy classifier ─▶ Grad-CAM++ / confidence colours
-        ─▶ internal validation ─▶ freeze weights + thresholds
-                                         │
-LUNA25 ─▶ same preprocessing ────────────┴─▶ external test (AUC-ROC, sensitivity, specificity)
-                                         │
-                                  Backend REST API
-                                         │
-                                   Doctor web app
-                    (stretch: patient app · growth-region forecast)
-```
-
-Full stage-by-stage plan: [docs/PIPELINE.md](docs/PIPELINE.md)
-
-## Scope: core vs stretch
-
-| Tier | Components | Why |
-|---|---|---|
-| ✅ **Core** (committed) | Data de-duplication and patient split · preprocessing · U-Net segmentation · nodule malignancy classifier · confidence colours + Grad-CAM++ · internal validation · LUNA25 external test · REST API · doctor web app | The public data has labels for all of these, and they fit one GPU workstation |
-| 🟡 **Extension** (if time allows) | Slice-sequence risk model (CNN → Bi-LSTM / Transformer) compared against the single-patch model · automatic nodule detection on whole scans | Feasible, but adds training time. There are no per-slice malignancy labels, so it is evaluated at nodule level |
-| 🔵 **Stretch / future work** | Growth-region forecasting · patient app with an AI assistant · official LUNA25 leaderboard submission | Growth forecasting needs follow-up scans of the same nodule. LUNA16/LIDC-IDRI have only one scan per patient, and LUNA25 (which has repeat scans) is kept aside as the unseen test set. The patient app is a separate product with extra safety requirements |
-
-Details: [docs/PIPELINE.md](docs/PIPELINE.md#scope-what-is-realistic)
-
-## Research Questions
-
-| ID | Question |
+| Path | What it is |
 |---|---|
-| RQ1 | How well does a malignancy model trained on LUNA16 / LIDC-IDRI generalise to an independent screening cohort (LUNA25)? |
-| RQ2 | Do Grad-CAM++ explanations focus on the nodule, as defined by radiologist outlines? |
-| RQ3 | Does a green / yellow / red confidence scheme concentrate model errors in the "review" band? |
-| RQ4 (extension) | Does modelling the slice sequence through a nodule improve on a single-patch model? |
+| `preprocess.py`, `dataset.py`, `model.py`, `train.py`, `evaluate.py`, `metrics.py` | LUNA16 pipeline: patches, MSGF-Net, training, FROC/CPM evaluation |
+| `baselines.py`, `compare_baselines.py` | 3D ResNet-18, 2.5D ResNet-18 and plain 3D CNN baselines |
+| `candidate_gen.py`, `infer.py`, `predictor.py`, `explain.py` | Full-scan inference from raw CT, Grad-CAM |
+| `luna25_*.py`, `risk_model.py`, `brock.py` | LUNA25 external test, cancer-risk models, growth model, Brock score |
+| `fed_train.py` | Federated averaging experiment |
+| `stats_compare.py` | Paired bootstrap tests |
+| `doctor_app/` | Python (FastAPI) server: AI, doctor accounts, studies, reports |
+| `doctor_flutter/` | Flutter doctor app (web, Android, Windows) |
+| `patient_app/`, `lungcare_mobile/` | Patient server + web app, and the Flutter Android app |
+| `deploy/huggingface/` | Online deployment (one Docker container, port 7860) |
+| `work/` | Result tables, metrics, training histories, the final MSGF-Net model (`work/runs/msgf_f9/best.pt`) |
+| `logs/` | Logs of every experiment |
+| `*.bat` | Numbered Windows steps used on the university GPU PC (see `START_HERE.txt`) |
+| `docs/PIPELINE_GUIDE.md`, `METHODOLOGY.md` | Detailed pipeline and methodology notes |
 
-Hypotheses, experiment tables and threats to validity: [docs/RESEARCH.md](docs/RESEARCH.md)
+## Data (not included)
 
-## Datasets
+* **LUNA16**: https://luna16.grand-challenge.org/ (888 CT scans, `annotations.csv`, `candidates_V2.csv`)
+* **LUNA25**: https://zenodo.org/records/14673658 (NLST low-dose screening CT with malignancy labels)
 
-| Dataset | Role |
-|---|---|
-| LUNA16 | Training and validation |
-| LIDC-IDRI | Training and validation (overlaps LUNA16, de-duplicated) |
-| LUNA25 | External test only (never used for training or tuning) |
+Split: LUNA16 official subsets, model selection on subset 8, test on subset 9. LUNA25: patient-level 5-fold split.
 
-The CT data is **not stored in this repository** (too large, and redistribution is governed by each dataset's terms). See [docs/DATASET.md](docs/DATASET.md) for download and placement instructions.
-
-## Evaluation Plan
-
-| Task | Metrics |
-|---|---|
-| Segmentation | Dice Similarity Coefficient, IoU |
-| Classification | Accuracy, Sensitivity, Specificity, AUC-ROC |
-| Slice-sequence model (extension) | Nodule-level AUC-ROC compared with the single-patch model (ablation) |
-| Interpretability | Qualitative comparison of Grad-CAM maps with radiologist annotations; ablation of the sequential module |
-| External generalisation | Nodule-level malignancy AUC-ROC, sensitivity, specificity on LUNA25 with the frozen model |
-
-## Results
-
-**Not yet available.** Results will be added to [`results/`](results/) only after experiments are run and verified.
-
-## Repository Structure
-
-```
-.
-├── README.md
-├── LICENSE                   # MIT
-├── CITATION.cff
-├── PROGRESS.md               # What is done / what remains
-├── requirements.txt          # Python dependencies (versions to be pinned)
-├── configs/                  # Example configuration files
-├── docs/
-│   ├── ARCHITECTURE.md
-│   ├── PIPELINE.md           # Train on LUNA16 + LIDC-IDRI, external test on LUNA25, apps
-│   ├── DATASET.md
-│   ├── API.md                # Planned REST API contract
-│   ├── RESEARCH.md           # Research questions, hypotheses, experiments
-│   ├── REFERENCES.md         # Literature reviewed (DOI links)
-│   ├── proposal/             # Proposal document and presentation
-│   ├── thesis/               # Report chapters, methodology, research gap analysis
-│   └── literature-matrices/  # Paper comparison spreadsheets
-├── literature/
-│   └── summaries/            # Our summaries of key papers
-├── src/                      # AI engine source (preprocessing, models, explainability)
-├── backend/                  # REST API server
-├── apps/
-│   ├── doctor-web-app/       # Radiologist decision-support web app
-│   └── patient-app/          # Stretch goal: patient app with AI assistant
-├── notebooks/                # Experiments
-├── data/                     # Local datasets (git-ignored)
-├── models/                   # Trained weights (git-ignored)
-├── results/                  # Verified metrics and figures
-└── tests/
-```
-
-## Setup
-
-> The AI engine code is not yet committed. The steps below describe the intended environment.
+## Run it
 
 ```bash
-git clone https://github.com/mabdullah52/FYP-Project.git
-cd FYP-Project
-
-python -m venv .venv
-# Windows: .venv\Scripts\activate
-source .venv/bin/activate
-
+python -m venv lungenv && source lungenv/bin/activate      # Windows: lungenv\Scripts\activate
 pip install -r requirements.txt
-cp configs/config.example.yaml configs/config.yaml   # then edit paths
-cp .env.example .env
+python doctor_app/server.py          # doctor workstation  -> http://127.0.0.1:8000
+python patient_app/server.py         # patient web app     -> http://127.0.0.1:8100
 ```
 
-Then download the dataset as described in [docs/DATASET.md](docs/DATASET.md).
+The trained detector `work/runs/msgf_f9/best.pt` is included. The LUNA25 cancer-risk ensemble
+(`work/runs/l25_scratch*/best.pt`) is not, because of its size. Without it the app still detects nodules and shows the Brock clinical risk.
+To reproduce training, follow `START_HERE.txt` (Windows) or `docs/PIPELINE_GUIDE.md`.
 
-## Tech Stack (planned)
+Flutter apps: `doctor_flutter/BUILD_DOCTOR_FLUTTER.bat` (web + Android) and `lungcare_mobile/SETUP_AND_BUILD_ANDROID.bat`.
 
-- **Language:** Python
-- **Deep learning:** PyTorch or TensorFlow/Keras (final choice to be confirmed)
-- **Medical imaging:** SimpleITK, OpenCV, NumPy
-- **API:** FastAPI or Flask
-- **Doctor web app:** Flutter (Dart) per the methodology, Provider or Riverpod for state (to be confirmed)
-- **Patient app (stretch):** framework and AI-agent stack to be decided
-- **Hardware:** NVIDIA GPU workstation
+## Online demo
 
-## Disclaimer
+Every push to `main` runs `.github/workflows/deploy.yml`, which
+1. builds the Flutter doctor web app,
+2. uploads the whole system to a Hugging Face Space (one Docker container: `/` and `/doctor/` for doctors, `/patient/` for patients), and
+3. builds the LungCare Android APK with the online address built in and publishes it under **Releases**.
 
-This is an academic research project. It is **not a medical device** and must not be used for clinical diagnosis.
+One-time setup: add the repository secrets `HF_TOKEN` (Hugging Face write token), `ADMIN_USER` and `ADMIN_PASSWORD`.
+The demo runs on a free CPU, so analysing a scan takes several minutes, and its data resets when the Space restarts.
 
-## Citation
+## Ethics and privacy
 
-If you refer to this work, please cite it using [CITATION.cff](CITATION.cff) (GitHub's "Cite this repository" button).
-
-## License
-
-Code and documentation in this repository are released under the [MIT License](LICENSE). Datasets and third-party papers keep their own licenses and are not redistributed here.
-
-## Acknowledgements
-
-Supervisor: Rabia Masood, Bahria University Lahore Campus. The datasets are credited in [docs/DATASET.md](docs/DATASET.md).
+No patient data is stored in this repository. The apps keep data locally (`app_data/`, git-ignored).
+Doctor accounts use salted password hashes; the patient portal uses per-patient access codes.

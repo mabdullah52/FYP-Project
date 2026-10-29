@@ -1,0 +1,4 @@
+model,data,best_val_AUC,test_CPM,CPM_95CI
+fed_avg,"4 hospitals, weights only",0.9941,0.8082,0.740-0.883
+fed_central,all data pooled,0.9967,0.8803,0.819-0.935
+fed_local_A,hospital A alone,0.9843,0.6653,0.583-0.744

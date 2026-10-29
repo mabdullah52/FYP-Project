@@ -1,0 +1,47 @@
+
+===== pick_demo_scans.py 1.3.6.1.4.1.14519.5.2.1.6279.6001.105756658031515062000744821260 =====
+======================================================================
+LUNA16 TEST SCANS (subset 9) WITH NODULES - copy a path into 'Add scan from a path on this PC'
+======================================================================
+  largest nodule 24.3 mm, 1 nodule(s):
+    D:\studentss\LUNA 16\subset9\1.3.6.1.4.1.14519.5.2.1.6279.6001.153985109349433321657655488650.mhd
+  largest nodule 23.6 mm, 1 nodule(s):
+    D:\studentss\LUNA 16\subset9\1.3.6.1.4.1.14519.5.2.1.6279.6001.220596530836092324070084384692.mhd
+  largest nodule 22.0 mm, 1 nodule(s):
+    D:\studentss\LUNA 16\subset9\1.3.6.1.4.1.14519.5.2.1.6279.6001.272344603176687884771013620823.mhd
+  largest nodule 21.5 mm, 3 nodule(s):
+    D:\studentss\LUNA 16\subset9\1.3.6.1.4.1.14519.5.2.1.6279.6001.170706757615202213033480003264.mhd
+  largest nodule 21.1 mm, 1 nodule(s):
+    D:\studentss\LUNA 16\subset9\1.3.6.1.4.1.14519.5.2.1.6279.6001.102681962408431413578140925249.mhd
+  largest nodule 20.2 mm, 1 nodule(s):
+    D:\studentss\LUNA 16\subset9\1.3.6.1.4.1.14519.5.2.1.6279.6001.194632613233275988184244485809.mhd
+  largest nodule 19.0 mm, 1 nodule(s):
+    D:\studentss\LUNA 16\subset9\1.3.6.1.4.1.14519.5.2.1.6279.6001.173931884906244951746140865701.mhd
+  largest nodule 17.4 mm, 1 nodule(s):
+    D:\studentss\LUNA 16\subset9\1.3.6.1.4.1.14519.5.2.1.6279.6001.138813197521718693188313387015.mhd
+
+(59 of 88 subset-9 scans have nodules; the others are normal)
+
+1.3.6.1.4.1.14519.5.2.1.6279.6001: subset ?, 0 nodule(s) - a normal scan, 0 findings is CORRECT
+
+======================================================================
+LUNA25 TEST SCANS (.mha) - for the cancer-risk demo (never used in training)
+======================================================================
+
+ MALIGNANT (cancer confirmed):
+  nodule ~35 mm at x=59 y=6 z=-35 mm:
+    D:\studentss\luna25\Extracted\luna25_images\luna25_images\1.3.6.1.4.1.14519.5.2.1.7009.9004.240324207329350237274075536816.mha
+  nodule ~32 mm at x=38 y=60 z=-132 mm:
+    D:\studentss\luna25\Extracted\luna25_images\luna25_images\1.3.6.1.4.1.14519.5.2.1.7009.9004.234966162311920343236075837521.mha
+  nodule ~29 mm at x=-102 y=95 z=-1410 mm:
+    D:\studentss\luna25\Extracted\luna25_images\luna25_images\1.3.6.1.4.1.14519.5.2.1.7009.9004.256022561495144490753662382418.mha
+  nodule ~29 mm at x=26 y=12 z=933 mm:
+    D:\studentss\luna25\Extracted\luna25_images\luna25_images\1.2.840.113654.2.55.22084245517968704647300402362399724489.mha
+
+ BENIGN:
+  nodule ~30 mm at x=98 y=-144 z=690 mm:
+    D:\studentss\luna25\Extracted\luna25_images\luna25_images\1.3.6.1.4.1.14519.5.2.1.7009.9004.311119362574023477506809299054.mha
+  nodule ~23 mm at x=75 y=7 z=-86 mm:
+    D:\studentss\luna25\Extracted\luna25_images\luna25_images\1.2.840.113654.2.55.238519687129394139924938635204494068809.mha
+  nodule ~23 mm at x=-97 y=-17 z=-117 mm:
+    D:\studentss\luna25\Extracted\luna25_images\luna25_images\1.2.840.113654.2.55.201664009347634165187058934797193112306.mha

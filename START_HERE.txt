@@ -1,0 +1,139 @@
+===========================================================================
+ LUNG NODULE PROJECT - WHAT TO DO ON THE UNIVERSITY PC (easy version)
+===========================================================================
+
+You only DOUBLE-CLICK files, in number order: 1, 2, 3, 4, 5, 6.
+Each one opens a black window. Wait until it says "Press any key".
+Each one saves what it printed into the "logs" folder -> send me that file.
+
+---------------------------------------------------------------------------
+ BEFORE STEP 1 (5 minutes)
+---------------------------------------------------------------------------
+a) Unzip lungscan_luna16_pipeline.zip into D:\students
+   You will get the folder D:\students\lungscan  (this folder).
+
+b) Open your dataset folder (D:\students\luna16 or D:\students\luna) and check:
+   - there are folders subset0, subset1, ... subset9
+   - inside them are files ending in .mhd AND .raw
+     (if you only see .zip files, right-click each one -> Extract All)
+   - annotations.csv and candidates_V2.csv are somewhere in the luna folder
+     (if you only have candidates_V2.zip, extract it)
+
+   You do NOT need to copy or move the dataset. The code finds it
+   automatically in D:\students. Step 2 prints which folder it found.
+   Only if it finds nothing: open config.py with Notepad and put your path in
+   the line   MY_LUNA16_FOLDER = r"D:\students\luna16"
+
+c) D: drive needs about 20 GB free space.
+
+---------------------------------------------------------------------------
+ STEP 1  ->  double-click 1_INSTALL.bat          (10-20 min, needs internet)
+---------------------------------------------------------------------------
+Installs Python packages + PyTorch for your Quadro P4000.
+If it says Python is not installed: install Python 3.11 from python.org,
+tick "Add python.exe to PATH", then double-click 1_INSTALL.bat again.
+
+---------------------------------------------------------------------------
+ STEP 2  ->  double-click 2_CHECK.bat            (5 min)
+---------------------------------------------------------------------------
+Checks the GPU, the packages and the dataset, and counts scans and nodules.
+The first part must end with:   RESULT: READY
+SEND ME: logs\2_check.txt
+(If it says the GPU failed: double-click 1B_ONLY_IF_GPU_FAILS.bat, then 2 again.
+ The GPU test now picks the right batch size by itself and saves it.)
+
+---------------------------------------------------------------------------
+ STEP 3  ->  double-click 3_PREPROCESS.bat       (30-90 min)
+---------------------------------------------------------------------------
+THIS IS THE PREPROCESSING. It runs before any training and does all of this
+automatically:
+  1. reads every CT scan (.mhd header + .raw image) - 888 scans
+  2. reads candidates_V2.csv (the spots to classify: nodule=1 / not=0)
+     and annotations.csv (real nodules with their size in mm)
+  3. converts the CSV positions (millimetres) into pixel positions in each scan
+  4. makes every scan the same scale: 1 pixel = 1 mm in all 3 directions
+     (scans have different slice thickness; this removes that difference)
+  5. cuts a small 3D cube (48 x 48 x 48 mm) around every spot
+  6. cleans the intensity values (Hounsfield units, clipped to -1200..1200)
+  7. balances the data: keeps ALL nodules + 40 non-nodules per scan
+     (there are about 490 non-nodules for every nodule)
+  8. splits by PATIENT (official subsets) so the test patients are never seen
+     in training
+  9. saves everything in D:\students\lungscan\work\patches (about 8 GB)
+During training it also adds automatically: the 3 contrast windows,
+random flips/rotations/shifts (augmentation) and balanced batches.
+If the PC restarts: double-click 3 again, it continues where it stopped.
+It now runs as ONE program using 8 threads (no extra Python windows/processes),
+so it cannot fill up the computer's memory like the first attempt.
+SEND ME: logs\3_preprocess.txt
+
+---------------------------------------------------------------------------
+ STEP 4  ->  double-click 4_TRAIN.bat            (several hours - leave PC on)
+---------------------------------------------------------------------------
+Trains the model on subsets 0-7, checks it on subset 8 after every epoch,
+and keeps the best version. If it stops, double-click 4 again (it continues).
+SEND ME: logs\4_train.txt  and  work\runs\msgf_f9\history.csv
+
+---------------------------------------------------------------------------
+ STEP 5  ->  double-click 5_IMPROVE_AND_TEST.bat (2-4 hours)
+---------------------------------------------------------------------------
+Finds the model's hardest mistakes, trains a second round on them, then
+tests on subset 9 (patients never seen) with the official LUNA16 score (CPM).
+SEND ME: logs\5_final.txt  and the folder  work\runs\msgf_f9_r2\eval_subset9
+   -> these are the MAIN RESULTS for the research paper.
+
+---------------------------------------------------------------------------
+ STEP 6  ->  double-click 6_EXPERIMENTS_OVERNIGHT.bat   (overnight)
+---------------------------------------------------------------------------
+Six comparison experiments (the "ablation table" of the paper).
+SEND ME: work\results_table.csv
+
+---------------------------------------------------------------------------
+ STEP 8  ->  double-click 8_FINAL_RESULTS.bat   (3-4 hours)
+---------------------------------------------------------------------------
+FIRST extract evaluationScript.zip into your LUNA 16 folder (it contains
+annotations\annotations_excluded.csv - the official evaluation needs it).
+Then this step picks the final model FAIRLY (on validation subset 8, never on
+the test subset), adds an ensemble, and writes work\results_table.csv.
+Do not run step 6 and step 8 at the same time (they share the GPU).
+SEND ME: work\results_table.csv and logs\8_final_results.txt
+
+---------------------------------------------------------------------------
+ STEP 7  ->  double-click 7_DOCTOR_APP.bat      (the doctor web app)
+---------------------------------------------------------------------------
+Opens the clinician workstation in your browser (http://127.0.0.1:8000).
+It automatically uses the best trained model (work\runs\msgf_f9_r2, else msgf_f9).
+Try it: + New patient -> paste a path like
+   D:\studentss\LUNA 16\subset9\<some scan>.mhd   -> Analyse path
+Then review findings, write an impression, Print report, Release to patient.
+Data is saved in the folder app_data\ (delete it to start fresh).
+
+---------------------------------------------------------------------------
+ STEP 9  ->  double-click 9_PATIENT_APP.bat     (the patient app, agentic AI)
+---------------------------------------------------------------------------
+Starts the doctor app too if needed, then opens http://127.0.0.1:8100.
+Demo: in the doctor app, analyse a scan, review the findings, write the
+impression and press "Release to patient". Then log in to the patient app with
+the 6-letter code shown on the patient's page in the doctor app.
+The assistant explains results, sets reminders, keeps a symptom diary (urgent
+symptoms alert the doctor) and sends questions / appointment requests to the
+doctor, who replies in the doctor app.
+Claude AI: paste an API key into patient_app\claude_api_key.txt (optional).
+On a phone on the same Wi-Fi: set LUNGCARE_HOST=0.0.0.0 before starting.
+
+---------------------------------------------------------------------------
+ LUNA25 (external test + malignancy)  ->  steps 10, 11, 12, 13 in order
+---------------------------------------------------------------------------
+First download LUNA25_Public_Training_Development_Data.csv (861 kB) from
+https://zenodo.org/records/14673658 and put it in your luna25 folder.
+10_LUNA25_CHECK_AND_STATS.bat  - finds LUNA25 + paper statistics (minutes)
+11_LUNA25_PREPARE.bat          - labels, patient split, nodule patches (1-2 h)
+12_LUNA25_EXTERNAL_TEST.bat    - does the LUNA16 model work on new data? (20-40 min)
+13_LUNA25_MALIGNANCY.bat       - benign vs malignant model (3-5 h)
+Send the log of each step from the logs folder.
+
+---------------------------------------------------------------------------
+ FOR THE APPS: copy these 2 files home (about 15 MB):
+   work\runs\msgf_f9_r2\best.pt
+   work\runs\msgf_f9_r2\calibration.json
+===========================================================================

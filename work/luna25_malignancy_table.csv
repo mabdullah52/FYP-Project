@@ -1,0 +1,3 @@
+model,init,val_AUC,test_AUC,AUC_95CI,AP,sens,spec,ECE,ECE_raw,unc_AUC_errors,size_only_AUC
+l25_scratch,scratch,0.8977,0.9,0.864-0.934,0.548,0.874,0.692,0.031,0.1551,0.341,0.8558
+l25_transfer,msgf_f9,0.8515,0.8783,0.841-0.913,0.4565,0.82,0.789,0.0193,0.2012,0.222,0.8558

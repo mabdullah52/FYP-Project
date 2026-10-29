@@ -1,0 +1,413 @@
+
+===== train.py --name abl_full --epochs 10 --workers 8 --resume =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+batch size 64 fits on the GPU (6.9 of 8.6 GB free)
+model params: 3.35 M | mixed precision: False
+ep 00 loss 0.2548 (cls 0.0700, diam 0.3198) | val AUC 0.7713 AP 0.3439 sens@spec95 0.313 diamMAE 6.33mm | 369s *
+ep 01 loss -0.6964 (cls 0.0468, diam 0.0316) | val AUC 0.9622 AP 0.8076 sens@spec95 0.856 diamMAE 2.60mm | 387s *
+ep 02 loss -1.4186 (cls 0.0260, diam 0.0203) | val AUC 0.9195 AP 0.5978 sens@spec95 0.662 diamMAE 5.19mm | 1583s 
+ep 03 loss -2.0113 (cls 0.0212, diam 0.0177) | val AUC 0.9932 AP 0.9159 sens@spec95 0.969 diamMAE 1.22mm | 1585s *
+ep 04 loss -2.5178 (cls 0.0158, diam 0.0116) | val AUC 0.9917 AP 0.9081 sens@spec95 0.969 diamMAE 1.49mm | 1586s 
+ep 05 loss -2.9062 (cls 0.0118, diam 0.0088) | val AUC 0.9942 AP 0.9197 sens@spec95 0.979 diamMAE 1.01mm | 1585s *
+ep 06 loss -3.1801 (cls 0.0097, diam 0.0062) | val AUC 0.9930 AP 0.9291 sens@spec95 0.969 diamMAE 1.11mm | 1586s 
+ep 07 loss -3.3456 (cls 0.0079, diam 0.0055) | val AUC 0.9954 AP 0.9381 sens@spec95 0.985 diamMAE 1.10mm | 1585s *
+ep 08 loss -3.4285 (cls 0.0073, diam 0.0044) | val AUC 0.9953 AP 0.9416 sens@spec95 0.985 diamMAE 0.86mm | 1585s 
+ep 09 loss -3.4546 (cls 0.0065, diam 0.0041) | val AUC 0.9946 AP 0.9402 sens@spec95 0.985 diamMAE 0.88mm | 1584s 
+best val AUC 0.9954 -> ./work\runs\abl_full\best.pt
+
+===== train.py --name abl_nocontext --epochs 10 --workers 8 --resume --no-context =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+batch size 64 fits on the GPU (7.0 of 8.6 GB free)
+model params: 1.66 M | mixed precision: False
+ep 00 loss 0.2751 (cls 0.0661, diam 0.3428) | val AUC 0.8559 AP 0.5632 sens@spec95 0.554 diamMAE 2.57mm | 267s *
+ep 01 loss -0.7206 (cls 0.0410, diam 0.0288) | val AUC 0.9732 AP 0.8039 sens@spec95 0.867 diamMAE 2.39mm | 259s *
+ep 02 loss -1.4256 (cls 0.0264, diam 0.0236) | val AUC 0.9800 AP 0.8349 sens@spec95 0.933 diamMAE 2.11mm | 261s *
+ep 03 loss -2.0448 (cls 0.0177, diam 0.0154) | val AUC 0.9869 AP 0.8965 sens@spec95 0.949 diamMAE 1.29mm | 260s *
+ep 04 loss -2.5483 (cls 0.0141, diam 0.0105) | val AUC 0.9891 AP 0.9014 sens@spec95 0.985 diamMAE 1.00mm | 260s *
+ep 05 loss -2.9294 (cls 0.0115, diam 0.0085) | val AUC 0.9921 AP 0.9038 sens@spec95 0.979 diamMAE 1.17mm | 260s *
+ep 06 loss -3.2020 (cls 0.0093, diam 0.0063) | val AUC 0.9946 AP 0.9140 sens@spec95 0.990 diamMAE 0.96mm | 260s *
+ep 07 loss -3.3718 (cls 0.0073, diam 0.0050) | val AUC 0.9952 AP 0.9215 sens@spec95 0.990 diamMAE 0.81mm | 261s *
+ep 08 loss -3.4530 (cls 0.0067, diam 0.0041) | val AUC 0.9953 AP 0.9281 sens@spec95 0.990 diamMAE 0.82mm | 260s *
+ep 09 loss -3.4796 (cls 0.0060, diam 0.0038) | val AUC 0.9953 AP 0.9255 sens@spec95 0.990 diamMAE 0.85mm | 260s 
+best val AUC 0.9953 -> ./work\runs\abl_nocontext\best.pt
+
+===== train.py --name abl_concat --epochs 10 --workers 8 --resume --fusion concat =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+batch size 64 fits on the GPU (6.9 of 8.6 GB free)
+model params: 3.32 M | mixed precision: False
+ep 00 loss 0.1619 (cls 0.0628, diam 0.2338) | val AUC 0.8745 AP 0.5856 sens@spec95 0.600 diamMAE 2.66mm | 420s *
+ep 01 loss -0.7098 (cls 0.0352, diam 0.0248) | val AUC 0.9731 AP 0.8013 sens@spec95 0.867 diamMAE 1.81mm | 392s *
+ep 02 loss -1.4111 (cls 0.0232, diam 0.0178) | val AUC 0.9824 AP 0.9018 sens@spec95 0.949 diamMAE 1.71mm | 1216s *
+ep 03 loss -2.0176 (cls 0.0160, diam 0.0133) | val AUC 0.9759 AP 0.8809 sens@spec95 0.944 diamMAE 1.68mm | 1217s 
+ep 04 loss -2.5146 (cls 0.0124, diam 0.0101) | val AUC 0.9925 AP 0.9274 sens@spec95 0.974 diamMAE 1.81mm | 1218s *
+ep 05 loss -2.8948 (cls 0.0104, diam 0.0077) | val AUC 0.9944 AP 0.9315 sens@spec95 0.990 diamMAE 1.69mm | 1218s *
+ep 06 loss -3.1666 (cls 0.0085, diam 0.0055) | val AUC 0.9959 AP 0.9397 sens@spec95 0.995 diamMAE 0.94mm | 1217s *
+ep 07 loss -3.3317 (cls 0.0069, diam 0.0047) | val AUC 0.9947 AP 0.9439 sens@spec95 0.990 diamMAE 1.06mm | 1221s 
+ep 08 loss -3.4122 (cls 0.0063, diam 0.0039) | val AUC 0.9916 AP 0.9390 sens@spec95 0.985 diamMAE 1.04mm | 1218s 
+ep 09 loss -3.4372 (cls 0.0058, diam 0.0037) | val AUC 0.9910 AP 0.9388 sens@spec95 0.985 diamMAE 1.06mm | 1216s 
+best val AUC 0.9959 -> ./work\runs\abl_concat\best.pt
+
+===== train.py --name abl_1window --epochs 10 --workers 8 --resume --windows single =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+batch size 64 fits on the GPU (7.0 of 8.6 GB free)
+model params: 3.35 M | mixed precision: False
+ep 00 loss 0.2628 (cls 0.0683, diam 0.3296) | val AUC 0.8623 AP 0.5440 sens@spec95 0.600 diamMAE 4.90mm | 392s *
+ep 01 loss -0.7061 (cls 0.0433, diam 0.0306) | val AUC 0.9651 AP 0.7853 sens@spec95 0.867 diamMAE 2.16mm | 367s *
+ep 02 loss -1.4215 (cls 0.0253, diam 0.0215) | val AUC 0.9870 AP 0.8624 sens@spec95 0.944 diamMAE 1.48mm | 1548s *
+ep 03 loss -2.0376 (cls 0.0169, diam 0.0146) | val AUC 0.9933 AP 0.9291 sens@spec95 0.979 diamMAE 1.70mm | 1554s *
+ep 04 loss -2.5431 (cls 0.0126, diam 0.0100) | val AUC 0.9929 AP 0.9213 sens@spec95 0.959 diamMAE 1.46mm | 1551s 
+ep 05 loss -2.9251 (cls 0.0106, diam 0.0076) | val AUC 0.9951 AP 0.9321 sens@spec95 0.979 diamMAE 1.14mm | 1551s *
+ep 06 loss -3.1932 (cls 0.0089, diam 0.0060) | val AUC 0.9949 AP 0.9345 sens@spec95 0.990 diamMAE 0.98mm | 1550s 
+ep 07 loss -3.3602 (cls 0.0071, diam 0.0050) | val AUC 0.9960 AP 0.9437 sens@spec95 0.985 diamMAE 0.98mm | 1551s *
+ep 08 loss -3.4431 (cls 0.0061, diam 0.0042) | val AUC 0.9957 AP 0.9444 sens@spec95 0.990 diamMAE 0.95mm | 1554s 
+ep 09 loss -3.4644 (cls 0.0061, diam 0.0041) | val AUC 0.9958 AP 0.9444 sens@spec95 0.990 diamMAE 0.92mm | 1552s 
+best val AUC 0.9960 -> ./work\runs\abl_1window\best.pt
+
+===== train.py --name abl_noaux --epochs 10 --workers 8 --resume --aux-weight 0 =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+batch size 64 fits on the GPU (6.9 of 8.6 GB free)
+model params: 3.35 M | mixed precision: False
+ep 00 loss 0.0574 (cls 0.0574, diam 0.0000) | val AUC 0.9652 AP 0.7937 sens@spec95 0.877 diamMAE 12.93mm | 418s *
+ep 01 loss 0.0229 (cls 0.0229, diam 0.0000) | val AUC 0.9802 AP 0.8377 sens@spec95 0.908 diamMAE 12.91mm | 387s *
+ep 02 loss 0.0146 (cls 0.0146, diam 0.0000) | val AUC 0.9828 AP 0.8806 sens@spec95 0.938 diamMAE 12.88mm | 1195s *
+ep 03 loss 0.0119 (cls 0.0119, diam 0.0000) | val AUC 0.9928 AP 0.8959 sens@spec95 0.985 diamMAE 12.93mm | 1195s *
+ep 04 loss 0.0098 (cls 0.0098, diam 0.0000) | val AUC 0.9940 AP 0.9174 sens@spec95 0.979 diamMAE 12.92mm | 1194s *
+ep 05 loss 0.0090 (cls 0.0090, diam 0.0000) | val AUC 0.9949 AP 0.9152 sens@spec95 0.990 diamMAE 12.91mm | 1194s *
+ep 06 loss 0.0078 (cls 0.0078, diam 0.0000) | val AUC 0.9950 AP 0.9218 sens@spec95 0.990 diamMAE 12.92mm | 1191s *
+ep 07 loss 0.0067 (cls 0.0067, diam 0.0000) | val AUC 0.9951 AP 0.9183 sens@spec95 0.990 diamMAE 12.94mm | 1190s *
+ep 08 loss 0.0059 (cls 0.0059, diam 0.0000) | val AUC 0.9944 AP 0.9225 sens@spec95 0.979 diamMAE 12.95mm | 1195s 
+ep 09 loss 0.0057 (cls 0.0057, diam 0.0000) | val AUC 0.9933 AP 0.9208 sens@spec95 0.969 diamMAE 12.94mm | 1196s 
+best val AUC 0.9951 -> ./work\runs\abl_noaux\best.pt
+
+===== train.py --name abl_bce --epochs 10 --workers 8 --resume --loss bce =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+batch size 64 fits on the GPU (6.9 of 8.6 GB free)
+model params: 3.35 M | mixed precision: False
+ep 00 loss 0.6684 (cls 0.4531, diam 0.3392) | val AUC 0.9381 AP 0.7219 sens@spec95 0.795 diamMAE 3.19mm | 405s *
+ep 01 loss -0.5999 (cls 0.1625, diam 0.0303) | val AUC 0.9820 AP 0.8592 sens@spec95 0.944 diamMAE 2.19mm | 382s *
+ep 02 loss -1.3680 (cls 0.1033, diam 0.0186) | val AUC 0.9860 AP 0.8651 sens@spec95 0.949 diamMAE 3.66mm | 1262s *
+ep 03 loss -1.9641 (cls 0.0824, diam 0.0141) | val AUC 0.9956 AP 0.9339 sens@spec95 0.990 diamMAE 1.83mm | 1263s *
+ep 04 loss -2.4252 (cls 0.0724, diam 0.0107) | val AUC 0.9957 AP 0.9401 sens@spec95 0.974 diamMAE 1.99mm | 1262s *
+ep 05 loss -2.7895 (cls 0.0615, diam 0.0087) | val AUC 0.9963 AP 0.9405 sens@spec95 0.995 diamMAE 1.19mm | 1261s *
+ep 06 loss -3.0536 (cls 0.0526, diam 0.0075) | val AUC 0.9963 AP 0.9407 sens@spec95 0.995 diamMAE 1.06mm | 1260s *
+ep 07 loss -3.2268 (cls 0.0460, diam 0.0063) | val AUC 0.9965 AP 0.9423 sens@spec95 1.000 diamMAE 0.98mm | 1258s *
+ep 08 loss -3.3202 (cls 0.0413, diam 0.0058) | val AUC 0.9965 AP 0.9449 sens@spec95 1.000 diamMAE 0.93mm | 1263s *
+ep 09 loss -3.3653 (cls 0.0370, diam 0.0056) | val AUC 0.9965 AP 0.9435 sens@spec95 1.000 diamMAE 0.92mm | 1262s 
+best val AUC 0.9965 -> ./work\runs\abl_bce\best.pt
+
+===== evaluate.py --run abl_full --no-tta --mc 1 --tag _plain --n-boot 200 --workers 8 =====
+Scoring every candidate of subset 9 (TTA=False, MC=1) ...
+  10/88 scans, 2.5 min, ~19.5 min left
+  20/88 scans, 4.9 min, ~16.5 min left
+  30/88 scans, 7.3 min, ~14.1 min left
+  40/88 scans, 9.8 min, ~11.8 min left
+  50/88 scans, 11.9 min, ~9.1 min left
+  60/88 scans, 13.8 min, ~6.4 min left
+  70/88 scans, 15.4 min, ~4.0 min left
+  80/88 scans, 17.9 min, ~1.8 min left
+  88/88 scans, 19.8 min, ~0.0 min left
+{
+  "run": "abl_full",
+  "subset": 9,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.907482993197279,
+    "cpm_ci95": [
+      0.8480892103676914,
+      0.956883735793481
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.7714285714285715,
+      "0.25": 0.8666666666666667,
+      "0.5": 0.8761904761904762,
+      "1": 0.9333333333333333,
+      "2": 0.9523809523809523,
+      "4": 0.9714285714285714,
+      "8": 0.9809523809523809
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9991449114395472,
+  "ap": 0.7675685945749003,
+  "ece": 0.051176226315981115,
+  "ece_uncalibrated": 0.051176226315981115,
+  "calibrated": false,
+  "diameter_mae_mm": 0.8048964832311402,
+  "diameter_pearson_r": 0.9909719373678821,
+  "uncertainty_auc_for_errors": 0.5,
+  "alpha_vs_diameter_spearman": 0.8803780304643642
+}
+-> ./work\runs\abl_full\eval_subset9_plain
+
+===== evaluate.py --run abl_nocontext --no-tta --mc 1 --tag _plain --n-boot 200 --workers 8 =====
+Scoring every candidate of subset 9 (TTA=False, MC=1) ...
+  10/88 scans, 2.3 min, ~17.9 min left
+  20/88 scans, 4.5 min, ~15.3 min left
+  30/88 scans, 6.7 min, ~13.0 min left
+  40/88 scans, 9.1 min, ~10.9 min left
+  50/88 scans, 11.0 min, ~8.4 min left
+  60/88 scans, 12.7 min, ~5.9 min left
+  70/88 scans, 14.3 min, ~3.7 min left
+  80/88 scans, 16.6 min, ~1.7 min left
+  88/88 scans, 18.3 min, ~0.0 min left
+{
+  "run": "abl_nocontext",
+  "subset": 9,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.908843537414966,
+    "cpm_ci95": [
+      0.8489393208143208,
+      0.9595063025210084
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.7904761904761904,
+      "0.25": 0.8666666666666667,
+      "0.5": 0.8952380952380953,
+      "1": 0.9333333333333333,
+      "2": 0.9523809523809523,
+      "4": 0.9523809523809523,
+      "8": 0.9714285714285714
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9990755403067358,
+  "ap": 0.7854142695383945,
+  "ece": 0.046669487704312264,
+  "ece_uncalibrated": 0.046669487704312264,
+  "calibrated": false,
+  "diameter_mae_mm": 0.5156307446344874,
+  "diameter_pearson_r": 0.9948058331407811,
+  "uncertainty_auc_for_errors": 0.5
+}
+-> ./work\runs\abl_nocontext\eval_subset9_plain
+
+===== evaluate.py --run abl_concat --no-tta --mc 1 --tag _plain --n-boot 200 --workers 8 =====
+Scoring every candidate of subset 9 (TTA=False, MC=1) ...
+  10/88 scans, 2.4 min, ~19.0 min left
+  20/88 scans, 4.8 min, ~16.3 min left
+  30/88 scans, 7.2 min, ~13.9 min left
+  40/88 scans, 9.7 min, ~11.6 min left
+  50/88 scans, 11.8 min, ~8.9 min left
+  60/88 scans, 13.6 min, ~6.3 min left
+  70/88 scans, 15.2 min, ~3.9 min left
+  80/88 scans, 17.8 min, ~1.8 min left
+  88/88 scans, 19.7 min, ~0.0 min left
+{
+  "run": "abl_concat",
+  "subset": 9,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.8979591836734694,
+    "cpm_ci95": [
+      0.8247740307642422,
+      0.9458409645909646
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.7428571428571429,
+      "0.25": 0.7904761904761904,
+      "0.5": 0.9047619047619048,
+      "1": 0.9238095238095239,
+      "2": 0.9619047619047619,
+      "4": 0.9809523809523809,
+      "8": 0.9809523809523809
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9988428675112166,
+  "ap": 0.6744493771355029,
+  "ece": 0.05690085225198417,
+  "ece_uncalibrated": 0.05690085225198417,
+  "calibrated": false,
+  "diameter_mae_mm": 0.6936069840108847,
+  "diameter_pearson_r": 0.9897415492912892,
+  "uncertainty_auc_for_errors": 0.5
+}
+-> ./work\runs\abl_concat\eval_subset9_plain
+
+===== evaluate.py --run abl_1window --no-tta --mc 1 --tag _plain --n-boot 200 --workers 8 =====
+Scoring every candidate of subset 9 (TTA=False, MC=1) ...
+  10/88 scans, 2.0 min, ~15.5 min left
+  20/88 scans, 3.9 min, ~13.2 min left
+  30/88 scans, 5.9 min, ~11.3 min left
+  40/88 scans, 7.9 min, ~9.5 min left
+  50/88 scans, 9.6 min, ~7.3 min left
+  60/88 scans, 11.1 min, ~5.2 min left
+  70/88 scans, 12.4 min, ~3.2 min left
+  80/88 scans, 14.5 min, ~1.4 min left
+  88/88 scans, 16.0 min, ~0.0 min left
+{
+  "run": "abl_1window",
+  "subset": 9,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.9034013605442178,
+    "cpm_ci95": [
+      0.8285180240320427,
+      0.9510681537987362
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.7523809523809524,
+      "0.25": 0.8285714285714286,
+      "0.5": 0.9047619047619048,
+      "1": 0.9238095238095239,
+      "2": 0.9619047619047619,
+      "4": 0.9714285714285714,
+      "8": 0.9809523809523809
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9987477456672825,
+  "ap": 0.7199466793703407,
+  "ece": 0.043276129981262366,
+  "ece_uncalibrated": 0.043276129981262366,
+  "calibrated": false,
+  "diameter_mae_mm": 0.5811908399963753,
+  "diameter_pearson_r": 0.9924117896137948,
+  "uncertainty_auc_for_errors": 0.5,
+  "alpha_vs_diameter_spearman": 0.8079667068269564
+}
+-> ./work\runs\abl_1window\eval_subset9_plain
+
+===== evaluate.py --run abl_noaux --no-tta --mc 1 --tag _plain --n-boot 200 --workers 8 =====
+Scoring every candidate of subset 9 (TTA=False, MC=1) ...
+  10/88 scans, 2.4 min, ~19.0 min left
+  20/88 scans, 4.8 min, ~16.2 min left
+  30/88 scans, 7.2 min, ~13.9 min left
+  40/88 scans, 9.7 min, ~11.6 min left
+  50/88 scans, 11.8 min, ~9.0 min left
+  60/88 scans, 13.6 min, ~6.4 min left
+  70/88 scans, 15.3 min, ~3.9 min left
+  80/88 scans, 17.8 min, ~1.8 min left
+  88/88 scans, 19.7 min, ~0.0 min left
+{
+  "run": "abl_noaux",
+  "subset": 9,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.9238095238095239,
+    "cpm_ci95": [
+      0.851969942292523,
+      0.9681133926457155
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.819047619047619,
+      "0.25": 0.8571428571428571,
+      "0.5": 0.9238095238095239,
+      "1": 0.9428571428571428,
+      "2": 0.9619047619047619,
+      "4": 0.9809523809523809,
+      "8": 0.9809523809523809
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9990907524706021,
+  "ap": 0.8055382969762054,
+  "ece": 0.04074832763710101,
+  "ece_uncalibrated": 0.04074832763710101,
+  "calibrated": false,
+  "diameter_mae_mm": 9.90183801985118,
+  "diameter_pearson_r": -0.5226814858974197,
+  "uncertainty_auc_for_errors": 0.5,
+  "alpha_vs_diameter_spearman": 0.14529898467078728
+}
+-> ./work\runs\abl_noaux\eval_subset9_plain
+
+===== evaluate.py --run abl_bce --no-tta --mc 1 --tag _plain --n-boot 200 --workers 8 =====
+Scoring every candidate of subset 9 (TTA=False, MC=1) ...
+  10/88 scans, 2.4 min, ~19.1 min left
+  20/88 scans, 4.8 min, ~16.4 min left
+  30/88 scans, 7.2 min, ~14.0 min left
+  40/88 scans, 9.8 min, ~11.7 min left
+  50/88 scans, 11.9 min, ~9.0 min left
+  60/88 scans, 13.7 min, ~6.4 min left
+  70/88 scans, 15.4 min, ~4.0 min left
+  80/88 scans, 17.9 min, ~1.8 min left
+  88/88 scans, 19.8 min, ~0.0 min left
+{
+  "run": "abl_bce",
+  "subset": 9,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.9251700680272109,
+    "cpm_ci95": [
+      0.8642288961038961,
+      0.9699691445595119
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.8285714285714286,
+      "0.25": 0.8666666666666667,
+      "0.5": 0.9142857142857143,
+      "1": 0.9523809523809523,
+      "2": 0.9619047619047619,
+      "4": 0.9714285714285714,
+      "8": 0.9809523809523809
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9990248636403625,
+  "ap": 0.7718584956571045,
+  "ece": 0.00841789654595721,
+  "ece_uncalibrated": 0.00841789654595721,
+  "calibrated": false,
+  "diameter_mae_mm": 0.6522729849275937,
+  "diameter_pearson_r": 0.9907384909523845,
+  "uncertainty_auc_for_errors": 0.5,
+  "alpha_vs_diameter_spearman": 0.9098004065809406
+}
+-> ./work\runs\abl_bce\eval_subset9_plain
+
+===== collect_results.py =====
+abl_1window\eval_subset9_plain                CPM 0.9034  [0.846-0.953]  excluded file used: True
+abl_bce\eval_subset9_plain                    CPM 0.9252  [0.873-0.969]  excluded file used: True
+abl_concat\eval_subset9_plain                 CPM 0.8980  [0.834-0.949]  excluded file used: True
+abl_full\eval_subset9_plain                   CPM 0.9075  [0.859-0.956]  excluded file used: True
+abl_noaux\eval_subset9_plain                  CPM 0.9238  [0.866-0.966]  excluded file used: True
+abl_nocontext\eval_subset9_plain              CPM 0.9088  [0.854-0.960]  excluded file used: True
+              run                eval    tta    mc     CPM     CPM_95CI  S@0.125  S@0.25  S@0.5    S@1    S@2    S@4    S@8     AUC      AP     ECE  ECE_raw  diam_MAE_mm  unc_AUC_errors
+0     abl_1window  eval_subset9_plain  False   1.0  0.9034  0.846-0.953    0.752   0.829  0.905  0.924  0.962  0.971  0.981  0.9987  0.7199  0.0433   0.0433         0.58           0.500
+1         abl_bce  eval_subset9_plain  False   1.0  0.9252  0.873-0.969    0.829   0.867  0.914  0.952  0.962  0.971  0.981  0.9990  0.7719  0.0084   0.0084         0.65           0.500
+2      abl_concat  eval_subset9_plain  False   1.0  0.8980  0.834-0.949    0.743   0.790  0.905  0.924  0.962  0.981  0.981  0.9988  0.6744  0.0569   0.0569         0.69           0.500
+3        abl_full  eval_subset9_plain  False   1.0  0.9075  0.859-0.956    0.771   0.867  0.876  0.933  0.952  0.971  0.981  0.9991  0.7676  0.0512   0.0512         0.80           0.500
+4       abl_noaux  eval_subset9_plain  False   1.0  0.9238  0.866-0.966    0.819   0.857  0.924  0.943  0.962  0.981  0.981  0.9991  0.8055  0.0407   0.0407         9.90           0.500
+5   abl_nocontext  eval_subset9_plain  False   1.0  0.9088  0.854-0.960    0.790   0.867  0.895  0.933  0.952  0.952  0.971  0.9991  0.7854  0.0467   0.0467         0.52           0.500
+6        ens_r1r2  eval_subset8_plain   None   NaN  0.8523  0.782-0.927    0.686   0.771  0.831  0.873  0.890  0.949  0.966     NaN     NaN     NaN      NaN          NaN             NaN
+7        ens_r1r2        eval_subset9   None   NaN  0.8993  0.845-0.949    0.762   0.810  0.905  0.914  0.952  0.971  0.981     NaN     NaN     NaN      NaN          NaN             NaN
+8         msgf_f9        eval_subset8   True  10.0  0.8801  0.812-0.949    0.771   0.805  0.856  0.873  0.924  0.958  0.975     NaN     NaN     NaN      NaN          NaN             NaN
+9         msgf_f9  eval_subset8_plain  False   1.0  0.8608  0.791-0.936    0.754   0.788  0.814  0.864  0.890  0.949  0.966  0.9982  0.7845  0.0007   0.0091         0.85           0.500
+10        msgf_f9        eval_subset9   True  10.0  0.9034  0.843-0.956    0.771   0.848  0.905  0.905  0.943  0.971  0.981  0.9989  0.7631  0.0007   0.0123         0.45           0.971
+11        msgf_f9  eval_subset9_plain  False   1.0  0.8816  0.824-0.942    0.714   0.810  0.876  0.905  0.924  0.962  0.981  0.9976  0.7419  0.0010   0.0108         0.50           0.500
+12     msgf_f9_r2  eval_subset8_plain  False   1.0  0.8329  0.754-0.913    0.636   0.720  0.780  0.864  0.915  0.949  0.966  0.9983  0.8085  0.0003   0.0179         0.98           0.500
+13     msgf_f9_r2        eval_subset9   True  10.0  0.8939  0.841-0.948    0.733   0.781  0.905  0.933  0.962  0.971  0.971  0.9993  0.8290  0.0007   0.0228         0.47           0.979
+14     msgf_f9_r2  eval_subset9_plain  False   1.0  0.8884  0.828-0.943    0.705   0.810  0.867  0.924  0.962  0.971  0.981  0.9982  0.8119  0.0007   0.0192         0.55           0.500
+-> ./work\results_table.csv

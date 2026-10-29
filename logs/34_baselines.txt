@@ -1,0 +1,302 @@
+
+===== train.py --name base_cnn3d --arch cnn3d --resume =====
+usage: train.py [-h] [--name NAME] [--test-subset TEST_SUBSET]
+                [--val-subset VAL_SUBSET] [--epochs EPOCHS]
+                [--batch-size BATCH_SIZE]
+                [--samples-per-epoch SAMPLES_PER_EPOCH] [--lr LR]
+                [--width WIDTH] [--workers WORKERS] [--no-context]
+                [--fusion {gated,concat}] [--windows {multi,single}]
+                [--loss {focal,bce}] [--aux-weight AUX_WEIGHT]
+                [--patience PATIENCE] [--seed SEED] [--resume]
+                [--hard-meta HARD_META] [--init-from INIT_FROM]
+train.py: error: unrecognized arguments: --arch cnn3d
+!!! exit code 2 
+
+===== train.py --name base_cnn3d --arch cnn3d --resume =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+
+===== train.py --name base_cnn3d --arch cnn3d --resume =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+batch size 64 fits on the GPU (7.0 of 8.6 GB free)
+model params: 3.53 M | mixed precision: False
+ep 00 loss 0.1759 (cls 0.0497, diam 0.2624) | val AUC 0.9753 AP 0.8262 sens@spec95 0.872 diamMAE 3.53mm | 1609s *
+ep 01 loss -0.7722 (cls 0.0203, diam 0.0214) | val AUC 0.9870 AP 0.8707 sens@spec95 0.954 diamMAE 1.96mm | 1255s *
+ep 02 loss -1.5348 (cls 0.0164, diam 0.0163) | val AUC 0.9888 AP 0.8890 sens@spec95 0.964 diamMAE 1.53mm | 1491s *
+ep 03 loss -2.2597 (cls 0.0144, diam 0.0134) | val AUC 0.9914 AP 0.8975 sens@spec95 0.964 diamMAE 1.48mm | 1469s *
+ep 04 loss -2.9625 (cls 0.0122, diam 0.0106) | val AUC 0.9902 AP 0.8860 sens@spec95 0.959 diamMAE 2.10mm | 1468s 
+ep 05 loss -3.6264 (cls 0.0117, diam 0.0090) | val AUC 0.9808 AP 0.8702 sens@spec95 0.944 diamMAE 1.71mm | 1466s 
+ep 06 loss -4.2483 (cls 0.0108, diam 0.0086) | val AUC 0.9943 AP 0.9122 sens@spec95 0.979 diamMAE 1.14mm | 1495s *
+ep 07 loss -4.8389 (cls 0.0097, diam 0.0077) | val AUC 0.9911 AP 0.8961 sens@spec95 0.964 diamMAE 1.79mm | 1471s 
+ep 08 loss -5.3892 (cls 0.0091, diam 0.0067) | val AUC 0.9932 AP 0.9060 sens@spec95 0.974 diamMAE 1.45mm | 1470s 
+ep 09 loss -5.8939 (cls 0.0083, diam 0.0061) | val AUC 0.9928 AP 0.9060 sens@spec95 0.985 diamMAE 2.18mm | 1375s 
+ep 10 loss -6.3641 (cls 0.0077, diam 0.0052) | val AUC 0.9920 AP 0.9063 sens@spec95 0.964 diamMAE 1.27mm | 1380s 
+ep 11 loss -6.7620 (cls 0.0073, diam 0.0051) | val AUC 0.9941 AP 0.9175 sens@spec95 0.974 diamMAE 1.04mm | 1477s 
+ep 12 loss -7.1507 (cls 0.0067, diam 0.0044) | val AUC 0.9935 AP 0.9165 sens@spec95 0.974 diamMAE 1.16mm | 1478s 
+ep 13 loss -7.4579 (cls 0.0067, diam 0.0040) | val AUC 0.9947 AP 0.9250 sens@spec95 0.985 diamMAE 1.17mm | 1474s *
+ep 14 loss -7.7552 (cls 0.0062, diam 0.0036) | val AUC 0.9944 AP 0.9221 sens@spec95 0.979 diamMAE 1.80mm | 1477s 
+ep 15 loss -8.0018 (cls 0.0059, diam 0.0034) | val AUC 0.9925 AP 0.9093 sens@spec95 0.979 diamMAE 0.92mm | 1477s 
+ep 16 loss -8.1783 (cls 0.0056, diam 0.0035) | val AUC 0.9948 AP 0.9264 sens@spec95 0.985 diamMAE 1.12mm | 1477s *
+ep 17 loss -8.3749 (cls 0.0056, diam 0.0030) | val AUC 0.9949 AP 0.9217 sens@spec95 0.979 diamMAE 0.85mm | 1477s *
+ep 18 loss -8.5234 (cls 0.0055, diam 0.0027) | val AUC 0.9921 AP 0.9069 sens@spec95 0.979 diamMAE 0.88mm | 1476s 
+ep 19 loss -8.6826 (cls 0.0051, diam 0.0026) | val AUC 0.9903 AP 0.9106 sens@spec95 0.974 diamMAE 0.91mm | 1478s 
+ep 20 loss -8.7926 (cls 0.0051, diam 0.0024) | val AUC 0.9957 AP 0.9319 sens@spec95 0.995 diamMAE 0.88mm | 1477s *
+ep 21 loss -8.9054 (cls 0.0047, diam 0.0023) | val AUC 0.9947 AP 0.9244 sens@spec95 0.990 diamMAE 0.97mm | 1477s 
+ep 22 loss -8.9609 (cls 0.0048, diam 0.0023) | val AUC 0.9933 AP 0.9231 sens@spec95 0.985 diamMAE 0.88mm | 1361s 
+ep 23 loss -9.0884 (cls 0.0042, diam 0.0022) | val AUC 0.9954 AP 0.9281 sens@spec95 0.985 diamMAE 0.84mm | 1399s 
+ep 24 loss -9.1220 (cls 0.0043, diam 0.0021) | val AUC 0.9949 AP 0.9231 sens@spec95 0.985 diamMAE 0.84mm | 1480s 
+ep 25 loss -9.1355 (cls 0.0044, diam 0.0020) | val AUC 0.9948 AP 0.9209 sens@spec95 0.985 diamMAE 0.92mm | 1473s 
+ep 26 loss -9.2010 (cls 0.0042, diam 0.0019) | val AUC 0.9947 AP 0.9213 sens@spec95 0.979 diamMAE 0.88mm | 1474s 
+ep 27 loss -9.2135 (cls 0.0042, diam 0.0019) | val AUC 0.9945 AP 0.9199 sens@spec95 0.979 diamMAE 0.90mm | 1477s 
+ep 28 loss -9.2017 (cls 0.0042, diam 0.0020) | val AUC 0.9946 AP 0.9200 sens@spec95 0.979 diamMAE 0.90mm | 1477s 
+early stopping
+best val AUC 0.9957 -> ./work\runs\base_cnn3d\best.pt
+
+===== train.py --name base_resnet25d --arch resnet25d --resume =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+batch size 64 fits on the GPU (6.5 of 8.6 GB free)
+model params: 11.21 M | mixed precision: False
+ep 00 loss 0.0825 (cls 0.0697, diam 0.1387) | val AUC 0.8644 AP 0.4997 sens@spec95 0.528 diamMAE 3.26mm | 209s *
+ep 01 loss -0.6346 (cls 0.0548, diam 0.0407) | val AUC 0.9223 AP 0.6043 sens@spec95 0.646 diamMAE 2.57mm | 216s *
+ep 02 loss -1.3460 (cls 0.0466, diam 0.0343) | val AUC 0.9231 AP 0.6615 sens@spec95 0.703 diamMAE 2.76mm | 203s *
+ep 03 loss -2.0109 (cls 0.0437, diam 0.0303) | val AUC 0.9534 AP 0.7128 sens@spec95 0.744 diamMAE 2.37mm | 201s *
+ep 04 loss -2.6355 (cls 0.0405, diam 0.0272) | val AUC 0.9649 AP 0.7746 sens@spec95 0.815 diamMAE 2.23mm | 203s *
+ep 05 loss -3.1957 (cls 0.0384, diam 0.0263) | val AUC 0.9622 AP 0.7645 sens@spec95 0.815 diamMAE 2.04mm | 203s 
+ep 06 loss -3.6775 (cls 0.0377, diam 0.0260) | val AUC 0.9635 AP 0.7711 sens@spec95 0.815 diamMAE 1.81mm | 203s 
+ep 07 loss -4.1615 (cls 0.0350, diam 0.0209) | val AUC 0.9705 AP 0.8024 sens@spec95 0.867 diamMAE 1.61mm | 203s *
+ep 08 loss -4.5468 (cls 0.0329, diam 0.0201) | val AUC 0.9730 AP 0.8264 sens@spec95 0.856 diamMAE 1.77mm | 204s *
+ep 09 loss -4.8639 (cls 0.0315, diam 0.0190) | val AUC 0.9762 AP 0.8467 sens@spec95 0.892 diamMAE 1.50mm | 203s *
+ep 10 loss -5.1727 (cls 0.0293, diam 0.0166) | val AUC 0.9790 AP 0.8518 sens@spec95 0.887 diamMAE 1.60mm | 203s *
+ep 11 loss -5.4160 (cls 0.0285, diam 0.0147) | val AUC 0.9823 AP 0.8586 sens@spec95 0.892 diamMAE 1.90mm | 205s *
+ep 12 loss -5.6908 (cls 0.0268, diam 0.0120) | val AUC 0.9857 AP 0.8695 sens@spec95 0.938 diamMAE 1.40mm | 203s *
+ep 13 loss -5.7860 (cls 0.0270, diam 0.0124) | val AUC 0.9851 AP 0.8822 sens@spec95 0.933 diamMAE 1.62mm | 204s 
+ep 14 loss -5.8978 (cls 0.0258, diam 0.0125) | val AUC 0.9861 AP 0.8831 sens@spec95 0.923 diamMAE 1.31mm | 205s *
+ep 15 loss -6.0667 (cls 0.0248, diam 0.0110) | val AUC 0.9825 AP 0.8821 sens@spec95 0.908 diamMAE 1.36mm | 203s 
+ep 16 loss -6.1333 (cls 0.0244, diam 0.0109) | val AUC 0.9859 AP 0.8860 sens@spec95 0.938 diamMAE 1.43mm | 203s 
+ep 17 loss -6.2131 (cls 0.0234, diam 0.0108) | val AUC 0.9844 AP 0.8805 sens@spec95 0.944 diamMAE 1.38mm | 203s 
+ep 18 loss -6.4023 (cls 0.0222, diam 0.0091) | val AUC 0.9842 AP 0.8835 sens@spec95 0.923 diamMAE 1.23mm | 205s 
+ep 19 loss -6.3937 (cls 0.0227, diam 0.0093) | val AUC 0.9853 AP 0.8785 sens@spec95 0.928 diamMAE 1.25mm | 204s 
+ep 20 loss -6.5056 (cls 0.0218, diam 0.0086) | val AUC 0.9886 AP 0.8906 sens@spec95 0.938 diamMAE 1.24mm | 194s *
+ep 21 loss -6.6604 (cls 0.0204, diam 0.0077) | val AUC 0.9876 AP 0.9010 sens@spec95 0.938 diamMAE 1.24mm | 176s 
+ep 22 loss -6.6870 (cls 0.0206, diam 0.0074) | val AUC 0.9896 AP 0.9020 sens@spec95 0.954 diamMAE 1.21mm | 212s *
+ep 23 loss -6.6694 (cls 0.0203, diam 0.0079) | val AUC 0.9892 AP 0.8982 sens@spec95 0.938 diamMAE 1.32mm | 212s 
+ep 24 loss -6.7889 (cls 0.0198, diam 0.0070) | val AUC 0.9890 AP 0.9021 sens@spec95 0.949 diamMAE 1.24mm | 169s 
+ep 25 loss -6.7531 (cls 0.0193, diam 0.0077) | val AUC 0.9893 AP 0.9019 sens@spec95 0.944 diamMAE 1.20mm | 203s 
+ep 26 loss -6.7902 (cls 0.0196, diam 0.0072) | val AUC 0.9898 AP 0.9025 sens@spec95 0.944 diamMAE 1.19mm | 206s *
+ep 27 loss -6.7456 (cls 0.0196, diam 0.0077) | val AUC 0.9899 AP 0.9038 sens@spec95 0.949 diamMAE 1.16mm | 206s *
+ep 28 loss -6.7830 (cls 0.0195, diam 0.0074) | val AUC 0.9898 AP 0.9035 sens@spec95 0.944 diamMAE 1.17mm | 207s 
+ep 29 loss -6.8589 (cls 0.0193, diam 0.0066) | val AUC 0.9898 AP 0.9044 sens@spec95 0.938 diamMAE 1.14mm | 207s 
+best val AUC 0.9899 -> ./work\runs\base_resnet25d\best.pt
+
+===== train.py --name base_resnet3d18 --arch resnet3d18 --resume =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+batch size 64 fits on the GPU (6.5 of 8.6 GB free)
+model params: 33.18 M | mixed precision: False
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFCD0834783  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFCD22C7AC4  Unknown               Unknown  Unknown
+ntdll.dll          00007FFCD478A351  Unknown               Unknown  Unknown
+
+===== train.py --name base_cnn3d --arch cnn3d --resume =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFCD0834783  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFCD22C7AC4  Unknown               Unknown  Unknown
+ntdll.dll          00007FFCD478A351  Unknown               Unknown  Unknown
+
+===== train.py --name base_cnn3d --arch cnn3d --resume =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+batch size 64 fits on the GPU (6.4 of 8.6 GB free)
+model params: 3.53 M | mixed precision: False
+run 'base_cnn3d' already finished -> ./work\runs\base_cnn3d\best.pt (delete ./work\runs\base_cnn3d\DONE to retrain)
+
+===== train.py --name base_resnet25d --arch resnet25d --resume =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+batch size 64 fits on the GPU (6.5 of 8.6 GB free)
+model params: 11.21 M | mixed precision: False
+run 'base_resnet25d' already finished -> ./work\runs\base_resnet25d\best.pt (delete ./work\runs\base_resnet25d\DONE to retrain)
+
+===== train.py --name base_r3d18 --arch resnet3d18 --resume =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+batch size 64 fits on the GPU (6.0 of 8.6 GB free)
+model params: 33.24 M | mixed precision: False
+ep 00 loss 0.0437 (cls 0.0582, diam 0.1297) | val AUC 0.8788 AP 0.4378 sens@spec95 0.426 diamMAE 3.22mm | 1358s *
+ep 01 loss -0.7179 (cls 0.0396, diam 0.0348) | val AUC 0.9349 AP 0.7697 sens@spec95 0.790 diamMAE 2.90mm | 635s *
+ep 02 loss -1.4492 (cls 0.0338, diam 0.0301) | val AUC 0.9320 AP 0.7173 sens@spec95 0.728 diamMAE 2.79mm | 809s 
+ep 03 loss -2.1514 (cls 0.0304, diam 0.0230) | val AUC 0.9346 AP 0.6646 sens@spec95 0.744 diamMAE 2.62mm | 806s 
+ep 04 loss -2.7818 (cls 0.0298, diam 0.0235) | val AUC 0.9653 AP 0.8184 sens@spec95 0.851 diamMAE 2.29mm | 808s *
+ep 05 loss -3.4424 (cls 0.0247, diam 0.0157) | val AUC 0.9754 AP 0.8158 sens@spec95 0.867 diamMAE 2.07mm | 800s *
+ep 06 loss -3.9830 (cls 0.0243, diam 0.0167) | val AUC 0.9504 AP 0.8243 sens@spec95 0.862 diamMAE 2.00mm | 843s 
+ep 07 loss -4.5249 (cls 0.0211, diam 0.0142) | val AUC 0.9863 AP 0.8782 sens@spec95 0.923 diamMAE 1.72mm | 838s *
+ep 08 loss -5.0399 (cls 0.0188, diam 0.0109) | val AUC 0.9784 AP 0.8747 sens@spec95 0.928 diamMAE 1.52mm | 844s 
+ep 09 loss -5.4861 (cls 0.0164, diam 0.0102) | val AUC 0.9858 AP 0.8856 sens@spec95 0.944 diamMAE 1.72mm | 835s 
+ep 10 loss -5.8954 (cls 0.0154, diam 0.0081) | val AUC 0.9864 AP 0.8835 sens@spec95 0.944 diamMAE 1.22mm | 837s *
+ep 11 loss -6.2403 (cls 0.0139, diam 0.0077) | val AUC 0.9824 AP 0.8823 sens@spec95 0.949 diamMAE 1.44mm | 840s 
+ep 12 loss -6.5658 (cls 0.0123, diam 0.0070) | val AUC 0.9865 AP 0.8977 sens@spec95 0.954 diamMAE 1.28mm | 714s *
+ep 13 loss -6.8015 (cls 0.0119, diam 0.0066) | val AUC 0.9861 AP 0.9017 sens@spec95 0.949 diamMAE 1.35mm | 666s 
+ep 14 loss -7.0470 (cls 0.0111, diam 0.0059) | val AUC 0.9896 AP 0.9065 sens@spec95 0.938 diamMAE 1.48mm | 788s *
+ep 15 loss -7.2818 (cls 0.0102, diam 0.0052) | val AUC 0.9842 AP 0.9116 sens@spec95 0.949 diamMAE 1.54mm | 840s 
+ep 16 loss -7.4301 (cls 0.0099, diam 0.0051) | val AUC 0.9904 AP 0.9089 sens@spec95 0.938 diamMAE 1.46mm | 848s *
+ep 17 loss -7.6189 (cls 0.0092, diam 0.0046) | val AUC 0.9880 AP 0.9155 sens@spec95 0.949 diamMAE 0.99mm | 889s 
+ep 18 loss -7.7740 (cls 0.0089, diam 0.0041) | val AUC 0.9859 AP 0.9094 sens@spec95 0.949 diamMAE 1.21mm | 893s 
+ep 19 loss -7.9013 (cls 0.0084, diam 0.0039) | val AUC 0.9850 AP 0.9020 sens@spec95 0.954 diamMAE 1.20mm | 887s 
+ep 20 loss -8.0564 (cls 0.0076, diam 0.0037) | val AUC 0.9836 AP 0.9097 sens@spec95 0.959 diamMAE 1.16mm | 889s 
+ep 21 loss -8.1745 (cls 0.0073, diam 0.0033) | val AUC 0.9891 AP 0.9054 sens@spec95 0.954 diamMAE 1.17mm | 887s 
+ep 22 loss -8.2336 (cls 0.0074, diam 0.0032) | val AUC 0.9886 AP 0.9142 sens@spec95 0.964 diamMAE 1.08mm | 894s 
+ep 23 loss -8.3599 (cls 0.0066, diam 0.0031) | val AUC 0.9837 AP 0.9108 sens@spec95 0.959 diamMAE 1.14mm | 891s 
+ep 24 loss -8.3717 (cls 0.0068, diam 0.0030) | val AUC 0.9848 AP 0.9116 sens@spec95 0.964 diamMAE 0.99mm | 897s 
+early stopping
+best val AUC 0.9904 -> ./work\runs\base_r3d18\best.pt
+
+===== evaluate.py --run base_cnn3d =====
+Scoring every candidate of subset 9 (TTA=True, MC=10) ...
+  10/88 scans, 16.8 min, ~130.7 min left
+  20/88 scans, 32.9 min, ~112.0 min left
+  30/88 scans, 49.0 min, ~94.7 min left
+  40/88 scans, 65.6 min, ~78.8 min left
+  50/88 scans, 79.7 min, ~60.6 min left
+  60/88 scans, 92.3 min, ~43.1 min left
+  70/88 scans, 103.6 min, ~26.6 min left
+  80/88 scans, 121.0 min, ~12.1 min left
+  88/88 scans, 133.8 min, ~0.0 min left
+{
+  "run": "base_cnn3d",
+  "subset": 9,
+  "tta": true,
+  "mc": 10,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.907482993197279,
+    "cpm_ci95": [
+      0.8571428571428571,
+      0.9534928616323965
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.7714285714285715,
+      "0.25": 0.8380952380952381,
+      "0.5": 0.9047619047619048,
+      "1": 0.9428571428571428,
+      "2": 0.9523809523809523,
+      "4": 0.9714285714285714,
+      "8": 0.9714285714285714
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9992787968094778,
+  "ap": 0.8326605511144248,
+  "ece": 0.015375120007708697,
+  "ece_uncalibrated": 0.015375120007708697,
+  "calibrated": false,
+  "diameter_mae_mm": 0.48866277570782213,
+  "diameter_pearson_r": 0.9950462594701899,
+  "uncertainty_auc_for_errors": 0.9823147546678119
+}
+-> ./work\runs\base_cnn3d\eval_subset9
+
+===== evaluate.py --run base_resnet25d =====
+Scoring every candidate of subset 9 (TTA=True, MC=10) ...
+  10/88 scans, 6.2 min, ~48.2 min left
+  20/88 scans, 12.1 min, ~41.3 min left
+  30/88 scans, 18.3 min, ~35.4 min left
+  40/88 scans, 24.7 min, ~29.6 min left
+  50/88 scans, 29.9 min, ~22.8 min left
+  60/88 scans, 34.6 min, ~16.2 min left
+  70/88 scans, 38.8 min, ~10.0 min left
+  80/88 scans, 44.6 min, ~4.5 min left
+  88/88 scans, 48.8 min, ~0.0 min left
+{
+  "run": "base_resnet25d",
+  "subset": 9,
+  "tta": true,
+  "mc": 10,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.8612244897959185,
+    "cpm_ci95": [
+      0.8117599971022891,
+      0.922574745547074
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.6952380952380952,
+      "0.25": 0.8285714285714286,
+      "0.5": 0.8476190476190476,
+      "1": 0.8761904761904762,
+      "2": 0.9142857142857143,
+      "4": 0.9333333333333333,
+      "8": 0.9333333333333333
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9976263525996305,
+  "ap": 0.7512920960599256,
+  "ece": 0.12153392787162137,
+  "ece_uncalibrated": 0.12153392787162137,
+  "calibrated": false,
+  "diameter_mae_mm": 0.6656435247482766,
+  "diameter_pearson_r": 0.9887197491667847,
+  "uncertainty_auc_for_errors": 0.8966659577000881
+}
+-> ./work\runs\base_resnet25d\eval_subset9
+
+===== evaluate.py --run base_r3d18 =====
+Scoring every candidate of subset 9 (TTA=True, MC=10) ...
+  10/88 scans, 7.2 min, ~56.0 min left
+  20/88 scans, 14.9 min, ~50.6 min left
+  30/88 scans, 22.8 min, ~44.0 min left
+  40/88 scans, 31.1 min, ~37.3 min left
+  50/88 scans, 38.0 min, ~28.9 min left
+  60/88 scans, 44.0 min, ~20.5 min left
+  70/88 scans, 49.3 min, ~12.7 min left
+  80/88 scans, 57.5 min, ~5.8 min left
+  88/88 scans, 63.6 min, ~0.0 min left
+{
+  "run": "base_r3d18",
+  "subset": 9,
+  "tta": true,
+  "mc": 10,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.85578231292517,
+    "cpm_ci95": [
+      0.7963832946971892,
+      0.9169749149659865
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.7333333333333333,
+      "0.25": 0.7619047619047619,
+      "0.5": 0.8095238095238095,
+      "1": 0.8571428571428571,
+      "2": 0.9238095238095239,
+      "4": 0.9428571428571428,
+      "8": 0.9619047619047619
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9968118603560012,
+  "ap": 0.7841164263039442,
+  "ece": 0.06088854075710689,
+  "ece_uncalibrated": 0.06088854075710689,
+  "calibrated": false,
+  "diameter_mae_mm": 0.9266599339306116,
+  "diameter_pearson_r": 0.9901869834636357,
+  "uncertainty_auc_for_errors": 0.9059027086532644
+}
+-> ./work\runs\base_r3d18\eval_subset9
+
+===== compare_baselines.py =====
+          model  params_M    CPM    CPM_95CI  sens@0.125  sens@0.25  sens@0.5  sens@1  sens@2  sens@4  sens@8    AUC  ECE_raw  diam_MAE_mm  unc_AUROC_errors             MSGF_minus_this_CPM
+MSGF-Net (ours)      3.35 0.9034 0.843-0.956       0.771      0.848     0.905   0.905   0.943   0.971   0.981 0.9989   0.0123         0.45             0.971                             NaN
+   3D ResNet-18     33.24 0.8558 0.796-0.917       0.733      0.762     0.810   0.857   0.924   0.943   0.962 0.9968   0.0609         0.93             0.906 +0.048 [+0.003, +0.088] p=0.034
+ 2.5D ResNet-18     11.21 0.8612 0.812-0.923       0.695      0.829     0.848   0.876   0.914   0.933   0.933 0.9976   0.1215         0.67             0.897 +0.042 [-0.010, +0.085] p=0.141
+   Plain 3D CNN      3.53 0.9075 0.857-0.953       0.771      0.838     0.905   0.943   0.952   0.971   0.971 0.9993   0.0154         0.49             0.982 -0.004 [-0.031, +0.021] p=0.683
+-> ./work\baseline_table.csv

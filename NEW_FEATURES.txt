@@ -1,0 +1,30 @@
+New features (proposal alignment) - what changed and how to use it
+==================================================================
+
+DOCTOR WEB APP (7_DOCTOR_APP.bat)
+  1. Login + roles. First start shows "Create the administrator account" - choose a username and a
+     password (8+ characters). The admin can add doctors (Admin button > Users).
+  2. Admin page: users (add / deactivate / change role / reset password), AI settings (detection
+     threshold, "needs review" uncertainty, slice-bar thresholds, max findings) and the activity log
+     (who logged in, uploaded, reviewed, released ...).
+  3. Slice-level risk bar under the CT viewer: every slice green / yellow / red (30% / 70% by default,
+     as in the proposal). Click the bar to jump to that slice.
+  4. "AI heatmap" switch above the viewer: Grad-CAM shows which image region made the AI flag a finding.
+     The printed report also shows the heatmap next to each finding. (Old studies: press Re-analyze.)
+  5. Lifestyle data per patient: smoking status, pack-years, family history, emphysema
+     ("Edit patient / lifestyle data"). Each finding now shows TWO cancer risks:
+       - AI cancer risk (image model trained on LUNA25)
+       - Brock clinical risk (published PanCan model: age, sex, family history, emphysema, nodule size,
+         type, upper lobe, count, spiculation). Set nodule type / upper lobe / spiculated per finding.
+
+PATIENT APP (9_PATIENT_APP.bat) + ANDROID APP (lungcare_mobile folder)
+  6. Guideline library (RAG): the assistant answers general questions (PET scan, biopsy, breathing
+     exercises, quitting smoking, air pollution, screening, what to ask the doctor) ONLY from the approved
+     documents in patient_app\knowledge and names the source. Add official WHO / NCCN patient PDFs to that
+     folder and restart - they are searched automatically.
+  7. Android app (Flutter): see lungcare_mobile\README_ANDROID.txt. The patient-app window now prints the
+     address the phone must use (phone and PC on the same Wi-Fi).
+
+RESEARCH
+  8. 18_FEDERATED_OVERNIGHT.bat - swarm/federated learning: 4 simulated hospitals that only share model
+     weights vs one hospital alone vs all data pooled. Send logs\18_federated.txt and work\federated_table.csv.

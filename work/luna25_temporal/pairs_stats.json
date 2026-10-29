@@ -1,0 +1,21 @@
+{
+  "lesions_total": 3762,
+  "pairs": 2401,
+  "label_changes_between_rounds": 0,
+  "median_interval_years": 1.002053388090349,
+  "train_pairs_malignant_patients": [
+    1433,
+    120,
+    675
+  ],
+  "val_pairs_malignant_patients": [
+    493,
+    44,
+    234
+  ],
+  "test_pairs_malignant_patients": [
+    475,
+    43,
+    223
+  ]
+}

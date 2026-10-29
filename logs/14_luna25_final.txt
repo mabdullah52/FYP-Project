@@ -1,0 +1,163 @@
+
+===== luna25_malignancy.py train --name l25_scratch_s1 --seed 1 =====
+train 3699 nodules (329 malignant) | val 1223 (115) | device cuda
+RAM available 13.1 of 68.4 GB | paging file 67.1 GB
+batch size 32 fits on the GPU (6.9 of 8.6 GB free)
+batch 32 x 2 accumulation steps = effective batch 64
+ep 00 loss 0.0637 | val AUC 0.6675 AP 0.2273 | 110s *
+ep 01 loss 0.0558 | val AUC 0.8370 AP 0.3731 | 116s *
+ep 02 loss 0.0535 | val AUC 0.8133 AP 0.2972 | 122s 
+ep 03 loss 0.0518 | val AUC 0.8562 AP 0.4618 | 123s *
+ep 04 loss 0.0501 | val AUC 0.8668 AP 0.4697 | 123s *
+ep 05 loss 0.0490 | val AUC 0.8668 AP 0.4199 | 124s *
+ep 06 loss 0.0474 | val AUC 0.8586 AP 0.4592 | 124s 
+ep 07 loss 0.0477 | val AUC 0.8668 AP 0.4702 | 124s 
+ep 08 loss 0.0458 | val AUC 0.8799 AP 0.5137 | 123s *
+ep 09 loss 0.0455 | val AUC 0.8682 AP 0.4546 | 124s 
+ep 10 loss 0.0462 | val AUC 0.8717 AP 0.4855 | 123s 
+ep 11 loss 0.0444 | val AUC 0.8660 AP 0.4519 | 124s 
+ep 12 loss 0.0439 | val AUC 0.8341 AP 0.4319 | 124s 
+ep 13 loss 0.0432 | val AUC 0.8675 AP 0.4377 | 124s 
+ep 14 loss 0.0414 | val AUC 0.8707 AP 0.4783 | 124s 
+ep 15 loss 0.0403 | val AUC 0.8518 AP 0.3557 | 124s 
+ep 16 loss 0.0396 | val AUC 0.8809 AP 0.4889 | 124s *
+ep 17 loss 0.0397 | val AUC 0.8723 AP 0.4768 | 124s 
+ep 18 loss 0.0377 | val AUC 0.8580 AP 0.4400 | 124s 
+ep 19 loss 0.0363 | val AUC 0.8134 AP 0.3956 | 124s 
+ep 20 loss 0.0363 | val AUC 0.8516 AP 0.4431 | 124s 
+ep 21 loss 0.0362 | val AUC 0.8528 AP 0.4715 | 124s 
+ep 22 loss 0.0342 | val AUC 0.8620 AP 0.4799 | 124s 
+ep 23 loss 0.0329 | val AUC 0.8412 AP 0.4351 | 124s 
+ep 24 loss 0.0318 | val AUC 0.8186 AP 0.3965 | 124s 
+early stopping
+best val AUC 0.8809
+
+===== luna25_malignancy.py train --name l25_scratch_s2 --seed 2 =====
+train 3699 nodules (329 malignant) | val 1223 (115) | device cuda
+RAM available 13.1 of 68.4 GB | paging file 67.1 GB
+batch size 32 fits on the GPU (6.9 of 8.6 GB free)
+batch 32 x 2 accumulation steps = effective batch 64
+ep 00 loss 0.0654 | val AUC 0.8113 AP 0.3448 | 126s *
+ep 01 loss 0.0557 | val AUC 0.8537 AP 0.3975 | 125s *
+ep 02 loss 0.0526 | val AUC 0.7820 AP 0.2568 | 124s 
+ep 03 loss 0.0518 | val AUC 0.8682 AP 0.4468 | 124s *
+ep 04 loss 0.0494 | val AUC 0.8364 AP 0.3731 | 124s 
+ep 05 loss 0.0501 | val AUC 0.8702 AP 0.4366 | 124s *
+ep 06 loss 0.0478 | val AUC 0.8701 AP 0.4568 | 123s 
+ep 07 loss 0.0468 | val AUC 0.8308 AP 0.3960 | 125s 
+ep 08 loss 0.0466 | val AUC 0.8675 AP 0.4845 | 124s 
+ep 09 loss 0.0465 | val AUC 0.8786 AP 0.4767 | 124s *
+ep 10 loss 0.0442 | val AUC 0.8567 AP 0.4629 | 123s 
+ep 11 loss 0.0433 | val AUC 0.8336 AP 0.4282 | 124s 
+ep 12 loss 0.0431 | val AUC 0.8610 AP 0.4718 | 124s 
+ep 13 loss 0.0415 | val AUC 0.8648 AP 0.4289 | 124s 
+ep 14 loss 0.0418 | val AUC 0.8456 AP 0.4461 | 123s 
+ep 15 loss 0.0407 | val AUC 0.8640 AP 0.4917 | 124s 
+ep 16 loss 0.0396 | val AUC 0.8688 AP 0.4783 | 124s 
+ep 17 loss 0.0380 | val AUC 0.8609 AP 0.4932 | 123s 
+early stopping
+best val AUC 0.8786
+
+===== luna25_final.py =====
+val 1223 (115 malignant) | test 1241 (111 malignant, 424 patients)
+models: ['l25_scratch', 'l25_scratch_s1', 'l25_scratch_s2', 'l25_transfer']
+  scored l25_scratch on val
+  scored l25_scratch on test
+  scored l25_scratch_s1 on val
+  scored l25_scratch_s1 on test
+  scored l25_scratch_s2 on val
+  scored l25_scratch_s2 on test
+  scored l25_transfer on val
+  scored l25_transfer on test
+
+          model  val_AUC  test_AUC    AUC_95CI     AP  sens  spec    ECE                    note
+   l25_scratch   0.8977    0.9004 0.864-0.934 0.5475 0.874 0.689 0.0295            scratch seed
+l25_scratch_s1   0.8778    0.8877 0.846-0.926 0.5439 0.865 0.683 0.0348            scratch seed
+l25_scratch_s2   0.8853    0.8923 0.851-0.928 0.5736 0.802 0.745 0.0349            scratch seed
+  l25_transfer   0.8515    0.8775 0.841-0.912 0.4565 0.820 0.788 0.0215                transfer
+     size_only   0.8318    0.8558 0.816-0.894 0.4284 0.739 0.810 0.0299 predicted diameter only
+      ensemble   0.8938    0.8997 0.861-0.934 0.5764 0.856 0.719 0.0349 mean of 3 scratch seeds
+        fusion   0.8974    0.8996 0.862-0.933 0.5699 0.865 0.732 0.0317   ensemble + size + age
+
+scratch seeds test AUC: 0.8935 +- 0.0065
+ensemble_vs_size_only        delta +0.0439  95% CI [+0.016, +0.073]  p=0.001
+fusion_vs_ensemble           delta -0.0001  95% CI [-0.007, +0.007]  p=0.955
+fusion_vs_size_only          delta +0.0438  95% CI [+0.019, +0.071]  p=0.001
+transfer_vs_ensemble         delta -0.0222  95% CI [-0.047, +0.001]  p=0.061
+
+AUC by predicted size: {
+ "<6": {
+  "n": 617,
+  "malignant": 6,
+  "ensemble_auc": 0.8063284233496999,
+  "size_only_auc": 0.6001091107474086
+ },
+ "6-8": {
+  "n": 293,
+  "malignant": 19,
+  "ensemble_auc": 0.6540530157510565,
+  "size_only_auc": 0.49654245101805605
+ },
+ "8-15": {
+  "n": 250,
+  "malignant": 49,
+  "ensemble_auc": 0.8380546248350086,
+  "size_only_auc": 0.6442278403898872
+ },
+ ">=15": {
+  "n": 81,
+  "malignant": 37,
+  "ensemble_auc": 0.8316953316953317,
+  "size_only_auc": 0.6504914004914005
+ }
+}
+
+uncertainty (ensemble): {
+ "auroc_errors_at_threshold": 0.4279786623005367,
+ "auc_after_referring_10pct_most_uncertain": 0.9026726896292113,
+ "auc_after_referring_10pct_random": 0.9192886182932446,
+ "auc_after_referring_20pct_most_uncertain": 0.9010799607287008,
+ "auc_after_referring_20pct_random": 0.9150490979675725
+}
+
+temporal check: {
+ "checked": true,
+ "columns": [
+  "PatientID",
+  "SeriesInstanceUID",
+  "StudyDate",
+  "CoordX",
+  "CoordY",
+  "CoordZ",
+  "LesionID",
+  "AnnotationID",
+  "NoduleID",
+  "label",
+  "Age_at_StudyDate",
+  "Gender"
+ ],
+ "patients_with_2plus_scans": 1240,
+ "patients_with_3plus_scans": 709,
+ "distinct_study_dates": [
+  "19990102",
+  "20000102",
+  "20010102"
+ ],
+ "id_columns_linking_rounds": {
+  "LesionID": {
+   "ids": 3762,
+   "followed_over_2plus_dates": 1603
+  },
+  "AnnotationID": {
+   "ids": 6163,
+   "followed_over_2plus_dates": 0
+  },
+  "NoduleID": {
+   "ids": 3762,
+   "followed_over_2plus_dates": 1603
+  }
+ }
+}
+
+-> ./work\luna25_final 
+-> risk model for the doctor app: ./work\runs\l25_risk\risk_model.json

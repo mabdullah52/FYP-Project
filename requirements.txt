@@ -1,27 +1,13 @@
-# Planned dependencies, taken from the methodology (Section 3.6).
-# NEEDS UNIVERSITY PC: replace with exact versions from the training environment:
-#   pip freeze > requirements-lock.txt
-
-# --- Core / imaging ---
-numpy
-SimpleITK
-opencv-python
-pandas
-scikit-learn
-matplotlib
-pyyaml
-python-dotenv
-
-# --- Deep learning framework: uncomment the one actually used ---
-# torch
-# torchvision
-# tensorflow
-
-# --- Explainability ---
-# grad-cam            # pytorch-grad-cam (PyTorch only)
-
-# --- API server: uncomment the one actually used ---
-# fastapi
-# uvicorn[standard]
-# python-multipart
-# flask
+torch>=2.1
+SimpleITK>=2.2
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+scikit-learn>=1.3
+matplotlib>=3.7
+pillow>=10
+# doctor / patient apps
+fastapi>=0.110
+uvicorn>=0.29
+python-multipart>=0.0.9
+anthropic>=0.40   # optional: Claude-powered patient assistant (works offline without it)

@@ -1,0 +1,25 @@
+{
+  "run": "l25_transfer",
+  "init_from": "msgf_f9",
+  "n_test": 1241,
+  "n_test_malignant": 111,
+  "n_test_patients": 424,
+  "val_auc": 0.8514989797520013,
+  "test_auc": 0.8783145977836242,
+  "test_auc_ci95": [
+    0.8413034368283343,
+    0.9130157950993756
+  ],
+  "test_ap": 0.45647288991322804,
+  "threshold_from_val": 0.1599135398864746,
+  "test_sensitivity": 0.8198198198198198,
+  "test_specificity": 0.7893805309734513,
+  "test_ece": 0.01926057683086318,
+  "test_ece_uncalibrated": 0.20122027129991513,
+  "uncertainty_auc_for_errors": 0.2221432920641364,
+  "size_only_baseline_test_auc": 0.8558159929841347,
+  "size_only_baseline_auc_ci95": [
+    0.8155322922674575,
+    0.8935706216239508
+  ]
+}

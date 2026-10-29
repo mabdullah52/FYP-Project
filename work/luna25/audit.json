@@ -1,0 +1,43 @@
+{
+  "images_found": 4069,
+  "csv_rows": 6163,
+  "nodules_with_image": 6163,
+  "malignant": 555,
+  "benign": 5608,
+  "patients": 2120,
+  "scans_in_csv": 4069,
+  "malignant_with_image": 555,
+  "columns_used": [
+    "seriesuid",
+    "coordX",
+    "coordY",
+    "coordZ",
+    "label",
+    "patient",
+    "annotation",
+    "age",
+    "gender",
+    "study_date"
+  ],
+  "age_mean_sd": [
+    63.3,
+    5.2
+  ],
+  "train_nodules_malignant_patients": [
+    3699,
+    329,
+    1272
+  ],
+  "val_nodules_malignant_patients": [
+    1223,
+    115,
+    424
+  ],
+  "test_nodules_malignant_patients": [
+    1241,
+    111,
+    424
+  ],
+  "sanity_centre_HU_median": -99.9375,
+  "failed_scans": 0
+}

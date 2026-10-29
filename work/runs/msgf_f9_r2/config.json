@@ -1,0 +1,44 @@
+{
+  "in_ch": 3,
+  "width": 24,
+  "dropout": 0.3,
+  "use_context": true,
+  "fusion": "gated",
+  "windows": [
+    [
+      -1350,
+      150
+    ],
+    [
+      -160,
+      240
+    ],
+    [
+      -1000,
+      400
+    ]
+  ],
+  "test_subset": 9,
+  "val_subset": 8,
+  "args": {
+    "name": "msgf_f9_r2",
+    "test_subset": 9,
+    "val_subset": 8,
+    "epochs": 10,
+    "batch_size": 64,
+    "samples_per_epoch": 24000,
+    "lr": 0.0003,
+    "width": 24,
+    "workers": 8,
+    "no_context": false,
+    "fusion": "gated",
+    "windows": "multi",
+    "loss": "focal",
+    "aux_weight": 1.0,
+    "patience": 8,
+    "seed": 2026,
+    "resume": true,
+    "hard_meta": "work\\patches\\hard_msgf_f9.csv",
+    "init_from": "msgf_f9"
+  }
+}

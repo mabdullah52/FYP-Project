@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LungScan AI · Clinician</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M11 3v8.2c0 1.5-.8 2.9-2.1 3.6L7 15.9V9.5C7 7.6 5.9 6 4.6 6.9 3.1 7.9 2 11 2 14.5 2 18.6 3.8 21 6 21c2.8 0 5-2.4 5-5.8V13h2v2.2c0 3.4 2.2 5.8 5 5.8 2.2 0 4-2.4 4-6.5 0-3.5-1.1-6.6-2.6-7.6C18.1 6 17 7.6 17 9.5v6.4l-1.9-1.1A4.1 4.1 0 0 1 13 11.2V3h-2Z"/></svg>
+    <span>LungScan <b>AI</b></span><small>Clinician workstation</small>
+  </div>
+  <div class="topright">
+    <span id="modelPill" class="pill">model…</span>
+    <span id="userBox" class="muted"></span>
+    <button id="btnAdmin" class="btn sm" hidden>Admin</button>
+    <button id="btnLogout" class="btn sm">Log out</button>
+  </div>
+</header>
+
+<div id="loginView" class="loginwrap" hidden>
+  <form id="loginForm" class="card loginbox">
+    <h2 id="loginTitle">Sign in</h2>
+    <p id="loginHint" class="muted small">Clinician workstation - authorised staff only.</p>
+    <label id="lblFullName" hidden>Full name<input name="name" autocomplete="name"></label>
+    <label>Username<input name="username" required autocomplete="username"></label>
+    <label>Password<input name="password" type="password" required autocomplete="current-password"></label>
+    <div id="loginMsg" class="msg err" hidden></div>
+    <button class="btn primary" id="loginBtn">Sign in</button>
+    <details class="muted small" style="margin-top:10px"><summary>Forgot password?</summary>
+      Doctors: ask the administrator (Admin &gt; Users &gt; Reset password). Administrator: on the PC that runs
+      the AI server, double-click <b>RESET_PASSWORD.bat</b> in the project folder.</details>
+  </form>
+</div>
+
+<div class="layout" id="appLayout" hidden>
+  <aside class="sidebar">
+    <div class="side-head">
+      <input id="search" type="search" placeholder="Search name or MRN">
+      <button id="btnNewPatient" class="btn primary">+ New patient</button>
+    </div>
+    <ul id="patientList" class="plist"></ul>
+  </aside>
+
+  <main id="main">
+    <section id="emptyView" class="empty">
+      <h2>Select or add a patient</h2>
+      <p>Upload a chest CT (LUNA16 <code>.mhd + .raw</code>, LUNA25 <code>.mha</code>, a <code>.zip</code>, DICOM slices or NIfTI). The AI finds suspected pulmonary nodules, estimates their size and flags uncertain ones for your review.</p>
+    </section>
+
+    <!-- patient view -->
+    <section id="patientView" hidden>
+      <div class="phead">
+        <div>
+          <h2 id="pName"></h2>
+          <div id="pMeta" class="muted"></div>
+          <div id="pLife" class="muted small"></div>
+          <button class="link" id="btnEditPatient">Edit patient / lifestyle data</button>
+        </div>
+        <div class="code-box" title="Give this code to the patient for the patient app">Patient app code <b id="pCode"></b></div>
+      </div>
+
+      <div class="card upload">
+        <h3>New CT study</h3>
+        <div id="drop" class="drop">
+          <input id="fileInput" type="file" multiple hidden>
+          <p><b>Drop files here</b> or <button class="link" id="btnBrowse">browse</button></p>
+          <p class="muted small">.mhd <u>and</u> .raw together · .mha (LUNA25) · .zip · DICOM slices · .nii / .nii.gz</p>
+        </div>
+        <div class="or">or analyse a file already on this PC</div>
+        <div class="pathrow">
+          <input id="pathInput" placeholder="e.g. D:\studentss\luna16\subset9\1.3.6.1....mhd  or  D:\studentss\luna25\...\1.2.840....mha">
+          <button id="btnPath" class="btn">Analyse path</button>
+        </div>
+        <div id="uploadMsg" class="msg" hidden></div>
+      </div>
+
+      <div class="card" id="reqCard" hidden>
+        <h3>Messages from the patient app</h3>
+        <div id="reqList"></div>
+      </div>
+
+      <div class="card">
+        <h3>Studies</h3>
+        <table class="tbl" id="studyTable">
+          <thead><tr><th>#</th><th>Date</th><th>Status</th><th>Nodules</th><th>Largest</th><th>Review</th><th>Released</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- administrator -->
+    <section id="adminView" hidden>
+      <div class="phead"><div><h2>Administration</h2><div class="muted">Users, AI thresholds and the activity log</div></div></div>
+      <div class="card">
+        <h3>Users</h3>
+        <table class="tbl" id="userTable"><thead><tr><th>Username</th><th>Name</th><th>Role</th><th>Active</th><th>Last login</th><th></th></tr></thead><tbody></tbody></table>
+        <form id="addUserForm" class="row wrap">
+          <input name="username" placeholder="username" required>
+          <input name="name" placeholder="full name" required>
+          <select name="role"><option value="doctor">doctor</option><option value="admin">admin</option></select>
+          <input name="password" type="password" placeholder="password (min 8)" required minlength="8">
+          <button class="btn primary">Add user</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>AI settings</h3>
+        <form id="settingsForm" class="settings">
+          <label>Detection threshold (nodule probability)<input name="detection_threshold" type="number" step="0.01" min="0.01" max="0.99"></label>
+          <label>"Needs review" when uncertainty above<input name="review_uncertainty" type="number" step="0.01" min="0.01" max="0.99"></label>
+          <label>Slice bar: yellow from<input name="slice_yellow" type="number" step="0.01" min="0.01" max="0.99"></label>
+          <label>Slice bar: red from<input name="slice_red" type="number" step="0.01" min="0.01" max="0.99"></label>
+          <label>Max findings per scan<input name="max_findings" type="number" step="1" min="1" max="30"></label>
+          <label>Analysis speed<select name="fast_mode"><option value="1">Fast (recommended, ~4x faster AI step)</option><option value="0">Thorough (full TTA on every candidate)</option></select></label>
+          <div class="row"><button class="btn primary">Save settings</button><span id="settingsMsg" class="muted small"></span></div>
+          <p class="muted small">New thresholds apply to scans analysed from now on (use Re-analyze for older studies).</p>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Activity log</h3>
+        <table class="tbl small" id="auditTable"><thead><tr><th>Time</th><th>User</th><th>Action</th><th>Details</th></tr></thead><tbody></tbody></table>
+      </div>
+    </section>
+
+    <!-- study view -->
+    <section id="studyView" hidden>
+      <div class="phead">
+        <div>
+          <button class="link back" id="btnBack">← back to patient</button>
+          <h2 id="sTitle"></h2>
+          <div id="sMeta" class="muted"></div>
+        </div>
+        <div class="actions">
+          <button id="btnReanalyze" class="btn" title="Run the AI again on this scan (e.g. after a model update)">Re-analyze</button>
+          <a id="btnPrint" class="btn" target="_blank">Print report</a>
+          <button id="btnRelease" class="btn primary">Release to patient</button>
+        </div>
+      </div>
+
+      <div id="processing" class="card processing" hidden>
+        <div class="spinner"></div>
+        <div><b id="procTitle">Analysing…</b><div id="procText" class="muted"></div></div>
+      </div>
+
+      <div id="studyBody" hidden>
+        <div class="tiles" id="tiles"></div>
+        <p id="statement" class="statement"></p>
+
+        <div class="grid2">
+          <div class="card viewer">
+            <div class="vbar">
+              <div class="seg" id="winSeg">
+                <button data-w="lung" class="on">Lung</button><button data-w="soft">Soft tissue</button><button data-w="bone">Bone</button>
+              </div>
+              <label class="tog" title="Show which image regions drove the AI decision (Grad-CAM)"><input type="checkbox" id="camToggle"> AI heatmap</label>
+              <span id="sliceLabel" class="muted"></span>
+            </div>
+            <div class="canvas-wrap"><canvas id="cv"></canvas></div>
+            <input id="zSlider" type="range" min="0" max="0" value="0">
+            <div class="riskrow">
+              <canvas id="riskBar" height="16" title="Slice-level risk: click to jump to a slice"></canvas>
+              <div class="legend small"><span class="lg g"></span>clear <span class="lg y"></span>uncertain <span class="lg r"></span>suspicious
+                <span class="muted" id="riskLegendTxt"></span></div>
+            </div>
+            <p class="muted small">Scroll the mouse wheel over the image or use ↑ ↓ to move through slices. Circles mark AI findings.</p>
+          </div>
+
+          <div class="card">
+            <h3>Findings <span class="muted small">(click to jump to slice)</span></h3>
+            <div id="findings"></div>
+            <h3 style="margin-top:18px">Impression</h3>
+            <textarea id="impression" rows="5" placeholder="Your overall impression and recommendation for this study…"></textarea>
+            <div class="row"><button id="btnSaveImp" class="btn primary">Save impression</button><span id="impMsg" class="muted small"></span></div>
+          </div>
+        </div>
+      </div>
+      <div id="errorBox" class="card error" hidden></div>
+    </section>
+  </main>
+</div>
+
+<!-- new patient dialog -->
+<dialog id="dlgPatient">
+  <form method="dialog" id="formPatient">
+    <h3 id="dlgTitle">New patient</h3>
+    <label>Full name *<input name="name" required></label>
+    <div class="two">
+      <label>MRN / hospital no.<input name="mrn"></label>
+      <label>Age<input name="age" type="number" min="0" max="120"></label>
+    </div>
+    <div class="two">
+      <label>Sex<select name="sex"><option></option><option>Female</option><option>Male</option><option>Other</option></select></label>
+      <label>Phone<input name="phone"></label>
+    </div>
+    <fieldset class="life"><legend>Lifestyle &amp; clinical risk factors</legend>
+      <div class="two">
+        <label>Smoking<select name="smoking_status"><option value="">unknown</option><option value="never">never</option><option value="former">former</option><option value="current">current</option></select></label>
+        <label>Pack-years<input name="pack_years" type="number" min="0" max="200" step="0.5"></label>
+      </div>
+      <label class="chk"><input type="checkbox" name="family_history"> Lung cancer in a parent, sibling or child</label>
+      <label class="chk"><input type="checkbox" name="emphysema"> Emphysema</label>
+    </fieldset>
+    <label>Clinical notes<textarea name="notes" rows="2" placeholder="other relevant history"></textarea></label>
+    <div class="row end"><button value="cancel" class="btn" formnovalidate>Cancel</button><button value="ok" class="btn primary" id="dlgOk">Create</button></div>
+  </form>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>

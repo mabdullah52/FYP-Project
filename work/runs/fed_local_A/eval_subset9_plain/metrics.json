@@ -1,0 +1,36 @@
+{
+  "run": "fed_local_A",
+  "subset": 9,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.6653061224489797,
+    "cpm_ci95": [
+      0.5828488210818308,
+      0.7436371100164202
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.5428571428571428,
+      "0.25": 0.5714285714285714,
+      "0.5": 0.6,
+      "1": 0.6571428571428571,
+      "2": 0.7142857142857143,
+      "4": 0.7714285714285715,
+      "8": 0.8
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9796292630714641,
+  "ap": 0.6347459472906771,
+  "ece": 0.13319125204225832,
+  "ece_uncalibrated": 0.13319125204225832,
+  "calibrated": false,
+  "diameter_mae_mm": 0.9914139624846396,
+  "diameter_pearson_r": 0.9816516687921917,
+  "uncertainty_auc_for_errors": 0.5,
+  "alpha_vs_diameter_spearman": 0.5290761861416464
+}

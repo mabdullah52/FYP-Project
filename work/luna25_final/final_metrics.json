@@ -1,0 +1,243 @@
+{
+  "n_val": 1223,
+  "n_test": 1241,
+  "n_test_malignant": 111,
+  "n_test_patients": 424,
+  "models": {
+    "l25_scratch": {
+      "val_auc": 0.8976534296028881,
+      "test_auc": 0.9004305190145898,
+      "test_auc_ci95": [
+        0.8643215627894048,
+        0.9343687379259237
+      ],
+      "test_ap": 0.5475309757940517,
+      "threshold_from_val": 0.055172277538315176,
+      "test_sensitivity": 0.8738738738738738,
+      "test_specificity": 0.6893805309734513,
+      "test_ece": 0.02951542053903209,
+      "uncertainty": {
+        "auroc_errors_at_threshold": 0.4374366672921749,
+        "auc_after_referring_10pct_most_uncertain": 0.9133681058630349,
+        "auc_after_referring_10pct_random": 0.9200396547235185,
+        "auc_after_referring_20pct_most_uncertain": 0.9123180291153414,
+        "auc_after_referring_20pct_random": 0.9170536144731165
+      }
+    },
+    "l25_scratch_s1": {
+      "val_auc": 0.8778213781196044,
+      "test_auc": 0.887658454915092,
+      "test_auc_ci95": [
+        0.8460453506141251,
+        0.9257115905881416
+      ],
+      "test_ap": 0.5438864947374649,
+      "threshold_from_val": 0.07453298575667784,
+      "test_sensitivity": 0.8648648648648649,
+      "test_specificity": 0.6831858407079646,
+      "test_ece": 0.03484588407488359,
+      "uncertainty": {
+        "auroc_errors_at_threshold": 0.3891476507579595,
+        "auc_after_referring_10pct_most_uncertain": 0.8887325022500527,
+        "auc_after_referring_10pct_random": 0.9089042879173259,
+        "auc_after_referring_20pct_most_uncertain": 0.8812280261175289,
+        "auc_after_referring_20pct_random": 0.901042856055416
+      }
+    },
+    "l25_scratch_s2": {
+      "val_auc": 0.8852927326950243,
+      "test_auc": 0.8922825480347604,
+      "test_auc_ci95": [
+        0.8508429004643494,
+        0.928186601269044
+      ],
+      "test_ap": 0.5736486457773784,
+      "threshold_from_val": 0.09198207324296932,
+      "test_sensitivity": 0.8018018018018018,
+      "test_specificity": 0.7451327433628319,
+      "test_ece": 0.03488099748899909,
+      "uncertainty": {
+        "auroc_errors_at_threshold": 0.2852569211046048,
+        "auc_after_referring_10pct_most_uncertain": 0.900717606630281,
+        "auc_after_referring_10pct_random": 0.9083835693256693,
+        "auc_after_referring_20pct_most_uncertain": 0.8929432446007032,
+        "auc_after_referring_20pct_random": 0.9052168176397453
+      }
+    },
+    "l25_transfer": {
+      "val_auc": 0.8514989797520013,
+      "test_auc": 0.8774934226261659,
+      "test_auc_ci95": [
+        0.8407300420155046,
+        0.9122096845295349
+      ],
+      "test_ap": 0.4564926431209459,
+      "threshold_from_val": 0.15991356396006062,
+      "test_sensitivity": 0.8198198198198198,
+      "test_specificity": 0.7884955752212389,
+      "test_ece": 0.02146676403096432,
+      "uncertainty": {
+        "auroc_errors_at_threshold": 0.15154243565648862,
+        "auc_after_referring_10pct_most_uncertain": 0.8795783926218709,
+        "auc_after_referring_10pct_random": 0.8906691233902785,
+        "auc_after_referring_20pct_most_uncertain": 0.8762901344600691,
+        "auc_after_referring_20pct_random": 0.8815305371596763
+      }
+    },
+    "size_only": {
+      "val_auc": 0.8318238894992936,
+      "test_auc": 0.8558159929841347,
+      "test_auc_ci95": [
+        0.8155322922674575,
+        0.8935706216239508
+      ],
+      "test_ap": 0.4283940712349862,
+      "threshold_from_val": 0.07619297618468185,
+      "test_sensitivity": 0.7387387387387387,
+      "test_specificity": 0.8097345132743363,
+      "test_ece": 0.029900003312908905
+    },
+    "ensemble": {
+      "val_auc": 0.8937686391461309,
+      "test_auc": 0.8996970421749183,
+      "test_auc_ci95": [
+        0.8609082973995937,
+        0.9342742274621733
+      ],
+      "test_ap": 0.5764155536622946,
+      "threshold_from_val": 0.06949591269829967,
+      "test_sensitivity": 0.8558558558558559,
+      "test_specificity": 0.7185840707964601,
+      "test_ece": 0.03491776402776685,
+      "uncertainty": {
+        "auroc_errors_at_threshold": 0.4279786623005367,
+        "auc_after_referring_10pct_most_uncertain": 0.9026726896292113,
+        "auc_after_referring_10pct_random": 0.9192886182932446,
+        "auc_after_referring_20pct_most_uncertain": 0.9010799607287008,
+        "auc_after_referring_20pct_random": 0.9150490979675725
+      }
+    },
+    "fusion": {
+      "val_auc": 0.8974258358185528,
+      "test_auc": 0.8996332615801643,
+      "test_auc_ci95": [
+        0.861870078621788,
+        0.9334989452709995
+      ],
+      "test_ap": 0.56985465696223,
+      "threshold_from_val": 0.07936349920547882,
+      "test_sensitivity": 0.8648648648648649,
+      "test_specificity": 0.731858407079646,
+      "test_ece": 0.0316699726460408,
+      "uncertainty": {
+        "auroc_errors_at_threshold": 0.41531238714337304,
+        "auc_after_referring_10pct_most_uncertain": 0.9004799548277809,
+        "auc_after_referring_10pct_random": 0.9195690052272135,
+        "auc_after_referring_20pct_most_uncertain": 0.8981237045925603,
+        "auc_after_referring_20pct_random": 0.9162035979802593
+      }
+    }
+  },
+  "scratch_seed_test_auc_mean_sd": [
+    0.8934571739881475,
+    0.006466545827425804
+  ],
+  "paired_tests": {
+    "ensemble_vs_size_only": {
+      "delta": 0.043881049190783616,
+      "ci95": [
+        0.016315092853568268,
+        0.0733226675920391
+      ],
+      "p": 0.001
+    },
+    "fusion_vs_ensemble": {
+      "delta": -6.378059475398157e-05,
+      "ci95": [
+        -0.006561970090094871,
+        0.006676006613324596
+      ],
+      "p": 0.955
+    },
+    "fusion_vs_size_only": {
+      "delta": 0.043817268596029635,
+      "ci95": [
+        0.019213896100739376,
+        0.07127927017309789
+      ],
+      "p": 0.001
+    },
+    "transfer_vs_ensemble": {
+      "delta": -0.022203619548752385,
+      "ci95": [
+        -0.04740107043501509,
+        0.0012906360604419025
+      ],
+      "p": 0.061
+    }
+  },
+  "auc_by_size": {
+    "<6": {
+      "n": 617,
+      "malignant": 6,
+      "ensemble_auc": 0.8063284233496999,
+      "size_only_auc": 0.6001091107474086
+    },
+    "6-8": {
+      "n": 293,
+      "malignant": 19,
+      "ensemble_auc": 0.6540530157510565,
+      "size_only_auc": 0.49654245101805605
+    },
+    "8-15": {
+      "n": 250,
+      "malignant": 49,
+      "ensemble_auc": 0.8380546248350086,
+      "size_only_auc": 0.6442278403898872
+    },
+    ">=15": {
+      "n": 81,
+      "malignant": 37,
+      "ensemble_auc": 0.8316953316953317,
+      "size_only_auc": 0.6504914004914005
+    }
+  },
+  "temporal_check": {
+    "checked": true,
+    "columns": [
+      "PatientID",
+      "SeriesInstanceUID",
+      "StudyDate",
+      "CoordX",
+      "CoordY",
+      "CoordZ",
+      "LesionID",
+      "AnnotationID",
+      "NoduleID",
+      "label",
+      "Age_at_StudyDate",
+      "Gender"
+    ],
+    "patients_with_2plus_scans": 1240,
+    "patients_with_3plus_scans": 709,
+    "distinct_study_dates": [
+      "19990102",
+      "20000102",
+      "20010102"
+    ],
+    "id_columns_linking_rounds": {
+      "LesionID": {
+        "ids": 3762,
+        "followed_over_2plus_dates": 1603
+      },
+      "AnnotationID": {
+        "ids": 6163,
+        "followed_over_2plus_dates": 0
+      },
+      "NoduleID": {
+        "ids": 3762,
+        "followed_over_2plus_dates": 1603
+      }
+    }
+  }
+}
