@@ -86,12 +86,13 @@ Flutter apps: `doctor_flutter/BUILD_DOCTOR_FLUTTER.bat` (web + Android) and `lun
 ## Online demo
 
 Every push to `main` runs `.github/workflows/deploy.yml`, which
-1. builds the Flutter doctor web app,
-2. uploads the whole system to a Hugging Face Space (one Docker container: `/` and `/doctor/` for doctors, `/patient/` for patients), and
-3. builds the LungCare Android APK with the online address built in and publishes it under **Releases**.
+1. builds the Flutter doctor web app and packs the whole system into one Docker image, `ghcr.io/mabdullah52/lungscan-ai:latest` (port 7860: `/` and `/doctor/` for doctors, `/patient/` for patients), and
+2. builds the LungCare Android APK and publishes it under **Releases**.
 
-One-time setup: add the repository secrets `HF_TOKEN` (Hugging Face write token), `ADMIN_USER` and `ADMIN_PASSWORD`.
-The demo runs on a free CPU, so analysing a scan takes several minutes, and its data resets when the Space restarts.
+The image runs on **Azure Container Apps** (Azure for Students). Set the container's environment variables `ADMIN_USER` and `ADMIN_PASSWORD` (the doctor administrator account),
+and the repository variable `LUNGCARE_SERVER` (`https://<app>.azurecontainerapps.io/patient`) so the APK has the address built in.
+The image runs on CPU, so analysing a scan takes several minutes, and its data resets when the container restarts.
+`deploy/huggingface/` can also deploy the same folder to a Hugging Face Space (requires a PRO account for Docker Spaces).
 
 ## Ethics and privacy
 
