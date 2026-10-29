@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<title>LungCare</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<!-- login -->
+<section id="login" class="login">
+  <div class="login-card">
+    <div class="logo">🫁</div>
+    <h1>LungCare</h1>
+    <p class="muted">Your chest CT results, explained simply - and a helper for what comes next.</p>
+    <form id="loginForm">
+      <label for="code">Your patient code</label>
+      <input id="code" maxlength="6" autocomplete="one-time-code" placeholder="e.g. 4F9A21" required>
+      <button class="btn primary big">Open my results</button>
+      <p id="loginErr" class="err" hidden></p>
+    </form>
+    <p class="muted small">You get this code from your doctor or clinic. You only enter it once on this device.</p>
+    <details class="small" id="forgot">
+      <summary>Forgot your code?</summary>
+      <form id="forgotForm">
+        <label for="fPhone">Phone number (as given to the clinic)</label>
+        <input id="fPhone" inputmode="tel" required>
+        <label for="fMrn">MRN / hospital number</label>
+        <input id="fMrn" required>
+        <button class="btn">Find my code</button>
+        <p id="forgotMsg" class="muted" hidden></p>
+      </form>
+    </details>
+  </div>
+</section>
+
+<!-- app -->
+<div id="app" hidden>
+  <header class="head">
+    <div><div class="hello" id="hello"></div><div class="muted small" id="modeLine"></div></div>
+    <button class="link" id="logout">Log out</button>
+  </header>
+
+  <main>
+    <section data-tab="home" class="tab">
+      <div class="card summary" id="summary"></div>
+      <div class="card next" id="nextCard"></div>
+      <div id="nodules"></div>
+      <p class="disclaimer">This app shows results your doctor has reviewed. It does not diagnose. If you feel very unwell,
+        cough up blood, have chest pain or cannot breathe, get emergency help now.</p>
+    </section>
+
+    <section data-tab="chat" class="tab chat" hidden>
+      <div id="chatLog" class="chatlog"></div>
+      <div class="chips" id="chips">
+        <button>Explain my results</button><button>What happens next?</button><button>Remind me about my next scan</button>
+        <button>What is a nodule?</button><button>Is it cancer?</button><button>Book an appointment</button>
+      </div>
+      <form id="chatForm" class="chatform">
+        <input id="chatInput" placeholder="Type a message… (English or Urdu)" autocomplete="off">
+        <button class="btn primary">Send</button>
+      </form>
+    </section>
+
+    <section data-tab="reminders" class="tab" hidden>
+      <div class="card">
+        <h3>Add a reminder</h3>
+        <form id="remForm" class="stack">
+          <input name="title" placeholder="What? e.g. Follow-up CT scan" required>
+          <input name="due_date" type="date" required>
+          <button class="btn primary">Add reminder</button>
+        </form>
+      </div>
+      <div id="remList"></div>
+    </section>
+
+    <section data-tab="diary" class="tab" hidden>
+      <div class="card">
+        <h3>How are you feeling?</h3>
+        <form id="symForm" class="stack">
+          <input name="symptom" placeholder="Symptom, e.g. cough, tiredness" required>
+          <label class="muted small">How bad? <b id="sevVal">3</b>/10
+            <input name="severity" type="range" min="1" max="10" value="3" id="sev"></label>
+          <input name="notes" placeholder="Notes (optional)">
+          <button class="btn primary">Save to diary</button>
+        </form>
+        <div id="symMsg" class="msg" hidden></div>
+      </div>
+      <div id="symList"></div>
+    </section>
+
+    <section data-tab="messages" class="tab" hidden>
+      <div class="card">
+        <h3>Message your doctor</h3>
+        <form id="reqForm" class="stack">
+          <select name="kind"><option value="question">Question</option><option value="appointment">Appointment request</option></select>
+          <textarea name="text" rows="3" placeholder="Write your message…" required></textarea>
+          <button class="btn primary">Send</button>
+        </form>
+      </div>
+      <div id="reqList"></div>
+    </section>
+  </main>
+
+  <nav class="tabs">
+    <button data-go="home" class="on"><span>🏠</span>Home</button>
+    <button data-go="chat"><span>💬</span>Assistant</button>
+    <button data-go="reminders"><span>⏰</span>Reminders</button>
+    <button data-go="diary"><span>📝</span>Diary</button>
+    <button data-go="messages"><span>✉️</span>Doctor</button>
+  </nav>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

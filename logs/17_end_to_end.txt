@@ -1,0 +1,562 @@
+
+===== eval_end_to_end.py =====
+model ./work\runs\msgf_f9\best.pt | 88 test scans, 0 already done
+  1: 400 candidates, lung mask 50.9 L, nodules found by finder 1/1 | 100s, ~145 min left
+  2: 400 candidates, lung mask 5.6 L, nodules found by finder 0/0 | 60s, ~115 min left
+  3: 400 candidates, lung mask 3.9 L, nodules found by finder 5/8 | 92s, ~119 min left
+  4: 400 candidates, lung mask 5.9 L, nodules found by finder 2/2 | 62s, ~110 min left
+  5: 400 candidates, lung mask 23.2 L, nodules found by finder 0/1 | 58s, ~103 min left
+  6: 400 candidates, lung mask 33.1 L, nodules found by finder 0/0 | 73s, ~101 min left
+  7: 400 candidates, lung mask 47.7 L, nodules found by finder 0/0 | 95s, ~104 min left
+  8: 400 candidates, lung mask 10.6 L, nodules found by finder 2/5 | 89s, ~105 min left
+  9: 400 candidates, lung mask 7.6 L, nodules found by finder 0/0 | 90s, ~105 min left
+  10: 400 candidates, lung mask 8.9 L, nodules found by finder 1/2 | 105s, ~107 min left
+  11: 400 candidates, lung mask 31.0 L, nodules found by finder 0/0 | 68s, ~104 min left
+  12: 400 candidates, lung mask 8.9 L, nodules found by finder 1/1 | 121s, ~107 min left
+  13: 400 candidates, lung mask 5.7 L, nodules found by finder 0/0 | 82s, ~105 min left
+  14: 400 candidates, lung mask 5.4 L, nodules found by finder 0/1 | 74s, ~103 min left
+  15: 400 candidates, lung mask 8.3 L, nodules found by finder 0/0 | 95s, ~102 min left
+  16: 400 candidates, lung mask 6.1 L, nodules found by finder 0/0 | 75s, ~100 min left
+  17: 400 candidates, lung mask 5.5 L, nodules found by finder 1/1 | 97s, ~100 min left
+  18: 400 candidates, lung mask 6.1 L, nodules found by finder 1/1 | 101s, ~100 min left
+  19: 400 candidates, lung mask 4.5 L, nodules found by finder 1/2 | 78s, ~98 min left
+  20: 400 candidates, lung mask 45.2 L, nodules found by finder 3/3 | 89s, ~97 min left
+  21: 400 candidates, lung mask 30.1 L, nodules found by finder 1/1 | 66s, ~94 min left
+  22: 400 candidates, lung mask 4.8 L, nodules found by finder 1/1 | 100s, ~93 min left
+  23: 400 candidates, lung mask 34.7 L, nodules found by finder 0/1 | 74s, ~92 min left
+  24: 400 candidates, lung mask 4.7 L, nodules found by finder 0/0 | 71s, ~90 min left
+  25: 400 candidates, lung mask 9.3 L, nodules found by finder 0/2 | 77s, ~88 min left
+  26: 400 candidates, lung mask 5.8 L, nodules found by finder 1/1 | 83s, ~86 min left
+  27: 400 candidates, lung mask 4.5 L, nodules found by finder 0/1 | 62s, ~84 min left
+  28: 400 candidates, lung mask 5.0 L, nodules found by finder 2/2 | 82s, ~83 min left
+  29: 400 candidates, lung mask 5.5 L, nodules found by finder 0/0 | 72s, ~81 min left
+  30: 400 candidates, lung mask 4.7 L, nodules found by finder 0/1 | 61s, ~79 min left
+  31: 400 candidates, lung mask 30.5 L, nodules found by finder 1/1 | 67s, ~77 min left
+  32: 400 candidates, lung mask 27.9 L, nodules found by finder 1/9 | 64s, ~75 min left
+  33: 400 candidates, lung mask 5.6 L, nodules found by finder 1/1 | 68s, ~74 min left
+  34: 400 candidates, lung mask 10.4 L, nodules found by finder 1/1 | 90s, ~73 min left
+  35: 400 candidates, lung mask 4.3 L, nodules found by finder 1/2 | 62s, ~71 min left
+  36: 400 candidates, lung mask 16.2 L, nodules found by finder 0/1 | 47s, ~69 min left
+  37: 400 candidates, lung mask 4.5 L, nodules found by finder 1/1 | 69s, ~67 min left
+  38: 400 candidates, lung mask 4.9 L, nodules found by finder 0/1 | 76s, ~66 min left
+  39: 400 candidates, lung mask 5.4 L, nodules found by finder 1/1 | 87s, ~65 min left
+  40: 400 candidates, lung mask 10.4 L, nodules found by finder 0/2 | 92s, ~63 min left
+  41: 400 candidates, lung mask 4.2 L, nodules found by finder 1/1 | 72s, ~62 min left
+  42: 400 candidates, lung mask 27.3 L, nodules found by finder 3/5 | 54s, ~60 min left
+  43: 400 candidates, lung mask 27.7 L, nodules found by finder 0/3 | 64s, ~59 min left
+  44: 400 candidates, lung mask 6.5 L, nodules found by finder 0/0 | 83s, ~57 min left
+  45: 400 candidates, lung mask 5.3 L, nodules found by finder 2/2 | 109s, ~57 min left
+  46: 400 candidates, lung mask 6.1 L, nodules found by finder 1/1 | 84s, ~55 min left
+  47: 400 candidates, lung mask 21.7 L, nodules found by finder 0/0 | 55s, ~54 min left
+  48: 400 candidates, lung mask 10.3 L, nodules found by finder 0/1 | 112s, ~53 min left
+  49: 400 candidates, lung mask 7.4 L, nodules found by finder 0/0 | 83s, ~52 min left
+  50: 400 candidates, lung mask 25.9 L, nodules found by finder 0/0 | 61s, ~50 min left
+  51: 400 candidates, lung mask 5.8 L, nodules found by finder 0/0 | 76s, ~49 min left
+  52: 400 candidates, lung mask 8.0 L, nodules found by finder 0/1 | 83s, ~47 min left
+  53: 400 candidates, lung mask 4.5 L, nodules found by finder 0/1 | 78s, ~46 min left
+  54: 400 candidates, lung mask 40.3 L, nodules found by finder 1/1 | 85s, ~45 min left
+  55: 400 candidates, lung mask 9.4 L, nodules found by finder 0/0 | 106s, ~44 min left
+  56: 400 candidates, lung mask 32.0 L, nodules found by finder 0/0 | 70s, ~42 min left
+  57: 400 candidates, lung mask 23.5 L, nodules found by finder 0/0 | 59s, ~41 min left
+  58: 400 candidates, lung mask 31.8 L, nodules found by finder 1/1 | 70s, ~39 min left
+  59: 400 candidates, lung mask 5.2 L, nodules found by finder 1/2 | 44s, ~38 min left
+  60: 400 candidates, lung mask 6.1 L, nodules found by finder 0/0 | 93s, ~37 min left
+  61: 400 candidates, lung mask 5.5 L, nodules found by finder 0/0 | 82s, ~35 min left
+  62: 400 candidates, lung mask 6.0 L, nodules found by finder 0/0 | 85s, ~34 min left
+  63: 400 candidates, lung mask 7.7 L, nodules found by finder 1/1 | 91s, ~33 min left
+  64: 400 candidates, lung mask 4.6 L, nodules found by finder 1/1 | 96s, ~32 min left
+  65: 400 candidates, lung mask 2.9 L, nodules found by finder 4/5 | 59s, ~30 min left
+  66: 400 candidates, lung mask 3.8 L, nodules found by finder 1/1 | 77s, ~29 min left
+  67: 400 candidates, lung mask 4.5 L, nodules found by finder 0/0 | 66s, ~28 min left
+  68: 400 candidates, lung mask 7.6 L, nodules found by finder 0/0 | 86s, ~26 min left
+  69: 400 candidates, lung mask 8.6 L, nodules found by finder 0/0 | 106s, ~25 min left
+  70: 400 candidates, lung mask 5.9 L, nodules found by finder 0/1 | 87s, ~24 min left
+  71: 400 candidates, lung mask 4.5 L, nodules found by finder 0/0 | 87s, ~22 min left
+  72: 400 candidates, lung mask 21.7 L, nodules found by finder 0/1 | 47s, ~21 min left
+  73: 400 candidates, lung mask 4.2 L, nodules found by finder 0/2 | 65s, ~20 min left
+  74: 400 candidates, lung mask 4.6 L, nodules found by finder 0/1 | 85s, ~18 min left
+  75: 400 candidates, lung mask 5.9 L, nodules found by finder 0/0 | 119s, ~17 min left
+  76: 400 candidates, lung mask 7.2 L, nodules found by finder 0/1 | 97s, ~16 min left
+  77: 400 candidates, lung mask 35.5 L, nodules found by finder 0/0 | 76s, ~15 min left
+  78: 400 candidates, lung mask 6.5 L, nodules found by finder 0/1 | 73s, ~13 min left
+  79: 400 candidates, lung mask 40.9 L, nodules found by finder 2/4 | 93s, ~12 min left
+  80: 400 candidates, lung mask 29.1 L, nodules found by finder 0/1 | 71s, ~11 min left
+  81: 400 candidates, lung mask 4.6 L, nodules found by finder 1/1 | 88s, ~9 min left
+  82: 400 candidates, lung mask 23.7 L, nodules found by finder 1/1 | 65s, ~8 min left
+  83: 400 candidates, lung mask 4.3 L, nodules found by finder 2/2 | 87s, ~7 min left
+  84: 400 candidates, lung mask 4.3 L, nodules found by finder 2/2 | 76s, ~5 min left
+  85: 400 candidates, lung mask 32.7 L, nodules found by finder 0/1 | 70s, ~4 min left
+  86: 400 candidates, lung mask 6.1 L, nodules found by finder 0/0 | 91s, ~3 min left
+  87: 400 candidates, lung mask 3.0 L, nodules found by finder 0/0 | 62s, ~1 min left
+  88: 400 candidates, lung mask 6.1 L, nodules found by finder 1/1 | 73s, ~0 min left
+{
+  "n_scans": 88,
+  "n_nodules": 105,
+  "candidate_recall": 0.5333333333333333,
+  "mean_candidates_per_scan": 332.54545454545456,
+  "candidate_recall_by_size_mm": {
+    "3-6": [
+      18,
+      45
+    ],
+    "6-10": [
+      16,
+      34
+    ],
+    "10-20": [
+      16,
+      20
+    ],
+    ">=20": [
+      6,
+      6
+    ]
+  },
+  "end_to_end": {
+    "cpm": 0.529251700680272,
+    "cpm_ci95": [
+      0.4217114982578397,
+      0.6563755313755314
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.5047619047619047,
+      "0.25": 0.5333333333333333,
+      "0.5": 0.5333333333333333,
+      "1": 0.5333333333333333,
+      "2": 0.5333333333333333,
+      "4": 0.5333333333333333,
+      "8": 0.5333333333333333
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 56,
+    "n_scans": 88
+  }
+}
+
+For comparison: with the official LUNA16 candidate list the model scored CPM 0.903 on the same scans.
+-> ./work\end_to_end
+
+===== eval_end_to_end.py =====
+model ./work\runs\msgf_f9\best.pt | candidate finder v3 | 88 test scans, 0 already done
+  1: 1000 candidates, lung mask 49.8 L (lungs not found, searched whole scan), nodules found by finder 1/1 | 130s, ~188 min left
+  2: 1000 candidates, lung mask 5.6 L, nodules found by finder 0/0 | 86s, ~155 min left
+  3: 1000 candidates, lung mask 3.9 L, nodules found by finder 8/8 | 119s, ~158 min left
+  4: 1000 candidates, lung mask 5.9 L, nodules found by finder 2/2 | 88s, ~148 min left
+  5: 1000 candidates, lung mask 22.6 L (lungs not found, searched whole scan), nodules found by finder 0/1 | 85s, ~140 min left
+  6: 1000 candidates, lung mask 32.4 L (lungs not found, searched whole scan), nodules found by finder 0/0 | 100s, ~138 min left
+  7: 1000 candidates, lung mask 46.7 L (lungs not found, searched whole scan), nodules found by finder 0/0 | 121s, ~140 min left
+  8: 1000 candidates, lung mask 10.6 L, nodules found by finder 3/5 | 117s, ~141 min left
+  9: 1000 candidates, lung mask 7.6 L, nodules found by finder 0/0 | 117s, ~141 min left
+  10: 1000 candidates, lung mask 8.9 L, nodules found by finder 2/2 | 132s, ~142 min left
+  11: 1000 candidates, lung mask 30.2 L (lungs not found, searched whole scan), nodules found by finder 0/0 | 96s, ~139 min left
+  12: 1000 candidates, lung mask 8.9 L, nodules found by finder 1/1 | 149s, ~141 min left
+  13: 1000 candidates, lung mask 5.7 L, nodules found by finder 0/0 | 109s, ~139 min left
+  14: 1000 candidates, lung mask 5.4 L, nodules found by finder 1/1 | 100s, ~136 min left
+  15: 1000 candidates, lung mask 8.3 L, nodules found by finder 0/0 | 122s, ~136 min left
+  16: 1000 candidates, lung mask 6.1 L, nodules found by finder 0/0 | 103s, ~133 min left
+  17: 1000 candidates, lung mask 5.5 L, nodules found by finder 1/1 | 126s, ~132 min left
+  18: 1000 candidates, lung mask 9.7 L, nodules found by finder 1/1 | 138s, ~132 min left
+  19: 1000 candidates, lung mask 4.5 L, nodules found by finder 2/2 | 105s, ~130 min left
+  20: 1000 candidates, lung mask 44.2 L (lungs not found, searched whole scan), nodules found by finder 3/3 | 118s, ~128 min left
+  21: 1000 candidates, lung mask 29.4 L (lungs not found, searched whole scan), nodules found by finder 1/1 | 94s, ~125 min left
+  22: 1000 candidates, lung mask 4.8 L, nodules found by finder 1/1 | 128s, ~124 min left
+  23: 1000 candidates, lung mask 33.8 L (lungs not found, searched whole scan), nodules found by finder 1/1 | 103s, ~122 min left
+  24: 1000 candidates, lung mask 4.7 L, nodules found by finder 0/0 | 98s, ~119 min left
+  25: 1000 candidates, lung mask 9.1 L, nodules found by finder 0/2 | 104s, ~117 min left
+  26: 1000 candidates, lung mask 5.8 L, nodules found by finder 1/1 | 109s, ~115 min left
+  27: 1000 candidates, lung mask 4.4 L, nodules found by finder 1/1 | 89s, ~112 min left
+  28: 1000 candidates, lung mask 5.0 L, nodules found by finder 2/2 | 110s, ~111 min left
+  29: 1000 candidates, lung mask 5.5 L, nodules found by finder 0/0 | 99s, ~108 min left
+  30: 1000 candidates, lung mask 4.7 L, nodules found by finder 0/1 | 87s, ~106 min left
+  31: 1000 candidates, lung mask 29.8 L (lungs not found, searched whole scan), nodules found by finder 1/1 | 96s, ~104 min left
+  32: 1000 candidates, lung mask 27.2 L (lungs not found, searched whole scan), nodules found by finder 1/9 | 92s, ~101 min left
+  33: 1000 candidates, lung mask 5.6 L, nodules found by finder 1/1 | 94s, ~99 min left
+  34: 1000 candidates, lung mask 10.4 L, nodules found by finder 1/1 | 117s, ~97 min left
+  35: 1000 candidates, lung mask 4.2 L, nodules found by finder 1/2 | 88s, ~95 min left
+  36: 1000 candidates, lung mask 15.7 L (lungs not found, searched whole scan), nodules found by finder 1/1 | 71s, ~92 min left
+  37: 1000 candidates, lung mask 4.5 L, nodules found by finder 1/1 | 94s, ~90 min left
+  38: 1000 candidates, lung mask 4.9 L, nodules found by finder 1/1 | 96s, ~88 min left
+  39: 1000 candidates, lung mask 5.4 L, nodules found by finder 1/1 | 116s, ~87 min left
+  40: 1000 candidates, lung mask 10.2 L, nodules found by finder 0/2 | 117s, ~85 min left
+  41: 1000 candidates, lung mask 4.2 L, nodules found by finder 1/1 | 97s, ~83 min left
+  42: 1000 candidates, lung mask 27.3 L (lungs not found, searched whole scan), nodules found by finder 3/5 | 80s, ~81 min left
+  43: 1000 candidates, lung mask 27.0 L (lungs not found, searched whole scan), nodules found by finder 0/3 | 90s, ~79 min left
+  44: 1000 candidates, lung mask 7.7 L, nodules found by finder 0/0 | 112s, ~77 min left
+  45: 1000 candidates, lung mask 5.3 L, nodules found by finder 2/2 | 138s, ~76 min left
+  46: 1000 candidates, lung mask 6.1 L, nodules found by finder 1/1 | 112s, ~74 min left
+  47: 1000 candidates, lung mask 21.1 L (lungs not found, searched whole scan), nodules found by finder 0/0 | 81s, ~72 min left
+  48: 1000 candidates, lung mask 10.1 L, nodules found by finder 0/1 | 138s, ~71 min left
+  49: 1000 candidates, lung mask 7.2 L, nodules found by finder 0/0 | 109s, ~69 min left
+  50: 1000 candidates, lung mask 25.2 L (lungs not found, searched whole scan), nodules found by finder 0/0 | 86s, ~67 min left
+  51: 1000 candidates, lung mask 5.8 L, nodules found by finder 0/0 | 102s, ~65 min left
+  52: 1000 candidates, lung mask 7.8 L, nodules found by finder 0/1 | 109s, ~64 min left
+  53: 1000 candidates, lung mask 4.5 L, nodules found by finder 0/1 | 95s, ~62 min left
+  54: 1000 candidates, lung mask 39.4 L (lungs not found, searched whole scan), nodules found by finder 1/1 | 112s, ~60 min left
+  55: 1000 candidates, lung mask 9.3 L, nodules found by finder 0/0 | 133s, ~59 min left
+  56: 1000 candidates, lung mask 31.3 L (lungs not found, searched whole scan), nodules found by finder 0/0 | 97s, ~57 min left
+  57: 1000 candidates, lung mask 22.8 L (lungs not found, searched whole scan), nodules found by finder 0/0 | 86s, ~55 min left
+  58: 1000 candidates, lung mask 31.0 L (lungs not found, searched whole scan), nodules found by finder 1/1 | 98s, ~53 min left
+  59: 1000 candidates, lung mask 5.2 L, nodules found by finder 2/2 | 70s, ~51 min left
+  60: 1000 candidates, lung mask 6.1 L, nodules found by finder 0/0 | 120s, ~49 min left
+  61: 1000 candidates, lung mask 5.5 L, nodules found by finder 0/0 | 109s, ~47 min left
+  62: 1000 candidates, lung mask 6.0 L, nodules found by finder 0/0 | 113s, ~46 min left
+  63: 1000 candidates, lung mask 7.5 L, nodules found by finder 1/1 | 117s, ~44 min left
+  64: 1000 candidates, lung mask 4.6 L, nodules found by finder 1/1 | 122s, ~42 min left
+  65: 1000 candidates, lung mask 2.9 L, nodules found by finder 5/5 | 87s, ~41 min left
+  66: 1000 candidates, lung mask 3.8 L, nodules found by finder 1/1 | 104s, ~39 min left
+  67: 1000 candidates, lung mask 4.5 L, nodules found by finder 0/0 | 93s, ~37 min left
+  68: 1000 candidates, lung mask 7.6 L, nodules found by finder 0/0 | 114s, ~35 min left
+  69: 1000 candidates, lung mask 8.6 L, nodules found by finder 0/0 | 134s, ~34 min left
+  70: 1000 candidates, lung mask 5.9 L, nodules found by finder 0/1 | 114s, ~32 min left
+  71: 1000 candidates, lung mask 4.5 L, nodules found by finder 0/0 | 114s, ~30 min left
+  72: 1000 candidates, lung mask 21.7 L (lungs not found, searched whole scan), nodules found by finder 1/1 | 74s, ~28 min left
+  73: 1000 candidates, lung mask 4.2 L, nodules found by finder 2/2 | 83s, ~26 min left
+  74: 1000 candidates, lung mask 4.6 L, nodules found by finder 0/1 | 104s, ~25 min left
+  75: 1000 candidates, lung mask 5.9 L, nodules found by finder 0/0 | 140s, ~23 min left
+  76: 1000 candidates, lung mask 7.2 L, nodules found by finder 1/1 | 117s, ~21 min left
+  77: 1000 candidates, lung mask 34.7 L (lungs not found, searched whole scan), nodules found by finder 0/0 | 102s, ~19 min left
+  78: 1000 candidates, lung mask 6.4 L, nodules found by finder 0/1 | 90s, ~18 min left
+  79: 1000 candidates, lung mask 40.0 L (lungs not found, searched whole scan), nodules found by finder 2/4 | 113s, ~16 min left
+  80: 1000 candidates, lung mask 28.4 L (lungs not found, searched whole scan), nodules found by finder 1/1 | 94s, ~14 min left
+  81: 1000 candidates, lung mask 4.6 L, nodules found by finder 1/1 | 115s, ~12 min left
+  82: 1000 candidates, lung mask 23.1 L (lungs not found, searched whole scan), nodules found by finder 1/1 | 83s, ~11 min left
+  83: 1000 candidates, lung mask 4.3 L, nodules found by finder 2/2 | 107s, ~9 min left
+  84: 1000 candidates, lung mask 4.3 L, nodules found by finder 2/2 | 103s, ~7 min left
+  85: 1000 candidates, lung mask 32.7 L (lungs not found, searched whole scan), nodules found by finder 0/1 | 88s, ~5 min left
+  86: 1000 candidates, lung mask 6.1 L, nodules found by finder 0/0 | 110s, ~4 min left
+  87: 1000 candidates, lung mask 3.0 L, nodules found by finder 0/0 | 88s, ~2 min left
+  88: 1000 candidates, lung mask 6.1 L, nodules found by finder 1/1 | 90s, ~0 min left
+{
+  "finder_version": "v3",
+  "n_scans": 88,
+  "scans_where_lungs_not_found": 17,
+  "n_nodules": 105,
+  "candidate_recall": 0.7047619047619048,
+  "mean_candidates_per_scan": 796.9090909090909,
+  "candidate_recall_by_size_mm": {
+    "3-6": [
+      30,
+      45
+    ],
+    "6-10": [
+      21,
+      34
+    ],
+    "10-20": [
+      17,
+      20
+    ],
+    ">=20": [
+      6,
+      6
+    ]
+  },
+  "end_to_end": {
+    "cpm": 0.6829931972789115,
+    "cpm_ci95": [
+      0.5533199620708568,
+      0.8182183441558442
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.6190476190476191,
+      "0.25": 0.6666666666666666,
+      "0.5": 0.6857142857142857,
+      "1": 0.6952380952380952,
+      "2": 0.7047619047619048,
+      "4": 0.7047619047619048,
+      "8": 0.7047619047619048
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 74,
+    "n_scans": 88
+  }
+}
+
+For comparison: with the official LUNA16 candidate list the model scored CPM 0.903 on the same scans.
+-> ./work\end_to_end\v3
+
+===== eval_end_to_end.py =====
+model ./work\runs\msgf_f9\best.pt | candidate finder v4 | 88 test scans, 0 already done
+  1: 1000 candidates, lung mask 9.1 L, nodules found by finder 1/1 | 167s, ~242 min left
+  2: 1000 candidates, lung mask 5.6 L, nodules found by finder 0/0 | 86s, ~182 min left
+  3: 1000 candidates, lung mask 3.9 L, nodules found by finder 8/8 | 121s, ~177 min left
+  4: 1000 candidates, lung mask 5.9 L, nodules found by finder 2/2 | 88s, ~162 min left
+  5: 1000 candidates, lung mask 6.6 L, nodules found by finder 0/1 | 104s, ~157 min left
+  6: 1000 candidates, lung mask 5.5 L, nodules found by finder 0/0 | 128s, ~158 min left
+  7: 1000 candidates, lung mask 7.5 L, nodules found by finder 0/0 | 162s, ~165 min left
+  8: 1000 candidates, lung mask 10.6 L, nodules found by finder 3/5 | 116s, ~162 min left
+  9: 1000 candidates, lung mask 7.6 L, nodules found by finder 0/0 | 119s, ~160 min left
+  10: 1000 candidates, lung mask 8.9 L, nodules found by finder 2/2 | 133s, ~159 min left
+  11: 1000 candidates, lung mask 8.5 L, nodules found by finder 0/0 | 122s, ~157 min left
+  12: 1000 candidates, lung mask 8.9 L, nodules found by finder 1/1 | 151s, ~158 min left
+  13: 1000 candidates, lung mask 5.7 L, nodules found by finder 0/0 | 111s, ~155 min left
+  14: 1000 candidates, lung mask 5.4 L, nodules found by finder 1/1 | 101s, ~151 min left
+  15: 1000 candidates, lung mask 8.3 L, nodules found by finder 0/0 | 124s, ~149 min left
+  16: 1000 candidates, lung mask 6.1 L, nodules found by finder 0/0 | 103s, ~145 min left
+  17: 1000 candidates, lung mask 5.5 L, nodules found by finder 1/1 | 127s, ~144 min left
+  18: 1000 candidates, lung mask 9.7 L, nodules found by finder 1/1 | 143s, ~143 min left
+  19: 1000 candidates, lung mask 4.5 L, nodules found by finder 2/2 | 106s, ~140 min left
+  20: 1000 candidates, lung mask 6.8 L, nodules found by finder 3/3 | 155s, ~140 min left
+  21: 1000 candidates, lung mask 4.8 L, nodules found by finder 1/1 | 120s, ~138 min left
+  22: 1000 candidates, lung mask 4.8 L, nodules found by finder 1/1 | 130s, ~136 min left
+  23: 1000 candidates, lung mask 3.1 L, nodules found by finder 1/1 | 130s, ~134 min left
+  24: 1000 candidates, lung mask 4.7 L, nodules found by finder 0/0 | 99s, ~131 min left
+  25: 1000 candidates, lung mask 9.1 L, nodules found by finder 0/2 | 105s, ~128 min left
+  26: 1000 candidates, lung mask 5.8 L, nodules found by finder 1/1 | 112s, ~126 min left
+  27: 1000 candidates, lung mask 4.4 L, nodules found by finder 1/1 | 89s, ~122 min left
+  28: 1000 candidates, lung mask 5.0 L, nodules found by finder 2/2 | 109s, ~120 min left
+  29: 1000 candidates, lung mask 5.5 L, nodules found by finder 0/0 | 100s, ~117 min left
+  30: 1000 candidates, lung mask 4.7 L, nodules found by finder 0/1 | 88s, ~114 min left
+  31: 1000 candidates, lung mask 3.7 L, nodules found by finder 1/1 | 117s, ~112 min left
+  32: 1000 candidates, lung mask 4.7 L, nodules found by finder 1/9 | 113s, ~110 min left
+  33: 1000 candidates, lung mask 5.6 L, nodules found by finder 1/1 | 95s, ~108 min left
+  34: 1000 candidates, lung mask 10.4 L, nodules found by finder 1/1 | 117s, ~106 min left
+  35: 1000 candidates, lung mask 4.2 L, nodules found by finder 1/2 | 89s, ~103 min left
+  36: 1000 candidates, lung mask 4.2 L, nodules found by finder 1/1 | 85s, ~100 min left
+  37: 1000 candidates, lung mask 4.5 L, nodules found by finder 1/1 | 93s, ~98 min left
+  38: 1000 candidates, lung mask 4.9 L, nodules found by finder 1/1 | 97s, ~96 min left
+  39: 1000 candidates, lung mask 5.4 L, nodules found by finder 1/1 | 116s, ~94 min left
+  40: 1000 candidates, lung mask 10.2 L, nodules found by finder 0/2 | 118s, ~92 min left
+  41: 1000 candidates, lung mask 4.2 L, nodules found by finder 1/1 | 98s, ~90 min left
+  42: 1000 candidates, lung mask 7.2 L, nodules found by finder 3/5 | 98s, ~87 min left
+  43: 1000 candidates, lung mask 5.4 L, nodules found by finder 3/3 | 112s, ~85 min left
+  44: 1000 candidates, lung mask 7.7 L, nodules found by finder 0/0 | 113s, ~84 min left
+  45: 1000 candidates, lung mask 5.3 L, nodules found by finder 2/2 | 137s, ~82 min left
+  46: 1000 candidates, lung mask 6.1 L, nodules found by finder 1/1 | 112s, ~80 min left
+  47: 1000 candidates, lung mask 5.7 L, nodules found by finder 0/0 | 99s, ~78 min left
+  48: 1000 candidates, lung mask 10.1 L, nodules found by finder 0/1 | 140s, ~76 min left
+  49: 1000 candidates, lung mask 7.2 L, nodules found by finder 0/0 | 110s, ~74 min left
+  50: 1000 candidates, lung mask 8.4 L, nodules found by finder 0/0 | 109s, ~72 min left
+  51: 1000 candidates, lung mask 5.8 L, nodules found by finder 0/0 | 103s, ~70 min left
+  52: 1000 candidates, lung mask 7.8 L, nodules found by finder 0/1 | 109s, ~68 min left
+  53: 1000 candidates, lung mask 4.5 L, nodules found by finder 0/1 | 96s, ~66 min left
+  54: 1000 candidates, lung mask 5.0 L, nodules found by finder 1/1 | 141s, ~65 min left
+  55: 1000 candidates, lung mask 9.3 L, nodules found by finder 0/0 | 133s, ~63 min left
+  56: 1000 candidates, lung mask 5.7 L, nodules found by finder 0/0 | 121s, ~61 min left
+  57: 1000 candidates, lung mask 5.6 L, nodules found by finder 0/0 | 105s, ~59 min left
+  58: 1000 candidates, lung mask 6.1 L, nodules found by finder 1/1 | 123s, ~57 min left
+  59: 1000 candidates, lung mask 5.2 L, nodules found by finder 2/2 | 70s, ~55 min left
+  60: 1000 candidates, lung mask 6.1 L, nodules found by finder 0/0 | 120s, ~53 min left
+  61: 1000 candidates, lung mask 5.5 L, nodules found by finder 0/0 | 109s, ~51 min left
+  62: 1000 candidates, lung mask 6.0 L, nodules found by finder 0/0 | 113s, ~49 min left
+  63: 1000 candidates, lung mask 7.5 L, nodules found by finder 1/1 | 117s, ~47 min left
+  64: 1000 candidates, lung mask 4.6 L, nodules found by finder 1/1 | 123s, ~46 min left
+  65: 1000 candidates, lung mask 2.9 L, nodules found by finder 5/5 | 86s, ~44 min left
+  66: 1000 candidates, lung mask 3.8 L, nodules found by finder 1/1 | 104s, ~42 min left
+  67: 1000 candidates, lung mask 4.5 L, nodules found by finder 0/0 | 93s, ~40 min left
+  68: 1000 candidates, lung mask 7.6 L, nodules found by finder 0/0 | 114s, ~38 min left
+  69: 1000 candidates, lung mask 8.6 L, nodules found by finder 0/0 | 134s, ~36 min left
+  70: 1000 candidates, lung mask 5.9 L, nodules found by finder 0/1 | 115s, ~34 min left
+  71: 1000 candidates, lung mask 4.5 L, nodules found by finder 0/0 | 115s, ~32 min left
+  72: 1000 candidates, lung mask 4.9 L, nodules found by finder 1/1 | 89s, ~30 min left
+  73: 1000 candidates, lung mask 4.2 L, nodules found by finder 2/2 | 84s, ~28 min left
+  74: 1000 candidates, lung mask 4.6 L, nodules found by finder 0/1 | 105s, ~26 min left
+  75: 1000 candidates, lung mask 5.9 L, nodules found by finder 0/0 | 140s, ~24 min left
+  76: 1000 candidates, lung mask 7.2 L, nodules found by finder 1/1 | 118s, ~23 min left
+  77: 1000 candidates, lung mask 7.7 L, nodules found by finder 0/0 | 132s, ~21 min left
+  78: 1000 candidates, lung mask 6.4 L, nodules found by finder 0/1 | 91s, ~19 min left
+  79: 1000 candidates, lung mask 6.9 L, nodules found by finder 4/4 | 143s, ~17 min left
+  80: 1000 candidates, lung mask 6.9 L, nodules found by finder 1/1 | 118s, ~15 min left
+  81: 1000 candidates, lung mask 4.6 L, nodules found by finder 1/1 | 114s, ~13 min left
+  82: 1000 candidates, lung mask 5.5 L, nodules found by finder 1/1 | 105s, ~11 min left
+  83: 1000 candidates, lung mask 4.3 L, nodules found by finder 2/2 | 106s, ~9 min left
+  84: 1000 candidates, lung mask 4.3 L, nodules found by finder 2/2 | 102s, ~8 min left
+  85: 1000 candidates, lung mask 5.9 L, nodules found by finder 0/1 | 109s, ~6 min left
+  86: 1000 candidates, lung mask 6.1 L, nodules found by finder 0/0 | 111s, ~4 min left
+  87: 1000 candidates, lung mask 3.0 L, nodules found by finder 0/0 | 89s, ~2 min left
+  88: 1000 candidates, lung mask 6.1 L, nodules found by finder 1/1 | 91s, ~0 min left
+{
+  "finder_version": "v4",
+  "n_scans": 88,
+  "scans_where_lungs_not_found": 0,
+  "n_nodules": 105,
+  "candidate_recall": 0.7523809523809524,
+  "mean_candidates_per_scan": 796.8068181818181,
+  "candidate_recall_by_size_mm": {
+    "3-6": [
+      34,
+      45
+    ],
+    "6-10": [
+      22,
+      34
+    ],
+    "10-20": [
+      17,
+      20
+    ],
+    ">=20": [
+      6,
+      6
+    ]
+  },
+  "end_to_end": {
+    "cpm": 0.7210884353741498,
+    "cpm_ci95": [
+      0.5925786019536019,
+      0.8464078701036866
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.6571428571428571,
+      "0.25": 0.7047619047619048,
+      "0.5": 0.7142857142857143,
+      "1": 0.7238095238095238,
+      "2": 0.7428571428571429,
+      "4": 0.7523809523809524,
+      "8": 0.7523809523809524
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 79,
+    "n_scans": 88
+  }
+}
+
+For comparison: with the official LUNA16 candidate list the model scored CPM 0.903 on the same scans.
+-> ./work\end_to_end\v4
+
+===== eval_end_to_end.py =====
+model ./work\runs\msgf_f9\best.pt | candidate finder v5 | 88 test scans, 0 already done
+  1: 1000 candidates, lung mask 9.1 L, nodules found by finder 1/1 | 276s, ~400 min left
+  2: 1000 candidates, lung mask 5.6 L, nodules found by finder 0/0 | 181s, ~327 min left
+  3: 1000 candidates, lung mask 3.9 L, nodules found by finder 8/8 | 223s, ~321 min left
+  4: 1000 candidates, lung mask 5.9 L, nodules found by finder 2/2 | 187s, ~303 min left
+  5: 1000 candidates, lung mask 6.6 L, nodules found by finder 0/1 | 203s, ~296 min left
+  6: 1000 candidates, lung mask 5.5 L, nodules found by finder 0/0 | 231s, ~296 min left
+  7: 1000 candidates, lung mask 7.5 L, nodules found by finder 0/0 | 268s, ~303 min left
+  8: 1000 candidates, lung mask 10.6 L, nodules found by finder 4/5 | 218s, ~298 min left
+  9: 1000 candidates, lung mask 7.6 L, nodules found by finder 0/0 | 222s, ~294 min left
+  10: 1000 candidates, lung mask 8.9 L, nodules found by finder 2/2 | 237s, ~292 min left
+  11: 1000 candidates, lung mask 8.5 L, nodules found by finder 0/0 | 222s, ~288 min left
+  12: 1000 candidates, lung mask 8.9 L, nodules found by finder 1/1 | 258s, ~288 min left
+  13: 1000 candidates, lung mask 5.7 L, nodules found by finder 0/0 | 213s, ~283 min left
+  14: 1000 candidates, lung mask 5.4 L, nodules found by finder 1/1 | 203s, ~277 min left
+  15: 1000 candidates, lung mask 8.3 L, nodules found by finder 0/0 | 226s, ~273 min left
+  16: 1000 candidates, lung mask 6.1 L, nodules found by finder 0/0 | 203s, ~268 min left
+  17: 1000 candidates, lung mask 5.5 L, nodules found by finder 1/1 | 231s, ~265 min left
+  18: 1000 candidates, lung mask 9.7 L, nodules found by finder 1/1 | 243s, ~262 min left
+  19: 1000 candidates, lung mask 4.5 L, nodules found by finder 2/2 | 208s, ~257 min left
+  20: 1000 candidates, lung mask 6.8 L, nodules found by finder 3/3 | 253s, ~255 min left
+  21: 1000 candidates, lung mask 4.8 L, nodules found by finder 1/1 | 220s, ~251 min left
+  22: 1000 candidates, lung mask 4.8 L, nodules found by finder 1/1 | 234s, ~248 min left
+  23: 1000 candidates, lung mask 3.1 L, nodules found by finder 1/1 | 228s, ~244 min left
+  24: 1000 candidates, lung mask 4.7 L, nodules found by finder 0/0 | 198s, ~239 min left
+  25: 1000 candidates, lung mask 9.1 L, nodules found by finder 2/2 | 205s, ~235 min left
+  26: 1000 candidates, lung mask 5.8 L, nodules found by finder 1/1 | 213s, ~231 min left
+  27: 1000 candidates, lung mask 4.4 L, nodules found by finder 1/1 | 184s, ~225 min left
+  28: 1000 candidates, lung mask 5.0 L, nodules found by finder 2/2 | 196s, ~221 min left
+  29: 1000 candidates, lung mask 5.5 L, nodules found by finder 0/0 | 144s, ~215 min left
+  30: 1000 candidates, lung mask 4.7 L, nodules found by finder 1/1 | 189s, ~210 min left
+  31: 1000 candidates, lung mask 3.7 L, nodules found by finder 1/1 | 224s, ~207 min left
+  32: 1000 candidates, lung mask 4.7 L, nodules found by finder 7/9 | 219s, ~203 min left
+  33: 1000 candidates, lung mask 5.6 L, nodules found by finder 1/1 | 197s, ~199 min left
+  34: 1000 candidates, lung mask 10.4 L, nodules found by finder 1/1 | 226s, ~195 min left
+  35: 1000 candidates, lung mask 4.2 L, nodules found by finder 2/2 | 192s, ~191 min left
+  36: 1000 candidates, lung mask 4.2 L, nodules found by finder 1/1 | 184s, ~187 min left
+  37: 1000 candidates, lung mask 4.5 L, nodules found by finder 1/1 | 198s, ~183 min left
+  38: 1000 candidates, lung mask 4.9 L, nodules found by finder 1/1 | 197s, ~179 min left
+  39: 1000 candidates, lung mask 5.4 L, nodules found by finder 1/1 | 218s, ~175 min left
+  40: 1000 candidates, lung mask 10.2 L, nodules found by finder 2/2 | 224s, ~172 min left
+  41: 1000 candidates, lung mask 4.2 L, nodules found by finder 1/1 | 204s, ~168 min left
+  42: 1000 candidates, lung mask 7.2 L, nodules found by finder 5/5 | 199s, ~164 min left
+  43: 1000 candidates, lung mask 5.4 L, nodules found by finder 3/3 | 217s, ~161 min left
+  44: 1000 candidates, lung mask 7.7 L, nodules found by finder 0/0 | 208s, ~157 min left
+  45: 1000 candidates, lung mask 5.3 L, nodules found by finder 2/2 | 250s, ~154 min left
+  46: 1000 candidates, lung mask 6.1 L, nodules found by finder 1/1 | 220s, ~151 min left
+  47: 1000 candidates, lung mask 5.7 L, nodules found by finder 0/0 | 206s, ~147 min left
+  48: 1000 candidates, lung mask 10.1 L, nodules found by finder 0/1 | 250s, ~144 min left
+  49: 1000 candidates, lung mask 7.2 L, nodules found by finder 0/0 | 217s, ~140 min left
+  50: 1000 candidates, lung mask 8.4 L, nodules found by finder 0/0 | 204s, ~136 min left
+  51: 1000 candidates, lung mask 5.8 L, nodules found by finder 0/0 | 268s, ~133 min left
+  52: 1000 candidates, lung mask 7.8 L, nodules found by finder 1/1 | 221s, ~130 min left
+  53: 1000 candidates, lung mask 4.5 L, nodules found by finder 1/1 | 207s, ~126 min left
+  54: 1000 candidates, lung mask 5.0 L, nodules found by finder 1/1 | 256s, ~123 min left
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFCD0834783  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFCD22C7AC4  Unknown               Unknown  Unknown
+ntdll.dll          00007FFCD478A351  Unknown               Unknown  Unknown
+
+===== eval_end_to_end.py =====
+model ./work\runs\msgf_f9\best.pt | candidate finder v5 | 88 test scans, 54 already done
+  1: 1000 candidates, lung mask 9.3 L, nodules found by finder 0/0 | 241s, ~133 min left
+  2: 1000 candidates, lung mask 5.7 L, nodules found by finder 0/0 | 225s, ~124 min left
+  3: 1000 candidates, lung mask 5.6 L, nodules found by finder 0/0 | 207s, ~116 min left
+  4: 1000 candidates, lung mask 6.1 L, nodules found by finder 1/1 | 225s, ~112 min left
+  5: 1000 candidates, lung mask 5.2 L, nodules found by finder 2/2 | 170s, ~103 min left
+  6: 1000 candidates, lung mask 6.1 L, nodules found by finder 0/0 | 232s, ~101 min left
+  7: 1000 candidates, lung mask 5.5 L, nodules found by finder 0/0 | 216s, ~97 min left
+  8: 1000 candidates, lung mask 6.0 L, nodules found by finder 0/0 | 219s, ~94 min left
+  9: 1000 candidates, lung mask 7.5 L, nodules found by finder 1/1 | 216s, ~90 min left
+  10: 1000 candidates, lung mask 4.6 L, nodules found by finder 1/1 | 229s, ~87 min left
+  11: 1000 candidates, lung mask 2.9 L, nodules found by finder 5/5 | 189s, ~83 min left
+  12: 1000 candidates, lung mask 3.8 L, nodules found by finder 1/1 | 214s, ~79 min left
+  13: 1000 candidates, lung mask 4.5 L, nodules found by finder 0/0 | 200s, ~75 min left
+  14: 1000 candidates, lung mask 7.6 L, nodules found by finder 0/0 | 204s, ~71 min left
+  15: 1000 candidates, lung mask 8.6 L, nodules found by finder 0/0 | 238s, ~68 min left
+  16: 1000 candidates, lung mask 5.9 L, nodules found by finder 0/1 | 227s, ~65 min left
+  17: 1000 candidates, lung mask 4.5 L, nodules found by finder 0/0 | 229s, ~61 min left
+  18: 1000 candidates, lung mask 4.9 L, nodules found by finder 1/1 | 217s, ~58 min left
+  19: 1000 candidates, lung mask 4.2 L, nodules found by finder 2/2 | 197s, ~54 min left
+  20: 1000 candidates, lung mask 4.6 L, nodules found by finder 0/1 | 222s, ~50 min left
+  21: 1000 candidates, lung mask 5.9 L, nodules found by finder 0/0 | 248s, ~47 min left
+  22: 1000 candidates, lung mask 7.2 L, nodules found by finder 1/1 | 234s, ~44 min left
+  23: 1000 candidates, lung mask 7.7 L, nodules found by finder 0/0 | 256s, ~40 min left
+  24: 1000 candidates, lung mask 6.4 L, nodules found by finder 1/1 | 182s, ~36 min left
+  25: 1000 candidates, lung mask 6.9 L, nodules found by finder 4/4 | 253s, ~33 min left
+  26: 1000 candidates, lung mask 6.9 L, nodules found by finder 1/1 | 225s, ~29 min left
+  27: 1000 candidates, lung mask 4.6 L, nodules found by finder 1/1 | 215s, ~26 min left
+  28: 1000 candidates, lung mask 5.5 L, nodules found by finder 1/1 | 207s, ~22 min left
+  29: 1000 candidates, lung mask 4.3 L, nodules found by finder 2/2 | 208s, ~18 min left
+  30: 1000 candidates, lung mask 4.3 L, nodules found by finder 2/2 | 207s, ~15 min left
+  31: 1000 candidates, lung mask 5.9 L, nodules found by finder 0/1 | 208s, ~11 min left
+  32: 1000 candidates, lung mask 6.1 L, nodules found by finder 0/0 | 217s, ~7 min left
+  33: 1000 candidates, lung mask 3.0 L, nodules found by finder 0/0 | 188s, ~4 min left
+  34: 1000 candidates, lung mask 6.1 L, nodules found by finder 1/1 | 193s, ~0 min left
+{
+  "finder_version": "v5",
+  "n_scans": 88,
+  "scans_where_lungs_not_found": 0,
+  "n_nodules": 105,
+  "candidate_recall": 0.9238095238095239,
+  "mean_candidates_per_scan": 871.6931818181819,
+  "candidate_recall_by_size_mm": {
+    "3-6": [
+      40,
+      45
+    ],
+    "6-10": [
+      31,
+      34
+    ],
+    "10-20": [
+      20,
+      20
+    ],
+    ">=20": [
+      6,
+      6
+    ]
+  },
+  "end_to_end": {
+    "cpm": 0.8666666666666668,
+    "cpm_ci95": [
+      0.799970238095238,
+      0.9229457572502686
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.7714285714285715,
+      "0.25": 0.8285714285714286,
+      "0.5": 0.8571428571428571,
+      "1": 0.8761904761904762,
+      "2": 0.8952380952380953,
+      "4": 0.9142857142857143,
+      "8": 0.9238095238095239
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 97,
+    "n_scans": 88
+  }
+}
+
+For comparison: with the official LUNA16 candidate list the model scored CPM 0.903 on the same scans.
+-> ./work\end_to_end\v5

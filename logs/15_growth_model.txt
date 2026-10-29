@@ -1,0 +1,136 @@
+
+===== luna25_temporal.py pairs =====
+{
+  "lesions_total": 3762,
+  "pairs": 2401,
+  "label_changes_between_rounds": 0,
+  "median_interval_years": 1.002053388090349,
+  "train_pairs_malignant_patients": [
+    1433,
+    120,
+    675
+  ],
+  "val_pairs_malignant_patients": [
+    493,
+    44,
+    234
+  ],
+  "test_pairs_malignant_patients": [
+    475,
+    43,
+    223
+  ]
+}
+
+===== luna25_temporal.py train --seed 0 =====
+l25_temporal_s0: train 1433 pairs (120 malignant) | val 493 (44) | cuda
+ep 00 loss 0.1344 | val AUC 0.9160 | 395s *
+ep 01 loss 0.1194 | val AUC 0.9065 | 421s 
+ep 02 loss 0.1092 | val AUC 0.9140 | 420s 
+ep 03 loss 0.1078 | val AUC 0.8932 | 422s 
+ep 04 loss 0.0988 | val AUC 0.9088 | 423s 
+ep 05 loss 0.0902 | val AUC 0.9154 | 422s 
+ep 06 loss 0.0933 | val AUC 0.9078 | 423s 
+early stopping
+best val AUC 0.9160
+
+===== luna25_temporal.py train --seed 1 =====
+l25_temporal_s1: train 1433 pairs (120 malignant) | val 493 (44) | cuda
+ep 00 loss 0.1456 | val AUC 0.9163 | 413s *
+ep 01 loss 0.1139 | val AUC 0.9139 | 420s 
+ep 02 loss 0.1073 | val AUC 0.9019 | 424s 
+ep 03 loss 0.0998 | val AUC 0.9155 | 431s 
+ep 04 loss 0.0936 | val AUC 0.9156 | 430s 
+ep 05 loss 0.0919 | val AUC 0.9137 | 431s 
+ep 06 loss 0.0845 | val AUC 0.9094 | 429s 
+early stopping
+best val AUC 0.9163
+
+===== luna25_temporal.py train --seed 2 =====
+l25_temporal_s2: train 1433 pairs (120 malignant) | val 493 (44) | cuda
+ep 00 loss 0.1312 | val AUC 0.9054 | 423s *
+ep 01 loss 0.1209 | val AUC 0.9182 | 433s *
+ep 02 loss 0.1092 | val AUC 0.9187 | 428s *
+ep 03 loss 0.1073 | val AUC 0.9184 | 432s 
+ep 04 loss 0.0965 | val AUC 0.9100 | 432s 
+ep 05 loss 0.0957 | val AUC 0.9015 | 429s 
+ep 06 loss 0.0875 | val AUC 0.9047 | 422s 
+ep 07 loss 0.0838 | val AUC 0.9040 | 423s 
+ep 08 loss 0.0861 | val AUC 0.8842 | 429s 
+early stopping
+best val AUC 0.9187
+
+===== luna25_temporal.py train --seed 0 --no-prior =====
+l25_temporal_noprior_s0: train 1433 pairs (120 malignant) | val 493 (44) | cuda
+ep 00 loss 0.1367 | val AUC 0.8989 | 387s *
+ep 01 loss 0.1247 | val AUC 0.8947 | 287s 
+ep 02 loss 0.1185 | val AUC 0.9031 | 287s *
+ep 03 loss 0.1152 | val AUC 0.8889 | 287s 
+ep 04 loss 0.1131 | val AUC 0.8970 | 287s 
+ep 05 loss 0.1124 | val AUC 0.9057 | 287s *
+ep 06 loss 0.1102 | val AUC 0.8985 | 287s 
+ep 07 loss 0.1097 | val AUC 0.9042 | 287s 
+ep 08 loss 0.0997 | val AUC 0.8900 | 287s 
+ep 09 loss 0.1007 | val AUC 0.8851 | 287s 
+ep 10 loss 0.0956 | val AUC 0.8968 | 287s 
+ep 11 loss 0.0912 | val AUC 0.8864 | 287s 
+early stopping
+best val AUC 0.9057
+
+===== luna25_temporal.py train --seed 1 --no-prior =====
+l25_temporal_noprior_s1: train 1433 pairs (120 malignant) | val 493 (44) | cuda
+ep 00 loss 0.1505 | val AUC 0.9094 | 282s *
+ep 01 loss 0.1213 | val AUC 0.8968 | 287s 
+ep 02 loss 0.1190 | val AUC 0.8821 | 287s 
+ep 03 loss 0.1149 | val AUC 0.9073 | 287s 
+ep 04 loss 0.1110 | val AUC 0.9040 | 287s 
+ep 05 loss 0.1092 | val AUC 0.9015 | 287s 
+ep 06 loss 0.1005 | val AUC 0.8976 | 287s 
+early stopping
+best val AUC 0.9094
+
+===== luna25_temporal.py train --seed 2 --no-prior =====
+l25_temporal_noprior_s2: train 1433 pairs (120 malignant) | val 493 (44) | cuda
+ep 00 loss 0.1364 | val AUC 0.8913 | 281s *
+ep 01 loss 0.1321 | val AUC 0.9024 | 287s *
+ep 02 loss 0.1149 | val AUC 0.9066 | 287s *
+ep 03 loss 0.1200 | val AUC 0.8922 | 287s 
+ep 04 loss 0.1140 | val AUC 0.8967 | 287s 
+ep 05 loss 0.1106 | val AUC 0.8922 | 287s 
+ep 06 loss 0.1032 | val AUC 0.9023 | 287s 
+ep 07 loss 0.1048 | val AUC 0.8983 | 287s 
+ep 08 loss 0.1102 | val AUC 0.8854 | 287s 
+early stopping
+best val AUC 0.9066
+
+===== luna25_temporal.py eval =====
+  scored TG-MSGF seed 0
+  scored TG-MSGF seed 1
+  scored TG-MSGF seed 2
+  scored TG-MSGF no-prior seed 0
+  scored TG-MSGF no-prior seed 1
+  scored TG-MSGF no-prior seed 2
+
+test: 475 nodules that have a prior scan (43 malignant, 223 patients)
+
+                    model  val_AUC  test_AUC    AUC_95CI     AP
+     single_scan_ensemble   0.9175    0.9218 0.872-0.966 0.6153
+       handcrafted_growth   0.9388    0.9333 0.890-0.972 0.6876
+           TG-MSGF seed 0   0.9144    0.9110 0.852-0.963 0.6023
+           TG-MSGF seed 1   0.9165    0.9213 0.873-0.964 0.6132
+           TG-MSGF seed 2   0.9145    0.9252 0.879-0.967 0.6445
+         TG-MSGF ensemble   0.9168    0.9215 0.870-0.966 0.6298
+  TG-MSGF no-prior seed 0   0.9088    0.9027 0.851-0.948 0.5198
+  TG-MSGF no-prior seed 1   0.9080    0.9093 0.859-0.954 0.5599
+  TG-MSGF no-prior seed 2   0.9040    0.8983 0.846-0.945 0.5078
+TG-MSGF no-prior ensemble   0.9094    0.9055 0.855-0.950 0.5355
+
+handcrafted_growth vs single_scan_ensemble         delta +0.0115  95% CI [-0.010, +0.034]  p=0.299
+TG-MSGF ensemble vs single_scan_ensemble           delta -0.0003  95% CI [-0.020, +0.016]  p=0.960
+TG-MSGF no-prior ensemble vs single_scan_ensemble  delta -0.0163  95% CI [-0.037, +0.003]  p=0.099
+TG-MSGF vs no-prior control                        delta +0.0160  95% CI [+0.006, +0.028]  p=0.003
+TG-MSGF vs handcrafted_growth                      delta -0.0118  95% CI [-0.046, +0.015]  p=0.439
+handcrafted_growth_coefficients {'risk_now': 2.7320890211327207, 'diameter_now': -0.29335609846737815, 'diameter_growth_per_year': 0.8848852362008353, 'risk_change': 0.41852308429068596}
+gate_beta_vs_diameter_growth_spearman 0.11665063627049756
+gate_beta_mean_malignant_vs_benign [0.533329963684082, 0.5180634260177612]
+-> ./work\luna25_temporal

@@ -1,0 +1,39 @@
+{
+  "in_ch": 3,
+  "width": 24,
+  "dropout": 0.3,
+  "use_context": true,
+  "fusion": "gated",
+  "windows": [
+    [
+      -1350,
+      150
+    ],
+    [
+      -160,
+      240
+    ],
+    [
+      -1000,
+      400
+    ]
+  ],
+  "task": "malignancy",
+  "init_from": null,
+  "args": {
+    "cmd": "train",
+    "name": "l25_cv3",
+    "init": null,
+    "epochs": 30,
+    "samples_per_epoch": 8000,
+    "pos_fraction": 0.25,
+    "batch_size": 32,
+    "effective_batch": 64,
+    "lr": 0.001,
+    "patience": 8,
+    "workers": 3,
+    "seed": 2026
+  },
+  "test_subset": "luna25_fold0",
+  "val_subset": "luna25_fold1"
+}

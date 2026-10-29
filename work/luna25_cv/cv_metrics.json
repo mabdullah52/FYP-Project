@@ -1,0 +1,205 @@
+{
+  "folds_used": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "per_fold": [
+    {
+      "fold": 0,
+      "test_nodules": 1241,
+      "test_malignant": 111,
+      "auc_3d": 0.9004305190145898,
+      "auc_size": 0.8558159929841347,
+      "test_pairs": 475,
+      "test_pairs_malignant": 43,
+      "pairs_auc_single": 0.9245801033591732,
+      "pairs_auc_growth": 0.9357773471145564,
+      "pairs_auc_tg_msgf": 0.9110142118863049,
+      "pairs_auc_tg_noprior": 0.9027239448751077,
+      "pairs_auc_stacked": 0.9352928509905254
+    },
+    {
+      "fold": 1,
+      "test_nodules": 1223,
+      "test_malignant": 115,
+      "auc_3d": 0.8775388479045676,
+      "auc_size": 0.8318238894992936,
+      "test_pairs": 493,
+      "test_pairs_malignant": 44,
+      "pairs_auc_single": 0.9018526017412432,
+      "pairs_auc_growth": 0.9165823041101437,
+      "pairs_auc_tg_msgf": 0.9130390767361813,
+      "pairs_auc_tg_noprior": 0.9020550718768983,
+      "pairs_auc_stacked": 0.9316157116825269
+    },
+    {
+      "fold": 2,
+      "test_nodules": 1145,
+      "test_malignant": 98,
+      "auc_3d": 0.8575229518741594,
+      "auc_size": 0.8209753815566341,
+      "test_pairs": 403,
+      "test_pairs_malignant": 33,
+      "pairs_auc_single": 0.8742014742014742,
+      "pairs_auc_growth": 0.9318591318591318,
+      "pairs_auc_tg_msgf": 0.9232596232596233,
+      "pairs_auc_tg_noprior": 0.9018837018837018,
+      "pairs_auc_stacked": 0.9416052416052416
+    },
+    {
+      "fold": 3,
+      "test_nodules": 1221,
+      "test_malignant": 117,
+      "auc_3d": 0.8890592097113836,
+      "auc_size": 0.8450777282299021,
+      "test_pairs": 501,
+      "test_pairs_malignant": 43,
+      "pairs_auc_single": 0.9270336142987712,
+      "pairs_auc_growth": 0.9383568599573474,
+      "pairs_auc_tg_msgf": 0.9443485325479841,
+      "pairs_auc_tg_noprior": 0.9195694120036559,
+      "pairs_auc_stacked": 0.9504417589113435
+    },
+    {
+      "fold": 4,
+      "test_nodules": 1333,
+      "test_malignant": 114,
+      "auc_3d": 0.8714577666479572,
+      "auc_size": 0.823438826763381,
+      "test_pairs": 529,
+      "test_pairs_malignant": 44,
+      "pairs_auc_single": 0.9051546391752577,
+      "pairs_auc_growth": 0.9131208997188378,
+      "pairs_auc_tg_msgf": 0.9298500468603561,
+      "pairs_auc_tg_noprior": 0.9146672914714152,
+      "pairs_auc_stacked": 0.920618556701031
+    }
+  ],
+  "nodule_level": {
+    "model_3d": {
+      "pooled_auc": 0.8751012067702509,
+      "pooled_auc_ci95": [
+        0.8581391561225447,
+        0.892491823457013
+      ],
+      "ap": 0.446956405467697,
+      "fold_auc_mean": 0.8792018590305315,
+      "fold_auc_sd": 0.016435745765659544
+    },
+    "size_only": {
+      "pooled_auc": 0.830260824305047,
+      "pooled_auc_ci95": [
+        0.8085665034800271,
+        0.8517622783670116
+      ],
+      "ap": 0.3472861235116956,
+      "fold_auc_mean": 0.835426363806669,
+      "fold_auc_sd": 0.014785090181623314
+    }
+  },
+  "pair_level": {
+    "single": {
+      "pooled_auc": 0.9036260508457409,
+      "pooled_auc_ci95": [
+        0.8807165866408171,
+        0.9235043179151946
+      ],
+      "ap": 0.49276724947993394,
+      "fold_auc_mean": 0.9065644865551838,
+      "fold_auc_sd": 0.021302005399447557
+    },
+    "growth": {
+      "pooled_auc": 0.9243170878857138,
+      "pooled_auc_ci95": [
+        0.9035065208190715,
+        0.9434493561905427
+      ],
+      "ap": 0.6546468843172384,
+      "fold_auc_mean": 0.9271393085520035,
+      "fold_auc_sd": 0.01151837695586297
+    },
+    "tg_msgf": {
+      "pooled_auc": 0.9170178660290031,
+      "pooled_auc_ci95": [
+        0.8954489155333231,
+        0.9355081759819874
+      ],
+      "ap": 0.6171282674605963,
+      "fold_auc_mean": 0.92430229825809,
+      "fold_auc_sd": 0.013575249476412083
+    },
+    "tg_noprior": {
+      "pooled_auc": 0.9053677354577041,
+      "pooled_auc_ci95": [
+        0.8832886786442776,
+        0.923821445987584
+      ],
+      "ap": 0.4751582446067965,
+      "fold_auc_mean": 0.9081798844221559,
+      "fold_auc_sd": 0.008347609064361699
+    },
+    "stacked": {
+      "pooled_auc": 0.9321777883467868,
+      "pooled_auc_ci95": [
+        0.9118899566507384,
+        0.9500282522764872
+      ],
+      "ap": 0.6864826002616407,
+      "fold_auc_mean": 0.9359148239781337,
+      "fold_auc_sd": 0.01113842112761867
+    }
+  },
+  "paired_tests": {
+    "3D model vs size only (all nodules)": {
+      "delta": 0.04484038246520394,
+      "ci95": [
+        0.027322316995752334,
+        0.06307398941967707
+      ],
+      "p": 0.0
+    },
+    "growth formula vs single scan": {
+      "delta": 0.02069103703997288,
+      "ci95": [
+        0.006139108370763808,
+        0.03522569776381734
+      ],
+      "p": 0.003
+    },
+    "TG-MSGF vs single scan": {
+      "delta": 0.013391815183262268,
+      "ci95": [
+        0.0002965260085055016,
+        0.026251065838376265
+      ],
+      "p": 0.043
+    },
+    "stacked: single + TG-MSGF + growth vs single scan": {
+      "delta": 0.028551737501045893,
+      "ci95": [
+        0.016350521506351034,
+        0.04184600844879362
+      ],
+      "p": 0.0
+    },
+    "TG-MSGF vs TG-MSGF no-prior control": {
+      "delta": 0.011650130571299044,
+      "ci95": [
+        0.002221756346259257,
+        0.0213603839291454
+      ],
+      "p": 0.012
+    },
+    "stacked: single + TG-MSGF + growth vs growth formula": {
+      "delta": 0.007860700461073011,
+      "ci95": [
+        0.0006170694760889579,
+        0.015253734236697528
+      ],
+      "p": 0.027
+    }
+  }
+}

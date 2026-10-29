@@ -1,0 +1,46 @@
+{
+  "in_ch": 3,
+  "width": 24,
+  "dropout": 0.3,
+  "arch": "resnet3d18",
+  "use_context": false,
+  "fusion": "gated",
+  "windows": [
+    [
+      -1350,
+      150
+    ],
+    [
+      -160,
+      240
+    ],
+    [
+      -1000,
+      400
+    ]
+  ],
+  "test_subset": 9,
+  "val_subset": 8,
+  "args": {
+    "name": "base_r3d18",
+    "test_subset": 9,
+    "val_subset": 8,
+    "epochs": 30,
+    "batch_size": 64,
+    "samples_per_epoch": 24000,
+    "lr": 0.001,
+    "width": 24,
+    "workers": 8,
+    "no_context": false,
+    "arch": "resnet3d18",
+    "fusion": "gated",
+    "windows": "multi",
+    "loss": "focal",
+    "aux_weight": 1.0,
+    "patience": 8,
+    "seed": 2026,
+    "resume": true,
+    "hard_meta": null,
+    "init_from": null
+  }
+}

@@ -1,64 +1,59 @@
-# ===== Datasets (never commit raw medical data) =====
-data/*
-!data/README.md
+# data, patient records and secrets - never commit
+app_data/
+LUNA16/
+luna25_images/
+work/patches/
+work/luna25/crops/
 *.mhd
 *.raw
-*.dcm
+*.mha
 *.nii
 *.nii.gz
-*.nrrd
 *.npy
 *.npz
+*.db
+*.sqlite
+patient_app/claude_api_key.txt
+work/local_settings.json
+.env
+# large / generated
+*.pt
+!work/runs/msgf_f9/best.pt
+**/eval_subset*/predictions.csv
+lungenv/
+__pycache__/
+*.pyc
+# Flutter / Android build output
+**/build/
+**/.dart_tool/
+**/.idea/
+**/.gradle/
+**/android_old/
+*.apk
+*.iml
+.flutter-plugins
+.flutter-plugins-dependencies
+# LaTeX
+paper/*.aux
+paper/*.log
+paper/*.bbl
+paper/*.blg
+paper/*.out
+paper/*.fls
+paper/*.fdb_latexmk
+# Android / secrets
+local.properties
+key.properties
+*.jks
+*.keystore
 *.h5
 *.hdf5
-
-# ===== Model weights & checkpoints =====
-models/*
-!models/README.md
-*.pt
 *.pth
 *.ckpt
-*.keras
 *.onnx
-*.pb
-*.tflite
-checkpoints/
-runs/
-lightning_logs/
-wandb/
-mlruns/
-
-# ===== Python =====
-__pycache__/
-*.py[cod]
-*.egg-info/
+*.dcm
+*.nrrd
 .venv/
 venv/
-env/
 .ipynb_checkpoints/
 .pytest_cache/
-.mypy_cache/
-
-# ===== Secrets & local config =====
-.env
-configs/config.yaml
-
-# ===== Flutter / Dart =====
-apps/**/.dart_tool/
-apps/**/build/
-apps/**/.flutter-plugins
-apps/**/.flutter-plugins-dependencies
-apps/**/.packages
-apps/**/.pub-cache/
-
-# ===== IDE / OS =====
-.vscode/
-.idea/
-*.swp
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# ===== Office temp/lock files =====
-~$*
-*.tmp

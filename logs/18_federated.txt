@@ -1,0 +1,245 @@
+
+===== fed_train.py fedavg =====
+batch size 32 fits on the GPU (7.0 of 8.6 GB free)
+fed_avg: sites ['A', 'B', 'C', 'D'] | patches per site {'A': 6725, 'B': 6710, 'C': 6598, 'D': 6575} | 6000 samples per site per round | batch 32 | cuda
+round 00 | val AUC 0.6627 AP 0.1184 | A:0.111 B:0.137 C:0.106 D:0.096 | 1161s *
+round 01 | val AUC 0.8206 AP 0.5076 | A:-0.408 B:-0.413 C:-0.438 D:-0.429 | 1126s *
+round 02 | val AUC 0.9020 AP 0.6846 | A:-0.800 B:-0.789 C:-0.814 D:-0.809 | 1126s *
+round 03 | val AUC 0.9430 AP 0.7642 | A:-1.161 B:-1.163 C:-1.193 D:-1.178 | 1127s *
+round 04 | val AUC 0.9476 AP 0.7361 | A:-1.504 B:-1.495 C:-1.535 D:-1.521 | 1136s *
+round 05 | val AUC 0.9646 AP 0.8010 | A:-1.832 B:-1.811 C:-1.864 D:-1.846 | 1141s *
+round 06 | val AUC 0.9675 AP 0.8254 | A:-2.148 B:-2.127 C:-2.167 D:-2.147 | 1141s *
+round 07 | val AUC 0.9769 AP 0.8579 | A:-2.416 B:-2.424 C:-2.447 D:-2.446 | 1141s *
+round 08 | val AUC 0.9772 AP 0.8594 | A:-2.676 B:-2.656 C:-2.711 D:-2.687 | 1133s *
+round 09 | val AUC 0.9846 AP 0.8936 | A:-2.914 B:-2.890 C:-2.948 D:-2.936 | 1141s *
+round 10 | val AUC 0.9883 AP 0.9045 | A:-3.121 B:-3.103 C:-3.160 D:-3.128 | 1138s *
+round 11 | val AUC 0.9921 AP 0.9217 | A:-3.290 B:-3.289 C:-3.334 D:-3.310 | 1141s *
+round 12 | val AUC 0.9913 AP 0.9270 | A:-3.443 B:-3.435 C:-3.483 D:-3.474 | 1141s 
+round 13 | val AUC 0.9929 AP 0.9321 | A:-3.568 B:-3.564 C:-3.613 D:-3.588 | 1141s *
+round 14 | val AUC 0.9936 AP 0.9392 | A:-3.661 B:-3.649 C:-3.694 D:-3.693 | 1141s *
+round 15 | val AUC 0.9941 AP 0.9381 | A:-3.739 B:-3.744 C:-3.778 D:-3.756 | 1141s *
+round 16 | val AUC 0.9937 AP 0.9365 | A:-3.789 B:-3.782 C:-3.816 D:-3.806 | 1141s 
+round 17 | val AUC 0.9935 AP 0.9372 | A:-3.812 B:-3.803 C:-3.856 D:-3.838 | 1140s 
+round 18 | val AUC 0.9936 AP 0.9376 | A:-3.819 B:-3.826 C:-3.871 D:-3.853 | 1140s 
+round 19 | val AUC 0.9938 AP 0.9383 | A:-3.837 B:-3.839 C:-3.871 D:-3.856 | 1141s 
+fed_avg: best val AUC 0.9941
+
+===== fed_train.py local --site A =====
+batch size 32 fits on the GPU (7.0 of 8.6 GB free)
+fed_local_A: sites ['A'] | patches per site {'A': 6725} | 6000 samples per site per round | batch 32 | cuda
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFCD0834783  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFCD22C7AC4  Unknown               Unknown  Unknown
+ntdll.dll          00007FFCD478A351  Unknown               Unknown  Unknown
+!!! exit code 3221225786 
+
+===== fed_train.py fedavg =====
+batch size 32 fits on the GPU (7.0 of 8.6 GB free)
+fed_avg already finished
+
+===== fed_train.py local --site A =====
+batch size 32 fits on the GPU (7.0 of 8.6 GB free)
+fed_local_A: sites ['A'] | patches per site {'A': 6725} | 6000 samples per site per round | batch 32 | cuda
+round 00 | val AUC 0.8362 AP 0.4860 | A:0.109 | 329s *
+round 01 | val AUC 0.9036 AP 0.6479 | A:-0.440 | 328s *
+round 02 | val AUC 0.9307 AP 0.6909 | A:-0.832 | 243s *
+round 03 | val AUC 0.8828 AP 0.6137 | A:-1.184 | 302s 
+round 04 | val AUC 0.8590 AP 0.5991 | A:-1.527 | 301s 
+round 05 | val AUC 0.9453 AP 0.7313 | A:-1.842 | 329s *
+round 06 | val AUC 0.9590 AP 0.8026 | A:-2.160 | 329s *
+round 07 | val AUC 0.9599 AP 0.8190 | A:-2.439 | 329s *
+round 08 | val AUC 0.9673 AP 0.8419 | A:-2.679 | 329s *
+round 09 | val AUC 0.9618 AP 0.8401 | A:-2.910 | 329s 
+round 10 | val AUC 0.9690 AP 0.8404 | A:-3.115 | 329s *
+round 11 | val AUC 0.9704 AP 0.8633 | A:-3.278 | 325s *
+round 12 | val AUC 0.9686 AP 0.8822 | A:-3.430 | 331s 
+round 13 | val AUC 0.9784 AP 0.8860 | A:-3.555 | 329s *
+round 14 | val AUC 0.9843 AP 0.9002 | A:-3.646 | 329s *
+round 15 | val AUC 0.9751 AP 0.8915 | A:-3.729 | 329s 
+round 16 | val AUC 0.9769 AP 0.8899 | A:-3.783 | 329s 
+round 17 | val AUC 0.9820 AP 0.8974 | A:-3.810 | 329s 
+round 18 | val AUC 0.9810 AP 0.8922 | A:-3.832 | 329s 
+round 19 | val AUC 0.9825 AP 0.8978 | A:-3.843 | 329s 
+fed_local_A: best val AUC 0.9843
+
+===== fed_train.py central =====
+D:\Studentss\Luna\lungscan\lungenv\Scripts\python.exe train.py --name fed_central --epochs 20 --samples-per-epoch 24000 --patience 20 --workers 3 --resume
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+batch size 64 fits on the GPU (7.0 of 8.6 GB free)
+model params: 3.35 M | mixed precision: False
+ep 00 loss 0.2526 (cls 0.0695, diam 0.3189) | val AUC 0.8903 AP 0.5781 sens@spec95 0.615 diamMAE 4.80mm | 964s *
+ep 01 loss -0.7207 (cls 0.0440, diam 0.0291) | val AUC 0.9756 AP 0.8249 sens@spec95 0.882 diamMAE 2.10mm | 906s *
+ep 02 loss -1.4838 (cls 0.0266, diam 0.0215) | val AUC 0.9599 AP 0.7451 sens@spec95 0.846 diamMAE 2.34mm | 895s 
+ep 03 loss -2.2090 (cls 0.0180, diam 0.0147) | val AUC 0.9906 AP 0.9017 sens@spec95 0.959 diamMAE 1.23mm | 899s *
+ep 04 loss -2.8597 (cls 0.0161, diam 0.0140) | val AUC 0.9806 AP 0.8573 sens@spec95 0.944 diamMAE 1.62mm | 899s 
+ep 05 loss -3.4923 (cls 0.0129, diam 0.0097) | val AUC 0.9902 AP 0.8920 sens@spec95 0.954 diamMAE 1.65mm | 904s 
+ep 06 loss -4.0613 (cls 0.0117, diam 0.0078) | val AUC 0.9946 AP 0.9189 sens@spec95 0.990 diamMAE 1.16mm | 905s *
+ep 07 loss -4.5793 (cls 0.0095, diam 0.0071) | val AUC 0.9952 AP 0.9220 sens@spec95 0.990 diamMAE 1.09mm | 902s *
+ep 08 loss -5.0456 (cls 0.0086, diam 0.0055) | val AUC 0.9913 AP 0.9089 sens@spec95 0.979 diamMAE 1.05mm | 881s 
+ep 09 loss -5.4663 (cls 0.0073, diam 0.0045) | val AUC 0.9955 AP 0.9364 sens@spec95 0.979 diamMAE 1.27mm | 896s *
+ep 10 loss -5.8052 (cls 0.0072, diam 0.0040) | val AUC 0.9958 AP 0.9389 sens@spec95 0.985 diamMAE 1.01mm | 899s *
+ep 11 loss -6.0955 (cls 0.0067, diam 0.0037) | val AUC 0.9967 AP 0.9448 sens@spec95 1.000 diamMAE 1.10mm | 899s *
+ep 12 loss -6.3390 (cls 0.0063, diam 0.0032) | val AUC 0.9950 AP 0.9417 sens@spec95 0.985 diamMAE 1.03mm | 899s 
+ep 13 loss -6.5364 (cls 0.0058, diam 0.0029) | val AUC 0.9960 AP 0.9415 sens@spec95 0.990 diamMAE 1.07mm | 899s 
+ep 14 loss -6.6935 (cls 0.0053, diam 0.0026) | val AUC 0.9956 AP 0.9415 sens@spec95 0.979 diamMAE 0.97mm | 899s 
+ep 15 loss -6.8059 (cls 0.0050, diam 0.0024) | val AUC 0.9957 AP 0.9398 sens@spec95 0.990 diamMAE 0.93mm | 899s 
+ep 16 loss -6.8808 (cls 0.0047, diam 0.0023) | val AUC 0.9954 AP 0.9394 sens@spec95 0.985 diamMAE 0.95mm | 899s 
+ep 17 loss -6.9325 (cls 0.0045, diam 0.0021) | val AUC 0.9951 AP 0.9363 sens@spec95 0.985 diamMAE 0.98mm | 899s 
+ep 18 loss -6.9568 (cls 0.0044, diam 0.0020) | val AUC 0.9951 AP 0.9369 sens@spec95 0.979 diamMAE 0.95mm | 899s 
+ep 19 loss -6.9500 (cls 0.0046, diam 0.0021) | val AUC 0.9952 AP 0.9372 sens@spec95 0.979 diamMAE 0.95mm | 899s 
+best val AUC 0.9967 -> ./work\runs\fed_central\best.pt
+
+===== fed_train.py report =====
+evaluating fed_avg on test subset 9
+Scoring every candidate of subset 9 (TTA=False, MC=1) ...
+  10/88 scans, 5.0 min, ~39.3 min left
+  20/88 scans, 9.9 min, ~33.8 min left
+  30/88 scans, 15.0 min, ~28.9 min left
+  40/88 scans, 20.2 min, ~24.3 min left
+  50/88 scans, 24.5 min, ~18.7 min left
+  60/88 scans, 28.4 min, ~13.2 min left
+  70/88 scans, 31.9 min, ~8.2 min left
+  80/88 scans, 37.1 min, ~3.7 min left
+  88/88 scans, 41.0 min, ~0.0 min left
+{
+  "run": "fed_avg",
+  "subset": 9,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.8081632653061225,
+    "cpm_ci95": [
+      0.7396136310498012,
+      0.8832733294930876
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.6571428571428571,
+      "0.25": 0.7142857142857143,
+      "0.5": 0.7904761904761904,
+      "1": 0.8095238095238095,
+      "2": 0.8761904761904762,
+      "4": 0.8857142857142857,
+      "8": 0.9238095238095239
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9967150890003226,
+  "ap": 0.7176926746518493,
+  "ece": 0.09681352336141412,
+  "ece_uncalibrated": 0.09681352336141412,
+  "calibrated": false,
+  "diameter_mae_mm": 0.7383458530626671,
+  "diameter_pearson_r": 0.9888796180211501,
+  "uncertainty_auc_for_errors": 0.5,
+  "alpha_vs_diameter_spearman": 0.43853188365843276
+}
+-> ./work\runs\fed_avg\eval_subset9_plain
+evaluating fed_central on test subset 9
+Scoring every candidate of subset 9 (TTA=False, MC=1) ...
+  10/88 scans, 5.1 min, ~39.4 min left
+  20/88 scans, 9.9 min, ~33.8 min left
+  30/88 scans, 14.9 min, ~28.9 min left
+  40/88 scans, 20.2 min, ~24.2 min left
+  50/88 scans, 24.5 min, ~18.6 min left
+  60/88 scans, 28.3 min, ~13.2 min left
+  70/88 scans, 31.7 min, ~8.2 min left
+  80/88 scans, 37.0 min, ~3.7 min left
+  88/88 scans, 40.9 min, ~0.0 min left
+{
+  "run": "fed_central",
+  "subset": 9,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.8802721088435375,
+    "cpm_ci95": [
+      0.8192294429292455,
+      0.9349775107411384
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.6761904761904762,
+      "0.25": 0.780952380952381,
+      "0.5": 0.8571428571428571,
+      "1": 0.9142857142857143,
+      "2": 0.9619047619047619,
+      "4": 0.9809523809523809,
+      "8": 0.9904761904761905
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9992495637957831,
+  "ap": 0.7931116430895784,
+  "ece": 0.03390797579939805,
+  "ece_uncalibrated": 0.03390797579939805,
+  "calibrated": false,
+  "diameter_mae_mm": 0.7372290824764228,
+  "diameter_pearson_r": 0.9929496490587527,
+  "uncertainty_auc_for_errors": 0.5,
+  "alpha_vs_diameter_spearman": 0.9753259415322776
+}
+-> ./work\runs\fed_central\eval_subset9_plain
+evaluating fed_local_A on test subset 9
+Scoring every candidate of subset 9 (TTA=False, MC=1) ...
+  10/88 scans, 5.0 min, ~39.1 min left
+  20/88 scans, 9.9 min, ~33.5 min left
+  30/88 scans, 14.8 min, ~28.6 min left
+  40/88 scans, 20.0 min, ~24.0 min left
+  50/88 scans, 24.2 min, ~18.4 min left
+  60/88 scans, 28.0 min, ~13.1 min left
+  70/88 scans, 31.4 min, ~8.1 min left
+  80/88 scans, 36.6 min, ~3.7 min left
+  88/88 scans, 40.4 min, ~0.0 min left
+{
+  "run": "fed_local_A",
+  "subset": 9,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.6653061224489797,
+    "cpm_ci95": [
+      0.5828488210818308,
+      0.7436371100164202
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.5428571428571428,
+      "0.25": 0.5714285714285714,
+      "0.5": 0.6,
+      "1": 0.6571428571428571,
+      "2": 0.7142857142857143,
+      "4": 0.7714285714285715,
+      "8": 0.8
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9796292630714641,
+  "ap": 0.6347459472906771,
+  "ece": 0.13319125204225832,
+  "ece_uncalibrated": 0.13319125204225832,
+  "calibrated": false,
+  "diameter_mae_mm": 0.9914139624846396,
+  "diameter_pearson_r": 0.9816516687921917,
+  "uncertainty_auc_for_errors": 0.5,
+  "alpha_vs_diameter_spearman": 0.5290761861416464
+}
+-> ./work\runs\fed_local_A\eval_subset9_plain
+
+       model                      data  best_val_AUC  test_CPM    CPM_95CI
+    fed_avg 4 hospitals, weights only        0.9941    0.8082 0.740-0.883
+fed_central           all data pooled        0.9967    0.8803 0.819-0.935
+fed_local_A          hospital A alone        0.9843    0.6653 0.583-0.744
+fed_avg vs fed_central: delta -0.0721  95% CI [-0.121, -0.023]  p=0.002
+fed_avg vs fed_local_A: delta +0.1429  95% CI [+0.101, +0.196]  p=0.000
+-> ./work\federated_table.csv

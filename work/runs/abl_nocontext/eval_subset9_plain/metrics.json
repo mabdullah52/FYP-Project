@@ -1,0 +1,37 @@
+{
+  "run": "abl_nocontext",
+  "subset": 9,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.908843537414966,
+    "cpm_ci95": [
+      0.8542588466579292,
+      0.9601891144723635
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.7904761904761904,
+      "0.25": 0.8666666666666667,
+      "0.5": 0.8952380952380953,
+      "1": 0.9333333333333333,
+      "2": 0.9523809523809523,
+      "4": 0.9523809523809523,
+      "8": 0.9714285714285714
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88,
+    "excluded_used": true
+  },
+  "auc": 0.9990755403067358,
+  "ap": 0.7854142695383945,
+  "ece": 0.046669487704312264,
+  "ece_uncalibrated": 0.046669487704312264,
+  "calibrated": false,
+  "diameter_mae_mm": 0.5156307446344874,
+  "diameter_pearson_r": 0.9948058331407811,
+  "uncertainty_auc_for_errors": 0.5,
+  "rescored": true
+}

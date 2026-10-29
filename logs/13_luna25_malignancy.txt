@@ -1,0 +1,297 @@
+
+===== luna25_malignancy.py train --name l25_transfer --init msgf_f9 =====
+train 3699 nodules (329 malignant) | val 1223 (115) | device cuda
+initialised from LUNA16 model 'msgf_f9' (transfer learning)
+batch size 64 fits on the GPU (6.8 of 8.6 GB free)
+
+===== luna25_malignancy.py train --name l25_scratch =====
+train 3699 nodules (329 malignant) | val 1223 (115) | device cuda
+batch size 64 fits on the GPU (6.8 of 8.6 GB free)
+Traceback (most recent call last):
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 231, in <module>
+    main()
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 227, in main
+    {"train": train, "eval": evaluate, "table": table}[a.cmd](a)
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 83, in train
+    for loc, ctx, y, d, dm in dl_tr:
+  File "D:\Studentss\Luna\lungscan\dataset.py", line 157, in __iter__
+    yield self._collate([f.result() for f in futs])
+  File "D:\Studentss\Luna\lungscan\dataset.py", line 139, in _collate
+    return (torch.stack(loc), torch.stack(ctx), torch.tensor(y, dtype=torch.float32),
+RuntimeError: [enforce fail at alloc_cpu.cpp:121] data. DefaultCPUAllocator: not enough memory: you tried to allocate 84934656 bytes.
+
+===== luna25_malignancy.py eval --name l25_transfer =====
+Traceback (most recent call last):
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 231, in <module>
+    main()
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 227, in main
+    {"train": train, "eval": evaluate, "table": table}[a.cmd](a)
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 137, in evaluate
+    pred = Predictor(os.path.join(run_dir, "best.pt"), apply_calibration=False)
+  File "D:\Studentss\Luna\lungscan\predictor.py", line 29, in __init__
+    ck = torch.load(ckpt_path, map_location=self.device, weights_only=False)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: './work\\runs\\l25_transfer\\best.pt'
+
+===== luna25_malignancy.py eval --name l25_scratch =====
+Traceback (most recent call last):
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 231, in <module>
+    main()
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 227, in main
+    {"train": train, "eval": evaluate, "table": table}[a.cmd](a)
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 137, in evaluate
+    pred = Predictor(os.path.join(run_dir, "best.pt"), apply_calibration=False)
+  File "D:\Studentss\Luna\lungscan\predictor.py", line 29, in __init__
+    ck = torch.load(ckpt_path, map_location=self.device, weights_only=False)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: './work\\runs\\l25_scratch\\best.pt'
+
+===== luna25_malignancy.py table =====
+Empty DataFrame
+Columns: []
+Index: []
+-> ./work\luna25_malignancy_table.csv
+
+===== luna25_malignancy.py train --name l25_transfer --init msgf_f9 =====
+train 3699 nodules (329 malignant) | val 1223 (115) | device cuda
+RAM available 9.0 of 68.4 GB | paging file 67.1 GB
+initialised from LUNA16 model 'msgf_f9' (transfer learning)
+batch size 64 fits on the GPU (6.8 of 8.6 GB free)
+ep 00 loss 0.2073 | val AUC 0.8036 AP 0.4153 | 111s *
+ep 01 loss 0.0552 | val AUC 0.8415 AP 0.4654 | 112s *
+ep 02 loss 0.0507 | val AUC 0.8439 AP 0.4635 | 118s *
+ep 03 loss 0.0492 | val AUC 0.8429 AP 0.4624 | 121s 
+ep 04 loss 0.0477 | val AUC 0.8427 AP 0.4747 | 122s 
+ep 05 loss 0.0473 | val AUC 0.8363 AP 0.4505 | 123s 
+Traceback (most recent call last):
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 256, in <module>
+    main()
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 252, in main
+    {"train": train, "eval": evaluate, "table": table}[a.cmd](a)
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 103, in train
+    for loc, ctx, y, d, dm in dl_tr:
+  File "D:\Studentss\Luna\lungscan\dataset.py", line 157, in __iter__
+    yield self._collate([f.result() for f in futs])
+  File "D:\Studentss\Luna\lungscan\dataset.py", line 157, in <listcomp>
+    yield self._collate([f.result() for f in futs])
+  File "C:\Program Files\Python39\lib\concurrent\futures\_base.py", line 438, in result
+    return self.__get_result()
+  File "C:\Program Files\Python39\lib\concurrent\futures\_base.py", line 390, in __get_result
+    raise self._exception
+  File "C:\Program Files\Python39\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\Studentss\Luna\lungscan\dataset.py", line 68, in __getitem__
+    loc, ctx = make_inputs(p, self.windows, self.use_context)
+  File "D:\Studentss\Luna\lungscan\dataset.py", line 20, in make_inputs
+    ctx = hu_to_windows(patch_hu, windows)                 # (W, 48, 48, 48)
+  File "D:\Studentss\Luna\lungscan\luna_io.py", line 128, in hu_to_windows
+    return np.stack(chans, axis=-4)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\numpy\_core\shape_base.py", line 455, in stack
+    return _nx.concatenate(expanded_arrays, axis=axis, out=out,
+numpy._core._exceptions.MemoryError: Unable to allocate 1.27 MiB for an array with shape (3, 48, 48, 48) and data type float32
+!!! exit code 1 
+
+===== luna25_malignancy.py train --name l25_transfer --init msgf_f9 =====
+train 3699 nodules (329 malignant) | val 1223 (115) | device cuda
+RAM available 8.5 of 68.4 GB | paging file 67.1 GB
+initialised from LUNA16 model 'msgf_f9' (transfer learning)
+batch size 64 fits on the GPU (6.8 of 8.6 GB free)
+resumed l25_transfer at epoch 6 (best val AUC so far 0.8439)
+Traceback (most recent call last):
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 256, in <module>
+    main()
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 252, in main
+    {"train": train, "eval": evaluate, "table": table}[a.cmd](a)
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 106, in train
+    out = model(loc, ctx)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\model.py", line 121, in forward
+    z, alpha = self.features(local, context)
+  File "D:\Studentss\Luna\lungscan\model.py", line 101, in features
+    fc = self.context(context)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\model.py", line 68, in forward
+    return self.layers(self.stem(x))
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\container.py", line 244, in forward
+    input = module(input)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\model.py", line 50, in forward
+    return F.relu(y + (x if self.short is None else self.short(x)), inplace=True)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 82.00 MiB. GPU 0 has a total capacity of 8.00 GiB of which 3.46 GiB is free. Of the allocated memory 2.71 GiB is allocated by PyTorch, and 428.18 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+!!! exit code 1 
+
+===== luna25_malignancy.py train --name l25_transfer --init msgf_f9 =====
+train 3699 nodules (329 malignant) | val 1223 (115) | device cuda
+RAM available 8.1 of 68.4 GB | paging file 67.1 GB
+initialised from LUNA16 model 'msgf_f9' (transfer learning)
+batch size 64 fits on the GPU (6.8 of 8.6 GB free)
+resumed l25_transfer at epoch 6 (best val AUC so far 0.8439)
+Traceback (most recent call last):
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 256, in <module>
+    main()
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 252, in main
+    {"train": train, "eval": evaluate, "table": table}[a.cmd](a)
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 103, in train
+    for loc, ctx, y, d, dm in dl_tr:
+  File "D:\Studentss\Luna\lungscan\dataset.py", line 157, in __iter__
+    yield self._collate([f.result() for f in futs])
+  File "D:\Studentss\Luna\lungscan\dataset.py", line 139, in _collate
+    return (torch.stack(loc), torch.stack(ctx), torch.tensor(y, dtype=torch.float32),
+RuntimeError: [enforce fail at alloc_cpu.cpp:121] data. DefaultCPUAllocator: not enough memory: you tried to allocate 84934656 bytes.
+!!! exit code 1 
+
+===== luna25_malignancy.py train --name l25_transfer --init msgf_f9 =====
+train 3699 nodules (329 malignant) | val 1223 (115) | device cuda
+RAM available 8.4 of 68.4 GB | paging file 67.1 GB
+initialised from LUNA16 model 'msgf_f9' (transfer learning)
+batch size 64 fits on the GPU (6.8 of 8.6 GB free)
+resumed l25_transfer at epoch 6 (best val AUC so far 0.8439)
+Traceback (most recent call last):
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 256, in <module>
+    main()
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 252, in main
+    {"train": train, "eval": evaluate, "table": table}[a.cmd](a)
+  File "D:\Studentss\Luna\lungscan\luna25_malignancy.py", line 110, in train
+    scaler.scale(loss).backward(); scaler.unscale_(opt)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\_tensor.py", line 647, in backward
+    torch.autograd.backward(
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\autograd\__init__.py", line 354, in backward
+    _engine_run_backward(
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\autograd\graph.py", line 829, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 82.00 MiB. GPU 0 has a total capacity of 8.00 GiB of which 3.42 GiB is free. Of the allocated memory 2.81 GiB is allocated by PyTorch, and 371.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+!!! exit code 1 
+
+===== luna25_malignancy.py train --name l25_transfer --init msgf_f9 =====
+train 3699 nodules (329 malignant) | val 1223 (115) | device cuda
+RAM available 12.9 of 68.4 GB | paging file 67.1 GB
+initialised from LUNA16 model 'msgf_f9' (transfer learning)
+batch size 32 fits on the GPU (6.9 of 8.6 GB free)
+batch 32 x 2 accumulation steps = effective batch 64
+resumed l25_transfer at epoch 6 (best val AUC so far 0.8439)
+ep 06 loss 0.0453 | val AUC 0.8271 AP 0.4389 | 112s 
+ep 07 loss 0.0447 | val AUC 0.8333 AP 0.4525 | 116s 
+ep 08 loss 0.0431 | val AUC 0.8295 AP 0.4325 | 124s 
+ep 09 loss 0.0420 | val AUC 0.8033 AP 0.4156 | 127s 
+ep 10 loss 0.0422 | val AUC 0.8311 AP 0.4497 | 128s 
+early stopping
+best val AUC 0.8439
+
+===== luna25_malignancy.py train --name l25_scratch =====
+train 3699 nodules (329 malignant) | val 1223 (115) | device cuda
+RAM available 12.9 of 68.4 GB | paging file 67.1 GB
+batch size 32 fits on the GPU (6.9 of 8.6 GB free)
+batch 32 x 2 accumulation steps = effective batch 64
+ep 00 loss 0.0657 | val AUC 0.7925 AP 0.3608 | 130s *
+ep 01 loss 0.0555 | val AUC 0.8117 AP 0.3072 | 128s *
+ep 02 loss 0.0521 | val AUC 0.8338 AP 0.3439 | 128s *
+ep 03 loss 0.0506 | val AUC 0.8710 AP 0.3931 | 128s *
+ep 04 loss 0.0490 | val AUC 0.8231 AP 0.2675 | 128s 
+ep 05 loss 0.0485 | val AUC 0.8822 AP 0.5122 | 129s *
+ep 06 loss 0.0466 | val AUC 0.8727 AP 0.4624 | 129s 
+ep 07 loss 0.0467 | val AUC 0.8732 AP 0.4882 | 130s 
+ep 08 loss 0.0465 | val AUC 0.8759 AP 0.4617 | 129s 
+ep 09 loss 0.0453 | val AUC 0.8375 AP 0.3367 | 130s 
+ep 10 loss 0.0458 | val AUC 0.8752 AP 0.4584 | 129s 
+ep 11 loss 0.0429 | val AUC 0.8805 AP 0.4745 | 130s 
+ep 12 loss 0.0436 | val AUC 0.8892 AP 0.4928 | 130s *
+ep 13 loss 0.0437 | val AUC 0.8782 AP 0.4954 | 130s 
+ep 14 loss 0.0425 | val AUC 0.8839 AP 0.4901 | 129s 
+ep 15 loss 0.0404 | val AUC 0.8837 AP 0.5001 | 130s 
+ep 16 loss 0.0398 | val AUC 0.8644 AP 0.4582 | 131s 
+ep 17 loss 0.0392 | val AUC 0.8957 AP 0.5326 | 131s *
+ep 18 loss 0.0378 | val AUC 0.8582 AP 0.4532 | 129s 
+ep 19 loss 0.0374 | val AUC 0.8649 AP 0.4588 | 130s 
+ep 20 loss 0.0353 | val AUC 0.8844 AP 0.4684 | 130s 
+ep 21 loss 0.0342 | val AUC 0.8669 AP 0.4598 | 130s 
+ep 22 loss 0.0344 | val AUC 0.8785 AP 0.4785 | 130s 
+ep 23 loss 0.0327 | val AUC 0.8689 AP 0.4985 | 130s 
+ep 24 loss 0.0327 | val AUC 0.8603 AP 0.4611 | 131s 
+ep 25 loss 0.0308 | val AUC 0.8548 AP 0.4648 | 130s 
+early stopping
+best val AUC 0.8957
+
+===== luna25_malignancy.py eval --name l25_transfer =====
+{
+  "run": "l25_transfer",
+  "init_from": "msgf_f9",
+  "n_test": 1241,
+  "n_test_malignant": 111,
+  "n_test_patients": 424,
+  "val_auc": 0.8514989797520013,
+  "test_auc": 0.8783145977836242,
+  "test_auc_ci95": [
+    0.8413034368283343,
+    0.9130157950993756
+  ],
+  "test_ap": 0.45647288991322804,
+  "threshold_from_val": 0.1599135398864746,
+  "test_sensitivity": 0.8198198198198198,
+  "test_specificity": 0.7893805309734513,
+  "test_ece": 0.01926057683086318,
+  "test_ece_uncalibrated": 0.20122027129991513,
+  "uncertainty_auc_for_errors": 0.2221432920641364,
+  "size_only_baseline_test_auc": 0.8558159929841347,
+  "size_only_baseline_auc_ci95": [
+    0.8155322922674575,
+    0.8935706216239508
+  ]
+}
+
+===== luna25_malignancy.py eval --name l25_scratch =====
+{
+  "run": "l25_scratch",
+  "init_from": null,
+  "n_test": 1241,
+  "n_test_malignant": 111,
+  "n_test_patients": 424,
+  "val_auc": 0.8976534296028881,
+  "test_auc": 0.8999840548513115,
+  "test_auc_ci95": [
+    0.8637293459260587,
+    0.934011974662222
+  ],
+  "test_ap": 0.5480311659813957,
+  "threshold_from_val": 0.05517226457595825,
+  "test_sensitivity": 0.8738738738738738,
+  "test_specificity": 0.6920353982300885,
+  "test_ece": 0.030982481233181258,
+  "test_ece_uncalibrated": 0.15512721456653353,
+  "uncertainty_auc_for_errors": 0.3411163578689352,
+  "size_only_baseline_test_auc": 0.8558159929841347,
+  "size_only_baseline_auc_ci95": [
+    0.8155322922674575,
+    0.8935706216239508
+  ]
+}
+
+===== luna25_malignancy.py table =====
+          model     init  val_AUC  test_AUC     AUC_95CI      AP   sens   spec     ECE  ECE_raw  unc_AUC_errors  size_only_AUC
+0   l25_scratch  scratch   0.8977    0.9000  0.864-0.934  0.5480  0.874  0.692  0.0310   0.1551           0.341         0.8558
+1  l25_transfer  msgf_f9   0.8515    0.8783  0.841-0.913  0.4565  0.820  0.789  0.0193   0.2012           0.222         0.8558
+
+transfer - scratch AUC: -0.0217  95% CI [-0.047, +0.001]  p=0.076
+-> ./work\luna25_malignancy_table.csv

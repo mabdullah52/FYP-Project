@@ -1,0 +1,292 @@
+
+===== evaluate.py --run msgf_f9 --calibrate --workers 8 =====
+NOTE: annotations_excluded.csv not found -> irrelevant findings count as FPs (CPM slightly lower)
+Calibration: scoring every candidate of validation subset 8 ...
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFD8A0B4783  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFD8C307AC4  Unknown               Unknown  Unknown
+ntdll.dll          00007FFD8DA7A351  Unknown               Unknown  Unknown
+
+===== evaluate.py --run msgf_f9 --calibrate --workers 8 =====
+Calibration: scoring every candidate of validation subset 8 ...
+  10/88 scans, 5.9 min, ~45.9 min left
+  20/88 scans, 13.3 min, ~45.4 min left
+  30/88 scans, 20.6 min, ~39.9 min left
+  40/88 scans, 27.4 min, ~32.8 min left
+  50/88 scans, 34.0 min, ~25.9 min left
+  60/88 scans, 40.4 min, ~18.8 min left
+  70/88 scans, 46.4 min, ~11.9 min left
+  80/88 scans, 51.9 min, ~5.2 min left
+  88/88 scans, 56.7 min, ~0.0 min left
+calibration: {'a': 1.6340811350232536, 'b': -2.8982556627889697, 'fitted_on_subset': 8, 'n_candidates': 74488}
+validation CPM (subset 8): 0.8801
+Scoring every candidate of subset 9 (TTA=True, MC=10) ...
+  10/88 scans, 7.2 min, ~55.9 min left
+  20/88 scans, 14.1 min, ~48.1 min left
+  30/88 scans, 21.3 min, ~41.2 min left
+  40/88 scans, 28.8 min, ~34.5 min left
+  50/88 scans, 34.9 min, ~26.5 min left
+  60/88 scans, 40.5 min, ~18.9 min left
+  70/88 scans, 45.4 min, ~11.7 min left
+  80/88 scans, 53.0 min, ~5.3 min left
+  88/88 scans, 58.5 min, ~0.0 min left
+{
+  "run": "msgf_f9",
+  "subset": 9,
+  "tta": true,
+  "mc": 10,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.9034013605442176,
+    "cpm_ci95": [
+      0.8432407055098008,
+      0.9561837833219411
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.7714285714285715,
+      "0.25": 0.8476190476190476,
+      "0.5": 0.9047619047619048,
+      "1": 0.9047619047619048,
+      "2": 0.9428571428571428,
+      "4": 0.9714285714285714,
+      "8": 0.9809523809523809
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9989422047740536,
+  "ap": 0.7630998571139628,
+  "ece": 0.0007241311031849283,
+  "ece_uncalibrated": 0.012296590000160102,
+  "calibrated": true,
+  "diameter_mae_mm": 0.44706510015395096,
+  "diameter_pearson_r": 0.9956091929897982,
+  "uncertainty_auc_for_errors": 0.9708515604916944,
+  "alpha_vs_diameter_spearman": 0.7675363141798459
+}
+-> ./work\runs\msgf_f9\eval_subset9
+
+===== evaluate.py --run msgf_f9 --subset 8 --no-tta --mc 1 --tag _plain --n-boot 200 --workers 8 =====
+Scoring every candidate of subset 8 (TTA=False, MC=1) ...
+  10/88 scans, 2.1 min, ~16.1 min left
+  20/88 scans, 4.6 min, ~15.7 min left
+  30/88 scans, 7.1 min, ~13.7 min left
+  40/88 scans, 9.4 min, ~11.3 min left
+  50/88 scans, 11.7 min, ~8.9 min left
+  60/88 scans, 13.9 min, ~6.5 min left
+  70/88 scans, 15.9 min, ~4.1 min left
+  80/88 scans, 17.8 min, ~1.8 min left
+  88/88 scans, 19.5 min, ~0.0 min left
+{
+  "run": "msgf_f9",
+  "subset": 8,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 74488,
+  "n_positive_candidates": 195,
+  "froc": {
+    "cpm": 0.8607748184019371,
+    "cpm_ci95": [
+      0.7912991002852755,
+      0.9373539045633886
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.7542372881355932,
+      "0.25": 0.788135593220339,
+      "0.5": 0.8135593220338984,
+      "1": 0.864406779661017,
+      "2": 0.8898305084745762,
+      "4": 0.9491525423728814,
+      "8": 0.9661016949152542
+    },
+    "n_nodules": 118,
+    "n_nodules_reachable": 116,
+    "n_scans": 88
+  },
+  "auc": 0.9982253910107141,
+  "ap": 0.7844867056136727,
+  "ece": 0.0007173985906725725,
+  "ece_uncalibrated": 0.009147590030810508,
+  "calibrated": true,
+  "diameter_mae_mm": 0.8454164819476073,
+  "diameter_pearson_r": 0.9862826002064146,
+  "uncertainty_auc_for_errors": 0.5,
+  "alpha_vs_diameter_spearman": 0.8154545390807996
+}
+-> ./work\runs\msgf_f9\eval_subset8_plain
+
+===== evaluate.py --run msgf_f9 --no-tta --mc 1 --tag _plain --n-boot 200 --workers 8 =====
+Scoring every candidate of subset 9 (TTA=False, MC=1) ...
+  10/88 scans, 2.5 min, ~19.4 min left
+  20/88 scans, 4.9 min, ~16.5 min left
+  30/88 scans, 7.3 min, ~14.2 min left
+  40/88 scans, 9.9 min, ~11.9 min left
+  50/88 scans, 12.1 min, ~9.2 min left
+  60/88 scans, 14.0 min, ~6.5 min left
+  70/88 scans, 15.7 min, ~4.0 min left
+  80/88 scans, 18.3 min, ~1.8 min left
+  88/88 scans, 20.3 min, ~0.0 min left
+{
+  "run": "msgf_f9",
+  "subset": 9,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.8816326530612245,
+    "cpm_ci95": [
+      0.8142582417582418,
+      0.937133984028394
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.7142857142857143,
+      "0.25": 0.8095238095238095,
+      "0.5": 0.8761904761904762,
+      "1": 0.9047619047619048,
+      "2": 0.9238095238095239,
+      "4": 0.9619047619047619,
+      "8": 0.9809523809523809
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9975786542183513,
+  "ap": 0.7418511935542963,
+  "ece": 0.001039262132514146,
+  "ece_uncalibrated": 0.0108111435052088,
+  "calibrated": true,
+  "diameter_mae_mm": 0.4999213938100543,
+  "diameter_pearson_r": 0.9946104800201113,
+  "uncertainty_auc_for_errors": 0.5,
+  "alpha_vs_diameter_spearman": 0.7538129735060306
+}
+-> ./work\runs\msgf_f9\eval_subset9_plain
+
+===== evaluate.py --run msgf_f9_r2 --subset 8 --no-tta --mc 1 --tag _plain --n-boot 200 --workers 8 =====
+Scoring every candidate of subset 8 (TTA=False, MC=1) ...
+  10/88 scans, 2.2 min, ~16.9 min left
+  20/88 scans, 4.9 min, ~16.5 min left
+  30/88 scans, 7.5 min, ~14.5 min left
+  40/88 scans, 10.0 min, ~11.9 min left
+  50/88 scans, 12.4 min, ~9.5 min left
+  60/88 scans, 14.8 min, ~6.9 min left
+  70/88 scans, 17.0 min, ~4.4 min left
+  80/88 scans, 19.1 min, ~1.9 min left
+  88/88 scans, 20.8 min, ~0.0 min left
+{
+  "run": "msgf_f9_r2",
+  "subset": 8,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 74488,
+  "n_positive_candidates": 195,
+  "froc": {
+    "cpm": 0.8329297820823245,
+    "cpm_ci95": [
+      0.7536607010011266,
+      0.912543771741885
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.635593220338983,
+      "0.25": 0.7203389830508474,
+      "0.5": 0.7796610169491526,
+      "1": 0.864406779661017,
+      "2": 0.9152542372881356,
+      "4": 0.9491525423728814,
+      "8": 0.9661016949152542
+    },
+    "n_nodules": 118,
+    "n_nodules_reachable": 116,
+    "n_scans": 88
+  },
+  "auc": 0.9982691539769595,
+  "ap": 0.8084818231789191,
+  "ece": 0.0002711313438733311,
+  "ece_uncalibrated": 0.017899696306590954,
+  "calibrated": true,
+  "diameter_mae_mm": 0.9789282047050156,
+  "diameter_pearson_r": 0.9802030183254223,
+  "uncertainty_auc_for_errors": 0.5,
+  "alpha_vs_diameter_spearman": 0.7184504496297051
+}
+-> ./work\runs\msgf_f9_r2\eval_subset8_plain
+
+===== evaluate.py --run msgf_f9_r2 --no-tta --mc 1 --tag _plain --n-boot 200 --workers 8 =====
+Scoring every candidate of subset 9 (TTA=False, MC=1) ...
+  10/88 scans, 2.5 min, ~19.4 min left
+  20/88 scans, 4.9 min, ~16.7 min left
+  30/88 scans, 7.3 min, ~14.2 min left
+  40/88 scans, 9.9 min, ~11.8 min left
+  50/88 scans, 11.9 min, ~9.1 min left
+  60/88 scans, 13.8 min, ~6.4 min left
+  70/88 scans, 15.5 min, ~4.0 min left
+  80/88 scans, 18.1 min, ~1.8 min left
+  88/88 scans, 20.0 min, ~0.0 min left
+{
+  "run": "msgf_f9_r2",
+  "subset": 9,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.8884353741496599,
+    "cpm_ci95": [
+      0.8160101540616247,
+      0.9339776935284783
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.7047619047619048,
+      "0.25": 0.8095238095238095,
+      "0.5": 0.8666666666666667,
+      "1": 0.9238095238095239,
+      "2": 0.9619047619047619,
+      "4": 0.9714285714285714,
+      "8": 0.9809523809523809
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88
+  },
+  "auc": 0.9982123874666431,
+  "ap": 0.8119320576422987,
+  "ece": 0.0006675316098244985,
+  "ece_uncalibrated": 0.01915532261761288,
+  "calibrated": true,
+  "diameter_mae_mm": 0.5497466646310213,
+  "diameter_pearson_r": 0.9935479120616045,
+  "uncertainty_auc_for_errors": 0.5,
+  "alpha_vs_diameter_spearman": 0.6528515540467792
+}
+-> ./work\runs\msgf_f9_r2\eval_subset9_plain
+
+===== ensemble.py --runs msgf_f9 msgf_f9_r2 --eval eval_subset8_plain --name ens_r1r2 =====
+ens_r1r2\eval_subset8_plain                   CPM 0.8523  [0.782-0.927]  excluded file used: True
+msgf_f9\eval_subset8                          CPM 0.8801  [0.812-0.949]  excluded file used: True
+msgf_f9\eval_subset8_plain                    CPM 0.8608  [0.791-0.936]  excluded file used: True
+msgf_f9\eval_subset9                          CPM 0.9034  [0.843-0.956]  excluded file used: True
+msgf_f9\eval_subset9_plain                    CPM 0.8816  [0.824-0.942]  excluded file used: True
+msgf_f9_r2\eval_subset8_plain                 CPM 0.8329  [0.754-0.913]  excluded file used: True
+msgf_f9_r2\eval_subset9                       CPM 0.8939  [0.841-0.948]  excluded file used: True
+msgf_f9_r2\eval_subset9_plain                 CPM 0.8884  [0.828-0.943]  excluded file used: True
+
+===== ensemble.py --runs msgf_f9 msgf_f9_r2 --eval eval_subset9 --name ens_r1r2 =====
+ens_r1r2\eval_subset9                         CPM 0.8993  [0.845-0.949]  excluded file used: True
+
+===== collect_results.py =====
+          run                eval    tta    mc     CPM     CPM_95CI  S@0.125  S@0.25  S@0.5    S@1    S@2    S@4    S@8     AUC      AP     ECE  ECE_raw  diam_MAE_mm  unc_AUC_errors
+0    ens_r1r2  eval_subset8_plain   None   NaN  0.8523  0.782-0.927    0.686   0.771  0.831  0.873  0.890  0.949  0.966     NaN     NaN     NaN      NaN          NaN             NaN
+1    ens_r1r2        eval_subset9   None   NaN  0.8993  0.845-0.949    0.762   0.810  0.905  0.914  0.952  0.971  0.981     NaN     NaN     NaN      NaN          NaN             NaN
+2     msgf_f9        eval_subset8   True  10.0  0.8801  0.812-0.949    0.771   0.805  0.856  0.873  0.924  0.958  0.975     NaN     NaN     NaN      NaN          NaN             NaN
+3     msgf_f9  eval_subset8_plain  False   1.0  0.8608  0.791-0.936    0.754   0.788  0.814  0.864  0.890  0.949  0.966  0.9982  0.7845  0.0007   0.0091         0.85           0.500
+4     msgf_f9        eval_subset9   True  10.0  0.9034  0.843-0.956    0.771   0.848  0.905  0.905  0.943  0.971  0.981  0.9989  0.7631  0.0007   0.0123         0.45           0.971
+5     msgf_f9  eval_subset9_plain  False   1.0  0.8816  0.824-0.942    0.714   0.810  0.876  0.905  0.924  0.962  0.981  0.9976  0.7419  0.0010   0.0108         0.50           0.500
+6  msgf_f9_r2  eval_subset8_plain  False   1.0  0.8329  0.754-0.913    0.636   0.720  0.780  0.864  0.915  0.949  0.966  0.9983  0.8085  0.0003   0.0179         0.98           0.500
+7  msgf_f9_r2        eval_subset9   True  10.0  0.8939  0.841-0.948    0.733   0.781  0.905  0.933  0.962  0.971  0.971  0.9993  0.8290  0.0007   0.0228         0.47           0.979
+8  msgf_f9_r2  eval_subset9_plain  False   1.0  0.8884  0.828-0.943    0.705   0.810  0.867  0.924  0.962  0.971  0.981  0.9982  0.8119  0.0007   0.0192         0.55           0.500
+-> ./work\results_table.csv

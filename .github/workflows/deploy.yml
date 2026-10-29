@@ -1,0 +1,98 @@
+# Builds the Flutter doctor web app, puts the whole system online as a Hugging Face Space,
+# and builds the LungCare Android app (APK) that already knows the online address.
+#
+# One-time setup (repository Settings -> Secrets and variables -> Actions -> New repository secret):
+#   HF_TOKEN        Hugging Face access token with WRITE permission
+#   ADMIN_USER      doctor administrator username for the online app
+#   ADMIN_PASSWORD  its password (8+ characters)
+# Optional: ANTHROPIC_API_KEY (Claude-powered patient assistant; works offline without it)
+# Then: Actions tab -> "Deploy online demo + Android app" -> Run workflow (it also runs on every push to main).
+name: Deploy online demo + Android app
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  online:
+    runs-on: ubuntu-latest
+    outputs:
+      space_url: ${{ steps.push.outputs.space_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check that the Hugging Face token is set
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "::error::Add the repository secret HF_TOKEN (Settings > Secrets and variables > Actions)."
+            exit 1
+          fi
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Build the Flutter doctor web app
+        working-directory: doctor_flutter
+        run: |
+          flutter pub get
+          flutter build web --release --base-href /doctor/
+      - name: Assemble the Space
+        run: bash deploy/huggingface/assemble.sh space
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Upload to Hugging Face
+        id: push
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          ADMIN_USER: ${{ secrets.ADMIN_USER }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SPACE_NAME: ${{ vars.SPACE_NAME }}
+        run: |
+          pip install -q huggingface_hub
+          python deploy/huggingface/push_space.py space
+      - name: Links
+        run: |
+          echo "### LungScan AI is deploying" >> $GITHUB_STEP_SUMMARY
+          echo "* Doctor app: ${{ steps.push.outputs.space_url }}/doctor/" >> $GITHUB_STEP_SUMMARY
+          echo "* Patient app: ${{ steps.push.outputs.space_url }}/patient/" >> $GITHUB_STEP_SUMMARY
+          echo "* The Space needs about 5-10 minutes to build after this; watch its Logs tab on huggingface.co." >> $GITHUB_STEP_SUMMARY
+
+  android:
+    needs: online
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Build the LungCare patient APK
+        working-directory: lungcare_mobile
+        run: |
+          sed -i 's/-Xmx8G/-Xmx4G/' android/gradle.properties
+          flutter pub get
+          flutter build apk --release --dart-define=LUNGCARE_SERVER=${{ needs.online.outputs.space_url }}/patient
+          cp build/app/outputs/flutter-apk/app-release.apk ../LungCare.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: LungCare-android
+          path: LungCare.apk
+      - name: Publish the APK as a download (Releases)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: lungcare-latest
+          name: LungCare Android app (latest)
+          body: "Patient app for ${{ needs.online.outputs.space_url }}/patient - download LungCare.apk, open it on the phone and allow installing."
+          files: LungCare.apk
+          make_latest: true

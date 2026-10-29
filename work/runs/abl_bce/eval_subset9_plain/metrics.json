@@ -1,0 +1,38 @@
+{
+  "run": "abl_bce",
+  "subset": 9,
+  "tta": false,
+  "mc": 1,
+  "n_candidates": 75924,
+  "n_positive_candidates": 144,
+  "froc": {
+    "cpm": 0.9251700680272109,
+    "cpm_ci95": [
+      0.8725859262623967,
+      0.9687763138792101
+    ],
+    "sensitivity_at_fp": {
+      "0.125": 0.8285714285714286,
+      "0.25": 0.8666666666666667,
+      "0.5": 0.9142857142857143,
+      "1": 0.9523809523809523,
+      "2": 0.9619047619047619,
+      "4": 0.9714285714285714,
+      "8": 0.9809523809523809
+    },
+    "n_nodules": 105,
+    "n_nodules_reachable": 104,
+    "n_scans": 88,
+    "excluded_used": true
+  },
+  "auc": 0.9990248636403625,
+  "ap": 0.7718584956571045,
+  "ece": 0.00841789654595721,
+  "ece_uncalibrated": 0.00841789654595721,
+  "calibrated": false,
+  "diameter_mae_mm": 0.6522729849275937,
+  "diameter_pearson_r": 0.9907384909523845,
+  "uncertainty_auc_for_errors": 0.5,
+  "alpha_vs_diameter_spearman": 0.9098004065809406,
+  "rescored": true
+}

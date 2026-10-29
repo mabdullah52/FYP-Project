@@ -1,0 +1,52 @@
+
+===== luna25_audit.py =====
+LUNA25 folder: D:\studentss\luna25\Extracted\luna25_images
+total size: 214.3 GB
+file types: {'.mha': 4069}
+top-level folders (files): {'luna25_images': 4069}
+
+image files: 4069  e.g. luna25_images\1.2.840.113654.2.55.10001915497607871704679012670488177360.mha
+  1.2.840.113654.2.55.10001915497607871704679012670488177360.mha: size (512, 512, 168) spacing (0.703, 0.703, 2.0) origin (-178.4, -180.0, -345.9) direction (1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0)
+  1.2.840.113654.2.55.100027385603639997812329606977270090953.mha: size (512, 512, 163) spacing (0.703, 0.703, 2.0) origin (-180.0, -180.0, -314.0) direction (1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0)
+  1.2.840.113654.2.55.100199553060090932939760477295777719301.mha: size (512, 512, 170) spacing (0.709, 0.709, 2.0) origin (-201.8, -184.1, -345.6) direction (1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0)
+
+Send this whole output back.
+
+===== stats_compare.py =====
+Ablation: no context stream                   0.9075 -> 0.9088  delta +0.0014  [-0.026, +0.027]  p=0.953
+Ablation: concat instead of gated fusion      0.9075 -> 0.8980  delta -0.0095  [-0.057, +0.027]  p=0.620
+Ablation: single HU window                    0.9075 -> 0.9034  delta -0.0041  [-0.034, +0.022]  p=0.742
+Ablation: no diameter task                    0.9075 -> 0.9238  delta +0.0163  [-0.019, +0.037]  p=0.444
+Ablation: BCE instead of focal                0.9075 -> 0.9252  delta +0.0177  [-0.012, +0.043]  p=0.248
+TTA + MC dropout (test)                       0.8816 -> 0.9034  delta +0.0218  [-0.006, +0.039]  p=0.177
+TTA + MC dropout (validation)                 0.8608 -> 0.8801  delta +0.0194  [+0.001, +0.040]  p=0.040
+Round-2 hard negatives (validation)           0.8608 -> 0.8329  delta -0.0278  [-0.067, -0.001]  p=0.037
+Round-2 hard negatives (test)                 0.8816 -> 0.8884  delta +0.0068  [-0.024, +0.024]  p=0.987
+Training length 10 vs 30 epochs (test)        0.8816 -> 0.9075  delta +0.0259  [-0.015, +0.057]  p=0.249
+-> ./work\significance_table.csv
+
+===== luna25_audit.py =====
+LUNA25 folder: D:\studentss\luna25\Extracted\luna25_images
+total size: 214.3 GB
+file types: {'.mha': 4069}
+top-level folders (files): {'luna25_images': 4069}
+
+image files: 4069  e.g. luna25_images\1.2.840.113654.2.55.10001915497607871704679012670488177360.mha
+  1.2.840.113654.2.55.10001915497607871704679012670488177360.mha: size (512, 512, 168) spacing (0.703, 0.703, 2.0) origin (-178.4, -180.0, -345.9) direction (1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0)
+  1.2.840.113654.2.55.100027385603639997812329606977270090953.mha: size (512, 512, 163) spacing (0.703, 0.703, 2.0) origin (-180.0, -180.0, -314.0) direction (1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0)
+  1.2.840.113654.2.55.100199553060090932939760477295777719301.mha: size (512, 512, 170) spacing (0.709, 0.709, 2.0) origin (-201.8, -184.1, -345.6) direction (1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0)
+
+Send this whole output back.
+
+===== stats_compare.py =====
+Ablation: no context stream                   0.9075 -> 0.9088  delta +0.0014  [-0.026, +0.027]  p=0.953
+Ablation: concat instead of gated fusion      0.9075 -> 0.8980  delta -0.0095  [-0.057, +0.027]  p=0.620
+Ablation: single HU window                    0.9075 -> 0.9034  delta -0.0041  [-0.034, +0.022]  p=0.742
+Ablation: no diameter task                    0.9075 -> 0.9238  delta +0.0163  [-0.019, +0.037]  p=0.444
+Ablation: BCE instead of focal                0.9075 -> 0.9252  delta +0.0177  [-0.012, +0.043]  p=0.248
+TTA + MC dropout (test)                       0.8816 -> 0.9034  delta +0.0218  [-0.006, +0.039]  p=0.177
+TTA + MC dropout (validation)                 0.8608 -> 0.8801  delta +0.0194  [+0.001, +0.040]  p=0.040
+Round-2 hard negatives (validation)           0.8608 -> 0.8329  delta -0.0278  [-0.067, -0.001]  p=0.037
+Round-2 hard negatives (test)                 0.8816 -> 0.8884  delta +0.0068  [-0.024, +0.024]  p=0.987
+Training length 10 vs 30 epochs (test)        0.8816 -> 0.9075  delta +0.0259  [-0.015, +0.057]  p=0.249
+-> ./work\significance_table.csv

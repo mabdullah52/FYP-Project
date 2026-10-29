@@ -1,0 +1,36 @@
+{
+  "members": [
+    "l25_scratch\\best.pt",
+    "l25_scratch_s1\\best.pt",
+    "l25_scratch_s2\\best.pt"
+  ],
+  "feature_mean": [
+    -1.234655930640723,
+    7.680162358708097,
+    63.17089125102208
+  ],
+  "feature_sd": [
+    1.1678066949689974,
+    4.142631720512515,
+    5.101848718815395
+  ],
+  "uses_age": true,
+  "with_age": {
+    "coef": [
+      2.3850551375080076,
+      0.18993877487020622,
+      0.18232970510774765
+    ],
+    "intercept": -3.9454740047038976
+  },
+  "without_age": {
+    "coef": [
+      2.3869419955794102,
+      0.19662131870088703
+    ],
+    "intercept": -3.935428944622766
+  },
+  "test_auc": 0.8996332615801643,
+  "trained_on": "LUNA25 (NLST) folds 2-4, fitted on fold 1",
+  "note": "Research prototype. Malignancy risk for screening-detected nodules; not a diagnosis."
+}

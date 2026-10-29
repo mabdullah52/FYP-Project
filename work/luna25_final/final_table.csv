@@ -1,0 +1,8 @@
+model,val_AUC,test_AUC,AUC_95CI,AP,sens,spec,ECE,note
+l25_scratch,0.8977,0.9004,0.864-0.934,0.5475,0.874,0.689,0.0295,scratch seed
+l25_scratch_s1,0.8778,0.8877,0.846-0.926,0.5439,0.865,0.683,0.0348,scratch seed
+l25_scratch_s2,0.8853,0.8923,0.851-0.928,0.5736,0.802,0.745,0.0349,scratch seed
+l25_transfer,0.8515,0.8775,0.841-0.912,0.4565,0.82,0.788,0.0215,transfer
+size_only,0.8318,0.8558,0.816-0.894,0.4284,0.739,0.81,0.0299,predicted diameter only
+ensemble,0.8938,0.8997,0.861-0.934,0.5764,0.856,0.719,0.0349,mean of 3 scratch seeds
+fusion,0.8974,0.8996,0.862-0.933,0.5699,0.865,0.732,0.0317,ensemble + size + age

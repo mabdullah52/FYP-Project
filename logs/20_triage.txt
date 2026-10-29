@@ -1,0 +1,20 @@
+
+===== replot_triage.py =====
+{
+  "errors_caught_at_0.5pct": 0.0449438202247191,
+  "errors_caught_at_1pct": 0.06741573033707865,
+  "errors_caught_at_2pct": 0.16853932584269662,
+  "errors_caught_at_5pct": 1.0,
+  "errors_caught_at_10pct": 1.0
+}
+-> ./work\runs\msgf_f9\eval_subset9\triage.png
+
+===== replot_triage.py =====
+{
+  "errors_caught_at_0.5pct": 0.0449438202247191,
+  "errors_caught_at_1pct": 0.06741573033707865,
+  "errors_caught_at_2pct": 0.16853932584269662,
+  "errors_caught_at_5pct": 1.0,
+  "errors_caught_at_10pct": 1.0
+}
+-> ./work\runs\msgf_f9\eval_subset9\triage.png

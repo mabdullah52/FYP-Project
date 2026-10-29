@@ -1,0 +1,77 @@
+:root {
+  --bg: #f4f7f6; --surface: #ffffff; --line: #dfe7e5; --ink: #10201e; --ink-2: #4b5c59; --ink-3: #7c8b88;
+  --accent: #0f766e; --accent-soft: #e2f3f1; --accent-ink: #fff;
+  --good: #15803d; --good-bg: #e6f5ea; --warn: #a16207; --warn-bg: #fdf3d8; --bad: #b91c1c; --bad-bg: #fde8e8;
+  --radius: 16px; color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0d1413; --surface: #16201f; --line: #263331; --ink: #eef5f4; --ink-2: #b4c3c0; --ink-3: #82918e;
+    --accent: #2dd4bf; --accent-soft: #123532; --accent-ink: #062320;
+    --good: #4ade80; --good-bg: #13301e; --warn: #facc15; --warn-bg: #33290c; --bad: #f87171; --bad-bg: #3b1818; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; font: 16px/1.5 "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; background: var(--bg); color: var(--ink); }
+[hidden] { display: none !important; }
+.muted { color: var(--ink-2); } .small { font-size: 13px; }
+h1 { margin: 6px 0; font-size: 28px; } h3 { margin: 0 0 10px; font-size: 17px; }
+input, select, textarea { font: inherit; width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); }
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+input[type=range] { padding: 0; border: 0; accent-color: var(--accent); margin-top: 6px; }
+.btn { font: inherit; font-weight: 600; border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  border-radius: 12px; padding: 11px 16px; cursor: pointer; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.big { width: 100%; padding: 14px; font-size: 17px; margin-top: 12px; }
+.btn.sm { padding: 6px 10px; font-size: 13px; }
+.link { background: none; border: 0; color: var(--accent); font: inherit; cursor: pointer; }
+.err { color: var(--bad); }
+
+.login { min-height: 100vh; display: grid; place-items: center; padding: 20px; }
+.login-card { width: min(420px, 100%); background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 28px 24px; text-align: center; }
+.login-card .logo { font-size: 44px; } .login-card form { text-align: left; margin: 18px 0 8px; }
+.login-card label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 6px; }
+#code { text-transform: uppercase; letter-spacing: 6px; font-size: 22px; text-align: center; font-family: Consolas, monospace; }
+
+#app { max-width: 640px; margin: 0 auto; min-height: 100vh; padding-bottom: 84px; }
+.head { position: sticky; top: 0; z-index: 3; display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 16px; background: var(--bg); border-bottom: 1px solid var(--line); }
+.hello { font-weight: 700; font-size: 18px; }
+main { padding: 14px 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; margin-bottom: 14px; }
+.summary { border-left: 5px solid var(--accent); }
+.next { background: var(--accent-soft); border-color: transparent; }
+.next .date { font-size: 22px; font-weight: 700; margin: 4px 0 8px; }
+.nod { display: flex; gap: 12px; align-items: center; }
+.nod .size { font-size: 22px; font-weight: 700; min-width: 70px; }
+.pill { display: inline-flex; gap: 4px; align-items: center; font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 99px; }
+.pill.g { background: var(--good-bg); color: var(--good); } .pill.w { background: var(--warn-bg); color: var(--warn); }
+.pill.b { background: var(--bad-bg); color: var(--bad); }
+.disclaimer { font-size: 13px; color: var(--ink-3); margin: 10px 4px 20px; }
+.stack { display: grid; gap: 10px; }
+.msg { margin-top: 10px; padding: 10px 12px; border-radius: 12px; background: var(--accent-soft); }
+.msg.bad { background: var(--bad-bg); color: var(--bad); font-weight: 600; }
+.item { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.item.done .t { text-decoration: line-through; color: var(--ink-3); }
+.due { font-size: 13px; color: var(--ink-2); } .due.soon { color: var(--warn); font-weight: 600; } .due.late { color: var(--bad); font-weight: 600; }
+
+.chat { display: flex; flex-direction: column; min-height: calc(100vh - 170px); }
+.chatlog { flex: 1; display: flex; flex-direction: column; gap: 10px; padding-bottom: 8px; }
+.bub { max-width: 88%; padding: 10px 14px; border-radius: 18px; white-space: normal; word-wrap: break-word; }
+.bub.user { align-self: flex-end; background: var(--accent); color: var(--accent-ink); border-bottom-right-radius: 6px; }
+.bub.assistant { align-self: flex-start; background: var(--surface); border: 1px solid var(--line); border-bottom-left-radius: 6px; }
+.acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.act { font-size: 12px; font-weight: 600; background: var(--good-bg); color: var(--good); padding: 3px 9px; border-radius: 99px; }
+.typing { color: var(--ink-3); font-style: italic; }
+.chips { display: flex; gap: 8px; overflow-x: auto; padding: 6px 0 10px; }
+.chips button { flex: none; font: inherit; font-size: 14px; border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  border-radius: 99px; padding: 7px 13px; cursor: pointer; }
+.chatform { display: flex; gap: 8px; position: sticky; bottom: 76px; background: var(--bg); padding: 6px 0; }
+
+.tabs { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: min(640px, 100%); display: grid;
+  grid-template-columns: repeat(5, 1fr); background: var(--surface); border-top: 1px solid var(--line);
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom)); z-index: 4; }
+.tabs button { background: none; border: 0; font: inherit; font-size: 12px; color: var(--ink-3); display: grid; justify-items: center;
+  gap: 1px; padding: 4px 0; cursor: pointer; }
+.tabs button span { font-size: 21px; } .tabs button.on { color: var(--accent); font-weight: 700; }
+.req.urgent { border-color: var(--bad); }
+.reply { margin-top: 8px; padding: 10px 12px; border-radius: 12px; background: var(--accent-soft); }

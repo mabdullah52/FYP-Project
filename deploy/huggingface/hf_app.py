@@ -1,0 +1,66 @@
+"""LungScan AI - one web server for the online demo (Hugging Face Spaces, port 7860).
+
+    /            doctor workstation (classic web page)
+    /doctor/     doctor app (Flutter web build)
+    /api/...     doctor / AI API (also used by the Flutter doctor app)
+    /patient/    LungCare patient web app; the Android app uses  https://<space>/patient  as server address
+
+The administrator account is created from the Space secrets ADMIN_USER / ADMIN_PASSWORD, so nobody
+else can claim it. Data lives in /data (persistent storage) if available, otherwise it resets on restart.
+"""
+import importlib.util
+import os
+import sys
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+os.chdir(ROOT)
+sys.path.insert(0, ROOT)
+
+DATA = "/data/app_data" if os.path.isdir("/data") and os.access("/data", os.W_OK) else os.path.join(ROOT, "app_data")
+os.makedirs(DATA, exist_ok=True)
+PORT = int(os.environ.get("PORT", "7860"))
+os.environ.setdefault("LUNGSCAN_APP_DATA", DATA)
+os.environ.setdefault("LUNGCARE_DATA", DATA)
+os.environ.setdefault("LUNGSCAN_DEVICE", "cpu")
+os.environ.setdefault("LUNGSCAN_FINDER_GPU", "0")
+os.environ.setdefault("DOCTOR_API", f"http://127.0.0.1:{PORT}")
+
+
+def load(name, path):
+    spec = importlib.util.spec_from_file_location(name, os.path.join(ROOT, path))
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[name] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+
+doctor = load("doctor_server", "doctor_app/server.py")
+patient = load("patient_server", "patient_app/server.py")
+
+# administrator account from Space secrets (never stored in the code)
+user, pw = os.environ.get("ADMIN_USER", "").strip(), os.environ.get("ADMIN_PASSWORD", "")
+if user and len(pw) >= 8:
+    import auth
+    with doctor.tx() as con:
+        if auth.n_users(con) == 0:
+            auth.create_user(con, user, os.environ.get("ADMIN_NAME", user), "admin", pw)
+            auth.audit(con, user.lower(), "setup", "administrator account created from Space secrets")
+            print(f"administrator '{user}' created")
+else:
+    print("WARNING: set the Space secrets ADMIN_USER and ADMIN_PASSWORD (8+ characters) - "
+          "until then the first visitor can create the administrator account.")
+
+from starlette.applications import Starlette  # noqa: E402
+from starlette.responses import RedirectResponse  # noqa: E402
+from starlette.routing import Mount, Route  # noqa: E402
+
+app = Starlette(routes=[
+    Route("/patient", lambda r: RedirectResponse("/patient/")),
+    Mount("/patient", app=patient.app),
+    Mount("/", app=doctor.app),
+])
+
+if __name__ == "__main__":
+    import uvicorn
+    print(f"LungScan AI online on port {PORT}  (data: {DATA})")
+    uvicorn.run(app, host="0.0.0.0", port=PORT, log_level="warning")

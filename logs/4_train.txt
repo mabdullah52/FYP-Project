@@ -1,0 +1,36 @@
+
+===== train.py --name msgf_f9 --workers 8 --resume =====
+train 26608 (pos 1218) | val 3350 (pos 195) | test subset 9 held out | device cuda
+batch size 64 fits on the GPU (6.9 of 8.6 GB free)
+model params: 3.35 M | mixed precision: False
+ep 00 loss 0.2576 (cls 0.0687, diam 0.3248) | val AUC 0.8495 AP 0.4844 sens@spec95 0.554 diamMAE 5.29mm | 387s *
+ep 01 loss -0.7210 (cls 0.0442, diam 0.0315) | val AUC 0.9572 AP 0.7940 sens@spec95 0.831 diamMAE 2.62mm | 475s *
+ep 02 loss -1.4900 (cls 0.0308, diam 0.0212) | val AUC 0.9713 AP 0.8239 sens@spec95 0.841 diamMAE 2.23mm | 472s *
+ep 03 loss -2.2203 (cls 0.0237, diam 0.0161) | val AUC 0.9880 AP 0.8893 sens@spec95 0.928 diamMAE 1.64mm | 464s *
+ep 04 loss -2.9170 (cls 0.0187, diam 0.0137) | val AUC 0.9879 AP 0.9106 sens@spec95 0.949 diamMAE 1.86mm | 455s 
+ep 05 loss -3.5986 (cls 0.0148, diam 0.0101) | val AUC 0.9895 AP 0.9082 sens@spec95 0.954 diamMAE 1.28mm | 476s *
+ep 06 loss -4.2011 (cls 0.0141, diam 0.0104) | val AUC 0.9930 AP 0.9281 sens@spec95 0.959 diamMAE 1.34mm | 472s *
+ep 07 loss -4.8064 (cls 0.0117, diam 0.0082) | val AUC 0.9952 AP 0.9481 sens@spec95 0.985 diamMAE 0.94mm | 478s *
+ep 08 loss -5.3571 (cls 0.0106, diam 0.0071) | val AUC 0.9920 AP 0.9361 sens@spec95 0.969 diamMAE 1.30mm | 479s 
+ep 09 loss -5.8560 (cls 0.0094, diam 0.0067) | val AUC 0.9963 AP 0.9496 sens@spec95 0.990 diamMAE 1.08mm | 475s *
+ep 10 loss -6.3368 (cls 0.0088, diam 0.0051) | val AUC 0.9954 AP 0.9439 sens@spec95 0.985 diamMAE 1.01mm | 473s 
+ep 11 loss -6.7329 (cls 0.0081, diam 0.0051) | val AUC 0.9946 AP 0.9388 sens@spec95 0.979 diamMAE 1.64mm | 474s 
+ep 12 loss -7.0941 (cls 0.0076, diam 0.0047) | val AUC 0.9928 AP 0.9416 sens@spec95 0.985 diamMAE 1.07mm | 472s 
+ep 13 loss -7.4244 (cls 0.0071, diam 0.0041) | val AUC 0.9961 AP 0.9410 sens@spec95 0.995 diamMAE 1.02mm | 475s 
+ep 14 loss -7.7325 (cls 0.0063, diam 0.0037) | val AUC 0.9968 AP 0.9543 sens@spec95 0.995 diamMAE 0.88mm | 471s *
+ep 15 loss -8.0092 (cls 0.0058, diam 0.0033) | val AUC 0.9968 AP 0.9554 sens@spec95 1.000 diamMAE 0.96mm | 475s *
+ep 16 loss -8.1957 (cls 0.0055, diam 0.0034) | val AUC 0.9929 AP 0.9488 sens@spec95 0.979 diamMAE 1.07mm | 475s 
+ep 17 loss -8.3684 (cls 0.0056, diam 0.0030) | val AUC 0.9934 AP 0.9464 sens@spec95 0.985 diamMAE 1.10mm | 471s 
+ep 18 loss -8.5562 (cls 0.0052, diam 0.0026) | val AUC 0.9934 AP 0.9437 sens@spec95 0.979 diamMAE 1.08mm | 471s 
+ep 19 loss -8.6572 (cls 0.0053, diam 0.0026) | val AUC 0.9951 AP 0.9496 sens@spec95 0.985 diamMAE 0.95mm | 467s 
+ep 20 loss -8.7668 (cls 0.0050, diam 0.0026) | val AUC 0.9963 AP 0.9548 sens@spec95 0.990 diamMAE 0.90mm | 472s 
+ep 21 loss -8.9390 (cls 0.0045, diam 0.0023) | val AUC 0.9950 AP 0.9540 sens@spec95 0.985 diamMAE 0.92mm | 472s 
+ep 22 loss -8.9900 (cls 0.0046, diam 0.0022) | val AUC 0.9969 AP 0.9606 sens@spec95 0.990 diamMAE 0.85mm | 469s *
+ep 23 loss -9.0666 (cls 0.0043, diam 0.0022) | val AUC 0.9964 AP 0.9571 sens@spec95 0.985 diamMAE 0.86mm | 471s 
+ep 24 loss -9.1673 (cls 0.0039, diam 0.0021) | val AUC 0.9960 AP 0.9562 sens@spec95 0.985 diamMAE 0.90mm | 474s 
+ep 25 loss -9.2419 (cls 0.0037, diam 0.0019) | val AUC 0.9955 AP 0.9541 sens@spec95 0.985 diamMAE 0.92mm | 474s 
+ep 26 loss -9.2282 (cls 0.0040, diam 0.0019) | val AUC 0.9951 AP 0.9538 sens@spec95 0.985 diamMAE 0.93mm | 469s 
+ep 27 loss -9.2701 (cls 0.0038, diam 0.0019) | val AUC 0.9952 AP 0.9536 sens@spec95 0.985 diamMAE 0.94mm | 474s 
+ep 28 loss -9.2445 (cls 0.0039, diam 0.0019) | val AUC 0.9948 AP 0.9526 sens@spec95 0.985 diamMAE 0.95mm | 472s 
+ep 29 loss -9.2337 (cls 0.0041, diam 0.0019) | val AUC 0.9947 AP 0.9529 sens@spec95 0.985 diamMAE 0.94mm | 473s 
+best val AUC 0.9969 -> ./work\runs\msgf_f9\best.pt

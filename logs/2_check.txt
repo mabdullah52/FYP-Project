@@ -1,0 +1,260 @@
+
+===== check_setup.py =====
+======================================================================
+1) SOFTWARE
+======================================================================
+[OK]   Python 3.9.7 on Windows 10
+[OK]   numpy 2.0.2
+[OK]   scipy 1.13.1
+[OK]   pandas 2.3.3
+[OK]   sklearn 1.6.1
+[OK]   matplotlib 3.9.4
+[OK]   SimpleITK 2.5.6
+[OK]   torch 2.8.0+cu126
+
+======================================================================
+2) GPU
+======================================================================
+[OK]   torch 2.8.0+cu126, built for CUDA 12.6
+[OK]   GPU: Quadro P4000, 8.6 GB, compute capability 6.1
+[OK]   mixed precision will be OFF (FP32 - correct for Pascal cards)
+[OK]   3D convolution runs on the GPU
+
+======================================================================
+3) DATASET FOLDER: D:\studentss\LUNA 16
+======================================================================
+[OK]   subset0: 89 scans
+[OK]   subset1: 89 scans
+[OK]   subset2: 89 scans
+[OK]   subset3: 89 scans
+[OK]   subset4: 89 scans
+[OK]   subset5: 89 scans
+[OK]   subset6: 89 scans
+[OK]   subset7: 89 scans
+[OK]   subset8: 88 scans
+[OK]   subset9: 88 scans
+[OK]   total scans: 888 (full LUNA16 = 888)
+[WARN] 9 archive(s) still in the folder: ['candidates_V2.zip', 'evaluationScript.zip', 'files.zip', 'seg-lungs-LUNA16.zip', 'subset5.zip', 'subset6 (1).zip'] - fine if they are already extracted
+[OK]   candidates_V2.csv: 754975 rows
+[OK]   annotations.csv: 1186 rows
+[WARN] annotations_excluded.csv not found at D:\studentss\LUNA 16\annotations_excluded.csv (optional; from evaluationScript.zip -> annotations/)
+
+======================================================================
+4) DISK AND MEMORY
+======================================================================
+[OK]   free space for WORK_DIR (D:\Studentss\Luna\lungscan\work): 1082 GB (need ~15 GB)
+[OK]   RAM 68 GB, CPU cores 48
+
+======================================================================
+5) ONE SCAN (reading + patch extraction speed)
+======================================================================
+[OK]   scan (121, 512, 512) (z,y,x), spacing (0.76, 0.76, 2.5) mm: read 0.5 s, 28 ms per patch
+
+======================================================================
+6) TRAINING SPEED / MEMORY ON THIS GPU
+======================================================================
+[WARN] batch 64: out of GPU memory, trying smaller
+[WARN] batch 32: out of GPU memory, trying smaller
+Traceback (most recent call last):
+  File "D:\Studentss\Luna\lungscan\check_setup.py", line 152, in <module>
+    out = m(loc, ctx)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\model.py", line 121, in forward
+    z, alpha = self.features(local, context)
+  File "D:\Studentss\Luna\lungscan\model.py", line 97, in features
+    fl = self.local(local)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\model.py", line 68, in forward
+    return self.layers(self.stem(x))
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\container.py", line 244, in forward
+    input = module(input)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\model.py", line 49, in forward
+    y = self.se(self.b2(self.c2(y)))
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\lungenv\lib\site-packages\torch\nn\modules\module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\Studentss\Luna\lungscan\model.py", line 31, in forward
+    w = self.fc(x.mean(dim=(2, 3, 4)))
+torch.AcceleratorError: CUDA error: invalid resource handle
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+===== preprocess.py --audit =====
+{
+  "scans_found": 888,
+  "scans_per_subset": {
+    "0": 89,
+    "1": 89,
+    "2": 89,
+    "3": 89,
+    "4": 89,
+    "5": 89,
+    "6": 89,
+    "7": 89,
+    "8": 88,
+    "9": 88
+  },
+  "candidates_in_csv": 754975,
+  "candidates_for_found_scans": 754975,
+  "positive_candidates": 1557,
+  "negative_candidates": 753418,
+  "annotated_nodules": 1186,
+  "scans_with_nodules": 601,
+  "nodule_diameter_mm": {
+    "count": 1186.0,
+    "mean": 8.31,
+    "std": 4.76,
+    "min": 3.25,
+    "25%": 5.11,
+    "50%": 6.43,
+    "75%": 9.7,
+    "max": 32.27
+  },
+  "positives_without_diameter_match": 0,
+  "imbalance_neg_per_pos": 483.9,
+  "annotated_scans_missing_on_disk": 0,
+  "spacing_xy_mm": [
+    0.4609375,
+    0.9765620231628418
+  ],
+  "spacing_z_mm": [
+    0.45000001788139343,
+    2.500000238418579
+  ],
+  "slices_per_scan": [
+    95,
+    764
+  ]
+}
+
+===== check_setup.py =====
+======================================================================
+1) SOFTWARE
+======================================================================
+[OK]   Python 3.9.7 on Windows 10
+[OK]   numpy 2.0.2
+[OK]   scipy 1.13.1
+[OK]   pandas 2.3.3
+[OK]   sklearn 1.6.1
+[OK]   matplotlib 3.9.4
+[OK]   SimpleITK 2.5.6
+[OK]   torch 2.8.0+cu126
+
+======================================================================
+2) GPU
+======================================================================
+[OK]   torch 2.8.0+cu126, built for CUDA 12.6
+[OK]   GPU: Quadro P4000, 8.6 GB, compute capability 6.1
+[OK]   mixed precision will be OFF (FP32 - correct for Pascal cards)
+[OK]   3D convolution runs on the GPU
+
+======================================================================
+3) DATASET FOLDER: D:\studentss\LUNA 16
+======================================================================
+[OK]   subset0: 89 scans
+[OK]   subset1: 89 scans
+[OK]   subset2: 89 scans
+[OK]   subset3: 89 scans
+[OK]   subset4: 89 scans
+[OK]   subset5: 89 scans
+[OK]   subset6: 89 scans
+[OK]   subset7: 89 scans
+[OK]   subset8: 88 scans
+[OK]   subset9: 88 scans
+[OK]   total scans: 888 (full LUNA16 = 888)
+[WARN] 9 archive(s) still in the folder: ['candidates_V2.zip', 'evaluationScript.zip', 'files.zip', 'seg-lungs-LUNA16.zip', 'subset5.zip', 'subset6 (1).zip'] - fine if they are already extracted
+[OK]   candidates_V2.csv: 754975 rows
+[OK]   annotations.csv: 1186 rows
+[WARN] annotations_excluded.csv not found at D:\studentss\LUNA 16\annotations_excluded.csv (optional; from evaluationScript.zip -> annotations/)
+
+======================================================================
+4) DISK AND MEMORY
+======================================================================
+[OK]   free space for WORK_DIR (D:\Studentss\Luna\lungscan\work): 1074 GB (need ~15 GB)
+[OK]   RAM 68 GB, AVAILABLE now 10.5 GB, page file 67 GB, CPU cores 48
+
+======================================================================
+5) ONE SCAN (reading + patch extraction speed)
+======================================================================
+[OK]   scan (121, 512, 512) (z,y,x), spacing (0.76, 0.76, 2.5) mm: read 0.3 s, 30 ms per patch
+
+======================================================================
+6) TRAINING SPEED / MEMORY ON THIS GPU (each test in a fresh process)
+======================================================================
+[OK]   GPU memory free now: 7.1 of 8.6 GB
+[OK]   batch 8: 0.11 s/step, peak 0.8 GB, ~5.3 min/epoch
+[OK]   batch 16: 0.19 s/step, peak 1.2 GB, ~4.8 min/epoch
+[OK]   batch 24: 0.28 s/step, peak 1.6 GB, ~4.7 min/epoch
+[OK]   batch 32: 0.37 s/step, peak 2.0 GB, ~4.7 min/epoch
+[OK]   batch 48: 0.56 s/step, peak 2.9 GB, ~4.7 min/epoch
+[OK]   batch 64: 1.89 s/step, peak 3.7 GB, ~11.8 min/epoch
+[OK]   -> training will use batch size 64 automatically (~12 min/epoch, ~5.9 h for 30 epochs)
+
+======================================================================
+RESULT: READY - go to the next step
+======================================================================
+
+===== preprocess.py --audit =====
+{
+  "scans_found": 888,
+  "scans_per_subset": {
+    "0": 89,
+    "1": 89,
+    "2": 89,
+    "3": 89,
+    "4": 89,
+    "5": 89,
+    "6": 89,
+    "7": 89,
+    "8": 88,
+    "9": 88
+  },
+  "candidates_in_csv": 754975,
+  "candidates_for_found_scans": 754975,
+  "positive_candidates": 1557,
+  "negative_candidates": 753418,
+  "annotated_nodules": 1186,
+  "scans_with_nodules": 601,
+  "nodule_diameter_mm": {
+    "count": 1186.0,
+    "mean": 8.31,
+    "std": 4.76,
+    "min": 3.25,
+    "25%": 5.11,
+    "50%": 6.43,
+    "75%": 9.7,
+    "max": 32.27
+  },
+  "positives_without_diameter_match": 0,
+  "imbalance_neg_per_pos": 483.9,
+  "annotated_scans_missing_on_disk": 0,
+  "spacing_xy_mm": [
+    0.4609375,
+    0.9765620231628418
+  ],
+  "spacing_z_mm": [
+    0.45000001788139343,
+    2.500000238418579
+  ],
+  "slices_per_scan": [
+    95,
+    764
+  ]
+}

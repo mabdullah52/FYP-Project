@@ -1,0 +1,318 @@
+
+===== luna25_malignancy.py train --name l25_cv1 =====
+train 3795 nodules (342 malignant) | val 1145 (98) | device cuda
+RAM available 45.8 of 68.4 GB | paging file 81.6 GB
+batch size 32 fits on the GPU (7.0 of 8.6 GB free)
+batch 32 x 2 accumulation steps = effective batch 64
+ep 00 loss 0.0653 | val AUC 0.8101 AP 0.2613 | 302s *
+ep 01 loss 0.0546 | val AUC 0.8080 AP 0.2625 | 299s 
+ep 02 loss 0.0504 | val AUC 0.8444 AP 0.3427 | 303s *
+ep 03 loss 0.0464 | val AUC 0.8497 AP 0.3706 | 302s *
+ep 04 loss 0.0470 | val AUC 0.8421 AP 0.3616 | 301s 
+ep 05 loss 0.0459 | val AUC 0.8538 AP 0.4042 | 306s *
+ep 06 loss 0.0436 | val AUC 0.8564 AP 0.4240 | 303s *
+ep 07 loss 0.0443 | val AUC 0.8550 AP 0.4009 | 298s 
+ep 08 loss 0.0435 | val AUC 0.8611 AP 0.4287 | 599s *
+ep 09 loss 0.0425 | val AUC 0.8586 AP 0.3942 | 703s 
+ep 10 loss 0.0416 | val AUC 0.8514 AP 0.4169 | 702s 
+ep 11 loss 0.0399 | val AUC 0.8563 AP 0.4223 | 673s 
+ep 12 loss 0.0387 | val AUC 0.8584 AP 0.4119 | 549s 
+ep 13 loss 0.0381 | val AUC 0.8474 AP 0.3796 | 303s 
+ep 14 loss 0.0387 | val AUC 0.8526 AP 0.4077 | 303s 
+ep 15 loss 0.0358 | val AUC 0.8511 AP 0.3983 | 303s 
+ep 16 loss 0.0354 | val AUC 0.8494 AP 0.3990 | 303s 
+early stopping
+best val AUC 0.8611
+
+===== luna25_temporal.py train --seed 0 =====
+l25_cv1_temporal_s0: train 1505 pairs (130 malignant) | val 403 (33) | cuda
+ep 00 loss 0.1481 | val AUC 0.9111 | 279s *
+ep 01 loss 0.1317 | val AUC 0.9166 | 274s *
+ep 02 loss 0.1327 | val AUC 0.9358 | 284s *
+ep 03 loss 0.1237 | val AUC 0.9355 | 284s 
+ep 04 loss 0.1106 | val AUC 0.9394 | 284s *
+ep 05 loss 0.1056 | val AUC 0.9235 | 284s 
+ep 06 loss 0.0982 | val AUC 0.9403 | 284s *
+ep 07 loss 0.0999 | val AUC 0.9190 | 284s 
+ep 08 loss 0.1015 | val AUC 0.9308 | 284s 
+ep 09 loss 0.0961 | val AUC 0.9221 | 283s 
+ep 10 loss 0.0950 | val AUC 0.9286 | 280s 
+ep 11 loss 0.0909 | val AUC 0.9222 | 284s 
+ep 12 loss 0.0860 | val AUC 0.9162 | 284s 
+early stopping
+best val AUC 0.9403
+
+===== luna25_malignancy.py train --name l25_cv2 =====
+train 3797 nodules (340 malignant) | val 1221 (117) | device cuda
+RAM available 45.6 of 68.4 GB | paging file 81.6 GB
+batch size 32 fits on the GPU (7.0 of 8.6 GB free)
+batch 32 x 2 accumulation steps = effective batch 64
+ep 00 loss 0.0660 | val AUC 0.7914 AP 0.2872 | 309s *
+ep 01 loss 0.0539 | val AUC 0.8641 AP 0.4004 | 306s *
+ep 02 loss 0.0513 | val AUC 0.8680 AP 0.3877 | 306s *
+ep 03 loss 0.0496 | val AUC 0.8468 AP 0.3484 | 306s 
+ep 04 loss 0.0473 | val AUC 0.8419 AP 0.3534 | 306s 
+ep 05 loss 0.0459 | val AUC 0.8775 AP 0.4111 | 306s *
+ep 06 loss 0.0456 | val AUC 0.8771 AP 0.4057 | 306s 
+ep 07 loss 0.0447 | val AUC 0.8747 AP 0.4201 | 306s 
+ep 08 loss 0.0434 | val AUC 0.8693 AP 0.3980 | 306s 
+ep 09 loss 0.0435 | val AUC 0.8807 AP 0.4233 | 306s *
+ep 10 loss 0.0416 | val AUC 0.8553 AP 0.3793 | 306s 
+ep 11 loss 0.0406 | val AUC 0.8760 AP 0.4135 | 306s 
+ep 12 loss 0.0400 | val AUC 0.8695 AP 0.4137 | 306s 
+ep 13 loss 0.0387 | val AUC 0.8783 AP 0.4350 | 306s 
+ep 14 loss 0.0383 | val AUC 0.8856 AP 0.4552 | 306s *
+ep 15 loss 0.0373 | val AUC 0.8792 AP 0.4436 | 306s 
+ep 16 loss 0.0378 | val AUC 0.8548 AP 0.4096 | 306s 
+ep 17 loss 0.0345 | val AUC 0.8567 AP 0.4120 | 306s 
+ep 18 loss 0.0350 | val AUC 0.8625 AP 0.4152 | 306s 
+ep 19 loss 0.0332 | val AUC 0.8753 AP 0.4415 | 306s 
+ep 20 loss 0.0319 | val AUC 0.8784 AP 0.4438 | 306s 
+ep 21 loss 0.0325 | val AUC 0.8780 AP 0.4682 | 306s 
+ep 22 loss 0.0320 | val AUC 0.8621 AP 0.4299 | 306s 
+early stopping
+best val AUC 0.8856
+
+===== luna25_temporal.py train --seed 0 =====
+l25_cv2_temporal_s0: train 1497 pairs (131 malignant) | val 501 (43) | cuda
+ep 00 loss 0.1367 | val AUC 0.9145 | 283s *
+ep 01 loss 0.1142 | val AUC 0.9211 | 287s *
+ep 02 loss 0.1188 | val AUC 0.9204 | 287s 
+ep 03 loss 0.1117 | val AUC 0.9110 | 287s 
+ep 04 loss 0.1022 | val AUC 0.8890 | 287s 
+ep 05 loss 0.0981 | val AUC 0.8998 | 287s 
+ep 06 loss 0.0995 | val AUC 0.8968 | 287s 
+ep 07 loss 0.0883 | val AUC 0.9217 | 287s *
+ep 08 loss 0.0922 | val AUC 0.9072 | 287s 
+ep 09 loss 0.0923 | val AUC 0.9038 | 287s 
+ep 10 loss 0.0851 | val AUC 0.9021 | 287s 
+ep 11 loss 0.0865 | val AUC 0.8834 | 287s 
+ep 12 loss 0.0766 | val AUC 0.8898 | 287s 
+ep 13 loss 0.0818 | val AUC 0.8911 | 287s 
+early stopping
+best val AUC 0.9217
+
+===== luna25_malignancy.py train --name l25_cv3 =====
+train 3609 nodules (324 malignant) | val 1333 (114) | device cuda
+RAM available 47.9 of 68.4 GB | paging file 81.6 GB
+batch size 32 fits on the GPU (7.0 of 8.6 GB free)
+batch 32 x 2 accumulation steps = effective batch 64
+ep 00 loss 0.0657 | val AUC 0.7683 AP 0.1931 | 318s *
+ep 01 loss 0.0556 | val AUC 0.8110 AP 0.3191 | 308s *
+ep 02 loss 0.0514 | val AUC 0.8474 AP 0.3441 | 308s *
+ep 03 loss 0.0493 | val AUC 0.8323 AP 0.2761 | 308s 
+ep 04 loss 0.0497 | val AUC 0.8386 AP 0.2921 | 308s 
+ep 05 loss 0.0474 | val AUC 0.8385 AP 0.3366 | 308s 
+ep 06 loss 0.0470 | val AUC 0.8596 AP 0.3847 | 308s *
+ep 07 loss 0.0449 | val AUC 0.8379 AP 0.3411 | 308s 
+ep 08 loss 0.0449 | val AUC 0.8656 AP 0.4002 | 308s *
+ep 09 loss 0.0438 | val AUC 0.8577 AP 0.3770 | 308s 
+ep 10 loss 0.0443 | val AUC 0.8569 AP 0.3797 | 308s 
+ep 11 loss 0.0413 | val AUC 0.8583 AP 0.4029 | 308s 
+ep 12 loss 0.0401 | val AUC 0.8435 AP 0.3877 | 308s 
+ep 13 loss 0.0401 | val AUC 0.8389 AP 0.3629 | 308s 
+ep 14 loss 0.0401 | val AUC 0.8655 AP 0.4210 | 308s 
+ep 15 loss 0.0386 | val AUC 0.8653 AP 0.4074 | 308s 
+ep 16 loss 0.0372 | val AUC 0.8595 AP 0.3628 | 308s 
+early stopping
+best val AUC 0.8656
+
+===== luna25_temporal.py train --seed 0 =====
+l25_cv3_temporal_s0: train 1371 pairs (120 malignant) | val 529 (44) | cuda
+ep 00 loss 0.1498 | val AUC 0.9101 | 284s *
+ep 01 loss 0.1403 | val AUC 0.9205 | 288s *
+ep 02 loss 0.1328 | val AUC 0.9159 | 288s 
+ep 03 loss 0.1205 | val AUC 0.9215 | 288s *
+ep 04 loss 0.1180 | val AUC 0.9246 | 288s *
+ep 05 loss 0.1088 | val AUC 0.9295 | 288s *
+ep 06 loss 0.1128 | val AUC 0.9297 | 288s *
+ep 07 loss 0.0952 | val AUC 0.9290 | 288s 
+ep 08 loss 0.1006 | val AUC 0.9245 | 288s 
+ep 09 loss 0.0989 | val AUC 0.9180 | 288s 
+ep 10 loss 0.0883 | val AUC 0.9258 | 288s 
+ep 11 loss 0.0787 | val AUC 0.9269 | 288s 
+ep 12 loss 0.0896 | val AUC 0.9276 | 288s 
+early stopping
+best val AUC 0.9297
+
+===== luna25_malignancy.py train --name l25_cv4 =====
+train 3589 nodules (330 malignant) | val 1241 (111) | device cuda
+RAM available 47.8 of 68.4 GB | paging file 81.6 GB
+batch size 32 fits on the GPU (7.0 of 8.6 GB free)
+batch 32 x 2 accumulation steps = effective batch 64
+ep 00 loss 0.0651 | val AUC 0.8574 AP 0.4527 | 318s *
+ep 01 loss 0.0536 | val AUC 0.8252 AP 0.3967 | 306s 
+ep 02 loss 0.0516 | val AUC 0.8552 AP 0.4983 | 306s 
+ep 03 loss 0.0494 | val AUC 0.8909 AP 0.5278 | 306s *
+ep 04 loss 0.0484 | val AUC 0.8914 AP 0.5248 | 306s *
+ep 05 loss 0.0477 | val AUC 0.8886 AP 0.5193 | 306s 
+ep 06 loss 0.0463 | val AUC 0.8969 AP 0.5299 | 306s *
+ep 07 loss 0.0452 | val AUC 0.9028 AP 0.5699 | 306s *
+ep 08 loss 0.0454 | val AUC 0.8669 AP 0.5032 | 306s 
+ep 09 loss 0.0441 | val AUC 0.8853 AP 0.5410 | 306s 
+ep 10 loss 0.0441 | val AUC 0.8742 AP 0.5178 | 306s 
+ep 11 loss 0.0428 | val AUC 0.8894 AP 0.5439 | 306s 
+ep 12 loss 0.0414 | val AUC 0.8774 AP 0.5230 | 306s 
+ep 13 loss 0.0410 | val AUC 0.8900 AP 0.5398 | 306s 
+ep 14 loss 0.0414 | val AUC 0.9020 AP 0.5515 | 306s 
+ep 15 loss 0.0398 | val AUC 0.9079 AP 0.5414 | 306s *
+ep 16 loss 0.0384 | val AUC 0.8926 AP 0.5387 | 306s 
+ep 17 loss 0.0368 | val AUC 0.8716 AP 0.4917 | 306s 
+ep 18 loss 0.0367 | val AUC 0.8791 AP 0.5193 | 306s 
+ep 19 loss 0.0368 | val AUC 0.8691 AP 0.4878 | 306s 
+ep 20 loss 0.0349 | val AUC 0.8832 AP 0.4878 | 306s 
+ep 21 loss 0.0351 | val AUC 0.8804 AP 0.4972 | 306s 
+ep 22 loss 0.0324 | val AUC 0.8812 AP 0.4894 | 306s 
+ep 23 loss 0.0328 | val AUC 0.8849 AP 0.4687 | 306s 
+early stopping
+best val AUC 0.9079
+
+===== luna25_temporal.py train --seed 0 =====
+l25_cv4_temporal_s0: train 1397 pairs (120 malignant) | val 475 (43) | cuda
+ep 00 loss 0.1423 | val AUC 0.9339 | 282s *
+ep 01 loss 0.1169 | val AUC 0.9252 | 286s 
+ep 02 loss 0.1111 | val AUC 0.9371 | 286s *
+ep 03 loss 0.1032 | val AUC 0.9137 | 286s 
+ep 04 loss 0.0964 | val AUC 0.9293 | 286s 
+ep 05 loss 0.0960 | val AUC 0.9226 | 286s 
+ep 06 loss 0.1013 | val AUC 0.9296 | 286s 
+ep 07 loss 0.0858 | val AUC 0.9160 | 286s 
+ep 08 loss 0.0761 | val AUC 0.9209 | 286s 
+early stopping
+best val AUC 0.9371
+
+===== luna25_temporal.py train --seed 0 --no-prior =====
+l25_cv1_temporal_noprior_s0: train 1505 pairs (130 malignant) | val 403 (33) | cuda
+ep 00 loss 0.1540 | val AUC 0.8813 | 279s *
+ep 01 loss 0.1447 | val AUC 0.8790 | 284s 
+ep 02 loss 0.1418 | val AUC 0.8780 | 284s 
+ep 03 loss 0.1374 | val AUC 0.8726 | 284s 
+ep 04 loss 0.1264 | val AUC 0.8944 | 284s *
+ep 05 loss 0.1234 | val AUC 0.8731 | 284s 
+ep 06 loss 0.1247 | val AUC 0.8949 | 284s *
+ep 07 loss 0.1184 | val AUC 0.9011 | 284s *
+ep 08 loss 0.1205 | val AUC 0.8990 | 284s 
+ep 09 loss 0.1148 | val AUC 0.8979 | 284s 
+ep 10 loss 0.1145 | val AUC 0.8945 | 284s 
+ep 11 loss 0.1132 | val AUC 0.8910 | 284s 
+ep 12 loss 0.1135 | val AUC 0.8859 | 284s 
+ep 13 loss 0.1073 | val AUC 0.9023 | 284s *
+ep 14 loss 0.1104 | val AUC 0.9025 | 284s *
+ep 15 loss 0.1016 | val AUC 0.8957 | 284s 
+ep 16 loss 0.0987 | val AUC 0.8953 | 283s 
+ep 17 loss 0.1007 | val AUC 0.8943 | 283s 
+ep 18 loss 0.0949 | val AUC 0.8921 | 284s 
+ep 19 loss 0.0991 | val AUC 0.9016 | 284s 
+best val AUC 0.9025
+
+===== luna25_temporal.py train --seed 0 --no-prior =====
+l25_cv2_temporal_noprior_s0: train 1497 pairs (131 malignant) | val 501 (43) | cuda
+ep 00 loss 0.1393 | val AUC 0.9022 | 278s *
+ep 01 loss 0.1194 | val AUC 0.9020 | 282s 
+ep 02 loss 0.1216 | val AUC 0.9044 | 282s *
+ep 03 loss 0.1182 | val AUC 0.8906 | 282s 
+ep 04 loss 0.1063 | val AUC 0.8709 | 282s 
+ep 05 loss 0.1042 | val AUC 0.8778 | 282s 
+ep 06 loss 0.1106 | val AUC 0.8852 | 282s 
+ep 07 loss 0.0998 | val AUC 0.9116 | 282s *
+ep 08 loss 0.0996 | val AUC 0.8881 | 282s 
+ep 09 loss 0.1009 | val AUC 0.8847 | 282s 
+ep 10 loss 0.0884 | val AUC 0.8880 | 282s 
+ep 11 loss 0.0932 | val AUC 0.8762 | 282s 
+ep 12 loss 0.0838 | val AUC 0.8768 | 282s 
+ep 13 loss 0.0901 | val AUC 0.8795 | 282s 
+early stopping
+best val AUC 0.9116
+
+===== luna25_temporal.py train --seed 0 --no-prior =====
+l25_cv3_temporal_noprior_s0: train 1371 pairs (120 malignant) | val 529 (44) | cuda
+ep 00 loss 0.1560 | val AUC 0.9002 | 283s *
+ep 01 loss 0.1493 | val AUC 0.9033 | 288s *
+ep 02 loss 0.1435 | val AUC 0.8997 | 288s 
+ep 03 loss 0.1337 | val AUC 0.9059 | 288s *
+ep 04 loss 0.1309 | val AUC 0.9038 | 288s 
+ep 05 loss 0.1236 | val AUC 0.9038 | 288s 
+ep 06 loss 0.1292 | val AUC 0.9045 | 288s 
+ep 07 loss 0.1185 | val AUC 0.9041 | 288s 
+ep 08 loss 0.1190 | val AUC 0.9009 | 288s 
+ep 09 loss 0.1154 | val AUC 0.9082 | 288s *
+ep 10 loss 0.1036 | val AUC 0.9106 | 288s *
+ep 11 loss 0.1012 | val AUC 0.9094 | 288s 
+ep 12 loss 0.1080 | val AUC 0.9050 | 288s 
+ep 13 loss 0.1038 | val AUC 0.9038 | 288s 
+ep 14 loss 0.1019 | val AUC 0.9027 | 288s 
+ep 15 loss 0.1003 | val AUC 0.9074 | 288s 
+ep 16 loss 0.1043 | val AUC 0.9109 | 288s *
+ep 17 loss 0.0977 | val AUC 0.9087 | 288s 
+ep 18 loss 0.0990 | val AUC 0.9080 | 288s 
+ep 19 loss 0.0971 | val AUC 0.9046 | 288s 
+best val AUC 0.9109
+
+===== luna25_temporal.py train --seed 0 --no-prior =====
+l25_cv4_temporal_noprior_s0: train 1397 pairs (120 malignant) | val 475 (43) | cuda
+ep 00 loss 0.1501 | val AUC 0.9212 | 281s *
+ep 01 loss 0.1313 | val AUC 0.9216 | 286s *
+ep 02 loss 0.1271 | val AUC 0.9067 | 286s 
+ep 03 loss 0.1204 | val AUC 0.9032 | 286s 
+ep 04 loss 0.1135 | val AUC 0.9206 | 286s 
+ep 05 loss 0.1047 | val AUC 0.9167 | 286s 
+ep 06 loss 0.1207 | val AUC 0.9022 | 286s 
+ep 07 loss 0.1044 | val AUC 0.9100 | 286s 
+early stopping
+best val AUC 0.9216
+
+===== luna25_cv.py report =====
+  scored l25_scratch on 1223 nodules (fold1)
+  scored l25_scratch on 1241 nodules (fold0)
+  scored l25_temporal_s0 on 493 pairs (fold1)
+  scored l25_temporal_s0 on 475 pairs (fold0)
+  scored l25_temporal_noprior_s0 on 493 pairs (fold1)
+  scored l25_temporal_noprior_s0 on 475 pairs (fold0)
+fold 0: {'fold': 0, 'test_nodules': 1241, 'test_malignant': 111, 'auc_3d': 0.9004305190145898, 'auc_size': 0.8558159929841347, 'test_pairs': 475, 'test_pairs_malignant': 43, 'pairs_auc_single': 0.9245801033591732, 'pairs_auc_growth': 0.9357773471145564, 'pairs_auc_tg_msgf': 0.9110142118863049, 'pairs_auc_tg_noprior': 0.9027239448751077, 'pairs_auc_stacked': 0.9352928509905254}
+  scored l25_cv1 on 1145 nodules (fold2)
+  scored l25_cv1 on 1223 nodules (fold1)
+  scored l25_cv1_temporal_s0 on 403 pairs (fold2)
+  scored l25_cv1_temporal_s0 on 493 pairs (fold1)
+  scored l25_cv1_temporal_noprior_s0 on 403 pairs (fold2)
+  scored l25_cv1_temporal_noprior_s0 on 493 pairs (fold1)
+fold 1: {'fold': 1, 'test_nodules': 1223, 'test_malignant': 115, 'auc_3d': 0.8775388479045676, 'auc_size': 0.8318238894992936, 'test_pairs': 493, 'test_pairs_malignant': 44, 'pairs_auc_single': 0.9018526017412432, 'pairs_auc_growth': 0.9165823041101437, 'pairs_auc_tg_msgf': 0.9130390767361813, 'pairs_auc_tg_noprior': 0.9020550718768983, 'pairs_auc_stacked': 0.9316157116825269}
+  scored l25_cv2 on 1221 nodules (fold3)
+  scored l25_cv2 on 1145 nodules (fold2)
+  scored l25_cv2_temporal_s0 on 501 pairs (fold3)
+  scored l25_cv2_temporal_s0 on 403 pairs (fold2)
+  scored l25_cv2_temporal_noprior_s0 on 501 pairs (fold3)
+  scored l25_cv2_temporal_noprior_s0 on 403 pairs (fold2)
+fold 2: {'fold': 2, 'test_nodules': 1145, 'test_malignant': 98, 'auc_3d': 0.8575229518741594, 'auc_size': 0.8209753815566341, 'test_pairs': 403, 'test_pairs_malignant': 33, 'pairs_auc_single': 0.8742014742014742, 'pairs_auc_growth': 0.9318591318591318, 'pairs_auc_tg_msgf': 0.9232596232596233, 'pairs_auc_tg_noprior': 0.9018837018837018, 'pairs_auc_stacked': 0.9416052416052416}
+  scored l25_cv3 on 1333 nodules (fold4)
+  scored l25_cv3 on 1221 nodules (fold3)
+  scored l25_cv3_temporal_s0 on 529 pairs (fold4)
+  scored l25_cv3_temporal_s0 on 501 pairs (fold3)
+  scored l25_cv3_temporal_noprior_s0 on 529 pairs (fold4)
+  scored l25_cv3_temporal_noprior_s0 on 501 pairs (fold3)
+fold 3: {'fold': 3, 'test_nodules': 1221, 'test_malignant': 117, 'auc_3d': 0.8890592097113836, 'auc_size': 0.8450777282299021, 'test_pairs': 501, 'test_pairs_malignant': 43, 'pairs_auc_single': 0.9270336142987712, 'pairs_auc_growth': 0.9383568599573474, 'pairs_auc_tg_msgf': 0.9443485325479841, 'pairs_auc_tg_noprior': 0.9195694120036559, 'pairs_auc_stacked': 0.9504417589113435}
+  scored l25_cv4 on 1241 nodules (fold0)
+  scored l25_cv4 on 1333 nodules (fold4)
+  scored l25_cv4_temporal_s0 on 475 pairs (fold0)
+  scored l25_cv4_temporal_s0 on 529 pairs (fold4)
+  scored l25_cv4_temporal_noprior_s0 on 475 pairs (fold0)
+  scored l25_cv4_temporal_noprior_s0 on 529 pairs (fold4)
+fold 4: {'fold': 4, 'test_nodules': 1333, 'test_malignant': 114, 'auc_3d': 0.8714577666479572, 'auc_size': 0.823438826763381, 'test_pairs': 529, 'test_pairs_malignant': 44, 'pairs_auc_single': 0.9051546391752577, 'pairs_auc_growth': 0.9131208997188378, 'pairs_auc_tg_msgf': 0.9298500468603561, 'pairs_auc_tg_noprior': 0.9146672914714152, 'pairs_auc_stacked': 0.920618556701031}
+
+folds used: [0, 1, 2, 3, 4]  |  nodules 6163 (555 malignant)  |  pairs 2401 (207 malignant)
+
+       level                              model    n  malignant  pooled_AUC    AUC_95CI fold_AUC_mean_sd     AP
+nodule_level             3D model (single seed) 6163        555      0.8751 0.858-0.892   0.879 +- 0.016 0.4470
+nodule_level                          size only 6163        555      0.8303 0.809-0.852   0.835 +- 0.015 0.3473
+  pair_level                        single scan 2401        207      0.9036 0.881-0.924   0.907 +- 0.021 0.4928
+  pair_level                     growth formula 2401        207      0.9243 0.904-0.943   0.927 +- 0.012 0.6546
+  pair_level                            TG-MSGF 2401        207      0.9170 0.895-0.936   0.924 +- 0.014 0.6171
+  pair_level           TG-MSGF no-prior control 2401        207      0.9054 0.883-0.924   0.908 +- 0.008 0.4752
+  pair_level stacked: single + TG-MSGF + growth 2401        207      0.9322 0.912-0.950   0.936 +- 0.011 0.6865
+
+3D model vs size only (all nodules)                     delta +0.0448  95% CI [+0.027, +0.063]  p=0.000
+growth formula vs single scan                           delta +0.0207  95% CI [+0.006, +0.035]  p=0.003
+TG-MSGF vs single scan                                  delta +0.0134  95% CI [+0.000, +0.026]  p=0.043
+stacked: single + TG-MSGF + growth vs single scan       delta +0.0286  95% CI [+0.016, +0.042]  p=0.000
+TG-MSGF vs TG-MSGF no-prior control                     delta +0.0117  95% CI [+0.002, +0.021]  p=0.012
+stacked: single + TG-MSGF + growth vs growth formula    delta +0.0079  95% CI [+0.001, +0.015]  p=0.027
+-> ./work\luna25_cv
