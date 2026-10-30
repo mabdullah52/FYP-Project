@@ -82,7 +82,7 @@ def cam_snapshot(scan, world, cam, path):
     fig.tight_layout(); fig.savefig(path); plt.close(fig)
 
 
-RESCORE_TOP = 150          # fast mode: candidates re-scored with full TTA + MC dropout
+RESCORE_TOP = int(os.environ.get("LUNGSCAN_RESCORE_TOP", "150"))   # fast mode: candidates re-scored with full TTA + MC dropout
 RESCORE_MIN_PROB = 0.05    # ... plus any candidate whose quick probability reaches this
 
 
