@@ -16,8 +16,21 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 os.chdir(ROOT)
 sys.path.insert(0, ROOT)
 
-DATA = "/data/app_data" if os.path.isdir("/data") and os.access("/data", os.W_OK) else os.path.join(ROOT, "app_data")
-os.makedirs(DATA, exist_ok=True)
+def _writable_dir(*candidates):
+    """First folder we can create and write in (the container user may not own /app)."""
+    for d in candidates:
+        try:
+            os.makedirs(d, exist_ok=True)
+            probe = os.path.join(d, ".write_test")
+            open(probe, "w").close()
+            os.remove(probe)
+            return d
+        except OSError:
+            continue
+    raise SystemExit("no writable folder for the app data")
+
+
+DATA = _writable_dir("/data/app_data", os.path.join(ROOT, "app_data"), "/tmp/lungscan_app_data")
 PORT = int(os.environ.get("PORT", "7860"))
 os.environ.setdefault("LUNGSCAN_APP_DATA", DATA)
 os.environ.setdefault("LUNGCARE_DATA", DATA)
