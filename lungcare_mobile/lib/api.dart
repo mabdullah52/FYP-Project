@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'local_store.dart';
 
 /// Thin client for the LungCare patient server (patient_app/server.py).
 /// Every call carries the patient's access code in the X-Code header.
@@ -25,7 +25,7 @@ class Api {
   /// (for example an old Wi-Fi address from an earlier version, or a code the clinic replaced).
   Future<bool> restore() async {
     try {
-      final p = await SharedPreferences.getInstance().timeout(const Duration(seconds: 5));
+      final p = await LocalStore.instance().timeout(const Duration(seconds: 5));
       baseUrl = p.getString('baseUrl') ?? '';
       code = p.getString('code') ?? '';
       patientName = p.getString('name') ?? '';
@@ -56,14 +56,14 @@ class Api {
     final r = await _send('POST', '/api/login', body: {'code': accessCode.trim()}, auth: false);
     code = r['code'] as String;
     patientName = r['name'] as String? ?? '';
-    final p = await SharedPreferences.getInstance();
+    final p = await LocalStore.instance();
     await p.setString('baseUrl', baseUrl);
     await p.setString('code', code);
     await p.setString('name', patientName);
   }
 
   Future<void> logout() async {
-    final p = await SharedPreferences.getInstance();
+    final p = await LocalStore.instance();
     await p.remove('code');
     code = '';
   }
