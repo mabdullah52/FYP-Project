@@ -138,8 +138,13 @@ def mirror_for(local_dir):
     """A started BlobMirror (after restoring the data), or None when no storage is configured."""
     if not CONN:
         return None
-    m = BlobMirror(local_dir)
-    n = m.restore()
-    print(f"storage: restored {n} files from blob container '{CONTAINER}'")
+    try:
+        m = BlobMirror(local_dir, conn=CONN.strip().strip('"').strip("'"))
+        n = m.restore()
+    except Exception as e:      # never stop the app because of storage: run without it and say why
+        print("STORAGE ERROR - data will NOT be kept after a restart. Check AZURE_STORAGE_CONNECTION_STRING.",
+              type(e).__name__, str(e)[:300], flush=True)
+        return None
+    print(f"storage: restored {n} files from blob container '{CONTAINER}'", flush=True)
     m.start()
     return m
