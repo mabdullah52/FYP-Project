@@ -6,7 +6,7 @@ ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 rm -rf "$OUT" && mkdir -p "$OUT"
 cd "$ROOT"
 cp deploy/huggingface/hf_app.py deploy/huggingface/Dockerfile deploy/huggingface/README.md deploy/huggingface/.gitattributes "$OUT/"
-cp deploy/huggingface/requirements_space.txt "$OUT/"
+cp deploy/huggingface/requirements_space.txt deploy/huggingface/persist.py "$OUT/"
 for f in config.py luna_io.py candidate_gen.py predictor.py dataset.py model.py baselines.py infer.py explain.py \
          risk_model.py brock.py metrics.py; do cp "$f" "$OUT/"; done
 cp -r doctor_app patient_app "$OUT/"
