@@ -42,12 +42,14 @@ jobs:
         with:
           context: server
           push: true
-          tags: ghcr.io/mabdullah52/lungscan-ai:latest
+          tags: |
+            ghcr.io/mabdullah52/lungscan-ai:latest
+            ghcr.io/mabdullah52/lungscan-ai:v${{ github.run_number }}
       - name: Summary
         run: |
           echo "### Online image ready" >> $GITHUB_STEP_SUMMARY
-          echo "Image: \`ghcr.io/mabdullah52/lungscan-ai:latest\` (port 7860)" >> $GITHUB_STEP_SUMMARY
-          echo "Azure Container Apps pulls this image. After an update: Azure portal > your container app > Revisions > Create new revision." >> $GITHUB_STEP_SUMMARY
+          echo "Image: \`ghcr.io/mabdullah52/lungscan-ai:v${{ github.run_number }}\` (also \`:latest\`, port 7860)" >> $GITHUB_STEP_SUMMARY
+          echo "To update Azure: Containers > Edit and deploy > set the image tag to v${{ github.run_number }} > Save > Create." >> $GITHUB_STEP_SUMMARY
 
   android:
     runs-on: ubuntu-latest
