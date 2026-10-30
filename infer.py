@@ -25,15 +25,21 @@ from predictor import Predictor, lung_rads_size_category
 REVIEW_UNCERTAINTY = 0.15      # std of MC/TTA probabilities above which a finding is flagged
 
 
-def nms(df, radius_mm=6.0):
+def nms(df, radius_mm=6.0, size_aware=False):
+    """Keep the most probable candidate and drop others within radius_mm of it.
+    size_aware=True (used by the apps) also drops candidates inside the kept nodule itself
+    (within half its estimated diameter), so one large nodule is not reported twice.
+    The evaluation scripts keep the original fixed radius, so published CPM values are unchanged."""
     df = df.sort_values("probability", ascending=False).reset_index(drop=True)
     xyz = df[["coordX", "coordY", "coordZ"]].to_numpy()
+    diam = df["diameter_mm"].to_numpy(float) if size_aware and "diameter_mm" in df else None
     keep, taken = [], np.zeros(len(df), bool)
     for i in range(len(df)):
         if taken[i]:
             continue
         keep.append(i)
-        taken |= np.linalg.norm(xyz - xyz[i], axis=1) < radius_mm
+        r = max(radius_mm, 0.5 * diam[i]) if diam is not None else radius_mm
+        taken |= np.linalg.norm(xyz - xyz[i], axis=1) < r
     return df.iloc[keep].reset_index(drop=True)
 
 
@@ -142,7 +148,7 @@ class LungCAD:
         df["patch_idx"] = np.arange(len(df))
         df["probability"], df["uncertainty"] = s["prob"], s["uncertainty"]
         df["diameter_mm"] = s["diameter_mm"]
-        df = nms(df)
+        df = nms(df, size_aware=True)
         found = df[df.probability >= threshold].head(max_findings)
         # borderline candidates below threshold but highly uncertain are surfaced for review
         border = df[(df.probability < threshold) & (df.probability >= 0.25)
