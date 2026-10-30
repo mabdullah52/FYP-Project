@@ -39,7 +39,13 @@ class _GateState extends State<Gate> {
   @override
   void initState() {
     super.initState();
-    Api.instance.restore().then((ok) => setState(() => _loggedIn = ok));
+    Api.instance
+        .restore()
+        .timeout(const Duration(seconds: 25), onTimeout: () => false)
+        .catchError((_) => false)
+        .then((ok) {
+      if (mounted) setState(() => _loggedIn = ok);
+    });
   }
 
   @override
