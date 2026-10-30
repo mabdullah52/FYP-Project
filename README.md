@@ -77,8 +77,7 @@ python doctor_app/server.py          # doctor workstation  -> http://127.0.0.1:8
 python patient_app/server.py         # patient web app     -> http://127.0.0.1:8100
 ```
 
-The trained detector `work/runs/msgf_f9/best.pt` is included. The LUNA25 cancer-risk ensemble
-(`work/runs/l25_scratch*/best.pt`) is not, because of its size. Without it the app still detects nodules and shows the Brock clinical risk.
+The trained detector `work/runs/msgf_f9/best.pt` and the LUNA25 cancer-risk ensemble (`work/runs/l25_scratch*/best.pt`) are included.
 To reproduce training, follow `START_HERE.txt` (Windows) or `docs/PIPELINE_GUIDE.md`.
 
 Flutter apps: `doctor_flutter/BUILD_DOCTOR_FLUTTER.bat` (web + Android) and `lungcare_mobile/SETUP_AND_BUILD_ANDROID.bat`.
