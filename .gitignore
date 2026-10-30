@@ -19,6 +19,9 @@ work/local_settings.json
 # large / generated
 *.pt
 !work/runs/msgf_f9/best.pt
+!work/runs/l25_scratch/best.pt
+!work/runs/l25_scratch_s1/best.pt
+!work/runs/l25_scratch_s2/best.pt
 **/eval_subset*/predictions.csv
 lungenv/
 __pycache__/
