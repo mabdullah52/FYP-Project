@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:archive/archive.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -128,7 +129,34 @@ class Api {
   }
 
   /// Upload CT files for a patient. Each file is (name, path) on desktop/Android or (name, bytes) on web.
+  /// CT volumes such as .raw are stored uncompressed and are mostly air, so they shrink to about
+  /// half (or less) when zipped. Packing them into one .zip before the upload cuts the upload time;
+  /// the server unpacks .zip files. Already-compressed files (.mha, .gz, .zip) are sent as they are.
+  static const _packable = ['.raw', '.mhd', '.dcm', '.nii', '.nrrd', '.img', '.hdr'];
+
+  Future<List<UploadItem>> _packForUpload(List<UploadItem> files) async {
+    final lower = files.map((f) => f.name.toLowerCase()).toList();
+    final packable = lower.every((n) => _packable.any(n.endsWith) || !n.contains('.'));
+    // only files already in memory (the web app); on Android/Windows the files are streamed from disk
+    if (!packable || files.any((f) => f.bytes == null)) return files;
+    final archive = Archive();
+    for (final f in files) {
+      final data = f.bytes!;
+      archive.addFile(ArchiveFile(f.name, data.length, data));
+    }
+    final zipped = ZipEncoder().encode(archive, level: 1);
+    if (zipped == null) return files;
+    final first = files.first.name;
+    final base = first.contains('.') ? first.substring(0, first.lastIndexOf('.')) : first;
+    return [UploadItem('$base.zip', bytes: Uint8List.fromList(zipped))];
+  }
+
   Future<int> uploadStudy(int patientId, List<UploadItem> files) async {
+    try {
+      files = await _packForUpload(files);
+    } catch (_) {
+      // packing is only a speed-up: if it fails, upload the original files
+    }
     final req = http.MultipartRequest('POST', uri('/api/studies/upload'))
       ..headers.addAll(_auth)
       ..fields['patient_id'] = '$patientId';
