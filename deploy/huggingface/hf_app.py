@@ -35,6 +35,25 @@ PORT = int(os.environ.get("PORT", "7860"))
 os.environ.setdefault("LUNGSCAN_APP_DATA", DATA)
 os.environ.setdefault("LUNGCARE_DATA", DATA)
 os.environ.setdefault("LUNGSCAN_DEVICE", "cpu")
+
+
+def _cpu_limit():
+    """CPUs this container may really use (cgroup quota), not the host's core count."""
+    try:
+        quota, period = open("/sys/fs/cgroup/cpu.max").read().split()
+        if quota != "max":
+            return max(1, round(int(quota) / int(period)))
+    except (OSError, ValueError):
+        pass
+    return os.cpu_count() or 1
+
+
+CPUS = _cpu_limit()
+for _v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS"):          # use every CPU Azure gives us, no more
+    os.environ.setdefault(_v, str(CPUS))
+# on a CPU the full 8-flip TTA + MC dropout is the slow part: give it to the 40 most suspicious
+# candidates instead of 150 (findings shown are at most 10, so their scores are unchanged in practice)
+os.environ.setdefault("LUNGSCAN_RESCORE_TOP", "40")
 os.environ.setdefault("LUNGSCAN_FINDER_GPU", "0")
 os.environ.setdefault("DOCTOR_API", f"http://127.0.0.1:{PORT}")
 
@@ -75,5 +94,5 @@ app = Starlette(routes=[
 
 if __name__ == "__main__":
     import uvicorn
-    print(f"LungScan AI online on port {PORT}  (data: {DATA})")
+    print(f"LungScan AI online on port {PORT}  (data: {DATA}, CPUs: {CPUS})")
     uvicorn.run(app, host="0.0.0.0", port=PORT, log_level="warning")

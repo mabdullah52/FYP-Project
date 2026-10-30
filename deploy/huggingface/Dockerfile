@@ -1,5 +1,5 @@
 FROM python:3.11-slim
-ENV PYTHONUNBUFFERED=1 OMP_NUM_THREADS=2 MPLBACKEND=Agg
+ENV PYTHONUNBUFFERED=1 MPLBACKEND=Agg
 RUN useradd -m -u 1000 user
 WORKDIR /app
 COPY requirements_space.txt requirements.txt
