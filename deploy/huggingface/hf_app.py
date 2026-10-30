@@ -8,6 +8,7 @@
 The administrator account is created from the Space secrets ADMIN_USER / ADMIN_PASSWORD, so nobody
 else can claim it. Data lives in /data (persistent storage) if available, otherwise it resets on restart.
 """
+import contextlib
 import importlib.util
 import os
 import sys
@@ -58,6 +59,11 @@ os.environ.setdefault("LUNGSCAN_FINDER_GPU", "0")
 os.environ.setdefault("DOCTOR_API", f"http://127.0.0.1:{PORT}")
 
 
+# keep patients and studies across restarts (Azure Blob Storage, if configured)
+from persist import mirror_for  # noqa: E402
+MIRROR = mirror_for(DATA)
+
+
 def load(name, path):
     spec = importlib.util.spec_from_file_location(name, os.path.join(ROOT, path))
     mod = importlib.util.module_from_spec(spec)
@@ -86,13 +92,32 @@ from starlette.applications import Starlette  # noqa: E402
 from starlette.responses import RedirectResponse  # noqa: E402
 from starlette.routing import Mount, Route  # noqa: E402
 
+
+
+@contextlib.asynccontextmanager
+async def _lifespan(_app):
+    yield
+    if MIRROR is not None:            # server stopping (restart or scale to zero): save the last changes
+        MIRROR.stop.set()
+        up, gone = MIRROR.sync()
+        print(f"storage: final sync, {up} uploaded, {gone} deleted")
+
+
 app = Starlette(routes=[
     Route("/patient", lambda r: RedirectResponse("/patient/")),
     Mount("/patient", app=patient.app),
     Mount("/", app=doctor.app),
-])
+], lifespan=_lifespan)
+
+if MIRROR is not None:
+    _inner = app
+
+    async def app(scope, receive, send):  # noqa: F811 - wraps the app: any change -> sync soon
+        if scope.get("type") == "http" and scope.get("method") not in ("GET", "HEAD", "OPTIONS"):
+            MIRROR.dirty.set()
+        await _inner(scope, receive, send)
 
 if __name__ == "__main__":
     import uvicorn
-    print(f"LungScan AI online on port {PORT}  (data: {DATA}, CPUs: {CPUS})")
+    print(f"LungScan AI online on port {PORT}  (data: {DATA}, CPUs: {CPUS}, storage: {'Azure Blob' if MIRROR else 'local only - resets on restart'})")
     uvicorn.run(app, host="0.0.0.0", port=PORT, log_level="warning")
