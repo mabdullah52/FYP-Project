@@ -20,12 +20,32 @@ class Api {
   String code = '';
   String patientName = '';
 
+  /// Restores a saved login. Returns false (= show the login screen) when nothing is saved,
+  /// when the phone's storage cannot be read, or when the saved server or code no longer works
+  /// (for example an old Wi-Fi address from an earlier version, or a code the clinic replaced).
   Future<bool> restore() async {
-    final p = await SharedPreferences.getInstance();
-    baseUrl = p.getString('baseUrl') ?? '';
-    code = p.getString('code') ?? '';
-    patientName = p.getString('name') ?? '';
-    return baseUrl.isNotEmpty && code.isNotEmpty;
+    try {
+      final p = await SharedPreferences.getInstance().timeout(const Duration(seconds: 5));
+      baseUrl = p.getString('baseUrl') ?? '';
+      code = p.getString('code') ?? '';
+      patientName = p.getString('name') ?? '';
+    } catch (_) {
+      return false;
+    }
+    if (baseUrl.isEmpty || code.isEmpty) return false;
+    try {
+      await http
+          .get(Uri.parse('$baseUrl/api/home'), headers: {'X-Code': code})
+          .timeout(const Duration(seconds: 15))
+          .then((r) {
+        if (r.statusCode >= 300) throw ApiException('saved login no longer valid');
+      });
+      return true;
+    } catch (_) {
+      code = '';
+      baseUrl = '';   // the login screen then offers the built-in online address
+      return false;
+    }
   }
 
   Future<void> login(String url, String accessCode) async {
