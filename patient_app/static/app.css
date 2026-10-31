@@ -28,7 +28,7 @@ input[type=range] { padding: 0; border: 0; accent-color: var(--accent); margin-t
 
 .login { min-height: 100vh; display: grid; place-items: center; padding: 20px; }
 .login-card { width: min(420px, 100%); background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 28px 24px; text-align: center; }
-.login-card .logo { font-size: 44px; } .login-card form { text-align: left; margin: 18px 0 8px; }
+.login-card .logo { color: var(--accent, #00d4c0); display: flex; justify-content: center; } .login-card form { text-align: left; margin: 18px 0 8px; }
 .login-card label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 6px; }
 #code { text-transform: uppercase; letter-spacing: 6px; font-size: 22px; text-align: center; font-family: Consolas, monospace; }
 
