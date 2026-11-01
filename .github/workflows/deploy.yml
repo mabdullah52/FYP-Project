@@ -30,7 +30,7 @@ jobs:
         working-directory: doctor_flutter
         run: |
           flutter pub get
-          flutter build web --release --base-href /doctor/
+          flutter build web --release --base-href /doctor/ --no-web-resources-cdn
       - name: Assemble the server folder
         run: bash deploy/huggingface/assemble.sh server
       - uses: docker/login-action@v3
