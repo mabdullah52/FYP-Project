@@ -1,0 +1,8 @@
+condition,description,CPM,CPM_95CI,sens_at_1FP,sens_at_4FP,sens_at_8FP,mean_uncertainty_nodules,mean_uncertainty_all,n_scans,CPM_change_vs_clean
+clean,Original scans,0.8830,0.817-0.941,0.905,0.962,0.981,0.0374,0.0057,88,0.0000
+noise25,Noise 25 HU,0.8857,0.827-0.941,0.895,0.962,0.981,0.0365,0.0058,88,0.0027
+noise50,Noise 50 HU,0.8844,0.821-0.941,0.914,0.962,0.981,0.0361,0.0061,88,0.0014
+noise100,Noise 100 HU,0.8558,0.784-0.920,0.895,0.943,0.971,0.0372,0.0069,88,-0.0272
+slices2,50% of slices missing (2x thicker),0.8381,0.781-0.903,0.867,0.914,0.943,0.0363,0.0061,88,-0.0449
+slices3,67% of slices missing (3x thicker),0.6639,0.586-0.748,0.657,0.800,0.829,0.0346,0.0066,88,-0.2191
+noise50+slices2,Noise 50 HU + 50% slices missing,0.8435,0.766-0.903,0.848,0.914,0.952,0.0363,0.0066,88,-0.0395
