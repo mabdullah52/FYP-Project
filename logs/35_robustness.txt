@@ -1,0 +1,108 @@
+
+===== robustness.py =====
+device: cpu   conditions: ['clean', 'noise25', 'noise50', 'noise100', 'slices2', 'slices3', 'noise50+slices2']
+88 scans of subset 9
+  1/88 scans, 7.6 min, about 662 min left
+  2/88 scans, 19.0 min, about 816 min left
+  3/88 scans, 32.0 min, about 908 min left
+  4/88 scans, 41.9 min, about 879 min left
+  5/88 scans, 59.1 min, about 981 min left
+  6/88 scans, 70.1 min, about 957 min left
+  7/88 scans, 84.9 min, about 982 min left
+  8/88 scans, 99.4 min, about 994 min left
+  9/88 scans, 104.2 min, about 914 min left
+  10/88 scans, 121.4 min, about 947 min left
+  11/88 scans, 139.9 min, about 980 min left
+  12/88 scans, 153.6 min, about 973 min left
+  13/88 scans, 166.2 min, about 959 min left
+  14/88 scans, 178.7 min, about 945 min left
+  15/88 scans, 192.6 min, about 937 min left
+  16/88 scans, 202.1 min, about 909 min left
+  17/88 scans, 214.4 min, about 895 min left
+  18/88 scans, 226.6 min, about 881 min left
+  19/88 scans, 235.2 min, about 854 min left
+  20/88 scans, 249.0 min, about 847 min left
+  21/88 scans, 260.4 min, about 831 min left
+  22/88 scans, 275.9 min, about 828 min left
+  23/88 scans, 290.3 min, about 820 min left
+  24/88 scans, 296.5 min, about 791 min left
+  25/88 scans, 316.6 min, about 798 min left
+  26/88 scans, 328.5 min, about 783 min left
+  27/88 scans, 342.7 min, about 774 min left
+  28/88 scans, 353.6 min, about 758 min left
+  29/88 scans, 361.0 min, about 735 min left
+  30/88 scans, 372.5 min, about 720 min left
+  31/88 scans, 385.7 min, about 709 min left
+  32/88 scans, 392.4 min, about 687 min left
+  33/88 scans, 404.5 min, about 674 min left
+  34/88 scans, 415.1 min, about 659 min left
+  35/88 scans, 428.1 min, about 648 min left
+  36/88 scans, 438.3 min, about 633 min left
+  37/88 scans, 452.8 min, about 624 min left
+  38/88 scans, 473.7 min, about 623 min left
+  39/88 scans, 499.1 min, about 627 min left
+  40/88 scans, 508.5 min, about 610 min left
+  41/88 scans, 518.4 min, about 594 min left
+  42/88 scans, 532.9 min, about 584 min left
+  43/88 scans, 547.6 min, about 573 min left
+  44/88 scans, 557.4 min, about 557 min left
+  45/88 scans, 569.4 min, about 544 min left
+  46/88 scans, 583.4 min, about 533 min left
+  47/88 scans, 591.8 min, about 516 min left
+  48/88 scans, 600.3 min, about 500 min left
+  49/88 scans, 612.6 min, about 488 min left
+  50/88 scans, 619.8 min, about 471 min left
+  51/88 scans, 630.1 min, about 457 min left
+  52/88 scans, 637.1 min, about 441 min left
+  53/88 scans, 644.7 min, about 426 min left
+  54/88 scans, 661.4 min, about 416 min left
+  55/88 scans, 666.7 min, about 400 min left
+  56/88 scans, 675.3 min, about 386 min left
+  57/88 scans, 682.8 min, about 371 min left
+  58/88 scans, 691.0 min, about 357 min left
+  59/88 scans, 708.0 min, about 348 min left
+  60/88 scans, 715.6 min, about 334 min left
+  61/88 scans, 721.3 min, about 319 min left
+  62/88 scans, 732.1 min, about 307 min left
+  63/88 scans, 742.1 min, about 294 min left
+  64/88 scans, 753.5 min, about 283 min left
+  65/88 scans, 759.4 min, about 269 min left
+  66/88 scans, 773.9 min, about 258 min left
+  67/88 scans, 780.8 min, about 245 min left
+  68/88 scans, 785.2 min, about 231 min left
+  69/88 scans, 791.1 min, about 218 min left
+  70/88 scans, 801.9 min, about 206 min left
+  71/88 scans, 814.6 min, about 195 min left
+  72/88 scans, 824.4 min, about 183 min left
+  73/88 scans, 839.5 min, about 172 min left
+  74/88 scans, 851.0 min, about 161 min left
+  75/88 scans, 858.4 min, about 149 min left
+  76/88 scans, 879.5 min, about 139 min left
+  77/88 scans, 886.4 min, about 127 min left
+  78/88 scans, 897.1 min, about 115 min left
+  79/88 scans, 910.9 min, about 104 min left
+  80/88 scans, 933.1 min, about 93 min left
+  81/88 scans, 945.8 min, about 82 min left
+  82/88 scans, 961.4 min, about 70 min left
+  83/88 scans, 973.0 min, about 59 min left
+  84/88 scans, 989.0 min, about 47 min left
+  85/88 scans, 1000.9 min, about 35 min left
+  86/88 scans, 1008.4 min, about 23 min left
+  87/88 scans, 1017.4 min, about 12 min left
+  88/88 scans, 1030.2 min, about 0 min left
+clean              CPM 0.8830  (0.817-0.941)
+noise25            CPM 0.8857  (0.827-0.941)
+noise50            CPM 0.8844  (0.821-0.941)
+noise100           CPM 0.8558  (0.784-0.920)
+slices2            CPM 0.8381  (0.781-0.903)
+slices3            CPM 0.6639  (0.586-0.748)
+noise50+slices2    CPM 0.8435  (0.766-0.903)
+      condition                        description    CPM    CPM_95CI  sens_at_1FP  sens_at_4FP  sens_at_8FP  mean_uncertainty_nodules  mean_uncertainty_all  n_scans  CPM_change_vs_clean
+          clean                     Original scans 0.8830 0.817-0.941        0.905        0.962        0.981                    0.0374                0.0057       88               0.0000
+        noise25                        Noise 25 HU 0.8857 0.827-0.941        0.895        0.962        0.981                    0.0365                0.0058       88               0.0027
+        noise50                        Noise 50 HU 0.8844 0.821-0.941        0.914        0.962        0.981                    0.0361                0.0061       88               0.0014
+       noise100                       Noise 100 HU 0.8558 0.784-0.920        0.895        0.943        0.971                    0.0372                0.0069       88              -0.0272
+        slices2 50% of slices missing (2x thicker) 0.8381 0.781-0.903        0.867        0.914        0.943                    0.0363                0.0061       88              -0.0449
+        slices3 67% of slices missing (3x thicker) 0.6639 0.586-0.748        0.657        0.800        0.829                    0.0346                0.0066       88              -0.2191
+noise50+slices2   Noise 50 HU + 50% slices missing 0.8435 0.766-0.903        0.848        0.914        0.952                    0.0363                0.0066       88              -0.0395
+-> ./work\robustness
