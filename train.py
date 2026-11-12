@@ -124,6 +124,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--name", default="msgf")
     ap.add_argument("--test-subset", type=int, default=C.DEFAULT_TEST_SUBSET)
+    ap.add_argument("--test-subsets", default=None,
+                    help="several held-out subsets, e.g. 0,1 (5-fold CV, see cv5.py); overrides --test-subset")
     ap.add_argument("--val-subset", type=int, default=C.DEFAULT_VAL_SUBSET)
     ap.add_argument("--epochs", type=int, default=C.TRAIN["epochs"])
     ap.add_argument("--batch-size", type=int, default=C.TRAIN["batch_size"])
@@ -144,6 +146,9 @@ def main():
     ap.add_argument("--hard-meta", default=None, help="csv from mine_hard_negatives.py (round 2)")
     ap.add_argument("--init-from", default=None, help="run name whose best.pt initialises the weights")
     args = ap.parse_args()
+    if args.test_subsets:
+        tests = [int(s) for s in args.test_subsets.split(",")]
+        args.test_subset = tests[0] if len(tests) == 1 else tests
 
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
