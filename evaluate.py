@@ -140,6 +140,9 @@ def main():
     run_dir = os.path.join(C.RUNS_DIR, args.run)
     pred = Predictor(os.path.join(run_dir, "best.pt"), tta=not args.no_tta, mc=args.mc, apply_calibration=False)
     subset = pred.cfg["test_subset"] if args.subset is None else args.subset
+    if isinstance(subset, list):
+        raise SystemExit(f"run '{args.run}' holds out subsets {subset}: evaluate it with cv5.py, "
+                         "or pass --subset <one of them>")
     out_dir = os.path.join(run_dir, f"eval_subset{subset}{args.tag}")
     os.makedirs(out_dir, exist_ok=True)
 

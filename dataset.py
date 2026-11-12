@@ -93,14 +93,17 @@ class BalancedEpochSampler(Sampler):
 
 
 def split_meta(meta_path, test_subset, val_subset, extra_meta=None):
+    """test_subset: one subset number, or a list of them (5-fold CV holds out two per fold)."""
+    tests = list(test_subset) if isinstance(test_subset, (list, tuple)) else [test_subset]
+    assert val_subset not in tests, "validation subset must not be a test subset"
     meta = pd.read_csv(meta_path)
     if extra_meta is not None and os.path.exists(extra_meta):      # model-mined hard negatives
         hard = pd.read_csv(extra_meta)
-        hard = hard[~hard.subset.isin([test_subset, val_subset])]  # never mine from val/test
+        hard = hard[~hard.subset.isin(tests + [val_subset])]       # never mine from val/test
         meta = pd.concat([meta, hard], ignore_index=True)
-    tr = meta[~meta.subset.isin([test_subset, val_subset])]
+    tr = meta[~meta.subset.isin(tests + [val_subset])]
     va = meta[meta.subset == val_subset]
-    te = meta[meta.subset == test_subset]
+    te = meta[meta.subset.isin(tests)]
     # hard guarantee against patient leakage
     assert not (set(tr.seriesuid) & set(va.seriesuid)) and not (set(tr.seriesuid) & set(te.seriesuid))
     return tr, va, te
