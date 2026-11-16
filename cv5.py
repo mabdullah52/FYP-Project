@@ -244,6 +244,58 @@ def cmd_report(args):
     print("->", OUT)
 
 
+def _triage_row(name, df, pcts=(1, 2, 5, 10)):
+    y, p, u = df["class"].to_numpy(), df.probability.to_numpy(), df.uncertainty.to_numpy()
+    err = ((p >= 0.5) != (y == 1)).astype(int)
+    order = np.argsort(-u, kind="stable")
+    caught = np.cumsum(err[order]) / max(1, err.sum())
+    row = {"set": name, "candidates": len(df), "errors": int(err.sum()),
+           "false_pos": int(((p >= 0.5) & (y == 0)).sum()), "false_neg": int(((p < 0.5) & (y == 1)).sum()),
+           "unc_AUROC_errors": round(float(roc_auc_score(err, u)), 4) if 0 < err.sum() < len(err) else None,
+           "unc_median": float(np.median(u)), "unc_p95": float(np.percentile(u, 95))}
+    for q in pcts:
+        row[f"caught@{q}%"] = round(float(caught[max(0, int(round(q / 100 * len(df))) - 1)]), 3)
+    return row, err
+
+
+def cmd_triage(args):
+    """Uncertainty triage per fold, per test subset and pooled (each fold refers its own most uncertain
+    candidates), plus the one-fold paper model on subset 9 computed the same way."""
+    from luna_io import index_scans
+    scan_index = index_scans()
+    rows = []
+    for arch in ARCH_LABEL:
+        df, done = collect(arch, scan_index)
+        if df is None:
+            continue
+        pooled_caught = {q: 0 for q in (1, 2, 5, 10)}
+        tot = 0
+        for k in done:
+            d = df[df.fold == k]
+            r, err = _triage_row(f"{ARCH_LABEL[arch]} fold {k}", d)
+            rows.append(r)
+            tot += r["errors"]
+            for q in pooled_caught:
+                pooled_caught[q] += r[f"caught@{q}%"] * r["errors"]
+            for s in FOLDS[k][0]:
+                rows.append(_triage_row(f"{ARCH_LABEL[arch]} fold {k}, subset {s} only", d[d.subset == s])[0])
+        r, _ = _triage_row(f"{ARCH_LABEL[arch]} pooled, one global ranking", df)
+        rows.append(r)
+        rows.append({"set": f"{ARCH_LABEL[arch]} pooled, each fold refers its own top q%", "errors": tot,
+                     **{f"caught@{q}%": round(pooled_caught[q] / max(1, tot), 3) for q in pooled_caught}})
+    old = os.path.join(C.RUNS_DIR, C.FINAL_RUN, "eval_subset9", "predictions.csv")
+    if os.path.exists(old):
+        rows.append(_triage_row(f"one-fold paper model ({C.FINAL_RUN}), subset 9", pd.read_csv(old))[0])
+    else:
+        print("(one-fold predictions not found:", old, ")")
+    t = pd.DataFrame(rows)
+    os.makedirs(OUT, exist_ok=True)
+    t.to_csv(os.path.join(OUT, "cv5_triage.csv"), index=False)
+    with pd.option_context("display.width", 250, "display.max_columns", 30):
+        print(t.to_string(index=False))
+    print("->", os.path.join(OUT, "cv5_triage.csv"))
+
+
 def plot(curves):
     import matplotlib
     matplotlib.use("Agg")
@@ -279,8 +331,9 @@ def main():
     for p in (r, sub.add_parser("report")):
         p.add_argument("--n-boot", type=int, default=1000)
         p.add_argument("--n-boot-paired", type=int, default=2000)
+    sub.add_parser("triage")
     args = ap.parse_args()
-    {"run": cmd_run, "report": cmd_report}[args.cmd](args)
+    {"run": cmd_run, "report": cmd_report, "triage": cmd_triage}[args.cmd](args)
 
 
 if __name__ == "__main__":
