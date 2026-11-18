@@ -1,0 +1,237 @@
+% =====================================================================================
+%  Paper 2 - growth-aware malignancy prediction on LUNA25.
+%  Compile on Overleaf with pdfLaTeX + BibTeX (IEEEtran is built in there).
+% =====================================================================================
+\IfFileExists{IEEEtran.cls}{\documentclass[conference]{IEEEtran}}{%
+  \documentclass[10pt,twocolumn]{article}\usepackage[margin=0.7in]{geometry}}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{cite}
+\usepackage[hidelinks]{hyperref}
+
+\makeatletter
+\providecommand{\IEEEauthorblockN}[1]{#1\\}
+\providecommand{\IEEEauthorblockA}[1]{\small #1}
+\@ifundefined{IEEEkeywords}{\newenvironment{IEEEkeywords}{\par\noindent\textbf{\textit{Index Terms}---}}{\par}}{}
+\makeatother
+
+\begin{document}
+
+\title{Does Last Year's Scan Help? Growth-Aware Malignancy Prediction for Screen-Detected Lung Nodules on LUNA25}
+
+\author{\IEEEauthorblockN{Abdullah Asim, Hussnain Khalid and Rabia Masood$^{*}$}
+\IEEEauthorblockA{Department of Computer Sciences, Bahria University Lahore Campus, Lahore, Pakistan\\
+abdullahasimnaawaz@gmail.com, hussnainkhalid421@gmail.com, rabiamasood.bulc@bahria.edu.pk\\
+$^{*}$Corresponding author: Rabia Masood (rabiamasood.bulc@bahria.edu.pk)}}
+
+\maketitle
+
+\begin{abstract}
+Radiologists rarely judge a screen-detected lung nodule from one CT alone: when an earlier screening round exists, growth is among the strongest signs of cancer. Most deep-learning malignancy models still look at a single time point. We study, on the public LUNA25 cohort (6{,}163 nodules, 555 malignant, 2{,}120 participants of the National Lung Screening Trial), how much a 3D convolutional network adds over nodule size, and how much the prior-year scan adds on top of that. A compact multi-window, scale-gated 3D network (MSGF-Net) predicts malignancy from a 48\,mm patch around each nodule. On 424 held-out participants it reaches an AUC of 0.900 (95\% CI 0.861--0.934), against 0.856 for predicted diameter alone ($\Delta=+0.044$, $p=0.001$). For the 2{,}401 nodules seen at an earlier round we compare three ways of using the prior scan: a four-feature growth formula, a learned temporal network (TG-MSGF) whose gate weighs the change between the two encodings, and a stacked combination. In five-fold, patient-level cross-validation the single-scan model reaches 0.904 on these nodules; the growth formula raises this to 0.924 ($p=0.003$), TG-MSGF to 0.917 ($p=0.043$) and the combination to 0.932 ($p<0.001$). A control network that receives the current scan twice stays at 0.905, so the gain comes from the prior image rather than from extra capacity. On a single test fold the same ordering appears but the differences are not significant, which we report as a caution about sample size. The models run inside a clinician application that shows the image-based risk next to the Brock score.
+\end{abstract}
+
+\begin{IEEEkeywords}
+lung cancer screening, malignancy prediction, nodule growth, longitudinal CT, LUNA25, NLST, 3D CNN, cross-validation
+\end{IEEEkeywords}
+
+% =====================================================================================
+\section{Introduction}
+Annual low-dose CT lowers lung-cancer mortality in heavy smokers~\cite{nlst2011}, yet most nodules it finds are benign. Management therefore depends on estimating, for each nodule, how likely it is to be cancer. Guidelines such as Lung-RADS~\cite{lungrads2022} and the Fleischner recommendations~\cite{macmahon2017fleischner} rely mainly on size and on change in size over time, and the Brock model~\cite{mcwilliams2013brock} adds patient and morphological factors to the size of a nodule seen at a baseline scan.
+
+Deep networks can read more from the image than its diameter. Ardila \emph{et al.}~\cite{ardila2019endtoend} showed that a 3D model trained on NLST outperformed six radiologists when no prior CT was available and performed on par with them when a prior CT was available. Their data and models are not public, however, and many later studies report a single train/test split on small cohorts. The LUNA25 challenge~\cite{luna25} released pathology-confirmed NLST nodules together with the screening round and lesion identity, which for the first time allows a public, patient-level study of whether, and by how much, a prior scan improves an image-based risk estimate.
+
+This paper asks three concrete questions:
+\begin{enumerate}
+\item How much better than predicted size is a compact 3D network at separating malignant from benign nodules, and does the gain hold across size groups?
+\item When the same nodule was imaged one year earlier, does the prior scan improve the estimate, and is a learned temporal model better than a simple growth formula?
+\item Are these conclusions stable across patient-level cross-validation folds, or do they depend on one lucky split?
+\end{enumerate}
+
+Our contributions follow from these questions. We report a single-scan malignancy model that clearly beats size on unseen participants, including within each size group. We introduce TG-MSGF, a temporal extension in which a learned gate decides how much the difference between current and prior encodings should matter, and we test it against both a growth formula and a no-prior control that has identical capacity. Finally, we evaluate everything with five-fold patient-level cross-validation and paired bootstrap tests and report the folds on which the gains are not significant.
+
+% =====================================================================================
+\section{Related Work}
+\textbf{Image-based risk.} Early work on LIDC-IDRI~\cite{armato2011lidc} predicted radiologists' subjective malignancy ratings, which are not pathology labels. NLST-based studies use confirmed outcomes; the end-to-end model of Ardila \emph{et al.}~\cite{ardila2019endtoend} combined a whole-volume model with a cancer region-of-interest model and reported an AUC of 0.944 on 6{,}716 NLST test cases; without a prior CT it produced 11\% fewer false positives and 5\% fewer false negatives than six radiologists, and with a prior CT it performed on par with them. LUNA25~\cite{luna25} provides a public subset of such nodules with annotated positions, making results comparable across groups. In the LUNA25 challenge, the best algorithm trained on these data reached an AUC of 0.78 on 5--15\,mm indeterminate nodules from three European screening trials, against 0.70 for the average of 65 radiologists~\cite{peeters2026luna25}; prior scans were not part of that task.
+
+\textbf{Growth.} Volume doubling time and diameter change are established markers of malignancy and drive follow-up intervals in Lung-RADS and the Fleischner guidelines~\cite{lungrads2022,macmahon2017fleischner}. Learned temporal models either concatenate the two scans as channels or encode them with a shared network and compare the features. We follow the second design because it keeps the single-scan encoder usable on its own and lets us build a control with the same number of parameters.
+
+\textbf{Backbone.} The encoder is MSGF-Net, which we developed for nodule false-positive reduction on LUNA16~\cite{setio2017luna16,asim2026msgf}. It reads a 32\,mm and a 48\,mm view in three Hounsfield-unit windows through residual squeeze-excitation blocks~\cite{hu2018se,he2016resnet} and fuses the two scales with a learned gate, which is in the spirit of multi-scale contextual 3D networks~\cite{dou2017multilevel}.
+
+% =====================================================================================
+\section{Data}
+LUNA25 contains 6{,}163 nodules with known position in 4{,}069 low-dose CT scans of 2{,}120 NLST participants (mean age $63.3\pm5.2$ years); 555 nodules (9.0\%) are malignant. We extracted a 48\,mm cube at 1\,mm spacing around each nodule.
+
+\textbf{Source and licence.} We used the public LUNA25 training and development set~\cite{luna25}, drawn from NLST participants enrolled in 2002--2004 at 33 US centres. The images (4{,}069 volumes in MetaImage \texttt{.mha} format, 221.1\,GB) are released under CC BY 4.0 (Zenodo record 14223624), and the annotation file under CC BY-NC 4.0 (DOI 10.5281/zenodo.14673658), which permits the non-commercial research use made here; no separate permission is required. For each nodule the file gives the series identifier, world coordinates, malignancy label, participant identifier, an identifier that links the same lesion across screening rounds, age and sex. This link between rounds is what makes LUNA25 suitable for studying growth: it is, to our knowledge, the largest public set of screen-detected nodules with malignancy labels and repeat scans.
+
+\textbf{Splits.} Participants were divided into five folds with a stratified group split (seed 2026), so that all nodules and scans of one person fall in one fold. The main analysis uses fold~0 as test (1{,}241 nodules, 111 malignant, 424 participants), fold~1 as validation (1{,}223 nodules) and folds 2--4 for training (3{,}699 nodules). The validation fold is used only for early stopping, Platt calibration~\cite{platt1999} and fitting the small combination models.
+
+\textbf{Pairs.} LUNA25 records which annotations belong to the same lesion across screening rounds. Linking them gives 2{,}401 current--prior pairs from 3{,}762 lesions; the median interval is 1.0 year, and no lesion changes label between rounds. Of the pairs, 207 are malignant. Pairs inherit the participant's fold, so the pair test set of fold~0 has 475 pairs (43 malignant, 223 participants).
+
+% =====================================================================================
+\section{Methods}
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/paper2_method.png}
+\caption{Study design. Current and prior 48\,mm nodule cubes are encoded by MSGF-Net; single-scan risk, a growth formula, the temporal model TG-MSGF and a no-prior control are compared, and a stacked model combines them. All models are evaluated on held-out participants.}
+\label{fig:method}
+\end{figure*}
+
+\subsection{Single-scan malignancy model}
+We train MSGF-Net from random initialisation to predict malignancy from one 48\,mm patch, using the recipe of our detection work: focal loss~\cite{lin2017focal}, AdamW with cosine decay, class-balanced sampling and flip, rotation, shift and intensity augmentation. Three seeds are trained and their calibrated outputs averaged. At test time each nodule is scored on eight flipped views with Monte-Carlo dropout in the head~\cite{gal2016dropout}. We also tried initialising from the LUNA16 detection weights and fusing the network output with age by logistic regression.
+
+\textbf{Size baseline.} Because LUNA25 does not provide diameters, the reference is the nodule diameter predicted by the LUNA16 MSGF-Net (median 6.2\,mm, IQR 5.1--8.5\,mm), passed through a logistic regression fitted on the validation fold. This keeps the comparison fair: both arms see the same patch.
+
+\subsection{Using the prior scan}
+\textbf{Growth formula.} A logistic regression on four standardised features: the current single-scan risk, the current predicted diameter, the change in diameter per year and the change in single-scan risk between the two rounds.
+
+\textbf{TG-MSGF.} A shared MSGF-Net encoder, initialised from the single-scan model, maps the current and prior patches to descriptors $z_c$ and $z_p$. With the change $d=z_c-z_p$ and the interval $\Delta t$ in years, a gate
+\begin{equation}
+\beta=\sigma\!\left(W_2\,\mathrm{ReLU}(W_1[z_c,d,\Delta t])\right)
+\end{equation}
+decides per channel how much of the change to pass on, and the risk is predicted from $[z_c,\ \beta\odot d]$ by a two-layer head with dropout. The encoder is fine-tuned at one tenth of the head's learning rate (20 epochs of 3{,}000 pairs, early stopping on validation AUC, three seeds).
+
+\textbf{No-prior control.} The same network is trained with the prior patch replaced by the current one and $\Delta t=0$. It has exactly the parameters of TG-MSGF but no access to the earlier image, so any difference between the two isolates the information in the prior scan.
+
+\textbf{Stacked model.} A logistic regression, fitted on the validation fold, combines single-scan risk, TG-MSGF risk, diameter change per year and risk change.
+
+\subsection{Evaluation}
+The primary measure is the area under the ROC curve (AUC). Confidence intervals and two-sided $p$-values for paired differences come from 2{,}000 bootstrap resamples of participants, not of nodules, because nodules of one person are correlated. For cross-validation, fold $k$ is the test set, fold $k{+}1$ the validation set and the other three folds the training set; every model is calibrated on its own validation fold, and the five test folds are then pooled so that each nodule is scored by a model that never saw its owner. We also report the mean and standard deviation of the per-fold AUC.
+
+% =====================================================================================
+\section{Results}
+\subsection{Single scan versus size}
+Table~\ref{tab:single} shows the held-out results of fold~0. The three-seed ensemble reaches an AUC of 0.900, 0.044 above predicted size ($p=0.001$). The three seeds individually give 0.900, 0.892 and 0.888 (mean $0.893\pm0.006$), so the result is not driven by one run; Table~\ref{tab:single} lists the first seed, which also had the highest validation AUC. Adding age changed nothing ($\Delta<0.001$, $p=0.96$), and starting from the LUNA16 detection weights was, if anything, worse (0.878, $p=0.061$ against the ensemble): features learned to separate nodules from vessels do not carry over directly to separating cancers from benign nodules. At the threshold fixed on validation, the ensemble detects 85.6\% of cancers at 71.9\% specificity, against 73.9\% and 81.0\% for size. Its calibration error after Platt scaling is 0.035.
+
+\begin{table}[t]
+\centering
+\caption{Malignancy prediction on the held-out fold (1{,}241 nodules, 111 malignant, 424 participants).}
+\label{tab:single}
+\setlength{\tabcolsep}{4pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lccc}
+\toprule
+Model & AUC (95\% CI) & AP & Sens./Spec. \\
+\midrule
+Predicted size only & 0.856 (0.816--0.894) & 0.428 & 0.739 / 0.810 \\
+MSGF-Net, LUNA16 init. & 0.878 (0.841--0.912) & 0.457 & 0.820 / 0.788 \\
+MSGF-Net, first seed & 0.900 (0.864--0.934) & 0.548 & 0.874 / 0.689 \\
+MSGF-Net, 3 seeds & \textbf{0.900} (0.861--0.934) & \textbf{0.576} & 0.856 / 0.719 \\
+\quad + size + age & 0.900 (0.862--0.933) & 0.570 & 0.865 / 0.732 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.85\columnwidth]{figures/roc_single.png}
+\caption{ROC curves on the held-out fold for the 3D ensemble and predicted size.}
+\label{fig:roc1}
+\end{figure}
+
+Size explains much of the overall AUC simply because large nodules are more often malignant. Fig.~\ref{fig:size} removes that effect by evaluating within diameter groups. Inside every group size alone is close to chance (0.50--0.65), whereas the network stays between 0.65 and 0.84. The 6--8\,mm group, where follow-up decisions are hardest, is also where both models are weakest; the $<$6\,mm group has only six cancers and a very wide interval.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/auc_by_size.png}
+\caption{AUC within predicted-diameter groups (held-out fold). Error bars: participant-level bootstrap 95\% CI.}
+\label{fig:size}
+\end{figure}
+
+\subsection{Adding the prior scan}
+Table~\ref{tab:cv} gives the pooled five-fold results. Over all 6{,}163 nodules the single-scan network reaches 0.875 against 0.830 for size ($p<0.001$), consistent with the held-out fold. On the 2{,}401 nodules with a prior scan, every method that sees the earlier image improves on the single scan. The growth formula adds 0.021 ($p=0.003$), TG-MSGF 0.013 ($p=0.043$) and the stacked model 0.029 ($p<0.001$), which is also better than the formula alone ($p=0.027$). The no-prior control is no better than the single scan, and TG-MSGF beats it by 0.012 ($p=0.012$). The per-fold standard deviation of the stacked model (0.011) is half that of the single scan (0.021).
+
+\begin{table}[t]
+\centering
+\caption{Five-fold patient-level cross-validation (pooled test predictions). $p$: paired bootstrap against the single scan.}
+\label{tab:cv}
+\setlength{\tabcolsep}{3.5pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+Model & AUC (95\% CI) & Fold mean$\pm$SD & AP & $p$ \\
+\midrule
+\multicolumn{5}{l}{\emph{All nodules (6{,}163; 555 malignant)}}\\
+Predicted size & 0.830 (0.809--0.852) & $0.835\pm0.015$ & 0.347 & \\
+Single scan & 0.875 (0.858--0.892) & $0.879\pm0.016$ & 0.447 & \\
+\midrule
+\multicolumn{5}{l}{\emph{Nodules with a prior scan (2{,}401; 207 malignant)}}\\
+Single scan & 0.904 (0.881--0.924) & $0.907\pm0.021$ & 0.493 & -- \\
+No-prior control & 0.905 (0.883--0.924) & $0.908\pm0.008$ & 0.475 & \\
+TG-MSGF & 0.917 (0.895--0.936) & $0.924\pm0.014$ & 0.617 & 0.043 \\
+Growth formula & 0.924 (0.904--0.943) & $0.927\pm0.012$ & 0.655 & 0.003 \\
+Stacked & \textbf{0.932} (0.912--0.950) & $0.936\pm0.011$ & \textbf{0.686} & $<$0.001 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+The gains are larger in average precision than in AUC (0.49 to 0.69 for the stacked model). With a 9\% prevalence, average precision rewards a model that ranks the few cancers at the very top, and growth is exactly the feature that pushes a growing nodule above stable ones of similar appearance.
+
+\subsection{A single split is not enough}
+On fold~0 alone (475 pairs, 43 malignant), the ordering is the same: single scan 0.922, TG-MSGF 0.921, growth formula 0.933 and stacked 0.936 (Fig.~\ref{fig:roc2}). None of these differences reaches significance (stacked versus single, $p=0.108$), although TG-MSGF again beats its no-prior control ($p=0.003$). Had we stopped at the first split, we would have concluded that the prior scan does not help. Fold-to-fold variation in the single-scan AUC on paired nodules (0.874 to 0.927) is as large as the effect being measured, which is why we consider cross-validation essential for this question.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.85\columnwidth]{figures/roc_temporal.png}
+\caption{ROC curves on the held-out fold for nodules with a prior scan.}
+\label{fig:roc2}
+\end{figure}
+
+\subsection{What the models use}
+The fitted coefficients of the growth formula (standardised features) are 2.73 for the current risk, $-0.29$ for current diameter, 0.88 for diameter change per year and 0.42 for risk change: once the image-based risk is known, current size adds little, but growth adds a lot. In the stacked model, single-scan risk, TG-MSGF risk and diameter growth all keep positive weights (1.19, 1.31 and 0.81), so the learned temporal features and the explicit growth term carry partly different information. The mean gate value of TG-MSGF is only slightly higher for malignant than for benign pairs (0.53 versus 0.52) and correlates weakly with diameter growth (Spearman 0.12), so the gate should not be read as a growth detector.
+
+% =====================================================================================
+\section{Discussion}
+Three points stand out. First, a small 3D network trained from scratch on about 3{,}700 nodules already adds information beyond size, and it does so within every size group, which is where clinical decisions are made. Second, the prior scan helps, but a transparent four-feature formula captures most of the benefit; the learned temporal network adds a further, smaller, significant gain when the two are combined. For deployment this is convenient: the formula needs only the single-scan model run on both scans. Third, effect sizes of 0.01--0.03 AUC are of the same order as the variation between test folds. Results on one split with a few dozen cancers, common in this area, can point either way.
+
+Table~\ref{tab:compare} places our results next to published malignancy studies. Our numbers are below the 0.944 reported by Ardila \emph{et al.}~\cite{ardila2019endtoend}, who trained on far more NLST data and whole volumes; the two are not directly comparable because the cohorts, inputs and splits differ. The LUNA25 challenge shows how much harder an external test is: on indeterminate 5--15\,mm nodules from three European trials, the best algorithm reached an AUC of 0.78~\cite{peeters2026luna25}. Our cross-validated results come from NLST alone and include nodules of all sizes, so they are not comparable with that benchmark and probably overestimate performance on external data. Our contribution is the controlled measurement of what the prior scan adds, which the challenge did not address.
+
+\begin{table}[t]
+\centering
+\caption{Comparison with published malignancy-risk studies. AUCs come from different cohorts and test sets and are not directly comparable.}
+\label{tab:compare}
+\small\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{2.55cm}p{3.0cm}ccc@{}}
+\toprule
+Study & Data and test & Prior & Public & AUC\\
+\midrule
+Ardila \emph{et al.}~\cite{ardila2019endtoend} & NLST, 6{,}716 test cases & yes & no & 0.944\\
+LUNA25 challenge, best AI~\cite{peeters2026luna25} & 468 external 5--15\,mm nodules, 3 trials & no & yes & 0.78\\
+LUNA25 challenge, 65 radiologists~\cite{peeters2026luna25} & same nodules & no & -- & 0.70\\
+\midrule
+Ours, size only & LUNA25, held-out fold & no & yes & 0.856\\
+Ours, single scan & LUNA25, held-out fold (1{,}241 nodules) & no & yes & 0.900\\
+Ours, single scan & 5-fold CV, 6{,}163 nodules & no & yes & 0.875\\
+Ours, stacked & 5-fold CV, 2{,}401 followed nodules & yes & yes & 0.932\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Limitations.} All data come from one trial, with one scanner generation and a single population; an external cohort is needed. The size reference uses predicted rather than measured diameter, and the growth features use diameter rather than volume. Pairs exist only for nodules seen in two rounds, which favours slow-growing lesions; cancers that appear between screens are not represented. Uncertainty estimates of the single-scan model did not help in triage: referring the 10\% most uncertain nodules lowered the remaining AUC slightly compared with referring a random 10\% (0.903 versus 0.919), so we do not claim a use for uncertainty in this task. Finally, the system is a research prototype for decision support, not a diagnostic device.
+
+\section{Conclusion}
+On public NLST data with patient-level cross-validation, a compact 3D network predicts malignancy better than nodule size (AUC 0.875 versus 0.830), and adding the prior-year scan raises the AUC for followed nodules from 0.904 to 0.932. A simple growth formula provides most of this gain, a learned temporal model adds to it, and a matched no-prior control confirms that the benefit comes from the earlier image. Single-split experiments were too small to show these effects reliably, so cross-validated evaluation should be the norm for longitudinal nodule studies.
+
+\textbf{What this work overcomes, and future work.} Earlier image-based risk models were either evaluated on one time point or trained on data that are not public. This study measures the value of the prior scan on public data, with patient-level cross-validation and a matched control, so others can repeat the comparison. Future work will validate the models on an external cohort, including the LUNA25 hidden test set, replace predicted diameter with measured volume and volume-doubling time, add a Brock-score baseline, and test whether the uncertainty estimate can support triage when the model is trained for longer.
+
+\section*{Author Contributions}
+A. Asim: conceptualization, methodology, software, experiments, formal analysis, visualization and writing of the original draft. H. Khalid: application testing, and writing (review and editing). R. Masood: supervision, project administration, and writing (review and editing). All authors read and approved the final manuscript.
+
+\section*{Funding}
+This research received no external funding. Computing resources were provided by the Department of Computer Sciences, Bahria University Lahore Campus.
+
+\section*{Conflict of Interest}
+The authors declare no conflict of interest.
+
+\section*{Data and Code Availability}
+LUNA25 is publicly available~\cite{luna25} at \url{https://luna25.grand-challenge.org} (images: CC BY 4.0; annotations: CC BY-NC 4.0). Code, split definitions, the three trained single-scan models, experiment logs and all result files are available at \url{https://github.com/mabdullah52/FYP-Project}.
+
+\section*{Declaration of Generative AI Use}
+During the preparation of this work the authors used an AI assistant (Claude, Anthropic) to help write code and to edit the language of the manuscript. The authors reviewed and edited all content and take full responsibility for the publication.
+
+\IfFileExists{IEEEtran.bst}{\bibliographystyle{IEEEtran}}{\bibliographystyle{unsrt}}
+\bibliography{refs}
+
+\end{document}

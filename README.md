@@ -15,10 +15,11 @@ Flutter doctor app, a Flutter (Android) and web patient app, and an online demo.
 
 | Task | Data | Result |
 |---|---|---|
-| Nodule detection (FP reduction), MSGF-Net, 3.35 M parameters | LUNA16, held-out subset 9 (88 scans, 105 nodules) | **CPM 0.903** (95% CI 0.843–0.956) |
-| Same protocol, standard networks | same | plain 3D CNN 0.908 (tie, p = 0.68) · 2.5D ResNet-18 0.861 · 3D ResNet-18 0.856 (MSGF-Net better, p = 0.034) |
-| Nodule size | same | MAE 0.45 mm (r = 0.996) |
-| Calibration / uncertainty | same | ECE 0.0123 → 0.0007 · uncertainty flags own errors with AUROC 0.971 |
+| Nodule detection (FP reduction), MSGF-Net, 3.35 M parameters | LUNA16, **5-fold patient-level cross-validation, all 888 scans** | **CPM 0.877** (95% CI 0.856–0.895); folds 0.861–0.889 |
+| Same model, development fold | LUNA16, test subset 9 (88 scans, 105 nodules) | CPM 0.903 (95% CI 0.843–0.956) |
+| Same protocol, standard networks (development fold) | subset 9 | plain 3D CNN 0.908 (tie, p = 0.68) · 2.5D ResNet-18 0.861 · 3D ResNet-18 0.856 (MSGF-Net better, p = 0.034) |
+| Nodule size | 5-fold, 888 scans | MAE 0.81 mm (r = 0.981) |
+| Calibration / uncertainty | 5-fold, 754,975 candidates | ECE 0.0307 → 0.0002 · uncertainty separates errors with AUROC 0.915 |
 | Complete system from raw CT (own candidate finder) | same | CPM 0.864, 72 s per scan on GPU |
 | External test without retraining | LUNA25 (6,163 nodules, NLST low-dose) | mean sensitivity 0.754 (0.907 at 8 FP/scan) |
 | Cancer risk from one scan | LUNA25, 424 unseen patients | AUC 0.900 vs 0.856 for size alone (p = 0.001); 5-fold CV 0.875 vs 0.830 |
@@ -30,8 +31,10 @@ Full numbers are in `work/*.csv`, `work/*/…metrics.json` and the run logs in `
 
 ## Papers
 
-* `paper/MSGF-Net_paper.pdf`: *MSGF-Net: calibrated, uncertainty-aware 3D false-positive reduction for lung nodule detection* (LaTeX source in `paper/`)
-* Paper 2 (draft): cancer-risk prediction on LUNA25 using a single scan and the prior-year scan (growth)
+* `paper/MSGF-Net_paper.pdf`: *Calibrated, uncertainty-aware pulmonary nodule false-positive reduction with multi-window scale-gated 3D fusion and size estimation* (LaTeX source in `paper/`)
+* `paper2/Growth-Aware_Malignancy_LUNA25.pdf`: *Does last year's scan help? Growth-aware malignancy prediction for screen-detected lung nodules on LUNA25* (LaTeX source in `paper2/`)
+
+Corresponding author of both papers: Rabia Masood (rabiamasood.bulc@bahria.edu.pk), Department of Computer Sciences, Bahria University Lahore Campus.
 
 ## Documentation
 
@@ -63,10 +66,12 @@ Full numbers are in `work/*.csv`, `work/*/…metrics.json` and the run logs in `
 
 ## Data (not included)
 
-* **LUNA16**: https://luna16.grand-challenge.org/ (888 CT scans, `annotations.csv`, `candidates_V2.csv`)
-* **LUNA25**: https://zenodo.org/records/14673658 (NLST low-dose screening CT with malignancy labels)
+* **LUNA16**: https://luna16.grand-challenge.org/ (888 CT scans, 66.7 GB, CC BY 4.0; Zenodo records 3723295 and 4121926)
+* **LUNA25**: https://luna25.grand-challenge.org/ (4,069 NLST low-dose CT scans, 221.1 GB, images CC BY 4.0 on Zenodo 14223624; annotations CC BY-NC 4.0, DOI 10.5281/zenodo.14673658)
 
-Split: LUNA16 official subsets, model selection on subset 8, test on subset 9. LUNA25: patient-level 5-fold split.
+See [docs/DATASET.md](docs/DATASET.md) for size, format, features and licences.
+
+Splits: LUNA16 5-fold cross-validation over the official subsets (`cv5.py`; test 0+1, 2+3, 4+5, 6+7, 8+9) and one development fold (train 0–7, validation 8, test 9). LUNA25: patient-level 5-fold split.
 
 ## Run it
 
