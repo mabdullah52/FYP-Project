@@ -1,0 +1,2 @@
+model,folds_done,n_scans,n_nodules,n_candidates,CPM_pooled,CPM_95CI,CPM_fold_mean,CPM_fold_sd,sens@0.125,sens@0.25,sens@0.5,sens@1,sens@2,sens@4,sens@8,AUC,AP,ECE_calibrated,ECE_uncalibrated,diameter_MAE_mm,diameter_r,uncertainty_AUROC_errors,errors,errors_in_top5pct_uncertain
+MSGF-Net,5,888,1186,754975,0.8769,0.856-0.895,0.8783,0.013,0.735,0.8,0.849,0.901,0.937,0.953,0.963,0.9981,0.7618,0.0002,0.0307,0.811,0.981,0.9151,849,0.193

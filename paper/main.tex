@@ -1,6 +1,6 @@
 % =====================================================================================
 %  MSGF-Net paper - compile on Overleaf (IEEEtran is built in) with pdfLaTeX + BibTeX.
-%  Red [PENDING: ...] marks = details still to be filled in (e-mail addresses).
+%  Final version for supervisor review (Nov 2026).
 % =====================================================================================
 \IfFileExists{IEEEtran.cls}{\documentclass[conference]{IEEEtran}}{%
   \documentclass[10pt,twocolumn]{article}\usepackage[margin=0.7in]{geometry}}
@@ -28,14 +28,15 @@
 
 \title{Calibrated, Uncertainty-Aware Pulmonary Nodule False-Positive Reduction with Multi-Window Scale-Gated 3D Fusion and Size Estimation}
 
-\author{\IEEEauthorblockN{Abdullah Asim, Hussnain Khalid and Rabia Masood}
+\author{\IEEEauthorblockN{Abdullah Asim, Hussnain Khalid and Rabia Masood$^{*}$}
 \IEEEauthorblockA{Department of Computer Sciences, Bahria University Lahore Campus, Lahore, Pakistan\\
-abdullahasimnaawaz@gmail.com, hussnainkhalid421@gmail.com, rabiamasood.bulc@bahria.edu.pk}}
+abdullahasimnaawaz@gmail.com, hussnainkhalid421@gmail.com, rabiamasood.bulc@bahria.edu.pk\\
+$^{*}$Corresponding author: Rabia Masood (rabiamasood.bulc@bahria.edu.pk)}}
 
 \maketitle
 
 \begin{abstract}
-False-positive reduction is the stage of a lung-screening computer-aided detection (CAD) system that decides which of hundreds of candidate locations per CT scan are real pulmonary nodules. Most recent work optimises accuracy on re-balanced 2D patch sets and outputs only a class label, which neither reflects screening performance nor tells the radiologist how much to trust a mark or how large the nodule is. We propose MSGF-Net, a compact (3.35\,M parameter) 3D network that encodes each candidate with three Hounsfield-unit windows, analyses a 32\,mm local view and a 48\,mm context view in two residual squeeze-excitation streams, and fuses them with a scale-gated fusion block in which context recalibrates local features and a learned per-channel gate mixes the two scales. A diameter-regression head is trained jointly through homoscedastic-uncertainty weighting, and inference combines 8-view test-time augmentation with Monte-Carlo dropout on the classification head, followed by Platt calibration fitted on a validation subset. On the held-out LUNA16 subset~9 (88 scans, 105 nodules, 75{,}924 candidates; patient-level split, model selected on subset~8) MSGF-Net reaches a competition performance metric (CPM) of 0.903 (95\% CI 0.843--0.956), with 97.1\% sensitivity at 4 and 98.1\% at 8 false positives per scan. It additionally estimates nodule diameter with a mean absolute error of 0.45\,mm ($r=0.996$), reduces the expected calibration error from 0.0123 to 0.0007, and its predictive uncertainty identifies its own errors with an AUROC of 0.971. Ablations show that these clinically useful outputs come without a measurable loss in detection accuracy. Trained with the identical protocol, MSGF-Net outperforms a 3D ResNet-18 ($p=0.034$) with one tenth of its parameters and matches a plain 3D CNN of similar size, indicating that much of the accuracy stems from the protocol rather than the architecture alone. Placed behind a training-free candidate finder whose candidates are ranked by Laplacian-of-Gaussian response times a Hessian blobness score, the complete pipeline reaches 92.4\% candidate recall and a CPM of 0.867 (95\% CI 0.800--0.923) from raw CT. Without retraining, at operating points fixed on LUNA16 validation, it detects on average 75.4\% (up to 90.7\%) of 6{,}163 nodules in the independent low-dose screening data of LUNA25. Detection is unchanged with added image noise of up to 50\,HU and keeps a CPM of 0.838 with half of the CT slices removed. Federated averaging across four simulated hospitals that share only model weights raises CPM from 0.665 (one hospital alone) to 0.808, against 0.880 for pooled data. The system is deployed in a clinician workstation with slice-level risk display and Grad-CAM explanations and in a patient application with a guideline-grounded, tool-using assistant.
+False-positive reduction is the stage of a lung-screening computer-aided detection (CAD) system that decides which of hundreds of candidate locations per CT scan are real pulmonary nodules. Most recent work optimises accuracy on re-balanced 2D patch sets and outputs only a class label, which neither reflects screening performance nor tells the radiologist how much to trust a mark or how large the nodule is. We propose MSGF-Net, a compact (3.35\,M parameter) 3D network that encodes each candidate with three Hounsfield-unit windows, analyses a 32\,mm local view and a 48\,mm context view in two residual squeeze-excitation streams, and fuses them with a scale-gated fusion block in which context recalibrates local features and a learned per-channel gate mixes the two scales. A diameter-regression head is trained jointly through homoscedastic-uncertainty weighting, and inference combines 8-view test-time augmentation with Monte-Carlo dropout on the classification head, followed by Platt calibration fitted on a validation subset. In five-fold patient-level cross-validation on all 888 LUNA16 scans (1{,}186 nodules, every one of 754{,}975 candidates scored by a model that never saw its scan) MSGF-Net reaches a competition performance metric (CPM) of 0.877 (95\% CI 0.856--0.895; per fold 0.861--0.889), with 90.1\% sensitivity at 1 and 96.3\% at 8 false positives per scan. This places it above three of the four FP-reduction systems of the LUNA16 challenge paper and below the best one (0.908). It additionally estimates nodule diameter with a mean absolute error of 0.81\,mm ($r=0.981$), its calibrated probabilities have an expected calibration error of 0.0002 (0.0307 before calibration), and its predictive uncertainty separates its errors from correct decisions with an AUROC of 0.915; this triage signal was strong in folds whose selected model had trained for 20 or more epochs and weak where early stopping chose an early epoch. Ablations show that these clinically useful outputs come without a measurable loss in detection accuracy. On a development fold, MSGF-Net trained with an identical protocol outperforms a 3D ResNet-18 ($p=0.034$) with one tenth of its parameters and matches a plain 3D CNN of similar size, indicating that much of the accuracy stems from the protocol rather than the architecture alone. Placed behind a training-free candidate finder whose candidates are ranked by Laplacian-of-Gaussian response times a Hessian blobness score, the complete pipeline reaches 92.4\% candidate recall and a CPM of 0.867 (95\% CI 0.800--0.923) from raw CT. Without retraining, at operating points fixed on LUNA16 validation, it detects on average 75.4\% (up to 90.7\%) of 6{,}163 nodules in the independent low-dose screening data of LUNA25. Detection is unchanged with added image noise of up to 50\,HU and keeps a CPM of 0.838 with half of the CT slices removed. Federated averaging across four simulated hospitals that share only model weights raises CPM from 0.665 (one hospital alone) to 0.808, against 0.880 for pooled data. The system is deployed in a clinician workstation with slice-level risk display and Grad-CAM explanations and in a patient application with a guideline-grounded, tool-using assistant.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -52,20 +53,20 @@ Two gaps motivate this work. First, a considerable part of the recent literature
 (1) A scale-gated fusion (SGF) block in which a 48\,mm context descriptor recalibrates the channels of a 32\,mm local feature map and a learned per-channel gate mixes the two scales inside one network; the gate is interpretable and correlates with nodule size.
 (2) Multi-window HU encoding and a jointly trained diameter head (homoscedastic-uncertainty weighting~\cite{kendall2018multitask}) that turn the classifier into a size-aware model.
 (3) Efficient uncertainty-aware inference: 8-view test-time augmentation with Monte-Carlo dropout~\cite{gal2016dropout} applied only to the head (encoders run once per view), Platt calibration~\cite{platt1999} on a validation subset, and an uncertainty-based triage analysis.
-(4) A rigorous protocol: patient-level official subsets, model selection on validation only, every candidate of the test subset scored, CPM with bootstrap confidence intervals and paired significance tests, including honestly reported negative results (hard-negative fine-tuning) and a same-protocol comparison with three standard 2.5D and 3D architectures.
+(4) A rigorous protocol: five-fold patient-level cross-validation over all 888 scans with a separate validation subset per fold for early stopping and calibration, every candidate of every test scan scored, CPM with bootstrap confidence intervals and paired significance tests, including honestly reported negative results (hard-negative fine-tuning) and a same-protocol comparison with three standard 2.5D and 3D architectures.
 (5) An end-to-end evaluation from raw CT with our own candidate finder, in which a robust field-of-view-aware lung mask and Hessian blobness ranking raise candidate recall from 53\% to 92\%, and an external validation on 6{,}163 nodules of the independent LUNA25 screening cohort~\cite{luna25}.
 (6) A deployed system: clinician workstation (slice-level risk bar, Grad-CAM, image-based and clinical Brock risk) and patient web and Android app with a guideline-grounded, tool-using assistant.
 
 % =====================================================================================
 \section{Related Work}
-\textbf{FP reduction on LUNA16.} The challenge paper~\cite{setio2017luna16} reports CPMs between 0.758 and 0.908 for the FP-reduction track; the best system, CUMedVis, used three 3D CNNs with different receptive fields whose output probabilities were averaged~\cite{dou2017multilevel}. MSGF-Net instead fuses scales at feature level inside one network with a learned gate.
+\textbf{FP reduction on LUNA16.} The challenge paper~\cite{setio2017luna16} reports CPMs between 0.758 and 0.908 for single FP-reduction systems and higher values for combinations of systems; the best single system, CUMedVis, used three 3D CNNs with different receptive fields whose output probabilities were averaged~\cite{dou2017multilevel}. Later work raised CPM further, for example with multi-scale gradual integration of 3D inputs (0.908 on the initial and 0.942 on the extended candidate set)~\cite{kim2019mgicnn} or with an ensemble of single-view 2D CNNs trained on automatically categorised non-nodules (0.922, eight-fold cross-validation on the initial candidates)~\cite{eun2020singleview}. These systems output a nodule score only. MSGF-Net fuses scales at feature level inside one network with a learned gate and adds size, calibration and uncertainty outputs.
 \textbf{2D patch classifiers.} AlexNet/VGG/EfficientNet-type models applied to 2D crops~\cite{naseer2022sensors,geetha2022efficientnet} and multi-scale lightweight designs such as MIFNet~\cite{lv2024mifnet} report high accuracy on balanced patch sets, which is not comparable with CPM.
 \textbf{Segmentation.} Transformer-U-Net hybrids, including federated variants~\cite{turjya2026federated}, address nodule delineation, a complementary task.
 \textbf{Calibration and uncertainty.} Modern networks are over-confident~\cite{guo2017calibration}; MC dropout~\cite{gal2016dropout} and ensembles~\cite{lakshminarayanan2017ensembles} provide predictive uncertainty. These are rarely evaluated for nodule FP reduction, where the strong class imbalance and oversampling during training make raw probabilities especially miscalibrated.
 
 % =====================================================================================
 \section{Data and Protocol}
-\textbf{LUNA16.} 888 CT scans (slice thickness $\le$2.5\,mm) with 1{,}186 nodules $\ge$3\,mm accepted by at least 3 of 4 radiologists (Table~\ref{tab:data}). We use the 754{,}975 candidates of \texttt{candidates\_V2} (1{,}557 positive). Findings in \texttt{annotations\_excluded} are neither TPs nor FPs, as in the official evaluation.
+\textbf{LUNA16.} 888 CT scans (slice thickness $\le$2.5\,mm) with 1{,}186 nodules $\ge$3\,mm accepted by at least 3 of 4 radiologists (Table~\ref{tab:data}). We use the 754{,}975 candidates of \texttt{candidates\_V2} (1{,}557 positive). Findings in \texttt{annotations\_excluded} are neither TPs nor FPs, as in the official evaluation. LUNA16 is derived from the public LIDC-IDRI collection~\cite{armato2011lidc} and distributed as MetaImage volumes (\texttt{.mhd}/\texttt{.raw}) in ten subsets with CSV files of reference nodules (world coordinates and diameter) and candidates (coordinates and label), 66.7\,GB in total (Zenodo records 3723295 and 4121926). It is released under the Creative Commons Attribution 4.0 licence (LIDC-IDRI: CC BY 3.0), so no separate permission is needed; we downloaded it from the official challenge site\footnote{\url{https://luna16.grand-challenge.org}} and cite it as required. Its consensus annotations and fixed subsets make results comparable across studies.
 
 \begin{table}[t]
 \centering
@@ -82,16 +83,21 @@ Candidates (positive) & 754{,}975 (1{,}557)\\
 Negative : positive candidates & 484 : 1\\
 In-plane / slice spacing & 0.46--0.98 / 0.45--2.50 mm\\
 \midrule
-Training (subsets 0--7) & 712 scans\\
-Validation (subset 8) & 88 scans, 118 nodules\\
+\multicolumn{2}{@{}l}{\emph{Five-fold cross-validation (primary evaluation)}}\\
+Test subsets per fold & 0+1, 2+3, 4+5, 6+7, 8+9\\
+Validation subset per fold & 2, 4, 6, 8, 0\\
+Training per fold & 7 subsets (about 620 scans)\\
+\midrule
+\multicolumn{2}{@{}l}{\emph{Development fold (model selection, analyses)}}\\
+Training / validation & subsets 0--7 / subset 8\\
 Test (subset 9) & 88 scans, 105 nodules\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Split.} Patient-level split by the official subsets: training 0--7, validation 8 (early stopping, calibration, model selection) and test 9 (reported once). The code asserts that no scan appears in two splits.
+\textbf{Splits.} All splits follow the official, patient-disjoint subsets, and the code asserts that no scan appears in two parts of a split. The method was developed on one fold: training subsets 0--7, validation subset 8 (early stopping, calibration, model selection) and test subset 9. With the method fixed, we ran five-fold cross-validation as the primary evaluation. Each fold holds out two subsets for testing, uses one further subset for early stopping and Platt calibration, and trains on the remaining seven (Table~\ref{tab:data}), so every scan is tested exactly once by a model that never saw it. The architecture comparison, ablations, robustness, external, federated and end-to-end experiments use the development fold.
 
-\textbf{Preprocessing.} World coordinates are mapped to voxel indices using origin, spacing \emph{and} direction cosines. For every candidate a $48^3$ cube at 1\,mm isotropic spacing is sampled directly from the original volume by trilinear interpolation, so that scans with different slice thickness yield patches of identical physical size; HU values are clipped to $[-1200, 1200]$ and regions outside the field of view are set to air. For training we keep all positives, 10 ``near-miss'' negatives located 5--25\,mm from a nodule and 30 random negatives per scan (26{,}608 training and 3{,}350 validation patches). Test scans are \emph{not} sub-sampled: all 75{,}924 candidates of subset~9 are scored.
+\textbf{Preprocessing.} World coordinates are mapped to voxel indices using origin, spacing \emph{and} direction cosines. For every candidate a $48^3$ cube at 1\,mm isotropic spacing is sampled directly from the original volume by trilinear interpolation, so that scans with different slice thickness yield patches of identical physical size; HU values are clipped to $[-1200, 1200]$ and regions outside the field of view are set to air. For training we keep all positives, 10 ``near-miss'' negatives located 5--25\,mm from a nodule and 30 random negatives per scan (26{,}608 training and 3{,}350 validation patches on the development fold; about 23{,}200 training patches per cross-validation fold). Test scans are \emph{not} sub-sampled: every candidate of every test scan is scored, 754{,}975 candidates over the five folds.
 
 % =====================================================================================
 \section{Method}
@@ -139,21 +145,21 @@ A classification head (dropout 0.3, FC-64, dropout, FC-1) and a diameter head ($
 \end{equation}
 
 \subsection{Training}
-AdamW (learning rate $10^{-3}$, weight decay $10^{-4}$), one warm-up epoch and cosine decay, batch size 64, 24{,}000 samples per epoch with 25\% positives (sampled with replacement), 30 epochs with early stopping on validation AUC (patience 8). Augmentation: random flips on three axes, 90$^\circ$ in-plane rotations, $\pm$3\,mm shifts and HU scale/offset jitter ($0.97$--$1.03$, $\pm$20\,HU). Training ran in FP32 on a single NVIDIA Quadro P4000 (8\,GB) at about 7.9\,min per epoch (about 4\,h); the best validation AUC (0.997) was reached at epoch 22.
+AdamW (learning rate $10^{-3}$, weight decay $10^{-4}$), one warm-up epoch and cosine decay, batch size 64, 24{,}000 samples per epoch with 25\% positives (sampled with replacement), 30 epochs with early stopping on validation AUC (patience 8). Augmentation: random flips on three axes, 90$^\circ$ in-plane rotations, $\pm$3\,mm shifts and HU scale/offset jitter ($0.97$--$1.03$, $\pm$20\,HU). Training ran in FP32 on a single NVIDIA Quadro P4000 (8\,GB) at about 6.5--11\,min per epoch. On the development fold the best validation AUC (0.997) was reached at epoch 22; in the five cross-validation folds the selected epochs were 20, 8, 13, 10 and 23.
 
 \subsection{Uncertainty-aware, calibrated inference}
-For each candidate the two encoders are evaluated once for each of $V=8$ flip combinations, and the dropout head is sampled $M=10$ times per view, so the 80 probability samples cost only 8 encoder passes. The prediction is the mean $\bar p$ and the uncertainty $u$ is the standard deviation of the samples. Because positives are oversampled during training, $\bar p$ is mis-calibrated; we fit Platt scaling $p=\sigma(a\,\mathrm{logit}(\bar p)+b)$ on all 74{,}488 validation candidates ($a=1.634$, $b=-2.898$). The mapping is monotonic and therefore changes neither CPM nor AUC.
+For each candidate the two encoders are evaluated once for each of $V=8$ flip combinations, and the dropout head is sampled $M=10$ times per view, so the 80 probability samples cost only 8 encoder passes. The prediction is the mean $\bar p$ and the uncertainty $u$ is the standard deviation of the samples. Because positives are oversampled during training, $\bar p$ is mis-calibrated; we fit Platt scaling $p=\sigma(a\,\mathrm{logit}(\bar p)+b)$ on all candidates of the validation subset (development fold: 74{,}488 candidates, $a=1.634$, $b=-2.898$; cross-validation folds: $a=1.69$--$2.80$). The mapping is monotonic and therefore changes neither CPM nor AUC.
 
 \subsection{Hard-negative fine-tuning (negative result)}
 We also tested a second training round: the round-1 model scored all candidates of the training subsets, the 20 negatives with highest score per scan (9{,}846 patches) were added, and the model was fine-tuned for 10 epochs (learning rate $3\times10^{-4}$). Model selection on the validation subset rejected this variant (Section~\ref{sec:results}).
 
 % =====================================================================================
 \section{Evaluation}
-\textbf{Detection:} FROC and CPM following~\cite{setio2017luna16} (a candidate within the radius of a reference nodule is a TP; excluded findings are ignored), with 95\% confidence intervals from 1{,}000 bootstrap resamples of scans; differences between variants use a paired bootstrap over scans (2{,}000 resamples). \textbf{Classification:} candidate-level AUC and average precision. \textbf{Calibration:} expected calibration error (ECE, 15 bins). \textbf{Size:} mean absolute error (MAE) and Pearson $r$ between predicted and reference diameter for positive candidates. \textbf{Uncertainty:} AUROC of $u$ for detecting misclassified candidates at $p\ge0.5$. \textbf{Model selection} among round-1, round-2 and their ensemble uses validation CPM only.
+\textbf{Detection:} FROC and CPM following~\cite{setio2017luna16} (a candidate within the radius of a reference nodule is a TP; excluded findings are ignored), with 95\% confidence intervals from 1{,}000 bootstrap resamples of scans; differences between variants use a paired bootstrap over scans (2{,}000 resamples). \textbf{Classification:} candidate-level AUC and average precision. \textbf{Calibration:} expected calibration error (ECE, 15 bins). \textbf{Size:} mean absolute error (MAE) and Pearson $r$ between predicted and reference diameter for positive candidates. \textbf{Uncertainty:} AUROC of $u$ for detecting misclassified candidates at $p\ge0.5$, and the share of these errors among the most uncertain candidates. In cross-validation, CPM is computed once on the pooled predictions of all 888 scans (with a scan-level bootstrap) and also per fold. \textbf{Model selection} among round-1, round-2 and their ensemble uses validation CPM only.
 
 % =====================================================================================
 \section{Results}\label{sec:results}
-\subsection{Model selection}
+\subsection{Model selection (development fold)}
 On the validation subset the round-1 model achieved the highest CPM (Table~\ref{tab:select}) and was selected; the hard-negative round significantly lowered validation CPM ($-$0.028, 95\% CI $-$0.067 to $-$0.001, $p=0.037$), mainly at low FP rates (0.754$\to$0.636 at 1/8 FP/scan). Test results of all variants are listed for transparency only.
 
 \begin{table}[t]
@@ -171,31 +177,43 @@ Ensemble of round 1 + 2 & 0.852 & --\\
 \end{tabular}
 \end{table}
 
-\subsection{Detection performance}
-Table~\ref{tab:main} reports the final model on the test subset. With uncertainty-aware inference MSGF-Net reaches CPM 0.903 (95\% CI 0.843--0.956), at the level of the best FP-reduction system in the LUNA16 challenge paper; TTA+MC raised CPM over single-pass inference by +0.019 on validation (95\% CI +0.001 to +0.040, paired bootstrap $p=0.040$) and by +0.022 on test ($-$0.006 to +0.039, $p=0.18$). Comparisons with the challenge results are indicative only: those systems were evaluated by 10-fold cross-validation on the earlier candidate set, whereas we report a single held-out fold with \texttt{candidates\_V2}. Fig.~\ref{fig:curves}a shows the FROC curve.
+\subsection{Detection performance: five-fold cross-validation}
+Table~\ref{tab:main} reports the primary result. Pooled over the five test folds, which together contain all 888 scans and 1{,}186 nodules, MSGF-Net with TTA, MC dropout and per-fold calibration reaches CPM 0.877 (95\% CI 0.856--0.895), with sensitivities of 0.735 at 1/8, 0.901 at 1 and 0.963 at 8 FPs per scan. The five folds give 0.861--0.889 (mean 0.878, SD 0.013), so the estimate is stable across subsets. Fig.~\ref{fig:curves}a shows the pooled FROC curve.
+
+Against the FP-reduction systems of the LUNA16 challenge paper, which were evaluated on the same 888 scans by ten-fold cross-validation, MSGF-Net is above JackFPR (0.872), DIAG\_CONVNET (0.854) and ZNET (0.758) and below CUMedVis (0.908), whose CPM lies above our confidence interval. Later methods report 0.908--0.942~\cite{kim2019mgicnn} and 0.922~\cite{eun2020singleview}, partly on a different candidate set and with eight- or ten-fold cross-validation. Two differences in protocol favour the published numbers: with ten folds each model trains on 90\% of the scans, whereas our folds train on 70\% because one subset per fold is reserved for early stopping and calibration; and several of these systems combine multiple networks. We therefore regard MSGF-Net as within the range of single-model systems but not as more accurate than the best of them.
+
+On the development fold, the model reached CPM 0.903 (95\% CI 0.843--0.956) on subset~9. That fold is part of cross-validation fold 5 (subsets 8+9, CPM 0.889), the best of the five, so the single-fold number was optimistic. TTA+MC raised CPM over single-pass inference by +0.019 on the development validation subset (95\% CI +0.001 to +0.040, paired bootstrap $p=0.040$).
 
 \begin{table*}[t]
 \centering
-\caption{Sensitivity at seven FP rates and CPM. Top: our model on the LUNA16 test subset (subset 9, 88 scans, 105 nodules). Bottom: FP-reduction systems reported in the LUNA16 challenge paper~\cite{setio2017luna16} (10-fold cross-validation on the original candidate set).}
+\caption{Sensitivity at seven FP rates and CPM. Top: MSGF-Net (TTA+MC+calibration), five-fold patient-level cross-validation on all 888 LUNA16 scans, and the single development fold. Middle: FP-reduction systems of the LUNA16 challenge paper~\cite{setio2017luna16} (ten-fold cross-validation on the same 888 scans). Bottom: later methods (CPM only; protocols differ).}
 \label{tab:main}
-\small
+\small\setlength{\tabcolsep}{4.5pt}
 \begin{tabular}{@{}lcccccccc@{}}
 \toprule
 Method & 1/8 & 1/4 & 1/2 & 1 & 2 & 4 & 8 & CPM (95\% CI)\\
 \midrule
-MSGF-Net, single pass & 0.714 & 0.810 & 0.876 & 0.905 & 0.924 & 0.962 & 0.981 & 0.882 (0.824--0.942)\\
-MSGF-Net, TTA+MC+calibration (final) & \textbf{0.771} & \textbf{0.848} & \textbf{0.905} & 0.905 & 0.943 & 0.971 & 0.981 & \textbf{0.903} (0.843--0.956)\\
+\textbf{MSGF-Net, 5-fold CV, pooled (888 scans)} & 0.735 & 0.800 & 0.849 & 0.901 & 0.937 & 0.953 & 0.963 & \textbf{0.877} (0.856--0.895)\\
+\quad fold 1 (test subsets 0+1) & 0.754 & 0.817 & 0.867 & 0.908 & 0.942 & 0.958 & 0.963 & 0.887\\
+\quad fold 2 (2+3) & 0.713 & 0.802 & 0.862 & 0.923 & 0.964 & 0.972 & 0.976 & 0.887\\
+\quad fold 3 (4+5) & 0.725 & 0.780 & 0.826 & 0.890 & 0.915 & 0.941 & 0.949 & 0.861\\
+\quad fold 4 (6+7) & 0.704 & 0.783 & 0.846 & 0.887 & 0.933 & 0.958 & 0.963 & 0.868\\
+\quad fold 5 (8+9) & 0.771 & 0.812 & 0.861 & 0.897 & 0.942 & 0.960 & 0.978 & 0.889\\
+MSGF-Net, development fold (subset 9 only) & 0.771 & 0.848 & 0.905 & 0.905 & 0.943 & 0.971 & 0.981 & 0.903 (0.843--0.956)\\
 \midrule
 CUMedVis~\cite{dou2017multilevel} & 0.677 & 0.834 & 0.927 & 0.972 & 0.981 & 0.983 & 0.983 & 0.908\\
 JackFPR & 0.734 & 0.796 & 0.859 & 0.892 & 0.923 & 0.944 & 0.954 & 0.872\\
 DIAG\_CONVNET & 0.669 & 0.760 & 0.831 & 0.892 & 0.923 & 0.945 & 0.960 & 0.854\\
 ZNET & 0.511 & 0.630 & 0.720 & 0.793 & 0.850 & 0.884 & 0.915 & 0.758\\
+\midrule
+MGI-CNN~\cite{kim2019mgicnn}, initial / extended candidates & -- & -- & -- & -- & -- & -- & -- & 0.908 / 0.942\\
+Single-view 2D CNN ensemble~\cite{eun2020singleview}, 8-fold & -- & -- & -- & -- & -- & -- & -- & 0.922\\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-\subsection{Comparison with standard architectures}
-To separate the contribution of the network from that of the training and inference protocol, we trained three widely used architectures with exactly the same split, sampling, multi-window input, augmentation, focal and diameter losses, training budget with early stopping on validation AUC, and inference (8-view TTA with MC dropout); only the network differs, and each uses the 32\,mm local view with the same classification and diameter heads. The baselines are a 3D ResNet-18~\cite{he2016resnet} with the standard stride-2 stem and max-pooling (33.2\,M parameters), a 2.5D ResNet-18 that receives the axial, coronal and sagittal centre planes of the three HU windows as nine input channels (11.2\,M), and a plain 3D CNN of four double-convolution blocks with max-pooling, the classic FP-reduction design (3.5\,M). Table~\ref{tab:arch} shows the results. MSGF-Net outperforms the 3D ResNet-18 (+0.048 CPM, 95\% CI +0.003 to +0.088, $p=0.034$) with one tenth of its parameters and is ahead of the 2.5D ResNet-18 without a significant difference (+0.042, $p=0.14$). The plain 3D CNN, however, matches MSGF-Net ($-$0.004, $p=0.68$). We therefore do not claim that the architecture alone improves detection: at this test size most of the accuracy is attributable to the shared protocol (multi-window encoding, hard-negative-aware sampling, TTA and MC dropout). MSGF-Net retains the lowest uncalibrated ECE and size error, provides the interpretable scale gate and the context stream used for large nodules, and is cheaper to run: because the plain CNN convolves its first two blocks at full resolution, it needed about three times longer per training epoch (${\approx}$1{,}470\,s vs.\ ${\approx}$470\,s) and 2.3 times longer to score the test subset (134 vs.\ 58\,min).
+\subsection{Comparison with standard architectures (development fold)}
+To separate the contribution of the network from that of the training and inference protocol, we trained three widely used architectures with exactly the same split, sampling, multi-window input, augmentation, focal and diameter losses, training budget with early stopping on validation AUC, and inference (8-view TTA with MC dropout); only the network differs, and each uses the 32\,mm local view with the same classification and diameter heads. The baselines are a 3D ResNet-18~\cite{he2016resnet} with the standard stride-2 stem and max-pooling (33.2\,M parameters), a 2.5D ResNet-18 that receives the axial, coronal and sagittal centre planes of the three HU windows as nine input channels (11.2\,M), and a plain 3D CNN of four double-convolution blocks with max-pooling, the classic FP-reduction design (3.5\,M). Table~\ref{tab:arch} shows the results. MSGF-Net outperforms the 3D ResNet-18 (+0.048 CPM, 95\% CI +0.003 to +0.088, $p=0.034$) with one tenth of its parameters and is ahead of the 2.5D ResNet-18 without a significant difference (+0.042, $p=0.14$). The plain 3D CNN, however, matches MSGF-Net ($-$0.004, $p=0.68$). This comparison was run on the development fold only and was not repeated in cross-validation. We therefore do not claim that the architecture alone improves detection: at this test size most of the accuracy is attributable to the shared protocol (multi-window encoding, hard-negative-aware sampling, TTA and MC dropout). MSGF-Net retains the lowest uncalibrated ECE and size error, provides the interpretable scale gate and the context stream used for large nodules, and is cheaper to run: because the plain CNN convolves its first two blocks at full resolution, it needed about three times longer per training epoch (${\approx}$1{,}470\,s vs.\ ${\approx}$470\,s) and 2.3 times longer to score the test subset (134 vs.\ 58\,min).
 
 \begin{table*}[t]
 \centering
@@ -215,24 +233,47 @@ Plain 3D CNN & 3.53\,M & 0.908 (0.857--0.953) & 0.943 / 0.971 & 0.015 & 0.49\,mm
 \end{table*}
 
 \subsection{Clinical outputs: size, calibration, uncertainty}
-On the test subset the diameter head estimates nodule size with an MAE of 0.45\,mm ($r=0.996$), so the size-based Lung-RADS category can be proposed automatically. Platt scaling fitted on the validation subset reduces the test ECE from 0.0123 to 0.0007 (Fig.~\ref{fig:curves}b). The predictive uncertainty separates wrong from correct decisions with an AUROC of 0.971: all 89 errors of the model (at $p=0.5$) lie among the 5\% most uncertain candidates (about 43 per scan), so referring this group to the radiologist would catch every error, whereas referring the same number at random would catch about 5\% of them (Fig.~\ref{fig:curves}c). The very top of the ranking is less selective (2\% referred catches 17\% of errors), because uncertainty is also high for borderline candidates that the model classifies correctly. The fusion gate is interpretable: the mean weight on the local stream increases with nodule size (Spearman $\rho=0.77$ on positive test candidates).
+\textbf{Size and calibration.} Over the five cross-validation folds the diameter head estimates nodule size with an MAE of 0.81\,mm ($r=0.981$; development fold 0.45\,mm, $r=0.996$), so the size-based Lung-RADS category can be proposed automatically. Platt scaling, fitted per fold on that fold's validation subset, lowers the pooled ECE over 754{,}975 test candidates from 0.0307 to 0.0002 (development fold: 0.0123 to 0.0007, Fig.~\ref{fig:curves}b).
+
+\textbf{Uncertainty.} Pooled over the folds, the predictive uncertainty separates wrong from correct decisions (849 errors at $p=0.5$: 278 FPs and 571 missed positive candidates) with an AUROC of 0.915 (per fold 0.82--0.98). If each fold refers its own 5\% most uncertain candidates (about 43 per scan) to the radiologist, 43\% of all errors are caught, against about 5\% for random referral. The benefit, however, differs strongly between folds (Table~\ref{tab:triage}). In folds 1 and 5, and on the development fold, the 5\% most uncertain candidates contain 92--100\% of the errors (Fig.~\ref{fig:curves}c); in folds 2--4 only 8--18\%. The selected models of the first group were taken from epochs 20--23, those of the second from epochs 8--13, where early stopping on a saturated validation AUC (0.995--0.998) picked an early checkpoint. These early models have a 4--9 times higher median uncertainty, so many correctly classified candidates rank above the errors. Five folds are too few to establish this as a rule, but the observation suggests that a fixed training length, or checkpoint selection that also considers the uncertainty signal on validation data, is needed before uncertainty-based triage can be relied upon. The fusion gate is interpretable: on the development fold the mean weight on the local stream increases with nodule size (Spearman $\rho=0.77$ on positive test candidates).
+
+\begin{table}[t]
+\centering
+\caption{Uncertainty-based triage per cross-validation fold: errors at $p=0.5$, AUROC of the uncertainty for detecting them, and share of errors among the 2\% and 5\% most uncertain candidates of the fold (random referral: 2\% and 5\%).}
+\label{tab:triage}
+\small\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Fold & Epoch & Median $u$ & Errors & AUROC & 2\% & 5\%\\
+\midrule
+1 & 20 & 0.0027 & 132 & 0.967 & 0.18 & 0.92\\
+2 & 8 & 0.0185 & 185 & 0.889 & 0.02 & 0.12\\
+3 & 13 & 0.0124 & 171 & 0.929 & 0.07 & 0.18\\
+4 & 10 & 0.0249 & 190 & 0.819 & 0.06 & 0.08\\
+5 & 23 & 0.0033 & 171 & 0.982 & 0.57 & 0.99\\
+\midrule
+All folds & & & 849 & 0.915 & 0.17 & 0.43\\
+Development & 22 & 0.0049 & 89 & 0.971 & 0.17 & 1.00\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \begin{figure*}[t]
 \centering
 \begin{tabular}{ccc}
-\figorbox{figures/froc.png}{0.31\textwidth} & \figorbox{figures/reliability.png}{0.25\textwidth} & \figorbox{figures/triage.png}{0.31\textwidth}\\
-(a) FROC, test subset & (b) reliability after calibration & (c) uncertainty-based triage
+\figorbox{figures/froc_cv5.png}{0.31\textwidth} & \figorbox{figures/reliability.png}{0.25\textwidth} & \figorbox{figures/triage.png}{0.31\textwidth}\\
+(a) FROC, 5-fold CV (888 scans) & (b) reliability after calibration & (c) uncertainty-based triage
 \end{tabular}
-\caption{Final model on the LUNA16 test subset.}
+\caption{(a) Pooled FROC of five-fold cross-validation on all LUNA16 scans. (b, c) Development-fold model on test subset 9.}
 \label{fig:curves}
 \end{figure*}
 
 \subsection{Ablation study}
-Table~\ref{tab:ablation} removes one component at a time (10 epochs, single-pass inference, same split and seed). No ablation changed CPM significantly (paired bootstrap, all $p\ge0.25$; differences within $\pm$0.02), and the reference model trained for 10 epochs (0.908) scored higher than the 30-epoch model with the same single-pass inference (0.882; $\Delta$ +0.026, $p=0.25$), indicating that differences of this size are within run-to-run variation. Removing the diameter task did not reduce CPM but eliminated size estimation (MAE 9.9\,mm). We therefore do not claim that individual components improve detection accuracy; the evidence supports that the additional clinical outputs are obtained without a measurable loss of detection performance. Ablation results were not used for model selection.
+Table~\ref{tab:ablation} removes one component at a time on the development fold (10 epochs, single-pass inference, same split and seed). No ablation changed CPM significantly (paired bootstrap, all $p\ge0.25$; differences within $\pm$0.02), and the reference model trained for 10 epochs (0.908) scored higher than the 30-epoch model with the same single-pass inference (0.882; $\Delta$ +0.026, $p=0.25$), indicating that differences of this size are within run-to-run variation. Removing the diameter task did not reduce CPM but eliminated size estimation (MAE 9.9\,mm). We therefore do not claim that individual components improve detection accuracy; the evidence supports that the additional clinical outputs are obtained without a measurable loss of detection performance. Ablation results were not used for model selection.
 
 \begin{table}[t]
 \centering
-\caption{Ablations on the test subset (10 epochs, single pass). $\Delta$ vs.\ full model; p from paired bootstrap.}
+\caption{Ablations on the development fold, test subset 9 (10 epochs, single pass). $\Delta$ vs.\ full model; p from paired bootstrap.}
 \label{tab:ablation}
 \small
 \begin{tabular}{@{}lccc@{}}
@@ -252,11 +293,11 @@ BCE instead of focal loss & 0.925 & +0.018 & 0.25\\
 
 % =====================================================================================
 \section{Robustness to Noisy and Incomplete Scans}\label{sec:robust}
-To test robustness directly, every one of the 88 test scans was corrupted before its candidates were cut and scored with the final model. Gaussian noise of 25, 50 and 100\,HU was added to every voxel, simulating lower-dose acquisition (typical low-dose screening CT noise is about 20--60\,HU), and only every second or third slice was kept, simulating thicker or incomplete scans. For speed the model was run once per candidate with 10 MC-dropout samples and no flip TTA (reference CPM 0.883). Table~\ref{tab:robust} and Fig.~\ref{fig:robust} show that noise up to 50\,HU leaves detection unchanged and 100\,HU costs 0.027 CPM. With half of the slices removed, sensitivity at 8 FPs per scan stays at 0.943, and adding 50\,HU noise on top changes nothing further. Only with two thirds of the slices missing does CPM fall clearly, to 0.664, because small nodules then appear on one or two slices only. The mean predictive uncertainty on true nodules did not increase under corruption (0.035--0.037), so the uncertainty estimate does not by itself flag poor-quality scans.
+To test robustness directly, every one of the 88 test scans of the development fold was corrupted before its candidates were cut and scored with the development-fold model. Gaussian noise of 25, 50 and 100\,HU was added to every voxel, simulating lower-dose acquisition (typical low-dose screening CT noise is about 20--60\,HU), and only every second or third slice was kept, simulating thicker or incomplete scans. For speed the model was run once per candidate with 10 MC-dropout samples and no flip TTA (reference CPM 0.883). Table~\ref{tab:robust} and Fig.~\ref{fig:robust} show that noise up to 50\,HU leaves detection unchanged and 100\,HU costs 0.027 CPM. With half of the slices removed, sensitivity at 8 FPs per scan stays at 0.943, and adding 50\,HU noise on top changes nothing further. Only with two thirds of the slices missing does CPM fall clearly, to 0.664, because small nodules then appear on one or two slices only. The mean predictive uncertainty on true nodules did not increase under corruption (0.035--0.037), so the uncertainty estimate does not by itself flag poor-quality scans.
 
 \begin{table}[t]
 \centering
-\caption{Robustness on LUNA16 subset 9 (88 scans; single pass with MC dropout).}
+\caption{Robustness on LUNA16 subset 9 (development fold, 88 scans; single pass with MC dropout).}
 \label{tab:robust}
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lcccc}
@@ -283,7 +324,7 @@ Noise 50\,HU + 50\% removed & 0.844 (0.766--0.903) & $-0.040$ & 0.848 & 0.952 \\
 
 % =====================================================================================
 \section{External Validation on LUNA25}
-\textbf{Data.} LUNA25~\cite{luna25} contains 4{,}069 low-dose screening CTs of the National Lung Screening Trial~\cite{nlst2011} with 6{,}163 annotated nodules (555 malignant) from 2{,}120 patients, acquired with different scanners and protocols than LIDC-IDRI. It provides nodule locations but no non-nodule candidates, so FPs per scan cannot be counted; we therefore measure nodule-level sensitivity at fixed operating points: the probability thresholds that produced 1/8 \dots\ 8 FPs per scan on the LUNA16 \emph{validation} subset, chosen before any LUNA25 data were seen. The same thresholds are applied to the LUNA16 test subset for comparison. The model is applied unchanged (no fine-tuning); 95\% CIs come from a patient-level bootstrap.
+\textbf{Data.} LUNA25~\cite{luna25} contains 4{,}069 low-dose screening CTs of the National Lung Screening Trial~\cite{nlst2011} with 6{,}163 annotated nodules (555 malignant) from 2{,}120 patients, acquired with different scanners and protocols than LIDC-IDRI. It provides nodule locations but no non-nodule candidates, so FPs per scan cannot be counted; we therefore measure nodule-level sensitivity at fixed operating points: the probability thresholds that produced 1/8 \dots\ 8 FPs per scan on the LUNA16 \emph{validation} subset, chosen before any LUNA25 data were seen. The same thresholds are applied to the LUNA16 test subset for comparison. The development-fold model is applied unchanged (no fine-tuning); 95\% CIs come from a patient-level bootstrap.
 
 \begin{table}[t]
 \centering
@@ -311,11 +352,11 @@ mean & 0.921 & 0.754 & & \\
 Table~\ref{tab:luna25} shows a clear but expected domain shift: mean sensitivity falls from 0.921 to 0.754, while at 8 FPs per scan on LUNA16 terms the model still finds 90.7\% of LUNA25 nodules. Two factors are likely: LUNA25 is low-dose screening CT with a higher noise level, and its annotations include many small and subsolid nodules that LUNA16's consensus criterion ($\ge$3\,mm, accepted by 3 of 4 readers) excludes. Malignant nodules are detected at least as well as benign ones at strict operating points. Because LUNA25 has malignancy labels, it also supports a cancer-risk model built on the same architecture; that work is reported separately.
 
 \section{Privacy-Preserving Federated Training}\label{sec:fed}
-Hospitals rarely may pool CT data. We therefore simulated four hospitals that never exchange images: the LUNA16 training subsets were split by subset (patient-disjoint) into sites A (subsets 0--1), B (2--3), C (4--5) and D (6--7), each holding about 6{,}600 training patches. With federated averaging (FedAvg)~\cite{mcmahan2017fedavg}, every round each site starts from the global model, trains on 6{,}000 of its own patches and returns only its weights, which the server averages (weighted by site size, including batch-normalisation statistics); 20 rounds were run. Compute was matched: one round equals one central epoch of 24{,}000 patches, and the same 20 epochs were used for a model trained on all data pooled (the privacy-violating upper bound) and for a model trained by site A alone (what a single hospital could do). All three were selected on validation AUC (subset~8) and tested on subset~9 with single-pass inference and no calibration, so absolute values are below Table~\ref{tab:main}.
+Hospitals rarely may pool CT data. We therefore simulated four hospitals that never exchange images: the LUNA16 training subsets were split by subset (patient-disjoint) into sites A (subsets 0--1), B (2--3), C (4--5) and D (6--7), each holding about 6{,}600 training patches. With federated averaging (FedAvg)~\cite{mcmahan2017fedavg}, every round each site starts from the global model, trains on 6{,}000 of its own patches and returns only its weights, which the server averages (weighted by site size, including batch-normalisation statistics); 20 rounds were run. Compute was matched: one round equals one central epoch of 24{,}000 patches, and the same 20 epochs were used for a model trained on all data pooled (the privacy-violating upper bound) and for a model trained by site A alone (what a single hospital could do). All three were selected on validation AUC (subset~8) and tested on subset~9 with single-pass inference and no calibration, so absolute values are below the development-fold result in Table~\ref{tab:main}.
 
 \begin{table}[t]
 \centering
-\caption{Federated training across four simulated hospitals (test subset 9, single-pass inference). $p$: paired patient-level bootstrap vs FedAvg.}
+\caption{Federated training across four simulated hospitals (development fold, test subset 9, single-pass inference). $p$: paired patient-level bootstrap vs FedAvg.}
 \label{tab:fed}
 \setlength{\tabcolsep}{4pt}
 \resizebox{\columnwidth}{!}{%
@@ -371,10 +412,29 @@ Both applications are written in Flutter and communicate over a token-authentica
 \end{figure*}
 
 \section{Discussion and Limitations}
-MSGF-Net reaches detection performance comparable to the best LUNA16 FP-reduction systems with a single compact network, and adds outputs that matter for clinical use: nodule size, calibrated probabilities and a reliable uncertainty signal. Several limitations apply. (i) We report one held-out fold rather than the full 10-fold protocol, and the test subset contains 105 nodules, hence the wide confidence intervals. (ii) Ablations and the architecture comparison used a single seed; a plain 3D CNN trained with our protocol matched MSGF-Net, so the architectural contribution to detection accuracy is not established. (iii) LUNA16 contains no malignancy labels; the detector does not estimate cancer risk, and the risk estimates shown in the workstation come from separate models. (iv) Lung-RADS categories are derived from size alone, without nodule type or growth. (v) The candidate finder was developed while looking at subset~9 (its design choices v2--v5 were driven by the failures observed there), so its end-to-end CPM is optimistic and should be confirmed on other subsets or on LUNA25. (vi) The external LUNA25 test measures sensitivity only, because the dataset has no non-nodule candidates. (vii) The federated experiment simulates hospitals by splitting one dataset, a single run per setting. (viii) Detection degrades when two thirds of the slices are missing, and the uncertainty estimate does not rise on corrupted scans. (ix) The applications are research prototypes and have not been evaluated with radiologists or patients.
+Five-fold cross-validation over all 888 LUNA16 scans gives MSGF-Net a CPM of 0.877 with a narrow confidence interval and little variation between folds. This is within the range of the single-model FP-reduction systems of the LUNA16 challenge but below the best of them and below later multi-network or multi-scale systems, so the contribution of this work is not a new accuracy record. It lies in what one compact network adds to the score under a strict protocol: a size estimate with sub-millimetre mean error, probabilities whose calibration error is close to zero over 754{,}975 candidates, an uncertainty signal that separates errors from correct decisions, and evidence on how detection holds up with noisy and incomplete scans, on independent screening data and under federated training. The cross-validation also corrected two impressions from the development fold: its CPM of 0.903 came from one of the easier subsets, and its near-perfect uncertainty triage was not reproduced in three of the five folds.
+
+Several limitations apply. (i) Cross-validation used one training run per fold, and each model trained on seven of ten subsets, fewer than in ten-fold protocols. (ii) The architecture comparison, ablations, robustness, external, federated and end-to-end experiments used the development fold only; a plain 3D CNN trained with our protocol matched MSGF-Net there, so the architectural contribution to detection accuracy is not established. (iii) Uncertainty-based triage worked well only for models selected late in training; we did not test a fixed training length or another selection rule. (iv) LUNA16 contains no malignancy labels; the detector does not estimate cancer risk, and the risk estimates shown in the workstation come from separate models. (v) Lung-RADS categories are derived from size alone, without nodule type or growth. (vi) The candidate finder was developed while looking at subset~9 (its design choices v2--v5 were driven by the failures observed there), so its end-to-end CPM is optimistic and should be confirmed on other subsets or on LUNA25. (vii) The external LUNA25 test measures sensitivity only, because the dataset has no non-nodule candidates. (viii) The federated experiment simulates hospitals by splitting one dataset, a single run per setting. (ix) Detection degrades when two thirds of the slices are missing, and the uncertainty estimate does not rise on corrupted scans. (x) The applications are research prototypes and have not been evaluated with radiologists or patients.
 
 \section{Conclusion}
-We presented a calibrated, uncertainty-aware 3D FP-reduction network with scale-gated fusion and size estimation that achieves CPM 0.903 on a held-out LUNA16 subset, outperforms a much larger 3D ResNet-18 under an identical protocol, provides sub-millimetre size estimates and well-calibrated, self-aware probabilities, and is deployed in clinician and patient applications. Behind a robust, blobness-ranked candidate finder the complete system reaches CPM 0.867 from raw CT, and it transfers to independent screening data with a measurable but moderate loss in sensitivity. Its detection is unchanged with added noise of up to 50\,HU and largely preserved with half of the CT slices missing. Trained by federated averaging across four simulated hospitals that share only model weights, it recovers about two thirds of the benefit of pooling their data. Code: \url{https://github.com/mabdullah52/FYP-Project}.
+We presented a calibrated, uncertainty-aware 3D FP-reduction network with scale-gated fusion and size estimation. In five-fold patient-level cross-validation on all LUNA16 scans it reaches CPM 0.877 (95\% CI 0.856--0.895) with a single compact network, estimates nodule size with a mean error of 0.81\,mm and produces almost perfectly calibrated probabilities; its uncertainty identifies errors well when the model is trained to convergence. Under an identical protocol it outperforms a much larger 3D ResNet-18, and behind a robust, blobness-ranked candidate finder the complete system reaches CPM 0.867 from raw CT on the development fold. It transfers to independent screening data with a measurable but moderate loss in sensitivity, its detection is unchanged with added noise of up to 50\,HU and largely preserved with half of the CT slices missing, and federated averaging across four simulated hospitals recovers about two thirds of the benefit of pooling their data. The system is deployed in clinician and patient applications. Code: \url{https://github.com/mabdullah52/FYP-Project}.
+
+\textbf{What this work overcomes, and future work.} The study addresses three weaknesses of earlier FP-reduction work: it measures detection per scan on every candidate instead of patch accuracy on re-balanced data, it reports size, calibrated probability and uncertainty alongside the nodule score, and it tests robustness, external transfer and federated training under one protocol. Future work will train for a fixed number of epochs with weight averaging to stabilise the uncertainty signal, combine several networks to raise CPM, repeat the evaluation with ten folds and several seeds, fine-tune on low-dose screening data, and evaluate the workstation in a reader study with radiologists.
+
+\section*{Author Contributions}
+A. Asim: conceptualization, methodology, software, experiments, formal analysis, visualization and writing of the original draft. H. Khalid: application testing, and writing (review and editing). R. Masood: supervision, project administration, and writing (review and editing). All authors read and approved the final manuscript.
+
+\section*{Funding}
+This research received no external funding. Computing resources were provided by the Department of Computer Sciences, Bahria University Lahore Campus.
+
+\section*{Conflict of Interest}
+The authors declare no conflict of interest.
+
+\section*{Data and Code Availability}
+LUNA16 is publicly available under CC BY 4.0 at \url{https://luna16.grand-challenge.org} (Zenodo records 3723295 and 4121926). All code, split definitions, the development-fold model, experiment logs and result files are available at \url{https://github.com/mabdullah52/FYP-Project}.
+
+\section*{Declaration of Generative AI Use}
+During the preparation of this work the authors used an AI assistant (Claude, Anthropic) to help write code and to edit the language of the manuscript. The authors reviewed and edited all content and take full responsibility for the publication.
 
 \IfFileExists{IEEEtran.bst}{\bibliographystyle{IEEEtran}}{\bibliographystyle{unsrt}}
 \bibliography{refs}

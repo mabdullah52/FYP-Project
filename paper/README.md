@@ -1,19 +1,8 @@
-# Paper (LaTeX, IEEE conference format)
+# Paper 1 (LaTeX, IEEE conference format)
 
-## Compile on Overleaf (recommended)
-1. Overleaf -> New Project -> Upload Project -> upload `paper.zip` (this folder zipped).
-2. Menu -> Compiler: **pdfLaTeX**. Main document: `main.tex`. Overleaf has IEEEtran built in.
+*Calibrated, uncertainty-aware pulmonary nodule false-positive reduction with multi-window scale-gated 3D fusion and size estimation.*
+Abdullah Asim, Hussnain Khalid and Rabia Masood (corresponding author), Bahria University Lahore Campus.
 
-## Add the result figures (from the university PC)
-Copy these three files into `paper/figures/`:
-    work\runs\msgf_f9\eval_subset9\froc.png
-    work\runs\msgf_f9\eval_subset9\reliability.png
-    work\runs\msgf_f9\eval_subset9\triage.png
-Until they are there, the PDF shows grey boxes instead.
-
-## Red [PENDING: ...] text
-Marks numbers that come from runs that are not finished yet (step 10 p-values, LUNA25,
-candidate recall, app screenshots, author list/email). Search the .tex for "PENDING".
-
-## References
-All references are in `refs.bib`. Check every entry against the publisher page before submission.
+* `main.tex`, `refs.bib`, `figures/`: source. `MSGF-Net_paper.pdf`: compiled PDF.
+* Compile on Overleaf: New Project, Upload Project (this folder zipped), compiler pdfLaTeX. IEEEtran is built in.
+* Main result: 5-fold patient-level cross-validation on all 888 LUNA16 scans, produced by `cv5.py` (`36_FIVE_FOLD_CV.bat`). Result files: `work/cv5/`.
