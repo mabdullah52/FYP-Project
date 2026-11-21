@@ -34,7 +34,15 @@ Full numbers are in `work/*.csv`, `work/*/…metrics.json` and the run logs in `
 * `paper/MSGF-Net_paper.pdf`: *Calibrated, uncertainty-aware pulmonary nodule false-positive reduction with multi-window scale-gated 3D fusion and size estimation* (LaTeX source in `paper/`)
 * `paper2/Growth-Aware_Malignancy_LUNA25.pdf`: *Does last year's scan help? Growth-aware malignancy prediction for screen-detected lung nodules on LUNA25* (LaTeX source in `paper2/`)
 
+Single-column versions for journal submission: `paper/Paper1_MSGF-Net_single_column.pdf`, `paper2/Paper2_Growth_Aware_Malignancy_LUNA25_single_column.pdf`.
+
 Corresponding author of both papers: Rabia Masood (rabiamasood.bulc@bahria.edu.pk), Department of Computer Sciences, Bahria University Lahore Campus.
+
+## FYP final report and defence
+
+* `docs/final/LungScanAI_FYP_Final_Report.pdf` (and `.docx`): final report (thesis) in the Bahria University template
+* `docs/final/LungScanAI_Chapter6_SDGs.docx`: Sustainable Development Goals chapter
+* `docs/final/LungScanAI_Defense_Presentation.pptx`: defence presentation
 
 ## Documentation
 
@@ -42,6 +50,7 @@ Corresponding author of both papers: Rabia Masood (rabiamasood.bulc@bahria.edu.p
 |---|---|
 | [Progress](PROGRESS.md) | What is done |
 | [Methodology](METHODOLOGY.md) · [Pipeline guide](docs/PIPELINE_GUIDE.md) | How the system and experiments work |
+| [Trained models](docs/MODELS.md) | Which model files are included and how to publish the rest |
 | [Research design](docs/RESEARCH.md) · [Datasets](docs/DATASET.md) · [References](docs/REFERENCES.md) | Original research plan, data, literature (32 papers) |
 | `docs/thesis/`, `docs/proposal/`, `docs/literature-matrices/`, `literature/summaries/` | Thesis chapters, proposal, literature matrices and summaries |
 
@@ -82,7 +91,7 @@ python doctor_app/server.py          # doctor workstation  -> http://127.0.0.1:8
 python patient_app/server.py         # patient web app     -> http://127.0.0.1:8100
 ```
 
-The trained detector `work/runs/msgf_f9/best.pt` and the LUNA25 cancer-risk ensemble (`work/runs/l25_scratch*/best.pt`) are included.
+The trained detector `work/runs/msgf_f9/best.pt` and the LUNA25 cancer-risk ensemble (`work/runs/l25_scratch*/best.pt`) are included; see [docs/MODELS.md](docs/MODELS.md) for the other trained models.
 To reproduce training, follow `START_HERE.txt` (Windows) or `docs/PIPELINE_GUIDE.md`.
 
 Flutter apps: `doctor_flutter/BUILD_DOCTOR_FLUTTER.bat` (web + Android) and `lungcare_mobile/SETUP_AND_BUILD_ANDROID.bat`.
