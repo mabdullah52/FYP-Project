@@ -60,3 +60,5 @@ key.properties
 venv/
 .ipynb_checkpoints/
 .pytest_cache/
+models_all.zip
+_models_pack/
