@@ -40,7 +40,7 @@ Corresponding author of both papers: Rabia Masood (rabiamasood.bulc@bahria.edu.p
 
 ## FYP final report and defence
 
-* `docs/final/LungScanAI_FYP_Final_Report.pdf` (and `.docx`): final report (thesis) in the Bahria University template
+* `docs/final/LungScanAI_FYP_Final_Report.pdf` (and `.docx`): final report (thesis) in the Bahria University FYP template (session Spring 2026 – Fall 2026, submission date December 05, 2026); the SDG chapter is Chapter 6
 * `docs/final/LungScanAI_Chapter6_SDGs.docx`: Sustainable Development Goals chapter
 * `docs/final/LungScanAI_Defense_Presentation.pptx`: defence presentation
 
