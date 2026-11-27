@@ -1,0 +1,287 @@
+{
+ "baselines_all": [
+  {
+   "model": "lungrads",
+   "auc": 0.8163873038516405,
+   "lo": 0.7951053439653922,
+   "hi": 0.8370056141588201,
+   "delta_vs_model_3d": -0.05871390291861045,
+   "p_vs_model_3d": 0.0005
+  },
+  {
+   "model": "size_only",
+   "auc": 0.830260824305047,
+   "lo": 0.8083448939769016,
+   "hi": 0.850921396259144,
+   "delta_vs_model_3d": -0.04484038246520394,
+   "p_vs_model_3d": 0.0005
+  },
+  {
+   "model": "brock",
+   "auc": 0.842625400007711,
+   "lo": 0.8209929774188237,
+   "hi": 0.862394745795435,
+   "delta_vs_model_3d": -0.032475806762539916,
+   "p_vs_model_3d": 0.001
+  },
+  {
+   "model": "model_3d",
+   "auc": 0.8751012067702509,
+   "lo": 0.857442271731312,
+   "hi": 0.8919737435373992
+  }
+ ],
+ "baselines_pairs": [
+  {
+   "model": "lungrads",
+   "auc": 0.7712734334746937,
+   "lo": 0.7380392893096729,
+   "hi": 0.80677484995268,
+   "delta_vs_stacked": -0.1609043548720931,
+   "p_vs_stacked": 0.0005
+  },
+  {
+   "model": "brock",
+   "auc": 0.8662425851796072,
+   "lo": 0.8366509165942831,
+   "hi": 0.8935777922391759,
+   "delta_vs_stacked": -0.0659352031671796,
+   "p_vs_stacked": 0.0005
+  },
+  {
+   "model": "single",
+   "auc": 0.9036260508457409,
+   "lo": 0.8822572909549466,
+   "hi": 0.9235696643716758,
+   "delta_vs_stacked": -0.028551737501045893,
+   "p_vs_stacked": 0.0005
+  },
+  {
+   "model": "growth",
+   "auc": 0.9243170878857138,
+   "lo": 0.9047923327105744,
+   "hi": 0.9436554316157593,
+   "delta_vs_stacked": -0.007860700461073011,
+   "p_vs_stacked": 0.029
+  },
+  {
+   "model": "tg_msgf",
+   "auc": 0.9170178660290031,
+   "lo": 0.8958881223185591,
+   "hi": 0.9372809050669263,
+   "delta_vs_stacked": -0.015159922317783625,
+   "p_vs_stacked": 0.0005
+  },
+  {
+   "model": "stacked",
+   "auc": 0.9321777883467868,
+   "lo": 0.9116205816152736,
+   "hi": 0.9499402333423849
+  }
+ ],
+ "operating_points": [
+  {
+   "set": "all",
+   "model": "Lung-RADS 4A+",
+   "sens": 0.7549549549549549,
+   "spec": 0.7660485021398002,
+   "benign_flagged": 1312,
+   "malignant": 555,
+   "benign": 5608
+  },
+  {
+   "set": "all",
+   "model": "size_only",
+   "sens_at_lungrads_spec": 0.7441441441441441,
+   "spec_at_lungrads_sens": 0.7614122681883024,
+   "benign_flagged_at_lungrads_sens": 1338,
+   "spec_at_95_sens": 0.38569900142653357
+  },
+  {
+   "set": "all",
+   "model": "brock",
+   "sens_at_lungrads_spec": 0.7657657657657657,
+   "spec_at_lungrads_sens": 0.7763908701854494,
+   "benign_flagged_at_lungrads_sens": 1254,
+   "spec_at_95_sens": 0.4638017118402282
+  },
+  {
+   "set": "all",
+   "model": "model_3d",
+   "sens_at_lungrads_spec": 0.8396396396396396,
+   "spec_at_lungrads_sens": 0.8364835948644793,
+   "benign_flagged_at_lungrads_sens": 917,
+   "spec_at_95_sens": 0.5481455064194009
+  },
+  {
+   "set": "pairs",
+   "model": "Lung-RADS 4A+",
+   "sens": 0.5748792270531401,
+   "spec": 0.9653600729261622,
+   "benign_flagged": 76,
+   "malignant": 207,
+   "benign": 2194
+  },
+  {
+   "set": "pairs",
+   "model": "brock",
+   "sens_at_lungrads_spec": 0.2995169082125604,
+   "spec_at_lungrads_sens": 0.902461257976299,
+   "benign_flagged_at_lungrads_sens": 214,
+   "spec_at_95_sens": 0.4981768459434822
+  },
+  {
+   "set": "pairs",
+   "model": "single",
+   "sens_at_lungrads_spec": 0.3864734299516908,
+   "spec_at_lungrads_sens": 0.9279854147675478,
+   "benign_flagged_at_lungrads_sens": 158,
+   "spec_at_95_sens": 0.6039197812215132
+  },
+  {
+   "set": "pairs",
+   "model": "stacked",
+   "sens_at_lungrads_spec": 0.6618357487922706,
+   "spec_at_lungrads_sens": 0.9794895168641751,
+   "benign_flagged_at_lungrads_sens": 45,
+   "spec_at_95_sens": 0.6463081130355515
+  }
+ ],
+ "spec_at_95_sens": [
+  {
+   "set": "all",
+   "model": "size_only",
+   "spec_at_95_sens": 0.38569900142653357,
+   "lo": 0.3223508959928243,
+   "hi": 0.5344513380732065
+  },
+  {
+   "set": "all",
+   "model": "brock",
+   "spec_at_95_sens": 0.4638017118402282,
+   "lo": 0.3870889268515717,
+   "hi": 0.5350267286927721
+  },
+  {
+   "set": "all",
+   "model": "model_3d",
+   "spec_at_95_sens": 0.5481455064194009,
+   "lo": 0.49666230567954445,
+   "hi": 0.6185592137636416
+  },
+  {
+   "set": "pairs",
+   "model": "single",
+   "spec_at_95_sens": 0.6039197812215132,
+   "lo": 0.5491552222805771,
+   "hi": 0.7340609480189825
+  },
+  {
+   "set": "pairs",
+   "model": "stacked",
+   "spec_at_95_sens": 0.6463081130355515,
+   "lo": 0.6139323006461629,
+   "hi": 0.7314579955360717
+  }
+ ],
+ "calibration": [
+  {
+   "set": "all",
+   "model": "size_only",
+   "brier": 0.07079249732182613,
+   "ece": 0.032156449550887756,
+   "slope": 0.9728646145356776,
+   "intercept": -0.005435487360308512,
+   "mean_pred": 0.0904185579227056,
+   "prevalence": 0.09005354535128995
+  },
+  {
+   "set": "all",
+   "model": "brock",
+   "brier": 0.07676055651273747,
+   "ece": 0.06191230999425285,
+   "slope": 0.9887792545267201,
+   "intercept": 1.4039783726629989,
+   "mean_pred": 0.02855116012256508,
+   "prevalence": 0.09005354535128995
+  },
+  {
+   "set": "all",
+   "model": "model_3d",
+   "brier": 0.06317669560902787,
+   "ece": 0.007563356229349669,
+   "slope": 0.9119137197006087,
+   "intercept": -0.006393534088533049,
+   "mean_pred": 0.09045263770801792,
+   "prevalence": 0.09005354535128995
+  },
+  {
+   "set": "pairs",
+   "model": "brock",
+   "brier": 0.07350789135794193,
+   "ece": 0.060420679652942795,
+   "slope": 1.123806154621888,
+   "intercept": 1.4022576204529764,
+   "mean_pred": 0.026944843381729797,
+   "prevalence": 0.08621407746772178
+  },
+  {
+   "set": "pairs",
+   "model": "single",
+   "brier": 0.057226796538130606,
+   "ece": 0.00848545893350237,
+   "slope": 0.9087628650955096,
+   "intercept": 0.0026542313985675014,
+   "mean_pred": 0.08606605226460451,
+   "prevalence": 0.08621407746772178
+  },
+  {
+   "set": "pairs",
+   "model": "stacked",
+   "brier": 0.04395267382338188,
+   "ece": 0.016208486881823855,
+   "slope": 1.018063561844301,
+   "intercept": -0.005461821331930605,
+   "mean_pred": 0.0864699820663703,
+   "prevalence": 0.08621407746772178
+  }
+ ],
+ "prior_gain_by_size": [
+  {
+   "group": "<6 mm",
+   "n": 1111,
+   "malignant": 9,
+   "auc_single": 0.9034079451502319,
+   "auc_stacked": 0.9120790481952006,
+   "delta": 0.008671103044968653,
+   "p": 0.696
+  },
+  {
+   "group": "6-8 mm",
+   "n": 643,
+   "malignant": 36,
+   "auc_single": 0.8713618890719385,
+   "auc_stacked": 0.8664195496979681,
+   "delta": -0.0049423393739703725,
+   "p": 0.813
+  },
+  {
+   "group": "8-15 mm",
+   "n": 497,
+   "malignant": 96,
+   "auc_single": 0.720360556940981,
+   "auc_stacked": 0.8518547381546134,
+   "delta": 0.13149418121363243,
+   "p": 0.0005
+  },
+  {
+   "group": ">=15 mm",
+   "n": 150,
+   "malignant": 66,
+   "auc_single": 0.7555916305916306,
+   "auc_stacked": 0.8796897546897547,
+   "delta": 0.12409812409812415,
+   "p": 0.002
+  }
+ ]
+}
